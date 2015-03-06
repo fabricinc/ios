@@ -1,0 +1,25 @@
+<div id="list-row-wrapper">
+    <div id="lists">
+        <% if(followers.length > 0) { %>
+        <% _.each(followers, function(follower) { %>
+            <%
+                if(parseInt(follower.userID) == APP.msPop.userID) {
+                    var source = "https://s3.amazonaws.com/trailerpop/images/MsPop/fakeMsPop.png";
+                } else {
+                    var source = "https://graph.facebook.com/" + follower.facebookID + "/picture?height=100&width=100";
+                }
+            %>
+            <div class="lists-row" data-userID="<%= follower.userID %>">
+            	<img class="profile-picture" src="<%= source %>" onerror="UI.imgError(this);" />
+            	<div class="follow-info">
+	                <div class="follow-name"><%= follower.userName %></div>
+	                <div class="follow-location gry"><%= follower.City %></div>
+            	</div>
+            </div>
+        <% }); %>
+        <% } else { %>
+            <p class="blank-message">No results found</p>
+            <p class="blank-instructions">Perhaps the person you're looking for hasn't joined yet. Why not try inviting them?</p>
+        <% } %>
+    </div>
+</div>

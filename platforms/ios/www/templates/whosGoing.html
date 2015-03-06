@@ -1,0 +1,31 @@
+<% var z = 0 %>
+<% var length = nearby.length %>
+<% if(nearby) { %>
+    <p id="whos-going-heading"><%= length %> People nearby want to see <span class="bold"><%= nearby[0].title %></span></p>
+    <div id="list-row-wrapper" class="">
+        <div id="lists">
+            <% var friendFan = nearby[0].friendStatus == null || nearby[0].friendStatus == '0' ? "Fans" : "Friends"; %>
+            <p class="friend-lable"><%= friendFan %></p>
+            <% _.each(nearby, function(friend) { %>
+                <% var x = nearby[z].friendStatus %>
+                <% var miles = Math.ceil(friend.distance); %>
+                <% var distance = miles > 1 ? miles +" miles away" : miles +" mile away"; %>
+                <% if(z != length - 1){ z++; }%>
+                <div class="lists-row" data-followid="<%= friend.userID %>">
+                	<img class="profile-picture<% if(parseInt(friend.userID) == 252990) { %> msPop<% } %>" src="https://graph.facebook.com/<%= friend.facebookID %>/picture?height=100&width=100" onerror="UI.imgError(this);" />
+                	<div class="follow-info">
+    	                <div class="follow-name"><%= friend.userName %></div>
+    	                <div class="follow-location gry">Within <%= distance %> </div>
+                	</div>
+                    <div class="send-invite">Invite</div>
+                </div>
+                <% if (x != nearby[z].friendStatus) { %>
+                    <p class="friend-lable">Fans</p>
+                <% } %>
+            <% }); %>
+        </div>
+    </div>
+<% } else { %>
+    <p class="blank-message">Nobody's here yet</p>
+    <p class="blank-instructions">Be the first in your area to queue this</p>
+<% } %>

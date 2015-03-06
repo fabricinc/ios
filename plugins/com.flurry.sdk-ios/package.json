@@ -1,0 +1,19 @@
+{
+    "version": "5.1.0",
+    "name": "com.flurry.sdk-ios",
+    "cordova_name": "Flurry SDK for iOS",
+    "description": "add Flurry Ads SDK for iOS to cordova project, as dependency of other plugins",
+    "keywords": [
+        "flurry",
+        "sdk"
+    ],
+    "platforms": [
+        "ios"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+<div id="messages-slider" class="<%= type %>">
+    <div id="messages-container">
+        <% if(context !== null) { %>
+            <div id="message-context">
+                <div class="profile-image<% if(parseInt(objects[0].creatorID) == 252990) { %> msPop<% } %>" data-senderid="<%= objects[0].creatorID %>" <% if(context.actorFbID && context.actorFbID != '') { %> style="background-image: url(https://graph.facebook.com/<%= context.actorFbID %>/picture?width=100&height=100);"<% } %> onerror="UI.imgError(this);"></div>
+                <% if(context.objectType == "movie") { %>
+                    <img src="<%= Api.appSettings.cdn %><%= context.objectAsset.replace('/files', '') %>" data-catid="<%= context.objectID %>" />
+                <% } %>
+                <p class="context-info">
+                    <span class="bold"><%= context.actorName %></span>
+                    <span><%= context.verb %></span>
+                    <% if(context.ratio) { %><span><%= context.ratio %>% of </span><% } %>
+                    <% contextObject = context.objectName.length > 60 ? context.objectName.slice(0, 63) +"..." : context.objectName; %>
+                    <span class="bold"><%= contextObject %></span>
+                </p>
+            </div>
+        <% } %>
+        <% _.each(objects, function(like) { %>
+        <div class="message">
+            <div class="profile-image<% if(parseInt(like.userID) == 252990) { %> msPop<% } %>"<% if(like.facebookID && like.facebookID != '') { %> style="background-image: url(https://graph.facebook.com/<%= like.facebookID %>/picture?width=100&height=100);"<% } %> data-senderid="<%= like.userID %>"></div>
+            <div class="conversation-info">
+                <h1><%= like.userName %></h1>
+                <h2><%= like.city %></h2>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>
+<div id="message-textarea">
+    <form class="message-form" name="message-form" action="javascript:void(0);">
+        <input id="message" type="text" name="message" value="" />
+        <input id="submit" type="submit" value="send" />
+    </form>
+</div>

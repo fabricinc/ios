@@ -1,0 +1,32 @@
+<div id="list-row-wrapper" class="movie-seen-list">
+    <div id="lists">
+        <% if(followers.friendData.length) { %>
+            <p class="friend-lable">Friends</p>
+            
+            <% _.each(followers.friendData, function(friend) { %>
+                <% recType = friend.typeID == "2" ? "Favorited" : "Queued"; %>
+                <div class="lists-row" data-followid="<%= friend.userID %>">
+                	<img class="profile-picture<% if(parseInt(friend.userID) == 252990) { %> msPop<% } %>" src="https://graph.facebook.com/<%= friend.facebookID %>/picture?height=100&width=100" onerror="UI.imgError(this);" />
+                	<div class="follow-info">
+    	                <div class="follow-name"><%= friend.userName %></div><span class="rec-type"><%= recType %></span>
+    	                <div class="follow-location gry"><%= friend.city %></div>
+                	</div>
+                </div>
+            <% }); %>
+        <% } %>
+        <% if(followers.seenData && followers.seenData.length > 0) { %>
+            <p class="friend-lable">Fans</p>
+
+            <% _.each(followers.seenData, function(viewer) { %>
+                <% recType = viewer.typeID == "2" ? "Favorited" : "Queued"; %>
+                <div class="lists-row" data-followid="<%= viewer.userID %>">
+                    <img class="profile-picture<% if(parseInt(viewer.userID) == 252990) { %> msPop<% } %>" src="https://graph.facebook.com/<%= viewer.facebookID %>/picture?height=100&width=100" onerror="UI.imgError(this);" />
+                    <div class="follow-info">
+                        <div class="follow-name"><%= viewer.userName %></div><span class="rec-type"><%= recType %></span>
+                        <div class="follow-location gry"><%= viewer.city %></div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</div>

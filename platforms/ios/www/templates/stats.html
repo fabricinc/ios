@@ -1,0 +1,48 @@
+<div id="stats">
+    <div id="stats-heading">
+        <div id="played"><%= totalTrailers %></div>
+        <div id="trailers-played">Trailers Played</div>
+        <div id="top-category"><span class="text">Top Category:  <%= topCat %></span><div class="image" <%= poster %>></div></div>
+    </div>
+
+    <div id="stats-row-2" class="stats-row">
+        <div class="padding">
+            <div id="categories" class="stat">
+                <div class="value"><%= catsPlayed %></div>
+                <div class="label">Categories Played</div>
+                <div class="rank-progress">
+                    <div class="circle"></div>
+                    <div class="progress-track">
+                        <div class="progress" style="width: <%= statsWidth %>;"></div>
+                    </div>
+                    <div class="circle right"></div>
+                </div>
+            </div>
+            <div id="correct" class="stat">
+                <div class="value"><%= totalQuestions %></div>
+                <div class="label">Percentage Correct</div>
+            </div>
+            <div id="points" class="stat">
+                <div class="value"><%= totalPoints %></div>
+                <div class="label">Monthly Points</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stats-row-3" class="stats-row">
+        <div class="padding">
+            <div id="highest" class="stat">
+                <div class="value"><%= bestDailyScore %></div>
+                <div class="label">Highest Daily Score</div>
+            </div>
+            <div id="average" class="stat">
+                <div class="value"><%= dailyAverage %></div>
+                <div class="label">Average Daily Score</div>
+            </div>
+            <div id="streak" class="stat">
+                <div class="value"><%= streak %></div>
+                <div class="label">Longest Streak</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="header">
+    <h1>Matches <span id="current">1</span>/<%= matches.length %></h1>
+</div>
+
+<div class="rel">
+    <div id="flipper" class="flip-container">
+        <div class="flipper">
+            <div class="front">
+                <div id="match-content" data-userid="<%= matches[0].userID %>">
+                    <h1 class="name"><%= matches[0].uName %></h1>
+                    <h2 class="city"><%= matches[0].city %>, <span class="state"><%= matches[0].state %></span></h2>
+                    <div class="portrait" style="background-image: url(https://graph.facebook.com/<%= matches[0].facebook_id %>/picture?height=300&width=300);"></div>
+                    <div class="top-three">
+                        <h1>Top 3 Movies</h1>
+                        <div class="top-three-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="back">
+                <div id="match-back">
+                    <div class="container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% if(matches.length > 1) { %>
+    <div id="match-content-two">
+        <h1 class="name"><%= matches[1].uName %></h1>
+        <h2 class="city"><%= matches[1].city %>, <span class="state"><%= matches[1].state %></span></h2>
+        <div class="portrait" style="background-image: url(https://graph.facebook.com/<%= matches[1].facebook_id %>/picture?height=300&width=300);"></div>
+        <div class="top-three">
+            <h1>Top 3 Movies</h1>
+            <div class="top-three-container"></div>
+        </div>
+    </div>
+    <% } %>
+    <% if(matches.length > 2) { %>
+    <div id="match-content-three">
+        <h1 class="name"><%= matches[2].uName %></h1>
+        <h2 class="city"><%= matches[2].city %>, <span class="state"><%= matches[2].state %></span></h2>
+        <div class="portrait" style="background-image: url(https://graph.facebook.com/<%= matches[2].facebook_id %>/picture?height=300&width=300);"></div>
+        <div class="top-three">
+            <h1>Top 3 Movies</h1>
+            <div class="top-three-container"></div>
+        </div>
+    </div>
+    <% } %>
+    <div id="match-mask"></div>
+</div>

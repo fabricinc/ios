@@ -1,0 +1,35 @@
+<%
+var cur = 0;
+var data = [
+    {
+        title: "Celery Man",
+        video: "https://s3.amazonaws.com/trailerpop/videos/kce/Paul_Rudds_Computer.mp4",
+        synopsis: "Celery Man is a short film starring \"Raul Pudd\" that explores the important questions like: Can we become friends with our own digital avatars?",
+        poster: "https://s3.amazonaws.com/trailerpop/videos/kce/jigg.gif"
+    }
+];
+%>
+
+<video id="kce-player" width="320" height="240" style="background-color: black;" controls>
+    <source src="<%= data[0].video %>" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<div id="fake-lobby-scroller">
+    <div class="lobby-bg">
+        <div id="movie-info">
+            <div id="movie-poster-div">
+                <img id="movie-poster" src="<%= data[cur].poster %>">
+            </div>
+            <div id="title-synopsis-block">
+                <h3 id="movie-title-heading">
+                    <span class="title"><%= data[cur].title %></span>
+                </h3>
+                <div id="synopsis-wrapper">
+                    <p id="synopsis"><%= data[cur].synopsis %></p>
+                    <span id="more">More...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

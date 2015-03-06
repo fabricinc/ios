@@ -1,0 +1,130 @@
+<!-- Old Thrown Out Code
+
+<!-- <h3 style="margin: 10px auto; width: 90%; padding: 5px; text-align: center;">You've seen <span id="total-seen"><%= totalSeen %></span> / <%= totalMovies %></h3>
+<!-- THIS IS AWFUL BUT WE NEED TO SEPARATE EACH GROUP OF MOVIE BY A HEADING
+<% var sections = ["queued", "unseen", "favorite", "seen"]; %>
+<% _.each(sections, function(section) {
+if(movies[section].length > 0) { %>
+<%
+var sectionTitle = section === "unseen" ? "Suggestions" : section,
+sectionTitle = sectionTitle === "seen" ? "Done" : sectionTitle;
+switch(section) {
+case "queued":
+var sectionTitle = "<span class='highlight'>+" + movies[section].length + "</span> Saved to your <span class='bold'>Want-To-Do List</span>";
+break;
+default:
+break;
+}
+%>
+
+<h3><%= sectionTitle %></h3>
+<% _.each(movies[section], function(movie) { %>
+<% if(section === "favorite" || section === "seen"){ %>
+<% var favorite = movie.movieFavorite != "1" ? " off" : ""; %>
+<% var queued = movie.movieWatchlist != "1" ? " off" : ""; %>
+<% var seen = movie.movieSeen != "1" ? " off" : ""; %>
+
+<div class="item" data-trailer="<%= movie.trailerLink %>">
+    <div class="movie-info">
+        <img class="poster-img" data-movieid="<%= movie.movieID %>" src="http://api-admin.trailerpop.com<%= movie.imageThumbnail %>" />
+        <h1><%= movie.movieTitle %></h1>
+        <% if(movie.criticsScore != "") { %>
+        <% var tomato = parseInt(movie.criticsScore) > 60 ? "fresh" : "rotten" %>
+        <div class="tomato <%= tomato %>"><%= movie.criticsScore %>%</div>
+        <% } %>
+
+        <div class="icons">
+            <div class="watch-icon<%= queued %>" data-listid="<%= lists.watchListID %>" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>">
+                <span>Want-To-Do</span>
+            </div>
+            <div class="favorite-icon<%= favorite %>" data-listid="<%= lists.favoriteListID %>" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>" >
+                <span>Favorite</span>
+            </div>
+            <div class="seen-icon<%= seen %>" data-listid="<%= lists.seenListID %>" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>">
+                <span>Done</span>
+            </div>
+        </div>
+    </div>
+</div>
+<% } else { %>
+<% var recs = parseInt(movie.friendRecs) >= 1 ? parseInt(movie.friendRecs) : false; %>
+<% var queued = movie.movieWatchlist === "1" ? " on" : ""; %>
+<% var playButton = parseInt(movie.moviePublishedID) > 100000000 ? "" : "play-button"; %>
+<div class="feed-item-wrapper feed-item-card">
+    <div class="feed-item" data-movie-id="<%= movie.movieID %>" data-movie-published-id="<%= movie.moviePublishedID %>">
+        <div class="cf">
+            <h1 class="summary-movie-title"><%= movie.movieTitle %></h1>
+            <% if(movie.criticsScore != "") { %>
+            <% var tomato = parseInt(movie.criticsScore) > 60 ? "fresh" : "rotten" %>
+            <div class="tomato <%= tomato %>"><%= movie.criticsScore %>%</div>
+            <% } %>
+            <% if(recs) { %>
+            <% var friends = recs > 1 ? "friends" : "friend"; %>
+            <div class="rec">
+                <%= movie.friendRecs +" "+ friends %> recommend
+            </div>
+            <% } %>
+        </div>
+        <div class="content">
+            <div class="poster" data-trailer="<%= movie.trailerLink %>">
+                <img class="movie-poster" src="http://api-admin.trailerpop.com<%= movie.imageThumbnail %>" />
+                <span class="<%= playButton %>"><img class="trailer-still"src="<%= movie.trailerStill %>" /></span>
+                <div class="feed-buttons" data-movie-id="<%= movie.movieID %>" data-movie-published-id="<%= movie.moviePublishedID %>">
+                    <span class="saved-button<% if(section == "queued") { %> on<% } %>">
+                    <% if(section == "queued") { %>
+                    Added
+                    <% } else { %>
+                    + Add To List
+                    <% } %>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+<% }); %>
+<% } %>
+<% }); %>
+
+
+
+
+
+
+
+<!--
+                <% if(friends.length == 0 && suggestions.length == 0) { %>
+                    <div id="empty-set">
+                        <h1>Anybody There?</h1>
+                        <p>We haven't found any people like you just yet. <br /> Try the next category for more opportunities.</p>
+                    </div>
+                <% } else { %>
+                    <% if(friends.length > 0) { %>
+                    <div class="full-header">Top Friends</div>
+                    <% } %>
+                    <% var num = 0; _.each(friends, function(friend) { num++; %>
+                        <div class="user" data-userid="<%= friend.userID %>">
+                            <div class="avatar"<% if(friend.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= friend.facebook_id %>/picture?height=100&width=100)"<% } %>></div>
+                            <div class="info">
+                                <div class="seen"><span class="bold"><%= friend.percentageSeen %>% <%=terms[sectionID].pastVerb %></span></div>
+                                <div class="name"><span class="bold"><%= friend.uName %></span></div>
+                            </div>
+                            <div class="num"><%= num %>.</div>
+                        </div>
+                    <% }); %>
+                    <% if(suggestions.length > 0) { %>
+                    <div class="full-header">People like you</div>
+                    <% } %>
+                    <% _.each(suggestions, function(suggestee) { %>
+                    <div class="user" data-userid="<%= suggestee.userID %>">
+                        <div class="avatar"<% if(suggestee.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= suggestee.facebook_id %>/picture?height=100&width=100)"<% } %>></div>
+                        <div class="info">
+                            <div class="name"><span class="bold"><%= suggestee.uName %></span></div>
+                            <div class="movie-in-common"><span class="title"><%= suggestee.title %></span></div>
+                        </div>
+                        <div class="follow">Follow</div>
+                    </div>
+                    <% }); %>
+                <% } %>
+-->

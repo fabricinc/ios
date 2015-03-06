@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="initial">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	    <title>Fabric</title>
+
+        <link href="css/main.css" rel="stylesheet">
+
+        <script src="js/lib/vendor/jquery-1.9.1.js"></script>
+        <script src="js/lib/vendor/jquery.timeago.js"></script>
+
+        <script src="cordova.js"></script>
+        <script src="cdv-plugin-fb-connect.js"></script>
+        <script src="facebook-js-sdk.js"></script>
+
+		<script src="js/lib/strings.js"></script>
+		<script src="js/lib/settings.js"></script>
+        <script src="js/helpers/util.js"></script>
+		<script src="js/helpers/api.js"></script>
+
+		<script src="js/lib/mobile/flurryPlugin.js"></script>
+		<script src="js/helpers/analytics.js"></script>
+
+		<script src="js/app.js"></script>
+
+		<script src="js/lib/vendor/underscore.js"></script>
+
+	    <script src="js/lib/mobile/swipeView.js"></script>
+	    <script src="js/lib/mobile/ChildBrowser.js"></script>
+	    <script src="js/lib/mobile/LowLatencyAudio.js"></script>
+	    <script src="js/lib/mobile/mobileDevice.js"></script>
+	    <script src="js/lib/mobile/kiipPlugin.js"></script>
+        <script src="js/helpers/kiipFunctions.js"></script>
+
+		<script src="js/lib/vendor/Modernizr.js"></script>
+		<script src="js/lib/vendor/backbone.js"></script>
+		<script src="js/lib/vendor/slick.js"></script>
+		<script src="js/lib/vendor/iscroll.js"></script>
+	    <script src="js/lib/vendor/Modernizr.js"></script>
+		<script src="js/lib/vendor/google.fastbutton.js"></script>
+
+        <script src="js/helpers/facebook.js"></script>
+        <script src="js/helpers/facebookActions.js"></script>
+        <script src="js/helpers/model.js"></script>
+		<script src="js/helpers/player.js"></script>
+        <script src="js/helpers/purchase.js"></script>
+        <script src="js/helpers/pushNotification.js"></script>
+        <script src="js/helpers/badWords.js"></script>
+        <script src="js/helpers/swipeView.js"></script>
+        <script src="js/helpers/templateLoader.js"></script>
+        <script src="js/helpers/touchMove.js"></script>
+		<script src="js/helpers/ui.js"></script>
+		<script src="js/helpers/user.js"></script>
+
+		<script src="js/lib/mobile/sounds.js"></script>
+        <script src="js/lib/mobile/TwitterPlugin.js"></script>
+		<script src="js/lib/jqPlugins/jquery.loadFadeImage.js"></script>
+
+        <script src="js/lib/vendor/handlebars.js"></script>
+        <script src="js/lib/vendor/jquery-ui.js"></script>
+        <script src="js/lib/vendor/jquery.dotdotdot-1.5.4-packed.js"></script>
+        <script src="js/lib/vendor/jquery.blockUI.js"></script>
+        <script src="js/lib/vendor/masonry.pkgd.min.js"></script>
+
+        <script src="js/helpers/touchPunch.js"></script>
+        <script src="js/views/categories.js"></script>
+        <script src="js/views/discovery.js"></script>
+        <script src="js/views/discussion.js"></script>
+        <script src="js/views/events.js"></script>
+        <script src="js/views/feed.js"></script>
+        <script src="js/views/matches.js"></script>
+		<script src="js/views/header.js"></script>
+        <script src="js/views/greeting.js"></script>
+        <script src="js/views/home.js"></script>
+        <script src="js/views/userLists.js"></script>
+        <script src="js/views/list.js"></script>
+        <script src="js/views/login.js"></script>
+        <script src="js/views/message.js"></script>
+		<script src="js/views/movielist.js"></script>
+        <script src="js/views/movieLobby.js"></script>
+        <script src="js/views/friends.js"></script>
+        <script src="js/views/player.js"></script>
+		<script src="js/views/profile.js"></script>
+        <script src="js/views/rate.js"></script>
+        <script src="js/views/recommendations.js"></script>
+        <script src="js/views/recommendedList.js"></script>
+        <script src="js/views/userRecommendations.js"></script>
+        <script src="js/views/whosGoing.js"></script>
+        <script src="js/views/register.js"></script>
+        <script src="js/views/search.js"></script>
+        <script src="js/views/settings.js"></script>
+        <script src="js/views/statusUpdates.js"></script>
+        <script src="js/views/suggestedCategories.js"></script>
+        <script src="js/views/fabricPlayer.js"></script>
+        <script src="js/views/stats.js"></script>
+        <script src="js/views/start.js"></script>
+		<script src="js/views/welcome.js"></script>
+
+		<script src="js/router.js"></script>
+		<script src="js/lib/vendor/mixpanel.js"></script>
+        <script src="js/plugins/LaunchMyApp.js"></script>
+        <script src="js/plugins/SocialSharing.js"></script>
+
+        <script>
+            function appInit() {
+                if (!window.APP) window.APP = APP;
+                if(Util.isMobile()) {
+                    document.addEventListener("deviceready", function() { MobileDevice.onDeviceReady(); }, false);
+                    document.addEventListener("touchmove", function(e) { e.preventDefault(); }, false);
+                } else {
+                    window.APP.init();
+                }
+            };
+        </script>
+	</head>
+
+	<body onload="appInit();">
+	    <div id="splash"></div>
+	    <div id="mask" class="on">
+	        <div class="can"></div>
+            <div class="wheel"></div>
+	    </div>
+	    <div id="wrapper"></div>
+        <div id="fb-root"></div>
+        <div class="modal-overlay"></div>        
+	</body>
+</html>

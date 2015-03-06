@@ -1,0 +1,27 @@
+<% var fontSize = " large"; %>
+<% var length = ""; %> 
+<div id="rec-list-wrapper">
+	<div id="rec-scroller">
+		<% 	_.each(items, function(item) { %>
+			<% var image = typeof(item.trailer_still) === "undefined" ? item.image : item.trailer_still; %>
+			<div data-listid="<%= item.listID %>" data-userID="<%= item.userID %>" data-parent="<%= item.Parent %>" class="list-item<% if(item.completed == 1) { %> completed<% } %>">
+                <!--
+			    <div class="title">
+			    	<% if(item.facebook_id != null || item.userID != "252990" && item.Parent === "0") { %>
+			    		<% fontSize = " small" %>
+			    		<% length = item.listname.length > 26 ? " double" : ""; %>
+			    		<% var src = item.facebook_id !== null ? "https://graph.facebook.com/"+ item.facebook_id +"/picture?height=200&width=200" : "images/discovery/avatar.png"; %>
+			    	 	<img class="fl" src="<%= src %>"/>
+			    	 	<span class="compatibility fl"><%= item.compatibility %>%</span>
+			    	<% } else if (item.Parent === "1") { %>
+			    		<div class="folder"></div>
+			    	<% } %>
+			    	<span class="rec-list-title<%= length + fontSize %>"><%= item.listname %></span>
+			    </div>
+			    -->
+			    <img src="<%= image %>" />
+			</div>
+			<% length = ""; %>
+		<% }); %>
+	</div>
+</div>

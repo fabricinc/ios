@@ -1,0 +1,44 @@
+<div id="user-matches">
+    <div class="cf">
+        <div id="match-config"></div>
+        <% if(matches.length == 0) { %>
+            <div id="no-matches">
+                <h1>Nobody here yet!</h1>
+                <p>
+                    Swipe more of what you love and we'll find you people with similar interests.
+                </p>
+            </div>
+        <% } else { %>
+            <div class="cf">
+                <h1 class="credits"><%= APP.gameState.credits %> Credits</h1>
+            </div>
+            <% _.each(matches, function(match) { %>
+                <% compatibility = parseInt(match.compatibility) %>
+                <% opacity = compatibility > 20 ? (compatibility / 100) : .2 %>
+                <% if(match.userName !== null){ %>
+                    <div class="match">
+                        <div class="cf">
+                            <div class="avatar<% if(match.userID == '252990') { %> msPop<% } %>"<% if(match.facebookID) { %> style="background-image: url(http://graph.facebook.com/<%= match.facebookID %>/picture?width=135&height=135);"<% } %> data-userid="<%= match.userID %>"></div>
+                            <div class="info">
+                                <p class="match-compatibility" style="background-color: rgba(0, 201, 218,<%= opacity %>);">
+                                    <span class="percent-match"><%= compatibility %>%</span>Match
+                                </p>
+                                <h1 class="name"><%= match.userName.split(" ")[0] %><%= match.age ? ", " + match.age : ""  %></h1>
+                                <% if(match.distance && match.distance != "NaN") { %>
+                                    <% var distanceInitial = parseFloat(match.distance).toFixed(1) %>
+                                    <% var miles = Math.ceil(distanceInitial); %>
+                                    <% var distance = miles > 1 ? "Within  "+ miles +" miles" : "Within  "+ miles +" mile"; %>
+                                    <p class="match-distance"><%= distance %></p>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="buttons" data-userid="<%= match.userID %>">
+                            <div class="follow<% if(match.following > 0) { %> following">Following</div><% } else { %>">Follow</div><% } %>
+                            <div class="greet<% if(match.messages > 0) { %> greeted">Message</div><% } else { %>">Say Hi</div><% } %>
+                        </div>
+                    </div>
+                <% } %>
+            <% }); %>
+        <% } %>
+    </div>
+</div>

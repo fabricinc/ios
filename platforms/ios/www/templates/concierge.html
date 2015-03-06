@@ -1,0 +1,88 @@
+<%
+	var date = new Date();
+	var day = date.getDay();
+	var today = parseInt(data.day);
+ 	var slice = [
+ 		[1,5,9,13,17,21,25,29],
+ 		[2,6,10,14,18,22,26,30],
+ 		[3,7,11,15,19,23,27,31],
+ 		[4,8,12,16,20,24,28]
+ 	]; 
+ 	var string; 
+ 	var fav = parseInt(data.fav),
+ 		queue = parseInt(data.queue),
+ 		total = parseInt(data.total),
+ 		critic = parseInt(data.critic),
+ 		title = data.title;
+
+ 	slice.forEach(function(e, i, a){
+ 		if(e.indexOf(today) !== -1){
+
+ 			if (i === 0) {
+
+ 				if(day === 2){ 		
+ 					string = title +" is out on DVD.";
+ 					if (fav === 0)		{ 	string += "<br /><span>Treat yourself by watching it tonight.</span><br />"; } 
+ 					else if(fav === 1)	{ 	string += "<br /><span>You have a friend who loves this movie.</span><br />"; } 
+ 					else if(fav > 1)	{ 	string += "<br /><span>"+ fav +" of your friends love this movie.</span><br />"; }
+				} else {
+					string = "Your daily pick is <i>"+ title +"</i>.";
+					if (fav == 0)		{ 	string += "<br /><span>How about watching it today?</span><br />"; }
+					else if (fav == 1)	{ 	string += "<br /><span>You have a friend who loves this movie.</span><br />"; }
+					else if (fav > 1)	{ 	string += "<br /><span>"+ fav +" of your friends love this movie.</span><br />"; }
+				}
+
+ 			} else if (i === 1) { 		
+				if (critic > 60) { string = "Your daily pick is <i>"+ title +"</i>.<br /><span>Critics gave it a "+ critic +"% fresh rating.</span><br />"; } 
+				else { string = "Your daily pick is <i>"+ title +"</i>.<br /><span>How about watching it today?</span><br />"; }
+
+ 			} else if (i === 2) {
+
+				if (day === 5 || day === 6 || day === 0) {
+					string = "<i>"+ title +"</i> is in theaters.";
+					
+					if (queue == 1) { 	string += "<br /><span>You have a friend who also wants to see it.</span><br />"; }
+					if (queue > 1) 	{ 	string += "<br /><span>"+ queue +" of your friends also want to see it. </span><br />"; }
+					if (queue == 0) { 	string += ".<br /><span>Invite some friends to watch it this weekend.<span><br />"; }
+
+				} else {
+					string = "Your daily pick is <i>"+ title +"</i>.";
+					if (queue == 1) { 	string += "<br /><span>Your friend also wants to see this movie.</span><br />"; }
+					if (queue > 1) 	{ 	string += "<br /><span>"+ queue +" of your friends also want to see this movie.</span><br />"; } 
+					else if (queue == 0) { string = "<br /><span>How about watching it today?</span><br />"; }
+				}
+
+ 			} else if (i === 3) { 		
+
+ 				string = "Your daily pick is <i>"+ title +"</i>.<br /><span>People on Fabric love this movie.</span><br />";
+
+ 			}
+ 		}
+ 	});
+%>
+
+<% if(data === false) { %>
+	<div class="empty-concierge">
+		<h6>Hi <%= APP.gameState.uName.split(" ")[0] %>,</h6>
+	
+		<% if (day == 2) { %>
+			<h3>Check out what's new on DVD today.<h3>
+				<h2 class="concierge-button" data-button="dvd">View</h2>
+		<% } else if (day === 5 || day === 6 || day === 0) { %>
+			<h3>Check out what's new in theaters this weekend.</h3>
+			<h2 class="concierge-button" data-button="theaters">View</h2>
+		<% } else { %>
+			<h3>Check out these recommendations for you.</h3>
+			<h2 class="concierge-button" data-button="recommendations">View</h2>
+		<% } %>
+	</div>
+<% } else { %>
+	<img class="concierge-poster" data-button="movie" data-movieid="<%= data.movieID %>" src="<%= Api.appSettings.cdn %>/posters/<%= data.publishedID %>_poster.jpg" />
+	<div class="concierge-info" style="background-image: url(<%= Api.appSettings.cdn %>/stills/<%= data.publishedID %>_still.jpg)">
+		<div class="concierge-text">
+			<h6>Hi <%= APP.gameState.uName.split(" ")[0] %>,</h6>
+			<h1><%= string %></h1>
+			<h2 class="concierge-button" data-button="movie" data-movieid="<%= data.movieID %>">Check It Out</h2>
+		</div>
+	</div>
+<% } %>

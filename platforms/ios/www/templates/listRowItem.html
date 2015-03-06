@@ -1,0 +1,13 @@
+<% var rottenFresh = movie.criticsScore >= 60 ? "fresh" : "rotten"; %>
+<li class="list-row" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>"<% if(movie.listMoviesID) { %> id="sortOrder_<%= movie.listMoviesID %>"<% } %>>
+    <img class="list-movie-image" src="<%= Api.appSettings.cdn %>/posters/thumbnails/<%= movie.moviePublishedID %>_144-poster.jpg"/>
+    <div class="list-movie-info">
+        <span class="list-title fnt"><%= movie.movieTitle %> <span class="year-actor">(<%= movie.releaseYear %>)</span></span>
+        <% if(movie.criticsScore) { %><span class="<%= rottenFresh %>"><%= movie.criticsScore %>%</span><% } %>
+        <div class="list-buttons">
+            <span class="list-button queue-button<% if (movie.queued == '0') { %> off <% } %>" data-listid="<%= userLists.watchListID %>">Queue</span>
+            <span class="list-button favorite-button<% if (movie.favorite == '0') { %> off <% } %>" data-listid="<%= userLists.favoriteListID %>">Favorite</span>
+            <span class="list-button seen-button<% if (movie.movieSeen == '0') { %> off <% } %>" data-listid="<%= userLists.seenListID %>">Seen</span>
+        </div>
+    </div>
+</li>

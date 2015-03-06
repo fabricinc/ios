@@ -1,0 +1,23 @@
+<div id="conversation-slider">
+    <div id="conversation-container">
+        <% 	_.each(messages, function(message) { %>
+        <div class="cf">
+            <% if(otherID == message.sender) { %>
+            <div class="message received">
+            <% } else { %>
+            <div class="message sent">
+            <% } %>
+                <%= message.msg %>
+                <div class="tail"></div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>
+
+<div id="message-textarea">
+    <form id="message-form" name="message-form" action="javascript:void(0);">
+        <input id="message" type="text" name="message" value="" onfocus="this.value = '';" />
+        <input id="submit" type="submit" value="send" />
+    </form>
+</div>

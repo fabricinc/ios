@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+/* Inherited styles */
+@import "keyframes.css";
+@import "base.css";
+@import "tablet.css";
+
+/* iPhone overrides */
+@import "main-3.5-inch.css"; /* iPhone 2 - 4s */
+@import "main-4-inch.css" only screen and (device-aspect-ratio: 40/71); /* iPhone 5/5s */
+@import "main-4.7-inch.css" only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2); /* iPhone 6 */
+@import "main-5.5-inch.css" only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 3); /* iPhone 6+ */
+
+/* iPad overrides */
+@import "main-ipad.css" screen and (min-device-width : 768px) and (max-device-width : 1024px);

@@ -1,0 +1,26 @@
+
+    <%
+        var offeredServices = {
+            '12' : 'Spotify',
+            '14' : 'Amazon',
+            '17' : 'iTunes',
+            '18' : 'Fandango',
+            '39' : 'Netflix',
+            '42' : 'Hulu',
+            '60' : 'Crackle'
+        }
+        _.each(services, function(service) {
+            var v = parseInt(service.vendor),
+                webView = service.webView ? "data-webView=" + service.webView : "",
+                appStoreUrl = service.appStoreUrl ? "data-appstoreurl=" + service.appStoreUrl : "",
+                vendor = offeredServices[v].toLowerCase();
+    %>
+        <div class="commerce <%= vendor %>"
+             target="_blank"
+             href="<%= service.url %>"
+             data-vendor = "<%= vendor %>"
+             <%= webView %>
+             <%= appStoreUrl %>>
+            <h2><%= offeredServices[v] %></h2>
+        </div>
+    <% }); %>

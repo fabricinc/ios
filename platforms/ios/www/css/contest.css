@@ -1,0 +1,100 @@
+#wrapper.contest {
+    background: black none 0 0 no-repeat;
+}
+
+#contest {
+    /*background-image: url(../images/tracing/contest.png);*/
+}
+
+#contest header {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    border-bottom: none;
+    position: fixed;
+}
+
+#contest a {
+    display: inline;
+}
+
+#contest .button {
+    display:inline-block;
+}
+
+#contest header .button {
+    background-color: rgba(0,0,0,.2);
+}
+
+#contest header .button:active {
+    background-color: #ff0000;
+}
+
+#contest .button.buy {
+    margin-right: 18px;
+}
+
+#contest #inner {
+    margin: 0 auto;
+    background: rgba(0, 0, 0, .85);
+    height: 768px;
+    width: 501px;
+    text-transform: none;
+    position: relative;
+}
+
+#contest #inner .padding {
+    padding: 15px 32px 15px;
+}
+
+#contest-logo {
+    width: 450px;
+    height: 215px;
+    margin: 0 auto;
+    text-align: center;
+    background-image: url(../images/zdt_contest_logo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#contest-logo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#heading {
+    text-transform: uppercase;
+    margin: -8px 0 0;
+    margin-top:-5px;
+    font-weight: bold;
+    font-size: 34px;
+    line-height:35px;
+    text-align:center;
+}
+
+#body-text {
+    font-size: 20px;
+}
+
+#body-text p {
+    margin: 23px 0;
+    line-height: 27px;
+    font-size:17px;
+}
+
+.enter {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#rules {
+    font-size: 13px;
+    line-height:18px;
+    position: absolute;
+    bottom: 0;
+    padding-right: 15px;
+}
+
+#rules a {
+    color: grey;
+    text-decoration: underline;
+}

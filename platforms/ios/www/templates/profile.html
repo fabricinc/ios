@@ -1,0 +1,61 @@
+<div id="profile" class="bgwhite<% if(!userID) { %> owner<% } %>">
+    <div class="profile-scroll-content cf">
+        <div class="info<% if(userID == '252990') { %> msPop<% } %>" <% if(profileData.facebookID) { %>style="background-image: url(https://graph.facebook.com/<%= profileData.facebookID %>/picture?height=380&width=320);"<% } %>>
+            <% if(userID != '252990') { %>
+                <% if(moviesInCommon[0].compatibility && moviesInCommon[0].compatibility != "0") { %>
+                <div class="outer">
+                    <div class="circle">
+                        <div class="percent"><%= moviesInCommon[0].compatibility %>%</div>
+                        <div class="match">MATCH</div>
+                    </div>
+                </div>
+                <% } %>
+            <% } %>
+            <% if(fbImages.length > 0) { %>
+                <% $("#profile .info").css("background-image", "none"); $("#profile .info").css("background-color", "#EFEFEF"); %>
+                <div id="side-swipe" style="background-color: #EFEFEF;">
+                    <% _.each(fbImages, function(image) { %>
+                    <div class="contain" style="background-image: url(<%= image.source %>)"></div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="bio">
+            <div class="name"><%= profileData.uName %><% if(profileData.age && parseInt(profileData.age) > 18) { %>, <%= profileData.age %><% } %></div>
+            <% if(profileData.city) { %>
+            <div class="location"><%= profileData.city %></div>
+            <% } %>
+        </div>
+
+        <% if(!self && userID != "252990") { %>
+        <div class="action-buttons">
+            <div id="follow-button" class="button follow<% if(following) { %> following <% } %>">Follow<% if(following) { %>ing<% } %></div>
+            <div id="send-greeting" class="button greeting<% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %> greeted<% } %>" data-messagecount="<%= messageCount[0].messageCount %>">
+                <% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %>
+                    Message
+                <% } else { %>
+                    Say Hi
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+
+        <% if(userID != "252990") { %>
+        <div id="follow-data" class="sub-header">
+            <div class="fl">
+                <h4 class="following"><%= followData.following.count %> Following</h4>
+            </div>
+            <div class="fl">
+                <h4><%= followData.followers.count %> Followers</h4>
+            </div>
+        </div>
+        <% } %>
+
+        <div id="lists" class="lists-nav">Lists</div>
+        <div id="feed" class="lists-nav">Recent Activity</div>
+
+        <div id="top-genres"></div>
+        <div id="favorite-delta"></div>
+    </div>
+</div>

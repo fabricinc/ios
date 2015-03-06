@@ -1,0 +1,30 @@
+<div id="side-nav-close"></div>
+<div id="side-nav">
+    <div id="menu-search">
+        <form id="menu-search-form" action="#" name="menu-search">
+            <input type="text" name="menu-search-text" placeholder="Search for movies, shows, etc" />
+        </form>
+        <div id="close-menu-drop" style="display: none;"></div>
+        <div id="menu-drop">
+            <div></div>
+        </div>
+    </div>
+    <div id="recently-queued-wrapper">
+        <h6>recently queued</h6>
+        <img class="queued-movie-poster" src="<%= Api.appSettings.cdn %>/posters/thumbnails/610908_144-poster.jpg" />
+        <img class="queued-movie-poster" src="<%= Api.appSettings.cdn %>/posters/thumbnails/963918_144-poster.jpg" />
+        <img class="queued-movie-poster" src="<%= Api.appSettings.cdn %>/posters/thumbnails/569885_144-poster.jpg" />
+        <img class="queued-movie-poster" src="<%= Api.appSettings.cdn %>/posters/thumbnails/199636_144-poster.jpg" />
+    </div>
+    <ul id="nav-menu">
+        <% 	_.each(menuItem, function(item) { %>
+            <li id="side-menu-<%= item.classes %>" data-actionID="<%= item.classes %>" class="nav-menu-item">
+                <div class="side-menu-icon"<% if(item.classes == 'profile') { %> style="background-image: url(<%= userPicture %>); border-radius: 15px;"<% } %>></div>
+                <span class="menu-text"><%= item.title %></span>
+            </li>
+        <% }); %>
+    </ul>
+    <!--<div id="menu-settings-block">
+        <p id="menu-settings" data-actionid="settings">Settings</p>
+    </div>-->
+</div>

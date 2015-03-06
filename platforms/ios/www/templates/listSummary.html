@@ -1,0 +1,127 @@
+<%
+    section = parseInt(section);
+    var sectionID = 0;
+
+    if(section == 3) { sectionID = 1; }
+    else if(section == 4 || section == 5) { sectionID = 2; }
+
+var terms = [{
+        "present": "watch",
+        "pastVerb": "seen",
+        "heading": "Movie / TV"
+    },{
+        "present": "visit",
+        "pastVerb": "visited",
+        "heading": "Travel"
+        
+    },{
+        "present": "hear",
+        "pastVerb": "heard",
+        "heading": "Music"
+    }];
+%>
+
+<div id="list-items-container">
+    <div id="list-scroller">
+        <div class="list-summary">
+            <div id="image" style="background-image: url(<%= categoryTile %>)"></div>
+            <div id="info">
+                <div class="cf">
+                    <div class="avatar"<% if(User.isFacebookUser()) { %> style="background-image: url(<%= User.getFacebookAvatar() %>)"<% } %>></div>
+                    <div class="name"><%= APP.gameState.uName %></div>
+                </div>
+                <h1><%= categoryName %></h1>
+                <h2>You've <%= terms[sectionID].pastVerb %> <span><%= ratio %>%</span></h2>
+                <!--<div id="share-button">Share</div>-->
+            </div>
+        </div>
+        <div class="category-info">
+            <!--
+            <div id="category-header">
+                <div id="items" class="active">View List</div>
+                <div id="friends">People</div>
+            </div>
+
+            <div id="list-friends" style="display: none;">
+                <% if(friends.length == 0 && suggestions.length == 0) { %>
+                    <div id="empty-set">
+                        <h1>Anybody There?</h1>
+                        <p>We haven't found any people like you just yet. <br /> Try the next category for more opportunities.</p>
+                    </div>
+                <% } else { %>
+                    <% if(friends.length > 0) { %>
+                        <div class="full-header">Top Friends</div>
+                    <% } %>
+                    <% var num = 0; _.each(friends, function(friend) { num++; %>
+                        <div class="user" data-userid="<%= friend.userID %>">
+                            <div class="avatar"<% if(friend.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= friend.facebook_id %>/picture?height=100&width=100)"<% } %>></div>
+                            <div class="info">
+                                <div class="seen"><span class="bold"><%= friend.percentageSeen %>% <%=terms[sectionID].pastVerb %></span></div>
+                                <div class="name"><span class="bold"><%= friend.uName %></span></div>
+                            </div>
+                            <div class="num"><%= num %>.</div>
+                        </div>
+                    <% }); %>
+
+                    <% if(suggestions.length > 0) { %>
+                        <div class="full-header">People like you</div>
+                    <% } %>
+
+                    <% _.each(suggestions, function(suggestee) { %>
+                        <div class="user" data-userid="<%= suggestee.userID %>">
+                            <div class="avatar"<% if(suggestee.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= suggestee.facebook_id %>/picture?height=100&width=100)"<% } %>></div>
+                        <div class="info">
+                            <div class="name"><span class="bold"><%= suggestee.uName %></span></div>
+                            <div class="movie-in-common"><span class="title"><%= suggestee.title %></span></div>
+                        </div>
+                        <div class="follow">Follow</div>
+                    </div>
+                    <% }); %>
+                <% } %>
+            </div>
+            -->
+            <div id="list-items" class="card-flow-column js-masonry" data-masonry-options="{ 'columnWidth': '.feed-item-card', 'itemSelector': '.feed-item-card', 'gutter': 10 }">
+                <div class="share-buttons">
+                    <div id="fb" class="btn" data-service="Facebook"></div>
+                    <div id="twitter" class="btn" data-service="Twitter"></div>
+                    <div id="email" class="btn" data-service="Email"></div>
+                    <div id="sms" class="btn" data-service="SMS"></div>
+                </div>
+                <% var i = 0; _.each(movies, function(movie) { i++; %>
+                    <% var favorite = movie.movieFavorite != "1" ? " off" : ""; %>
+                    <% var queued = movie.movieWatchlist != "1" ? " off" : ""; %>
+                    <% var seen = movie.movieSeen != "1" ? " off" : ""; %>
+                    <div class="item" data-trailer="<%= movie.trailerLink %>">
+                        <div class="movie-info">
+                            <img class="poster-img" data-movieid="<%= movie.movieID %>" src="<%= Api.appSettings.cdn %><%= movie.imageThumbnail.replace('/files', '') %>" />
+                            <h1><%= i %>. <%= movie.movieTitle %><% if(parseInt(movie.releaseYear) > 0) { %> <span>(<%= movie.releaseYear %>)</span><% } %></h1>
+
+                            <div class="item-icons">
+                                <% if(parseInt(movie.friendRecs) > 0) { %>
+                                <div class="recs"><%= movie.friendRecs %></div>
+                                <% } %>
+                                <% if(movie.criticsScore != "") { %>
+                                <% var tomato = parseInt(movie.criticsScore) > 60 ? "fresh" : "rotten" %>
+                                <div class="tomato <%= tomato %>"><%= movie.criticsScore %>%</div>
+                                <% } %>
+                            </div>
+
+                            <div class="buttons">
+                                <div class="watch-icon<%= queued %>" data-listid="<%= lists.watchListID %>" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>">
+                                    <% if(queued == " off") { %>
+                                        Add To List
+                                    <% } else { %>
+                                        Added
+                                    <% } %>
+                                </div>
+                                <div class="seen-icon<%= seen %>" data-listid="<%= lists.seenListID %>" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>">Done</div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <video id="trailer-player"></video>
+    <div id="trailer-loader"></div>
+</div>

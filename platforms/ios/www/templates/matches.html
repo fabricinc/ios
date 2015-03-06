@@ -1,0 +1,55 @@
+<% var msPop = msPop || false; %>
+<div class="content" <% if(msPop) { %> style="background-image: url(images/discovery/msPopBg.png); background-size: 100% 100%;"<% } %>>
+    <h1><%= compatibility %>% Match</h1>
+    <div class="cf rel">
+        <div class="circle">
+            <div class="match"<% if(APP.gameState.facebookID) { %> style="background-image: url(http://graph.facebook.com/<%= APP.gameState.facebookID %>/picture?width=100&height=100);"<% } %>></div>
+        </div>
+        <div class="plus">+</div>
+        <div class="circle">
+            <% if(msPop) { %>
+            <div class="match" style="background-image: url(<%= match.avatar %>);"></div>
+            <% } else { %>
+            <div class="match"<% if(match.facebook_id) { %> style="background-image: url(http://graph.facebook.com/<%= match.facebook_id %>/picture?width=100&height=100);"<% } %>></div>
+            <% } %>
+        </div>
+    </div>
+    <div class="cf">
+        <div class="fl" style="margin-left:20px;width:120px;">
+            <div class="name"><%= APP.gameState.uName.split(" ")[0] %></div>
+            <% if(APP.gameState.city) { %>
+                <div class="location"><%= APP.gameState.city %></div>
+            <% } %>
+        </div>
+        <div class="fr" style="margin-right:20px;width:120px;">
+            <% if(msPop) { %>
+            <div class="name"><%= match.uName %></div>
+            <% } else { %>
+            <div class="name"><%= match.uName.split(" ")[0] %></div>
+            <% } %>
+            <% if(APP.gameState.city) { %>
+            <div class="location"><%= match.city %></div>
+            <% } %>
+        </div>
+    </div>
+    <div class="movie-info<% if(msPop) { %> msPop<% } %>" style="background-image: none !important;">
+        <% if(msPop) { %>
+        <div class="info msPop" style="background-image: none !important;">
+            <h1>You've Been Matched!</h1>
+            <p>Swiping movies & TV connects you with people who share your interests</p>
+        </div>
+        <% } else { %>
+        <div class="poster" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= match.moviePublishedID %>_poster.jpg)"></div>
+        <div class="info">
+            <p>You're both into <span><%= match.title %></span><% if(parseInt(match.movies_in_common)-1 > 1) { %> and <%= parseInt(match.movies_in_common)-1 %> other<% if(parseInt(match.movies_in_common)-1 > 1) { %>s<% } %> from this category<% } %></p>
+            <p>Check out what else you have in common</p>
+        </div>
+        <% } %>
+    </div>
+    <div class="cf">
+        <div id="match-exit" class="button bg-none">Not Now</div>
+        <div id="match-see" class="button">View Match</div>
+    </div>
+</div>
+<div class="background" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= match.moviePublishedID %>_poster.jpg)"></div>
+<div class="background-mask"></div>

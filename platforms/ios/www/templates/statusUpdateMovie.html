@@ -1,0 +1,14 @@
+<!-- <div class="suggested-title">
+    
+</div> -->
+<div class="statusInfo">
+    <div id="status-poster" class="poster"<% if(movie.posterPath) { %> style="background-image: url(<%= Api.appSettings.cdn %><%= movie.posterPath.replace('/files', '') %>)"<% } %>></div>
+    <!--<p>Going to check out <span class="bold"><%= movie.title %></span></p>-->
+    <div class="text-box">
+        <textarea rows="5" cols="20">Write a comment about <%= movie.title %></textarea>
+    </div>
+</div>
+<div class="share-icons">
+    <div id="facebook-share" class="facebook">Facebook</div>
+    <div id="twitter-share" class="twitter">Twitter</div>
+</div>

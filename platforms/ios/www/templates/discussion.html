@@ -1,0 +1,46 @@
+<div id="messages-slider" class="<%= type %>">
+    <div id="messages-container">
+        <% if(context !== null) { %>
+            <% if(type == "movie") { %>
+                <div id="message-context" style="height: 72px; line-height: 20px;" class="section<%= context.sectionID %>">
+                    <h1>
+                        <div class="poster-thumb" style="background-image: url(<%= Api.appSettings.cdn %><%= context.posterThumb.replace('/files', '') %>)"></div>
+                        <span class="title"><%= context.movieTitle %> (<%= context.year %>)</span>
+                    </h1>
+                </div>
+            <% } else { %>
+                <div id="message-context">
+                    <div class="profile-image<% if(context.creatorID == 252990) { %> msPop<% } %>" data-senderid="<%= context.creatorID %>" <% if(context.actorFbID) { %> style="background-image: url(https://graph.facebook.com/<%= context.actorFbID %>/picture?width=100&height=100);"<% } %>></div>
+                    <% if(context.objectType == "movie") { %>
+                        <img src="<%= Api.appSettings.cdn %><%= context.objectAsset.replace('/files','') %>" data-catid="<%= context.objectID %>" />
+                    <% } %>
+                    <p class="context-info">
+                        <span class="bold"><%= context.actorName %></span>
+                        <span><%= context.verb %></span>
+                        <% if(context.ratio) { %><span><%= context.ratio %>% of </span><% } %>
+                        <% contextObject = context.objectName.length > 60 ? context.objectName.slice(0, 63) +"..." : context.objectName; %>
+                        <span class="bold"><%= contextObject %></span>
+                    </p>
+                </div>
+            <% } %>
+        <% } %>
+        <% if(objects && objects.comments.length > 0 && objects.comments[0].createdAt != null) { %>
+            <% _.each(objects.comments, function(comment) { %>
+            <div class="message">
+                <div class="profile-image<% if(comment.senderName == 'Ms. Pop') { %> msPop<% } %>"<% if(comment.senderFbID) { %> style="background-image: url(https://graph.facebook.com/<%= comment.senderFbID %>/picture?width=100&height=100);"<% } %> data-senderid="<%= comment.senderID %>"></div>
+                <div class="conversation-info">
+                    <h1><%= comment.senderName %></h1>
+                    <!-- <h2><%= comment.city %></h2> -->
+                    <p><%= comment.message %></p>
+                </div>
+            </div>
+            <% }); %>
+        <% } %>
+    </div>
+</div>
+<div id="message-textarea">
+    <form class="message-form" name="message-form" action="javascript:void(0);">
+        <input id="message" type="text" name="message" value="" />
+        <input id="submit" type="submit" value="post" />
+    </form>
+</div>

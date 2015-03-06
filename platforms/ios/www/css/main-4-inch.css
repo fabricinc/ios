@@ -1,0 +1,69 @@
+@media screen and (device-aspect-ratio: 40/71) {
+    #wrapper {
+        width: 320px;
+        height: 570px;
+        position: relative;
+    }
+    #fake-feed-container {
+        height: 537px !important;
+        overflow: hidden;
+    }
+    #home-menu {
+        height: 537px !important;
+        overflow: hidden;
+    }
+    #category-container { height: 476px; }
+    .recommended-filter #category-container { height: 428px; }
+    #category-container div h1 {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+    .button-holder {
+        bottom: 75px;
+        left: 30px;
+    }
+    #home-slider { height: 517px; }
+    #get-started,
+    #welcome-poster-tap,
+    #rate-first,
+    #match-found { height: 570px; }
+    #rate-first, #get-started { background-size: 320px 568px; }
+    .div-swiper {
+        width: 200px !important;
+        height: 300px !important;
+        background-size: 200px 300px;
+        top: 140px;
+    }
+    /* MUSIC */
+    #wrapper.music-section .div-swiper {
+        height: 200px !important;
+        background-size: 200px 200px;
+        top: 170px; 
+    }
+    #wrapper.music-section #gravity {
+        background-position-y: 332px; 
+    }
+    
+    /* END MUSIC */
+    #messages-slider,
+    #list-row-wrapper,
+    #list-items-container {
+        height: 519px;
+        overflow: hidden;
+    }
+    #messages-slider.like { height: 517px; }
+    #messages-slider.comment { height: 468px; }
+    #conversation-slider { height: 468px; }
+    #slider, #slider-container .intro-slide { height: 570px; }
+    #list-summary-scroller { height: 309px; }
+    #feed-container { height: 497px; }
+    #discovery-background,
+    #profile,
+    #user-matched,
+    #user-matches { height: 519px; }
+    #matches-tutorial-modal {
+        background-image: url(../images/discovery/match_overlay.png);
+        background-size: 320px 568px;
+    }
+    #match-found.msPop { background-size: 320px 568px; }
+}

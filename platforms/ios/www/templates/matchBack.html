@@ -1,0 +1,45 @@
+<div id="match-back-flip"></div>
+<div class="avatar"<% if(match.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= match.facebook_id %>/picture?height=300&width=300);"<% } %>></div>
+<h1>Recent Activity</h1>
+<p>Recently Favorited</p>
+<div class="cf">
+    <% if(favMovies.length > 0) { %>
+        <% _.each(favMovies, function(movie) { %>
+            <% if(movie.moviePublishedID) { %>
+            <div class="poster" data-movieid="<%= movie.moviePublishedID %>" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= movie.moviePublishedID %>_poster.jpg);"></div>
+            <% } %>
+        <% }); %>
+        <% if(favMovies.length == 2) { %>
+        <div class="poster"></div>
+        <% } %>
+        <% if(favMovies.length == 1) { %>
+        <div class="poster"></div>
+        <div class="poster"></div>
+        <% } %>
+    <% } else { %>
+        <div class="poster"></div>
+        <div class="poster"></div>
+        <div class="poster"></div>
+    <% } %>
+</div>
+<p>Recently Queued</p>
+<div class="cf mtm">
+    <% if(queueMovies.length > 0) { %>
+        <% _.each(queueMovies, function(movie) { %>
+            <% if(movie.moviePublishedID) { %>
+            <div class="poster" data-movieid="<%= movie.moviePublishedID %>" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= movie.moviePublishedID %>_poster.jpg);"></div>
+            <% } %>
+        <% }); %>
+        <% if(queueMovies.length == 2) { %>
+        <div class="poster"></div>
+        <% } %>
+        <% if(queueMovies.length == 1) { %>
+        <div class="poster"></div>
+        <div class="poster"></div>
+        <% } %>
+    <% } else { %>
+    <div class="poster"></div>
+    <div class="poster"></div>
+    <div class="poster"></div>
+    <% } %>
+</div>

@@ -1,0 +1,36 @@
+<% var editButton = editButton || false %>
+<% var lobbyButtons = lobbyButtons || false %>
+<% var doneButton = doneButton || false %>
+<% var moreButton = moreButton || false %>
+<% var postButton = postButton || false %>
+<% var doneInter = doneInter || false %>
+<% var filterButton = filterButton || false %>
+
+<nav>
+	<div id="scroll-top"></div>
+    <h1><%= title %><span id="current-icon" class="<%= label %>"></span></h1>
+    <div id="tap-menu"></div>
+    <% if(editButton) { %>
+    <span id="header-edit-button">Edit</span>
+    <% } else if(lobbyButtons) { %>
+    <!-- <div id="shopping-cart"></div> -->
+    <div id="share-icon"></div>
+    <% } else if(doneButton) { %>
+    <div class="right button done" id="done-button">Done</div>
+    <% } else if(moreButton) { %>
+    <div class="right button more" id="more-button">...</div>
+    <% } else if(postButton) { %>
+    <div class="right button post" id="post-button">Post</div>
+    <% } else if(doneInter) { %>
+    <div class="right button post" id="done-inter-button">Next</div>
+    <% } else if(filterButton) { %>
+    <div class="right button done" id="rec-filter-button">Sort</div>
+    <% } else { %>
+    <div id="notifications-menu">
+        <div class="rel"></div><div id="notifications-num"></div>
+    </div>
+    <div id="chat-menu">
+        <div class="rel"></div><div id="chat-num"></div>
+    </div>
+    <% } %>
+</nav>

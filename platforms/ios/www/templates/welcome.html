@@ -1,0 +1,42 @@
+<div id="progress">
+    <div class="outer-bar">
+        <div id="inner-bar"></div>
+    </div>
+    <div class="numbers">
+        <span id="rated"><%= currentPos %></span> / <%= totalMovies %>
+    </div>
+</div>
+
+<div id="swiper-content" class="div-swiper">
+    <div class="highlight-holder">
+        <div id="not-seen-highlight"></div>
+        <div id="seen-highlight"></div>
+        <div id="favorite-highlight"></div>
+        <div id="queue-highlight"></div>
+    </div>
+</div>
+<div id="swiper-content-two" class="div-swiper"></div>
+<div id="swiper-content-three" class="div-swiper"></div>
+<div id="swiper-content-four" class="div-swiper"></div>
+<div id="swiper-mask" class="div-swiper"></div>
+
+<div id="favorite" class="swipe-icon favorite"><span>Favorite</span></div>
+<div id="queue" class="swipe-icon queue"><span>Want to see</span></div>
+<div id="seen" class="swipe-icon seen"><span>Seen</span></div>
+<div id="not-seen" class="swipe-icon not-seen"><span>Not Seen</span></div>
+
+<div id="gravity"></div>
+
+<div id="welcome-container" class="open">
+    <div id="welcome-content" class="next"></div>
+</div>
+
+<div id="discovery-complete">
+    <h1>Nice Job!</h1>
+    <h2>You've Seen <span id="complete-ratio"></span>% of <%= categoryName %></h2>
+    <div id="share">Share</div>
+    <div id="done">Done</div>
+</div>
+
+<div id="get-started"></div>
+<div id="welcome-poster-tap" style="display: none;"></div>

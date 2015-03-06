@@ -1,0 +1,48 @@
+<div id="settings-wrapper" class="notification-settings">
+	<div id="settings">
+		<h5 class="settings-headings">Push Notifications</h5>
+		<div class="white-wide notification">
+			<h4 class="settings-button">Messages
+				<div class="onoffswitch">
+				    <input type="checkbox" class="onoffswitch-checkbox" id="notificationMessage" <% if(settings.notificationMessage == "1") { %> checked <% } %> />
+				    <label class="onoffswitch-label" for="notificationMessage">
+				        <div class="onoffswitch-inner"></div>
+				        <div class="onoffswitch-switch"></div>
+				    </label>
+				</div>
+			</h4>
+			<h4 class="settings-button">Comments on activity
+				<div class="onoffswitch">
+				    <input type="checkbox" class="onoffswitch-checkbox" id="notificationComment" <% if(settings.notificationComment == "1") { %> checked <% } %> />
+				    <label class="onoffswitch-label" for="notificationComment">
+				        <div class="onoffswitch-inner"></div>
+				        <div class="onoffswitch-switch"></div>
+				    </label>
+				</div>
+			</h4>
+			<h4 class="settings-button last">New followers
+				<div class="onoffswitch">
+				    <input type="checkbox"  class="onoffswitch-checkbox" id="notificationFollowers" <% if(settings.notificationFollowers == "1") { %> checked <% } %> />
+				    <label class="onoffswitch-label" for="notificationFollowers">
+				        <div class="onoffswitch-inner"></div>
+				        <div class="onoffswitch-switch"></div>
+				    </label>
+				</div>
+			</h4>
+		</div>
+		<h5 class="settings-headings">E-mail Notifications</h5>
+		<div class="white-wide notification">
+			<h4 class="settings-button last">Release Reminders
+				<div class="onoffswitch">
+				    <input type="checkbox" class="onoffswitch-checkbox" id="promotionalEmails" <% if(settings.promotionalEmails == "1") { %> checked <% } %> />
+				    <label class="onoffswitch-label" for="notificationMessage">
+				        <div class="onoffswitch-inner"></div>
+				        <div class="onoffswitch-switch"></div>
+				    </label>
+				</div>
+			</h4>
+		</div>
+	</div>
+</div>
+
+

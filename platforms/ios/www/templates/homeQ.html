@@ -1,0 +1,45 @@
+<% if(concierge){ %>
+	<div id="side-swipe">
+	    <div id="concierge" class="contain">
+	        <% var concierge = this.concierge({ data: concierge }); %>
+	        <%= concierge %>
+	    </div>
+	</div>
+<% }
+
+if(items.length > 0 && !items[0].emptyList) {
+	count = count == undefined ? 0 : count;
+	_.each(items, function(item, x) {
+	    var rottenFresh = item.criticsScore >= 60 ? "fresh" : "rotten";
+		var posterOld = item.sectionID === "3" ?  Api.appSettings.cdn + "/posters/" + item.moviePublishedID + "_poster.jpg" : item.imageThumbnail;
+        var poster = Api.appSettings.cdn + "/posters/" + item.moviePublishedID + "_poster.jpg";
+		var removed = removedList.indexOf(parseInt(item.moviePublishedID)) > -1 ? " off checked" : "";
+		var rottenFresh = item.criticsScore >= 60 ? "fresh" : "rotten";
+		var musicClass = item.sectionID === "4" ? " music" : "";
+		var isMovie = item.sectionID === "1" ? true : false;
+		var isTV = item.sectionID === "2" ? true : false;
+%>
+
+		<div class="check-list-wrapper rel<%= removed %>" data-publishedid="<%= item.moviePublishedID %>" data-movieid="<%= item.movieID %>">
+			<div class="check-list-item">
+				<img class="check-list-poster" src="<%= poster %>" />
+				<div class="check-list-info">
+					<h2 class="check-list-title fnt <%= musicClass %>">
+						<%= x + count + 1 %>. <%= item.movieTitle %>
+						<% if(isMovie || isTV) { %><span> (<%= item.releaseYear %>)</span> <% } %>
+					</h2>
+					<div class="check-list-ratings">
+						<% if(item.Count > 0){ %><span class="favorites"><%= item.Count %></span><% } %>
+						<% if(isMovie && item.criticsScore !== "") { %>
+							<span class="tomatos <%= rottenFresh %>"><%= item.criticsScore %>%</span>
+						<% } %>
+					</div>
+				</div>
+				<span class="check-list-check<%= removed %>"></span>
+			</div>
+		</div>
+	<% }); %>
+<% } else if($(".blank-message").length <=  0) { %>
+	<p class="blank-message">Nothing here yet!</p>
+	<p class="blank-instructions">Tap the explore tab and check out some packs to start building your want-to list</p>
+<% } %>

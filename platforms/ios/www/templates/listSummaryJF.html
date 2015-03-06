@@ -1,0 +1,24 @@
+<div class="list-summary" >
+    <div id="image" style="background-image: url(<%= categoryTile %>)"></div>
+    <div id="info">
+        <h1 id="ratio"><%= ratio %>%</h1>
+        <h3><%= categoryName %></h3>
+        <h3>You've seen <span id="total-seen"><%= totalSeen %></span> / <%= totalMovies %></h3>
+        <div id="share-button">Share</div>
+    </div>
+</div>
+
+<div id="list-summary-scroller">
+    <div id="list-summary-scroller-content">
+        <h3 id="recommended-next">Recommended Next</h3>
+        <div id="list-items" class="hidden"></div>
+        <div id="recommended-categories" class="padm">
+            <% _.each(categories, function(category) { %>
+            <div class="category" data-catid="<%= category.category_id %>" data-listid="<%= category.list_id %>">
+                <div class="title"><%= category.title %></div>
+                <img src="<%= category.tile_image %>" />
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</div>

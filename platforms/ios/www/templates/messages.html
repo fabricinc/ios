@@ -1,0 +1,20 @@
+<div id="messages-slider">
+    <div id="messages-container">
+        <%  var i = 0; _.each(conversations, function(message) { %>
+        <div class="message" data-senderid="<%= message.sender_id %>" data-receiverid="<%= message.receiver_id %>">
+            <% if(userData[i].facebook_id) { %>
+            <div class="profile-image" style="background-image: url(https://graph.facebook.com/<%= userData[i].facebook_id %>/picture?width=100&height=100);"></div>
+            <% } else { %>
+            <div class="profile-image<% if(message.sender_id == '252990') { %> msPop<% } %>"></div>
+            <% } %>
+            <div class="conversation-info">
+                <h1><%= userData[i].uName %></h1>
+                <p><%= message.message %></p>
+            </div>
+            <% if(userID != message.sender_id && message.seen == "0") { %>
+            <div class="unseen"></div>
+            <% } %>
+        </div>
+        <% i = i + 1; }); %>
+    </div>
+</div>

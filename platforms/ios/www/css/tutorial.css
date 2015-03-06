@@ -1,0 +1,456 @@
+@-webkit-keyframes tutorialSlideInLTR {
+    from {
+        -webkit-transform: translate3d(-1024px, 0, 0);
+    }
+    99% {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    to {}
+}
+
+@-webkit-keyframes tutorialSlideOutLTR {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    99% {
+        -webkit-transform: translate3d(1024px, 0, 0);
+    }
+    to {
+        
+    }
+}
+
+@-webkit-keyframes tutorialSlideInRTL {
+    from {
+        -webkit-transform: translate3d(1024px, 0, 0);
+    }
+    99% {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    to {}
+}
+
+@-webkit-keyframes tutorialSlideOutRTL {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    99% {
+        -webkit-transform: translate3d(-1024px, 0, 0);
+    }
+    to {
+        
+    }
+}
+
+#tutorial-slides {
+    height: 748px;
+}
+
+slide {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: translate3d(1024px, 0, 0);
+    -webkit-animation-duration: 400ms;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: forwards;
+    z-index: 1;
+}
+
+slide.in.next {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation-name: tutorialSlideInRTL;
+}
+
+slide.out.next {
+    -webkit-transform: translate3d(-1024px, 0, 0);
+    -webkit-animation-name: tutorialSlideOutRTL;
+}
+
+slide.in.prev {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation-name: tutorialSlideInLTR;
+}
+
+slide.out.prev {
+    -webkit-transform: translate3d(1024px, 0, 0);
+    -webkit-animation-name: tutorialSlideOutLTR;
+}
+
+
+#tutorial1-question, #tutorial5-icon1 {
+    position: absolute;
+    background-image: url('../images/tutorial/tutorial-question.png');
+    width: 902px;
+    height: 218px;
+    top: 133px;
+    left: 60px;
+    padding: 0;
+    border-radius: 0;
+}
+
+#tutorial5-list {
+    position: absolute;
+    background: url('../images/tutorial/tutorial_lists_image.png') center center no-repeat;
+    width: 902px;
+    height: 267px;
+    top: 94px;
+    left: 60px;
+    padding: 0;
+    border-radius: 0;
+    background-size: contain;
+}
+
+#tutorial6-edit {
+    position: absolute;
+    background: url('../images/tutorial/tutorial_listediting_image.png') center center no-repeat;
+    width: 902px;
+    height: 267px;
+    top: 94px;
+    left: 60px;
+    padding: 0;
+    border-radius: 0;
+    background-size: contain;
+}
+
+#tutorial7-end {
+    position: absolute;
+    background: url('../images/tutorial/tutorial_end_image.png') center center no-repeat;
+    width: 902px;
+    height: 267px;
+    top: 94px;
+    left: 60px;
+    padding: 0;
+    border-radius: 0;
+    background-size: contain;
+}
+
+.tutorial-block-wrapper {
+    position: absolute;
+    margin: 0 auto;
+}
+
+.tutorial-block-wrapper h2 {
+    text-transform: uppercase;
+    text-align: center;
+    -webkit-margin-before: 0;
+    margin: 0px auto;
+}
+
+.tutorial-block {
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+
+    padding: 18px 48px;
+
+
+    width: 660px;
+
+
+    font-size: 29px;
+
+
+    border-radius: 10px;
+
+
+}
+
+.tutorial-block p {
+    margin: 0 0 8px;
+    line-height: 44px;
+}
+
+.tutorial-block P:last-child {
+    margin: 0;
+}
+
+#tutorial1-p, #tutorial2-p, #tutorial3-p {
+    top: 380px;
+    width: 756px;
+    left: 133px;
+}
+
+.tutorial-in-a-row {
+    position: absolute;
+    top: 200px;
+    width: 210px;
+}
+
+#tutorial2-3inarow {
+    left: 140px;
+}
+
+#tutorial2-5inarow {
+    left: 410px;
+}
+
+#tutorial2-8inarow {
+    left: 673px;
+}
+
+.tutorial2-message {
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 26px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    width: 210px;
+    opacity: 1;
+    -webkit-transform: translate3d(0, 200px, 0);
+}
+
+.tutorial2-medallion {
+    font-size: 26px;
+    text-align: center;
+    background: red;
+    width: 60px;
+    height: 60px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    line-height: 52px;
+    margin: 20px auto;
+    opacity: 1;
+}
+
+@-webkit-keyframes tutorial2med {
+    from {
+        -webkit-transform: scale3d(2, 2, 1);
+        opacity: 0;
+    }
+
+    99% {
+        -webkit-transform: scale3d(1, 1, 1);
+        opacity: 1;
+    }
+    to {}
+}
+
+@-webkit-keyframes tutorial2msg {
+    from {
+        -webkit-transform: translate3d(0, 100px, 0);
+        opacity: 0;
+    }
+
+    99% {
+        -webkit-transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    to {}
+}
+
+.in .tutorial2-message {
+    -webkit-animation-name: tutorial2msg;
+}
+
+.in .tutorial2-medallion {
+    -webkit-animation-name: tutorial2med;
+}
+
+.in .tutorial2-message, .in .tutorial2-medallion {
+    -webkit-animation-duration: 800ms;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: both;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+#tutorial2-3inarow .tutorial2-message, #tutorial2-3inarow .tutorial2-medallion {
+    -webkit-animation-delay: 600ms;
+}
+
+#tutorial2-5inarow .tutorial2-message, #tutorial2-5inarow .tutorial2-medallion {
+    -webkit-animation-delay: 800ms;
+}
+
+#tutorial2-8inarow .tutorial2-message, #tutorial2-8inarow .tutorial2-medallion {
+    -webkit-animation-delay: 1000ms;
+}
+
+@-webkit-keyframes tutorial3rankZoom {
+    0% {
+        -webkit-transform: scale3d(0.5, 0.5, 1);
+        opacity: 0;
+    }
+
+    99% {
+        -webkit-transform: scale3d(1, 1, 1);
+        opacity: 1;
+    }
+
+    100% {}
+}
+
+@-webkit-keyframes tutorial3slideLeft {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+
+    99% {
+        -webkit-transform: translate3d(-64px, 0, 0);
+    }
+
+    100% {}
+}
+
+@-webkit-keyframes tutorial3slideRight {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+
+    99% {
+        -webkit-transform: translate3d(64px, 0, 0);
+    }
+
+    100% {}
+}
+
+#tutorial3-ranks {
+    position: absolute;
+    top: 128px;
+    left: 400px;
+    width: 224px;
+    height: 224px;
+}
+
+#tutorial3-ranks div {
+    background-size: cover;
+    width: 224px;
+    height: 224px;
+    position: absolute;
+}
+
+#tutorial3-ranks #tutorial3-rank1 {
+    background-image: url('../images/badges/ipad/Extra.png');
+    z-index: 3;
+}
+
+#tutorial3-ranks #tutorial3-rank2 {
+    background-image: url('../images/badges/ipad/Stunt-Double.png');
+    z-index: 2;
+    width: 168px;
+    height: 168px;
+    top: 28px;
+    left: 0px;
+    -webkit-transform: translate3d(-64px, 0, 0);
+}
+
+#tutorial3-ranks #tutorial3-rank3 {
+    background-image: url('../images/badges/ipad/Supporting-Actor.png');
+    z-index: 1;
+    width: 168px;
+    height: 168px;
+    top: 28px;
+    right: 0px;
+    -webkit-transform: translate3d(64px, 0, 0);
+}
+
+.in #tutorial3-ranks {
+    -webkit-animation: tutorial3rankZoom 400ms 400ms ease-out both;
+}
+
+.in #tutorial3-rank2 {
+    -webkit-animation: tutorial3slideLeft 400ms 700ms ease-out both;
+}
+
+.in #tutorial3-rank3 {
+    -webkit-animation: tutorial3slideRight 400ms 700ms ease-out both;
+}
+
+.tutorial4-icon {
+    /*     background-color: white; */
+    width: 120px;
+    height: 120px;
+    position: relative;
+    left: 120px;
+}
+
+#tutorial4-block1, #tutorial4-icon1 {
+    top: 116px;
+}
+
+#tutorial4-block2, #tutorial4-icon2 {
+    top: 188px;
+}
+
+#tutorial4-block3, #tutorial4-icon3 {
+    top: 258px;
+}
+
+
+#tutorial4-block1, #tutorial4-block2, #tutorial4-block3 {
+    padding: 10px 24px 39px 36px;
+    position: relative;
+    right: -305px;
+    width: 584px;
+    height: 117px;
+    top: -263px;
+    margin-bottom: 23px;
+    line-height: 1.6em;
+}
+
+#tutorial4-icon1.tutorial4-icon {
+    background-image: url('../images/tutorial/tutorial_seen_icon.png'); background-size: auto 100%; background-repeat: no-repeat;
+    background-position: center center;}
+
+#tutorial4-icon2.tutorial4-icon {
+    background-image: url('../images/tutorial/tutorial_buyrent_icon.png'); background-size: auto 100%; background-repeat: no-repeat;
+    background-position: center center;}
+
+#tutorial4-icon3.tutorial4-icon {
+    background-image: url('../images/tutorial/tutorial_add_icon.png'); background-size: auto 100%; background-repeat: no-repeat;
+    background-position: center center;}
+
+@-webkit-keyframes tutorial4iconFade {
+    0% { opacity: 0; -webkit-transform: scale3d(1.5, 1.5, 1);  }
+    99% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); }
+}
+
+.in .tutorial4-icon {
+    -webkit-animation-name: tutorial4iconFade;
+    -webkit-animation-duration: 400ms;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-fill-mode: both;
+}
+
+.in #tutorial4-icon1 {
+    -webkit-animation-delay: 0;
+}
+
+.in #tutorial4-icon2 {
+    -webkit-animation-delay: 300ms;
+}
+
+.in #tutorial4-icon3 {
+    -webkit-animation-delay: 600ms;
+}
+
+#tutorial5-icon1, #tutorial6-icon1, #tutorial7-icon1 {
+    background-image: url(../images/tutorial/tutorial_lists_image.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    margin: 61px auto 0;
+    top: auto;
+    left: 60px;
+    height: 382px;
+    width: 902px;
+}
+
+.one-forty-six {
+    margin: 0 146px;
+}
+
+#tutorial6-icon1 {
+    background-image: url(../images/tutorial/tutorial_listediting_image.png);margin: 55px 0 -10px;
+    height: 355px;
+}
+
+#tutorial7-icon1 {
+    background-image: url(../images/tutorial/tutorial_end_image.png);
+    height: 425px;
+}

@@ -1,0 +1,41 @@
+<div class="film-strip">
+<% 	
+	var i = 0;
+	_.each(items, function(item) { 
+%>
+	<div id="movie-<%= item.id %>" class="trailer-cell" publishedid="<%= item.publishedid %>" mid="<%= item.id %>" morder="<%= i %>">
+		<div class="trailer-cell-poster fade-in" style="background-image: url(<%= item.poster %>); background-size: auto 100%; background-repeat: no-repeat no-repeat;"></div>
+		<div class="trailer-cell-buttons">
+            <!--
+		    <a href="#simplePlayer/<%= item.publishedid %>" class="link-fix">
+				<div class="play-trailer button" rel="<%= item.id %>">Watch trailer</div>
+			</a>
+			-->
+		    <div class="share button">
+		    	<span class="label">Share</span>
+		        <span class="share-span"></span>
+		        <div id="share-pop-up-content">
+		        	<div class="share-pop-up-wrapper">
+		            	<div class="share-with-facebook"><span>Share with Facebook</span></div>
+		               	<div class="share-with-twitter"><span>Share with Twitter</span></div>
+		           	</div>
+		        </div>
+		    </div>
+		   	<div class="buy-rent button ticket" rel="<%= item.publishedid %>">
+		    	<span>Buy/Rent</span>
+		       	<div class="buy-rent-pop-up-wrapper">
+		        	<div class="buy-rent-pop-up">
+		            	<div class="close"></div>
+		                <div class="buy-rent-links"></div>
+		            </div>
+		        </div>
+		    </div>
+		   	<div class="lists-menu button">Add to list</div>
+		</div>
+	</div>
+<% 
+	i = i + 1;
+	}); 
+%>
+</div>
+

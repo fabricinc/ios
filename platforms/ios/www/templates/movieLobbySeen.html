@@ -1,0 +1,15 @@
+<div id="seen-avatars" class="cf">
+    <% _.each(users, function(user) { %>
+        <div class="avatar" data-userid="<%= user.userID %>" 
+        	<%  if(user.facebookID !== null) { %>
+        		style="background-image: url('https://graph.facebook.com/<%= user.facebookID %>/picture?height=200&width=200')";
+        	<% } %>
+        ></div>
+    <% }); %>
+</div>
+<div id="seen-by-container">
+    <% if(percent > 0) { %>
+    	<span id="seen-by"><%= percent %> fans</span>
+    <% } %>
+    <span id="view-all-seen">View All</span>
+</div>

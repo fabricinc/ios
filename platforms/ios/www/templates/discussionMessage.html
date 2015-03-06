@@ -1,0 +1,8 @@
+<div class="message">
+    <div class="profile-image<% if(comment.senderID == '252990') { %> msPop<% } %>"<% if(comment.senderFbID) { %> style="background-image: url(https://graph.facebook.com/<%= comment.senderFbID %>/picture?width=100&height=100);"<% } %> data-senderid="<%= comment.senderID %>"></div>
+    <div class="conversation-info">
+        <h1><%= comment.senderName %></h1>
+        <h2><%= comment.city %></h2>
+        <p><%= comment.message %></p>
+    </div>
+</div>

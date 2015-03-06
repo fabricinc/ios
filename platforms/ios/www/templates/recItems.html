@@ -1,0 +1,33 @@
+
+<% _.each(movies, function(movie) { %>
+    <% var recs = parseInt(movie.friendRecs) >= 1 ? parseInt(movie.friendRecs) : false; %>
+    <% var queued = movie.movieWatchlist === "1" ? " on" : ""; %>
+    <% var playButton = parseInt(movie.moviePublishedID) > 100000000 ? "" : "play-button"; %>
+    <div class="feed-item-wrapper">
+        <% if(movie.newRelease){ %>
+            <h1 class="release-notice"><%= movie.newRelease %></h1>
+        <% } %>
+        <div class="feed-item" data-movie-id="<%= movie.movieID %>" data-movie-published-id="<%= movie.moviePublishedID %>">
+            <div class="cf">
+                <h1 class="summary-movie-title"><%= movie.movieTitle %></h1>
+                <% if(movie.criticsScore != "") { %>
+                    <% var tomato = parseInt(movie.criticsScore) > 60 ? "fresh" : "rotten" %> 
+                    <div class="tomato <%= tomato %>"><%= movie.criticsScore %>%</div>
+                <% } %>
+                <% if(recs) { %>
+                    <% var friends = recs > 1 ? "friends" : "friend"; %>
+                    <div class="rec"><%= movie.friendRecs +" "+ friends %> recommend</div>
+                <% } %>
+            </div>
+            <div class="content">
+                <div class="poster rec-poster-block" data-trailer="<%= movie.trailerLink %>">
+                    <img class="movie-poster" src="<%= Api.appSettings.cdn %><%= movie.imageThumbnail.replace('/files', '') %>" />
+                    <span class="<%= playButton %>"><img class="trailer-still"src="<%= movie.trailerStill %>" /></span>
+                    <div class="rec-queue-button<%= queued %>" data-movie-id="<%= movie.movieID %>" data-movie-published-id="<%= movie.moviePublishedID %>">
+                        <span class="plus">+</span>Want-to-do
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }); %>

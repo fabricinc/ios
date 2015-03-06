@@ -1,0 +1,66 @@
+<% var movieDate;%>
+
+<div id="video-src" class="rel" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>">
+    <video id="player" webkit-playsinline="webkit-playsinline">
+        <source src="<%= movie.link %>" type="video/mp4">
+    </video>
+    <div id="fullscreen"></div>
+    <div id="play"></div>
+    <img id="poster-layover" src="<%= movie.trailerStill %>" />
+</div>
+
+<div id="fake-lobby-scroller">
+    <div class="lobby-bg">
+        <div id="movie-info">
+            <div id="movie-poster-div">
+                <img id="movie-poster" src="<%= Api.appSettings.cdn %><%= movie.posterThumbPath.replace('/files', '') %>">
+            </div>
+            <div id="title-synopsis-block">
+                <h3 id="movie-title-heading">
+                	<span class="title">
+						<% if(movie.year != 0) { 
+                            var date = movie.releaseDate ? movie.releaseDate : movie.year; %>
+							<%= movie.title + " - " + date %>
+						<% } else { %>
+							<%= movie.title %>
+						<% } %>
+                    </span> 
+                    <% if(movie.criticsScore != "") { %>
+                        <% if(parseInt(movie.criticsScore) > 60) { %>
+                            <span class="synopsis-RT"><img src="images/game/game-tomato_fresh.png" class="fresh" /><%= movie.criticsScore %>%</span>
+                        <% } else { %>
+                            <span class="synopsis-RT"><img src="images/game/game-tomato_rotten.png" class="rotten" /><%= movie.criticsScore %>%</span>
+                        <% } %>
+                    <% } %>
+                </h3>
+                <div id="synopsis-wrapper">
+                    <p id="synopsis">
+                        <% if(movie.synopsis != "") { %>
+                            <%= movie.synopsis %>
+                        <% } else { %>
+                            No synopsis available
+                        <% } %>
+                    </p>
+                    <span id="more">More...</span>
+                </div>
+            </div>
+        </div>
+        <div class="list-buttons">
+            <span class="list-button queue-button<% if (movie.queued == "0") { %> off <% } %>" data-listid="<%= userLists.watchListID %>">Want-to-do</span>
+            <span class="list-button favorite-button<% if (movie.favorite == "0") { %> off <% } %>" data-listid="<%= userLists.favoriteListID %>">Favorite</span>
+            <span class="list-button seen-button<% if (movie.movieSeen == "0") { %> off <% } %>" data-listid="<%= userLists.seenListID %>">Done</span>
+        </div>
+        <div id="seen-data"></div>
+        <% if(services) { %>
+            <div id="services">
+                <%= APP.load("movieServices", {services: services}) %>
+            </div>
+        <% } %>
+        <div id="movie-discussion" class="button2" style="margin: 0 auto;">Comment<% if(parseInt(movie.comments) > 0) { %>s<% } %><span style="float: right;"><%= movie.comments %></span></div>
+    </div>
+    <div id="popup-options">
+        <div id="facebook-share" class="top-button">Facebook<span class="check fr"></span></div>
+        <div id="twitter-share" class="bottom-button">Twitter<span class="check fr"></span></div>
+        <div id="done">Cancel</div>
+    </div>
+</div>

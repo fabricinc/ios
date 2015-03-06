@@ -1,0 +1,27 @@
+<% if(items.length > 0) { %>
+    <% _.each(items, function(item) { %>
+        <% var src = item.imageThumbnail || "images/discovery/no_poster.jpg"; %>
+        <% if(item.movieID) { %>
+        <% var rottenFresh = item.criticsScore >= 60 ? "fresh" : "rotten"; %>
+        	<div class="list-row" data-moviepublishedid="<%= item.moviePublishedID %>" data-movieid="<%= item.movieID %>"<% if(item.listMoviesID) { %> id="sortOrder_<%= item.listMoviesID %>"<% } %>>
+                <img class="list-movie-image" src="<%= Api.appSettings.cdn %>/posters/thumbnails/<%= item.moviePublishedID %>_144-poster.jpg" />
+        	    <div class="list-movie-info">
+                    <span class="list-title fnt"><%= item.movieTitle %> <span class="year-actor">(<%= item.releaseYear %>)</span></span>
+                    <% if(item.criticsScore) { %>
+                        <span class="<%= rottenFresh %>"><%= item.criticsScore %>%</span>
+        	    	<% } %>
+                    <% if(item.Count && item.Count > 0) { %> 
+                        <% var recommend = item.Count === "1" ? "Recommended by "+ item.Count +" Friend" : "Recommended by "+ item.Count +" Friends"; %> 
+                        <div class="recommended-by"><%= recommend %><p>View All</p></div>
+                    <% } %>
+                <div class="list-buttons">
+                    <span class="list-button queue-button<% if (item.queued == "0") { %> off <% } %>" data-listid="<%= userLists.watchListID %>">Queue</span>
+                    <span class="list-button favorite-button<% if (item.favorite == "0") { %> off <% } %>" data-listid="<%= userLists.favoriteListID %>">Favorite</span>
+                    <span class="list-button seen-button<% if (item.movieSeen == "0") { %> off <% } %>" data-listid="<%= userLists.seenListID %>">Seen</span>
+                </div>
+                </div>
+            </div>
+        <% } %>
+    <% }); %>
+    <div class="load-more-spinner"></div>
+<% } %>

@@ -1,0 +1,1110 @@
+
+/* iPad */
+@media screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+
+    #wrapper{
+        height: 1024px;
+        width: 100%;
+        position: relative;
+    }
+
+	/*
+	==============================================================    
+		opening/splash screens
+	============================================================== 
+	*/
+
+	div#mask .wheel {
+		position: absolute;
+		top: 446px;
+		left: 340px;
+		width: 100px;
+		height: 100px;
+		background-size: 100px 100px;
+		-webkit-animation: spin 1.3s infinite linear;
+	}
+
+
+    /*
+    ==============================================================    
+        intro slider
+    ============================================================== 
+    */
+
+    #slider {
+        width: 768px;
+        height: 1024px;
+    }
+
+    #slider-container {
+        width: 3840px;
+    }
+
+    #slider-container .intro-slide {
+        width: 768px;
+        height: 1024px;
+        background-position: center;
+        background-size: auto;
+        background-size: 768px auto;
+    }
+
+    #indicator {
+        bottom: 50px;
+        left: 352px;    
+    }
+
+    #slider #logo { top: 200px; }
+    #ready-to-start { top: 355px; }
+    #facebook { top: 477px; }
+    #sign-up { top: 561px; }
+    #slider .login-button { left: 273px; }
+
+    #get-started {
+        background-image: url(../images/login/ipad-tut.png);
+    }
+    #rate-first {
+        background-image: url(../images/discovery/coach/iPad/coach0.png);
+    }
+    #welcome-container #welcome-content.next { background-image: url(../images/discovery/ipadScrim01.png); }
+    #welcome-container #welcome-content.next-two { background-image: url(../images/discovery/ipadScrim02.png); }
+
+	/*
+	==============================================================    
+		home page cover image area
+	============================================================== 
+	*/
+
+    #category-container {
+        height: 932px;
+        padding: 0;
+    }
+    .recommended-filter #category-container { height: 882px; }
+    #category-container #side-swipe {
+        width: 780px;
+        height: 255px;
+    }
+
+    .slick-list, #side-swipe .contain {
+    	position: relative;
+    	height: 250px;
+    }
+
+    .watching-tonight, .tonights-title {
+    	text-align: right;
+    	margin-right: 20px;
+    	font-size: 30px;
+    	margin-bottom: 10px;
+    }
+
+    #status-update-form {
+    	position: absolute;
+    	bottom: 48px;
+    	right: 20px;
+    }
+
+    input.slider-status-update {
+    	position: relative;
+    	top: inherit;
+    	width: 280px;
+    	height: 40px;
+    	padding: 3px 14px;
+    	font-size: 24px;
+        border-radius: 10px;
+    }
+
+    .user-info {
+    	height: auto;
+    	margin: 20px 20px 5px 20px;
+    	padding: 4px 4px 10px 4px;
+    }
+
+    #side-swipe .user-avatar {
+    	width: 150px;
+    	height: 150px;
+    	margin: 0 auto;
+    	background-size: 150px;
+    }
+
+    #side-swipe .totalSeen {
+    	margin-top: 6px;
+    }
+
+    #home-filters {
+        top: 0;
+        width: 780px;
+    }
+
+    #home-filters #category-filter, #home-filters #activity-filter, #home-filters #recommended-filter {
+        float: none;
+        width: 260px;
+        font-size: 1.2em;
+    }
+
+    #home-filters #category-filter {
+        left: 0;
+    }
+
+    #home-filters #activity-filter {
+        left: 260px;
+    }
+
+    #home-filters #recommended-filter {
+        left: 520px;
+    }
+
+
+    /*
+    ==============================================================    
+        header search
+    ============================================================== 
+    */
+    header nav h1 {
+        width: 660px;
+        max-width: 660px;
+    }
+    #category-container #status-drop {
+        z-index: 10000;
+        top: 202px;
+        left: 193px;
+        width: 365px;
+        max-height: 746px;
+        padding-top: 0px;
+        background-image: url('../images/discovery/up-arrow.png');
+        background-repeat: no-repeat;
+        background-position: 40px 0;
+        background-color: white;
+        border: none;
+        box-shadow: -1px 16px 22px 7px rgba(0,0,0,0.8);
+        margin: 0;
+    }
+
+    #home-slider #status-drop .result .poster {
+        margin-right: 4px;
+    }
+
+    #home-slider #status-drop .result .info {
+        width: 260px;
+        margin-top: 4px;
+    }
+
+    #home-slider #status-drop .result {
+        background-color: #FFF;
+        border-right: 1px solid #EBEBEB;
+        border-left: 1px solid #EBEBEB;
+    }
+
+
+    /*
+    ==============================================================    
+    	home page category listing
+    ============================================================== 
+    */
+
+    #home-slider {
+        height: 974px;
+    }
+
+    #category-container .catItem {
+        float: left;
+        width: 354px;
+        height: 207px;
+        margin: 20px 0 0 20px;
+        overflow-y: hidden;
+        max-height: 207px;
+    }
+
+    #category-container .catItem img {
+    	width: 100%;
+    }
+
+    #category-container div .title, #recommended-categories .category {
+    	width: 100%;
+    }
+
+
+    /*
+    ==============================================================    
+      recommendations listing
+    ============================================================== 
+    */
+
+    .content-scroller .list-item {
+        float: left;
+        width: 340px;
+        height: 185px;
+        margin: 20px;    
+        overflow-y: hidden;
+    }
+
+    #recommended-list #list-items {
+        height: 973px;
+    }
+
+    #recommended-list #list-items .feed-item-wrapper, .category-info #list-items .feed-item-wrapper {
+        width: 340px;
+        margin-bottom: 25px;
+    }
+
+    #recommended-list #list-items .feed-item-wrapper .feed-item, .category-info #list-items .feed-item-wrapper .feed-item {
+        width: 330px;
+    }
+
+    #recommended-list #list-items .feed-item-wrapper .feed-item .poster, .category-info #list-items .feed-item-wrapper .feed-item .poster {
+        margin-left: 14px;
+        text-align: left;
+    }
+
+
+
+
+    /*
+    ==============================================================    
+    	home page activity feed
+    ============================================================== 
+    */
+
+    div.poster {
+    	text-align: center;
+    }
+
+    #recommended-categories .category img {
+    	width: auto;
+    }
+
+    #category-container div img {
+        width: 100%;
+    }
+
+    .card-flow-column .feed-item-card {
+        margin-top: 0;
+    }
+
+    #slide-filters #activity-filter-x {
+        width: 50%;
+    }
+
+    .poster img.movie-img {
+        height: 460px;
+    }
+
+    .poster img.category-img {
+        height: 180px;
+    }
+
+    div#status-drop {
+        width:766px;
+        top:241px
+    }
+
+    #status-drop .result .info {
+        width: 720px;
+    }
+
+    #user-container #close-status-drop,
+    #close-search-drop {
+        top: 187px;
+        right: 26px
+    }
+
+    div#close-status-drop {
+        top: 167px;
+        right: 230px
+    }
+
+        /*
+        ==============================================================
+            swiper title posters
+        ==============================================================
+        */
+
+    .div-swiper {
+    	width: 375px !important;
+    	height: 600px !important;
+    	background-size: 375px 600px;
+    	left: 196px;
+    	-webkit-transform-origin-y: 100%;
+    }
+
+    div#swiper-content.div-swiper {
+    	left: 196px;
+    	top: 215px;
+    }
+
+    #discovery-background {
+    	height: 1024px;
+    	width: 768px;
+    	background-size: 768px 1024px;
+    	background-image: url(../images/discovery/rate_overlay.png);
+    }
+
+    #swiper-content, #swiper-mask {
+        top: 215px;
+    }
+
+    #swiper-content-two {
+        top: 245px;
+    }
+
+    #swiper-content-three, #swiper-content-four {
+        top: 273px;
+    }
+
+    /* MUSIC */
+    .music-section div#swiper-content.div-swiper {
+        left: 196px;
+        top: 215px;
+    }
+    .music-section .div-swiper {
+        width: 375px !important;
+        height: 375px !important;
+        background-size: 375px 375px;
+        top: 150px;
+    }
+    .music-section #swiper-content, .music-section #swiper-mask { top: 200px; }
+    .music-section #swiper-content-two { top: 230px; }
+    .music-section #swiper-content-three { top: 245px; }
+    .music-section #swiper-content-four { top: 260px; }
+    .music-section #gravity { background-position: center 310px; }
+    .music-section #swiper-content .highlight-holder #favorite-highlight { top: 140px; }
+    /* END MUSIC */
+
+    #progress { width: 720px;padding: 10px; border-radius: 20px; }
+    #progress .outer-bar { width: 650px; height: 15px;height: 20px;border-radius: 10px; }
+    #progress .outer-bar #inner-bar { height: 20px; }
+    #progress .numbers { font-size: 20px; line-height: 20px; }
+
+    .swipe-icon {
+        width: 48px;
+        height: 42px;
+        background-size: 48px 42px;
+    }
+    .swipe-icon span {
+        font-size: 24px !important;
+        top: 50px;
+    }
+    .swipe-icon.favorite {
+        top: 125px;
+        left: 360px;
+    }
+    .swipe-icon.favorite span {
+        top: 45px;
+    }
+    .swipe-icon.queue {
+        left: 360px;
+        bottom: 90px;
+    }
+    .swipe-icon.seen {
+        top: 475px;
+        right: 75px;
+    }
+    .swipe-icon.not-seen {
+        top: 475px;
+        left: 75px;
+    }
+    .swipe-icon.not-seen span {
+        width:105px;
+        left:-27px
+    }
+    /*
+    ==============================================================    
+        movie lobby
+    ============================================================== 
+    */
+
+    .lobby-bg {
+        padding-top: 40px;
+    }
+
+    .lobby-bg #movie-info {
+        width: 80%;
+        height: auto;
+        overflow: hidden;
+    }
+
+    .lobby-bg #movie-poster-div {
+        height: auto;
+        margin-right: 20px;
+    }
+
+    .lobby-bg #movie-poster {
+        width: 144px;
+    }
+
+    .lobby-bg #title-synopsis-block h3 {
+        font-size: 26px;
+    }
+
+    .lobby-bg #title-synopsis-block .synopsis-RT {
+        display: inline-block;
+        position: relative;
+        margin-right: 20px;
+        font-size: 24px;
+    }
+
+    .lobby-bg #title-synopsis-block .synopsis-RT img {
+        position: relative;
+        top: 4px;
+        width: 36px;
+        background-image: none;
+    }
+
+    .lobby-bg #title-synopsis-block .synopsis-RT img.rotten, .lobby-bg #title-synopsis-block .synopsis-RT img.fresh {
+        background-image: none;
+    }
+
+    .lobby-bg #title-synopsis-block #synopsis-wrapper {
+        height: 168px;
+    }
+
+    .lobby-bg #title-synopsis-block #synopsis {
+        font-size: 18px;
+        line-height: 140%;
+        padding-right: 10px;
+    }
+
+    .lobby-bg #title-synopsis-block #more {
+        height: 20px;
+        font-size: 20px;
+    }
+
+    #fake-lobby-scroller .list-buttons {
+        width: 80%;
+        height: 45px;
+        line-height: 45px;
+    }
+
+    #fake-lobby-scroller .list-buttons .list-button {
+        font-size: 18px;
+        background-size: 18px;
+    }
+
+    #fake-lobby-scroller .list-buttons .list-button.queue-button {
+        background-position: 28px 8px;
+    }
+
+    #fake-lobby-scroller .list-buttons .list-button.favorite-button {
+        background-position: 34px 8px;
+    }
+
+    #fake-lobby-scroller .list-buttons .list-button.seen-button {
+        background-position: 46px 8px;
+    }
+
+    #fake-lobby-scroller #seen-data {
+        width: 80%;
+    }
+
+    #fake-lobby-scroller #seen-avatars.cf {
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    #fake-lobby-scroller #seen-avatars.cf .avatar {
+        width: 100px;
+        height: 100px;
+        float: none;
+        background-size: 100px;
+        border-radius: 50px;
+        display: inline-block;
+    }
+
+    #fake-lobby-scroller #seen-by-container {
+        padding: 20px; 
+        text-align: center;
+        font-size: 18px;
+    }
+
+    #fake-lobby-scroller #seen-by-container #seen-by{
+        margin-right: 20px;
+    }
+
+
+    /*
+    ==============================================================    
+        video player
+    ============================================================== 
+    */
+
+	#player {
+		width: 100%;
+		height: 380px;
+	}
+
+	#poster-layover {
+		clip: auto;
+	}
+
+	#play::before {
+		font-size: 100px;
+	}
+
+	#play {
+		right: 350px;
+		top: 120px;
+	}
+
+	#video-src {
+		height: 380px;
+		overflow-y: hidden;
+	}
+
+	#fake-lobby-scroller {
+		height: 590px;
+	}
+
+    /*
+    ==============================================================    
+        hamburger menu
+    ============================================================== 
+    */
+
+    #wrapper.leftMenu {
+        position: relative;
+        left: 276px !important;
+    }
+
+    #side-nav, #right-menu {
+        left: 0;
+    }
+
+
+    /*
+    ==============================================================    
+        profile
+    ============================================================== 
+    */
+
+    #profile {
+        height: 976px;
+    }
+
+    #profile .info {
+        background-position-x: center;
+        background-size: 80%;
+        background-position-y: -40px;
+    }
+
+    #profile div#lists.lists-nav {
+        display: none;
+    }
+
+    div.contain.slick-slide {
+        width: 100%;
+    }
+
+    #profile .info,
+    #profile #side-swipe .slick-list,
+    #profile #side-swipe .contain {
+        height: 400px;
+    }
+
+    #profile .sub-header div:first-child {
+        width: 383px;
+    }
+
+    #profile .sub-header div {
+        width: 384px;
+    }
+
+
+    #profile .button.following {
+        width: 33% !important;
+    }
+
+    #profile .action-buttons .button.follow,
+    #profile .action-buttons .button.greeting {
+        width: 33%;
+        margin: 10px 0 10px 80px;
+    }
+
+    #profile .poster {
+        position: relative;
+        float: left;
+        width: 175px;
+        height: 270px;
+        background-size: 175px 270px;
+        left: 0 !important;
+    }
+
+    #favorite-delta h1 {
+        font-size: 28px;
+    }
+
+    #favorite-delta .delta-poster {
+        text-align: center;
+    }
+
+    #favorite-delta .delta-poster img {
+        /*width: 360px !important;*/
+    }
+
+    .lists-nav {
+        background-position: 740px;
+    }
+
+    .feed-item {}
+
+    .feed-item .recommendation-action {
+         width: 100%;
+     }
+
+    .feed-item .recommendation-action p {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .feed-footer.recommendations-footer span {
+        width: 33%; /* previously 50% - caused recommnedations feed issue */
+    }
+
+    .feed-footer {
+        width: 340px;
+        margin-left: 10px;
+    }
+
+    .recommendation-action p:first-of-type {
+        font-size: 26px;
+        line-height:32px;
+    }
+
+    .passion-poster-container {
+        height: 290px;
+    }
+
+    /* friends list */
+    .friend-list .lists-row {
+        height: 60px;
+    }
+
+    .follow-compatibility {
+        height: 95px;
+        margin: 0;
+        top: 0;
+    }
+
+    #search-users .profile-picture, .lists-row .profile-picture, .movie-seen-list .profile-picture, .follow-list .profile-picture {
+        border-radius: 28px;
+        height: 55px;
+    }
+
+    .follow-name {
+        font-size: 20px;
+        width: 400px;
+    }
+
+    .follow-location {
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    #friends #list-row-wrapper {
+        height: 890px;
+    }
+
+
+    /*
+    ==============================================================    
+        lists
+    ============================================================== 
+    */
+
+    #user-matches { height: 973px; }
+    #user-matches .match {
+        float: left;
+        margin-left: 20px;
+        width: 323px;
+        height: 180px;
+    }
+    #user-matches .match .info { width: 177px; }
+    #user-matches h1 { font-size: 26px; }
+    #user-matches .cf { width: auto; }
+    #list-movies {
+        background-color: rgb(241, 241, 241);
+        overflow: hidden;
+    }
+
+    #list-movies .list-row {
+        float: left;
+        width: 320px;
+        margin-top: 30px;
+        margin-left: 36px;
+    }
+
+    div#list-row-wrapper {
+        height: 973px;
+        background-color: rgb(241, 241, 241);
+    }
+
+    div#services { width: 80%; }
+    #movie-discussion.button2 { width: 77%; }
+
+    #recommendations-feed #feed-container {
+        height: 1024px;
+        padding: 10px 0 0 0;
+    }
+
+    #recommendations-feed .poster {
+        overflow-y: hidden;
+    }
+
+    #recommendations-feed .poster img {
+        position: relative;
+        clip: auto;
+    }
+
+    #recommendations-feed video {
+        height: 380px;
+    }
+
+    #notifications-container {
+        height: 976px;
+    }
+
+    .feed-item {
+        width: 340px;
+        margin: 0;
+        padding-bottom: 0;
+    }
+
+    .feed-item:first-child {
+        margin-top: 10px; 
+    }
+
+    .feed-item .action { width: 75%; font-size: 22px; line-height: 26px; }
+    .feed-item .action .timeago { font-size: 20px; line-height: 24px; }
+    .feed-footer {
+        width: 360px;
+        margin: 0 auto;
+    }
+    .feed-footer span { font-size: 22px; }
+    .feed-social span { font-size: 18px; line-height: 22px; }
+    #category-container div .title,
+    #content-container .list-item .title { width: 339px; }
+    #fabric-player-button { margin: 15px 20px 0; }
+
+    #feed-container {
+        position: relative;
+        height: 976px;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    #feed-container #feed {
+        position: relative;
+    }
+
+    #list-items-container {
+        height: 976px;
+    }
+
+    .list-summary, .list-summary #info {
+        height: 240px;
+    }
+    .list-summary #image { background-size: 100% 100%; }
+    .list-summary #info h1 { font-size: 34px; }
+    .list-summary #info h2 { font-size: 32px; }
+    .list-summary #info #share-button {
+        margin-top: 30px;
+        width: 180px;
+        padding: 10px;
+        font-size: 28px;
+    }
+    .category-info .feed-item-card { margin: 20px auto; }
+    .category-info #list-items .feed-item-wrapper { width: 300px; float: left; }
+    .category-info #list-items .feed-item-wrapper .feed-item { width: 98.5%; }
+    #list-items .poster .movie-poster { width: 183px; height: 275px; }
+    #list-items .poster .trailer-still {
+        width: 460px;
+        clip: rect(0px,475px,240px,0px);
+    }
+    #list-items .feed-buttons { margin-left: 10px; width: 69%; }
+    #recommended-list #list-items .feed-item-wrapper { width: 96%; }
+    #recommended-list #list-items .feed-item-wrapper .feed-item,
+    .category-info #list-items .feed-item-wrapper .feed-item { width: 98.5%; }
+
+    #list-items .item .movie-info .icons div { padding-left: 50px; background-position-x: 28px; }
+    #rec-list-wrapper { height: 973px; }
+    #recommended-list .list-item {
+        width: 48.5%;
+        margin-right: 10px;
+        float: left;
+    }
+    /* tomatoes */
+    #list-items .item .info span img {
+        right: -40px;
+    }
+
+    .movie-seen-list #list-row-wrapper, .follow-list #list-row-wrapper {
+        height: 976px;
+    }
+
+    /* Settings */
+
+    #settings-wrapper {
+        height: 972px;
+    }
+
+    .settings-button {
+        background-position: 740px;
+    }
+
+    #notifications-container .notification .content {
+        width: 690px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    #messages-container .message .conversation-info {
+        width: 680px;
+    }
+    #messages-container .message .conversation-info h1 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+    #messages-container .message .conversation-info p {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    div#messages-slider {
+        height: 973px;
+        overflow: hidden;
+    }
+    div#conversation-slider {
+        height: 921px;
+        font-size: 26px;
+        line-height: 32px;
+    }
+    #conversation-container .message {
+        margin-top: 10px;
+    }
+    input.slider-search-form {
+        width: 687px;
+        margin-left: 25px;
+        font-size: 20px;
+        height: 35px;
+    }
+    .list-buttons {
+        width: 220px;
+    }
+    /*
+    ==============================================================    
+        match found modal
+    ============================================================== 
+    */
+
+    #match-found, #rate-first, #get-started {
+        height: 100%;
+        width: 100%;
+        background-size: 100%;
+    }
+
+    #match-found .content {
+        width: 768px;
+        height: 1024px;
+
+    }
+
+    /*
+    we should not be changing static classes like .cf
+    .cf {
+        margin: 0 auto;
+    }
+    */
+
+    #match-found .movie-info {
+        width: 500px;
+        margin: 60px auto 0;
+    }
+
+    #match-found .poster {
+        width: 120px;
+        height: 180px;
+        background-size: 120px 180px;
+    }
+
+    #match-found .info {
+        width: 330px;
+        margin: 5px 10px;
+        font-size: 24px;
+        line-height: 130%;
+    }
+
+    #match-found .background, #match-found .background-mask {
+        width: 768px;
+        height: 1024px;
+        background-size: 768px 1024px;
+    }
+
+    .list-summary #info {
+        width: 100%;
+    }
+
+    /*
+    ==============================================================    
+        fabric menu
+    ============================================================== 
+    */
+
+    #fabric-menu { 
+        top: -974px; 
+    }
+
+    /*
+    ==============================================================    
+        post rating view list
+    ============================================================== 
+    */
+
+    
+    .category-info #list-items {
+        background-color: rgb(218, 218, 218);
+    }
+
+    .category-info .feed-item-card {
+        position: relative;
+        width: 350px;
+        margin: 40px auto;
+    }
+
+
+    .category-info #list-items .poster .trailer-still {
+        margin-left: 12px;
+    }
+
+    .category-info #list-items div.poster {
+        text-align: inherit;
+    }
+
+    .category-info #list-items h2 {
+        font-size: 24px;
+    }
+
+    .category-info #list-items .feed-footer {
+        width: 340px;
+    }
+
+
+    /*
+    ==============================================================    
+        modal
+    ============================================================== 
+    */
+
+    .modal-overlay {
+        display: none;
+        position: absolute;
+        z-index: 9000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.6;
+    }
+
+    .modal-overlay.active {
+        display: block;
+    }
+
+    /* Extra */
+
+    #category-container .concierge-poster {
+        width: 159px;
+        height: 240px;
+    }
+
+    #category-container .concierge-info {
+        height: 250px;
+        width: 100%;
+        background-size: 600px auto;
+    }
+    #category-container .concierge-info .concierge-text {
+        height: 210px;
+        padding-left: 20px;
+    }
+
+    #category-container .concierge-info h6 { font-size: 22px; margin: 10px 0; line-height: 24px; }
+    #category-container .concierge-info h1,
+    #category-container .concierge-info h1 span { font-size: 22px; line-height: 24px; }
+    .concierge-info h2.concierge-button {
+        width: 240px;
+        margin: 20px 0 140px;
+        padding: 10px;
+        font-size: 24px;
+        line-height: 34px;
+        border-radius: 15px;
+    }
+    #side-swipe #total-queue.contain .banner-content { height: 250px; width: 570px; }
+    #side-swipe #total-queue.contain .banner-content p {
+        margin-bottom: 20px;
+        font-size: 32px;
+        line-height: 34px;
+    }
+    #side-swipe #total-queue.contain .banner-content h1 { font-size: 46px; line-height: 48px; }
+    #side-swipe #total-queue.contain .banner-content .button {
+        height: 30px;
+        line-height: 34px;
+        font-size: 34px;
+        padding: 15px;
+        width: 50%;
+    }
+    #side-swipe .watching-next.contain p,
+    #side-swipe .watching-next.contain h1 {
+        text-shadow: 1px 1px 1px #000;
+        font-size: 28px;
+        line-height: 40px;
+    }
+    #side-swipe .watching-next.contain h1 { font-size: 34px; line-height: 38px; margin-top: 5px; }
+    input#slide-status-update.slider-status-update { margin: 30px 0 0 200px; width: 340px; }
+    #status-update-form { right: 220px; }
+    #fullscreen { right: 50px; }
+    #menu-drop {
+        width: 275px;
+        top: 62px;
+        left: 0px;
+        max-height: 918px;
+    }
+    #user-matches h1 { font-size: 24px; line-height: 28px; }
+    #user-matches h1.credits { background-position: 100px 5px; }
+    #up-next { height: auto; border-radius: 5px; left: 50px; top: 50px; }
+    #up-next-wrapper { height: auto !important; }
+    #up-next-wrapper .catItem {
+        height: auto !important;
+        max-height: 290px !important;
+    }
+    #up-next-wrapper div .title { width: 625px; font-size: 26px; line-height: 30px; }
+    #up-next-wrapper div .title .icon { margin-top: 5px; }
+
+    #slider-container #slide1 { background-image: url(../images/login/01_slide_ipad.png); }
+    #slider-container #slide2 { background-image: url(../images/login/02_slide_ipad.png); }
+    #slider-container #slide3 { background-image: url(../images/login/03_slide_ipad.png); }
+    #slider-container #slide4 { background-image: url(../images/login/04_slide_ipad.png); }
+
+    #search #list-row-wrapper { height: 923px; }
+    #search-form input {
+        margin: 10px auto;
+        margin-left: 210px;
+        width: 350px;
+    }
+    .greeting .credits { background-position: 310px 10px; }
+    .greeting .content .box .info { width: 620px; padding: 10px 5px; }
+    .greeting .content .box form input[type="text"] { height: 35px; width: 692px; }
+    .greeting .content .box #send-suggestion { margin-right: 3px; margin-top: 5px; }
+    #login-content { position: relative; overflow: hidden; }
+    #pop-up { max-width: 80%; margin: 390px auto 0; }
+    #recover-email { width: 597px; }
+    .fl .login-text { width: 427px; }
+    #registration { left: 120px; top: 180px; }
+    #services .commerce { background-size: 45px; height: 55px; }
+    .commerce h2 {
+        padding-left: 10px;
+        line-height: 26px;
+    }
+}
+
+
+
+
+

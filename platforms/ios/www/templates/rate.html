@@ -1,0 +1,39 @@
+<div id="home-slider">
+    <div id="home-filters">
+        <div id="category-filter">
+            <span>Explore</span>
+        </div>
+        <div id="activity-filter">Feed</div>
+        <div id="recommended-filter">Want-to List</div>
+    </div>
+    <div id="category-container">
+        <div>
+            <div id="status-drop">
+                <div></div>
+            </div>
+            <div id="content-container">
+                <div class="content-scroller"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<%= APP.load("fabricMenu") %>
+<div id="want-to-sort">
+    <div class="filter" id="modified" data-filter="modified">When Added</div> 
+    <div class="filter" id="Count" data-filter="Count">Popularity with Friends</div>
+    <div class="filter" id="totalCount" data-filter="totalCount">Popularity with Everyone</div>
+    <div class="filter" id="movieTitle" data-filter="movieTitle">A to Z</div>
+    <div class="filter" id="releaseDate" data-filter="releaseDate">Release Date</div>
+    <div class="filter" id="criticsScore" data-filter="criticsScore">Rotten Tomatoes Score</div>
+</div>
+<h2 id="sort-button">
+    <span id="sort-button-text">sort</span>
+    <span id="current-filter"></span>
+</h2>
+
+<div id="screen"></div>
+<div id="rate-first"></div>
+
+
+

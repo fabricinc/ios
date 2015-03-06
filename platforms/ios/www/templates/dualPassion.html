@@ -1,0 +1,76 @@
+<div class="content">
+    <div class="cf">
+        <div class="user">
+            <div class="fr">
+                <% var fbID = APP.gameState.facebookID; %>
+                <div class="avatar"<% if(APP.gameState.isFacebook) { %> style="background-image: url(https://graph.facebook.com/<%= fbID %>/picture?height=380&width=320);"<% }%>></div>
+                <div class="seen"><%= Util.addCommas(APP.gameState.totalSeen) %> Done</div>
+            </div>
+        </div>
+        <div class="user">
+            <div class="fl">
+                <div class="avatar<% if(userID == '252990') { %> msPop<% } %><% if(profile.facebookID) { %> fb" style="background-image: url(https://graph.facebook.com/<%= profile.facebookID %>/picture?height=300&width=300);<% }%>"></div>
+                <div class="seen"><%= Util.addCommas(profile.totalSeen) %> Done</div>
+            </div>
+        </div>
+    </div>
+    <div class="mtl cf">
+        <div class="self">
+            <div class="cf">
+                <div class="profile-pic"></div>
+                <div class="seen-pic"></div>
+            </div>
+            <%  _.each(user, function(category) { %>
+                <% var passion = parseInt(category.passion) / 2; %> 
+            <div class="category section<%= category.section_id %>">
+                <div class="passion" style="width: 100%;"></div> <!-- <%= parseInt(category.passion) / 2 %> -->
+                <div class="cat-name"><%= category.key_genre %></div>
+            </div>
+            <% }); %>
+        </div>
+        <div class="other">
+            <div class="cf">
+                <div class="profile-pic"></div>
+                <div class="seen-pic"></div>
+            </div>
+            <%  _.each(other, function(category) { %>
+            <div class="category section<%= category.section_id %>">
+                <div class="passion" style="width: 100%;"></div> <!-- <%= parseInt(category.passion) / 2 %> -->
+                <div class="cat-name"><%= category.key_genre %></div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+    <% if(favCommon && favCommon.length > 0) { %>
+    <div class="fav common">
+        <h1><%= favCommon.length %> Favorites in Common</h1>
+        <div class="passion-poster-container">
+        <% if(favCommon.length >= 4) { %>
+            <% for(var i = 0; i < 4; i++) { %>
+                <div class="poster" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= favCommon[i].moviePublishedID %>_poster.jpg)"></div>
+            <% } %>
+        <% }  else { %>
+            <% _.each(favCommon, function(movie) { %>
+                <div class="poster" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= movie.moviePublishedID %>_poster.jpg)"></div>
+            <% }); %>
+        <% } %>
+        </div>
+    </div>
+    <% } %>
+    <% if(queueCommon && queueCommon.length > 0) { %>
+    <div class="queue common">
+        <h1><%= queueCommon.length %> Want-Tos in Common</h1>
+        <div class="passion-poster-container">
+        <% if(queueCommon.length >= 4) { %>
+            <% for(var i = 0; i < 4; i++) { %>
+                <div class="poster" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= queueCommon[i].moviePublishedID %>_poster.jpg)"></div>
+            <% } %>
+        <% } else { %>
+            <% _.each(queueCommon, function(movie) { %>
+                <div class="poster" style="background-image: url(<%= Api.appSettings.cdn %>/posters/<%= movie.moviePublishedID %>_poster.jpg)"></div>
+            <% }); %>
+        <% } %>
+        </div>
+    </div>
+    <% } %>
+</div>

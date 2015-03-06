@@ -1,0 +1,183 @@
+/* iPhone < 5 */
+@media screen and (device-aspect-ratio: 2/3) {
+	#wrapper {
+        width: 320px;
+        height: 480px;
+        position: relative;
+	}
+    #sub-nav { }
+    #sub-nav .tab { }
+    #category-container { height: 388px; }
+    .recommended-filter #category-container {height: 338px;}
+    #category-container div h1 { font-size: 14px; }
+    #notifications-container,
+	#home-slider { height: 430px; }
+    #messages-slider { height: 429px; overflow: hidden; }
+    #messages-slider.comment { height: 378px; }
+    #fake-feed-container,
+    #list-items-container,
+    #home-menu,
+    #profile,
+    #profile.owner,
+    #user-matches {
+        height: 429px !important;
+        overflow: hidden;
+    }
+    #list-row-wrapper {
+        height: 429px;
+    }
+	/* Discovery */
+    #discovery-background { 
+        background-image: url(../images/discovery/rateOverlay3.png); 
+        background-size: 320px 430px;
+        height: 430px; 
+    }
+	.div-swiper {
+        width: 172px !important;
+        height: 258px !important;
+        background-size: 172px 258px;
+        top: 120px;
+        left: 70px;
+	}
+    #up-next-wrapper { height: 403px; }
+    #up-next-wrapper .catItem { height: 112px; }
+
+    #swiper-content .highlight-holder #favorite-highlight {
+        top: 200px;
+    }
+    #discovery-complete {
+        top: 0px;
+        height: 480px;
+        background-size: 320px 480px;
+    }
+    #discovery-complete h1 { margin: 75px 0 0 0; }
+    #discovery-complete #share { bottom: 175px; }
+    #discovery-complete #done { bottom: 88px; }
+    #get-started,
+    #rate-first,
+    #match-found {
+        height: 480px;
+    }
+    #weclome-poster-tap,
+    #get-started { background-size: 320px 480px; }
+    #rate-first { background-size: 320px 568px; }
+
+    /* MUSIC */
+    #progress { top: 55px; }
+    .swipe-icon {
+        width: 24px;
+        height: 21px;
+        background-size: 24px 21px;
+    }
+    .swipe-icon span { top: 20px; }
+    .swipe-icon.favorite { top: 80px; }
+    .swipe-icon.favorite span { left: -9px; }
+    .swipe-icon.queue { bottom: 45px; }
+    #wrapper.music-section #gravity { background-position-y: 310px; }
+    #wrapper.music-section #swiper-content .highlight-holder #favorite-highlight { top: 140px; }
+    #wrapper.music-section .div-swiper {
+        height: 172px !important;
+        background-size: 172px 172px;
+        top: 178px;
+    }
+    /* END MUSIC */
+    #rec-list-wrapper { height: 429px; }
+    #recommended-list  #list-items { height: 379px; }
+
+    /* messages */
+
+    #conversation-slider { height: 378px; }
+    /*
+    #slider-container #slide1 {
+        background-image: url(../images/login/3inch/slide1s.png);
+    }
+    #slider-container #slide2 {
+        background-image: url(../images/login/3inch/slide2s.png);
+    }
+    #slider-container #slide3 {
+        background-image: url(../images/login/3inch/slide3s.png);
+    }
+    #slider-container #slide4 {
+        background-image: url(../images/login/3inch/slide4s.png);
+    }
+    */
+
+    #list-summary-scroller { height: 221px; }
+    #feed-container { height: 410px !important; }
+    #recommendations-feed #feed-container { height: 374px !important}
+    #indicator { bottom: 20px; }
+    .list-summary #info { height: 150px; }
+    .list-summary #info #share-button { margin: 20px auto 0; }
+    #match-found h2 { margin: 10px 0; }
+    #match-found div.user-bubble-container { margin: 15px auto; }
+    #match-found div.user-bubble-container div.user-bubble div.user-portrait { height: 204px; }
+    div#mask .wheel { top: 200px; }
+    #gravity { background-position: center 341px; }
+    .flip-container, .flip-container .front, .flip-container .back { height: 410px; }
+    #match-found.list #match-content,
+    #match-found.list #match-mask,
+    #match-found.list #match-content-two,
+    #match-found.list #match-content-three { height: 410px; }
+    #match-found.list .portrait { height: 180px; }
+    #match-found.list #match-back { height: 410px; }
+    #match-found .container .avatar {
+        width: 60px;
+        height: 60px;
+        background-size: 60px;
+        margin: 0px auto;
+    }
+    #match-found .container h1 { margin: 5px 0;}
+    #match-found .container p { margin: 5px 0;}
+    .friends #list-row-wrapper, .movie-seen-list #list-row-wrapper, .follow-list #list-row-wrapper { height: 429px; }
+    #friends #list-row-wrapper { height: 345px !important; }
+    #search #list-row-wrapper { height: 389px !important; }
+    #nearby-attending #list-row-wrapper { height: 367px; }
+    #fake-lobby-scroller { height: 274px; }
+    #settings-wrapper { height: 429px; }
+    #settings-wrapper.notification-settings .settings-headings { height: 37px; }
+    .settings-headings { height: 18px; }
+
+    #user-matched { height: 517px; }
+    .list #list-row-wrapper,
+    #matches-tutorial-modal {
+        background-size: 320px 480px;
+    }
+    #match-found .content h1 { margin: 10px 0; }
+    #match-found .movie-info { margin-top: 5px; }
+    #match-found .content p { margin-bottom: 0px; }
+    #register-content #logo { display: none; }
+    #registration { top: 50px; }
+    #register-button { margin: 17px 0; }
+    .greeting .dash { height: 85px; padding-top: 5px; }
+    .greeting .content h1 { margin: 0; }
+    .greeting .credits {
+        height: 30px;
+        font-size: 16px;
+        line-height: 30px;
+        background-size: 15px 14px;
+        background-position: 100px 8px;
+    }
+    .greeting .content .box .poster {
+        width: 60px;
+        height: 90px;
+        background-size:60px 90px;
+    }
+    .greeting .content .box .info { width: 186px; }
+    .greeting .dash h1 { margin-top: 0; }
+    .greeting .dash .avatar {
+        width: 65px;
+        height: 65px;
+        background-size: 65px;
+    }
+    #status-drop { height: 355px; }
+    #slider-container #slide1 { background-image: url(../images/login/3inch/01_slide.png); }
+    #slider-container #slide2 { background-image: url(../images/login/3inch/02_slide.png); }
+    #slider-container #slide3 { background-image: url(../images/login/3inch/03_slide.png); }
+    #slider-container #slide4 { background-image: url(../images/login/3inch/04_slide.png); }
+    #logout { margin: 12px auto; }
+    div#facebook.login/3inch-button { top: 267px; }
+    div#sign-up.login/3inch-button { top: 341px; }
+    #recommended-list #list-items { height: 429px; }
+}
+
+

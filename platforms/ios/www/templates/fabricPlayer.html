@@ -1,0 +1,15 @@
+<style>
+
+</style>
+
+<div id="video-player">
+    <video id="fabric-player" src="<%= movies[0].link %>" preload="auto" poster="<%= movies[0].trailerStill %>" controls></video>
+</div>
+
+<div id="movie-list">
+    <div class="cf">
+        <% var i = 0; _.each(movies, function(movie) { %>
+        <div class="movie-poster<% if(i==0) { %> active<% } %>" style="background-image: url(<%= Api.appSettings.cdn %><%= movie.posterPath.replace('/files', '') %>);" data-pos="<%= i %>"></div>
+        <% i++; }); %>
+    </div>
+</div>

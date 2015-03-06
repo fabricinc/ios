@@ -1,0 +1,31 @@
+<div id="contest-leaderboard" style="background: transparent url(<%= data.contest.leaderboardBkgImage %>) 0 0 no-repeat; height: 768px;">
+    <header class="header">
+        <div class="header-text"><%= data.contest.handle %> Leaderboard</div>
+        <a href="#home" class="button exit">Exit</a>
+    </header>
+
+    <div id="inner">
+        <div id="top">
+            <div id="competing" class="on">
+                <div id="leaderboard-top"><%= data.contest.leaderboardTop %></div>
+                <div class="button play">Play Again</div>
+            </div>
+            <p id="winner" class="off">Congratulations, you’re a contest winner!<br />Fabric will contact you soon!</p>
+            <p id="contest-ended" class="off">This contest has ended. Thanks for playing!</p>
+        </div>
+        <div id="scroll-wrapper">
+            <ol id="leaderboard">
+                <% _.each(data.leaderboard, function(contestant) { %>
+                <li><span class="name"><%= contestant.name %></span><span class="rank"><%= contestant.rank %></span><span class="score"><%= contestant.score %></span></li>
+                <% }); %>
+            </ol>
+        </div>
+        <div id="bottom">
+            <div id="share">Share this contest<br />with friends</div>
+            <div id="purchase">
+                <div id="poster" class="fade-in" style="background-image: url(<%= data.contest.leaderboardProductImage %>)"></div>
+                <div id="product-copy"><%= data.contest.leaderboardProductCopy %></div>
+            </div>
+        </div>
+    </div>
+</div>

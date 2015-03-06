@@ -1,0 +1,64 @@
+<% var x = 0 %>
+<% var countType = friends ? "FavCount" : "listCount"; %>
+<% var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
+<% if(feed){ %>
+
+    <div class="card-flow-column js-masonry" data-masonry-options='{ "columnWidth": ".feed-item-card", "itemSelector": ".feed-item-card", "gutter": 10 }'>
+
+        <% _.each(feed, function(item){ %>
+            <% count = parseInt(item[countType]) %>
+            <div class="feed-item-card">
+                <div class="feed-item" data-hls="<%= item.hls %>" data-count="<%= x %>">
+                    <div class="cf">
+                        <div class="recommendation-action">
+                            <% if (filter === "recent"){ %>
+                        <!-- New and Upcoming -->
+                                <% var rD = new Date(); %>
+                                <% rD.setYear(item.theater_release_dates.substring(0,4)); %>
+                                <% rD.setMonth(parseInt(item.theater_release_dates.substring(5,7)) - 1) ; %>
+                                <% rD.setDate(item.theater_release_dates.substring(8,11)); %>
+                                <% var inTheaters = rD <= date ? "Now In Theaters" : month[rD.getMonth()]+" "+ rD.getDate()  %>
+                                <b class="in-theaters"><%= inTheaters %></b>
+                                <p><%= item.title %></p>
+                                <% if(count > 0){ %>
+                                    <% var recType = count === 1 ? " person recommends" : " people recommend" ;%> 
+                                    <p><%= count + recType %><span class="view-all-seen">View All</span></p>
+                                <% } %>
+                            <% } else if(filter === "popular"){ %>
+                        <!-- Popular All Time -->
+                                <p><%= item.title %></p>
+                                <% if(count > 0){ %>
+                                    <% var recType = count === 1 ? " person recommends" : " people recommend" ;%> 
+                                    <p><%= count + recType %></p>
+                                <% } %>
+                            <% } else { %>
+                        <!-- Popular with Friends -->
+                                <p><%= item.title %></p>
+                                <% if(count > 0){ %>
+                                    <% var recType = count === 1 ? " friends recommends" : " friend recommend" ;%> 
+                                    <p><%= count + recType %><span class="view-all-seen">View All</span></p>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="poster">
+                            <img src="<%= API_URL + item.poster_path%>" width="260"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-footer recommendations-footer" data-count="<%= x %>" data-feedid="<%= item.publishedid %>">
+                    <span class="movie-info">Info</span>
+                    <span class="share">Share</span>
+                    <span class="add-queue">+Queue</span>
+                </div>
+            </div>
+            <% x++ %>
+        <% }); %>
+
+    </div>
+
+<% } else { %>
+    <p class="blank-message">Need more recommendations?</p>
+    <p class="blank-instructions">Try following some people with great taste and we'll add their picks here</p>
+<% } %> 

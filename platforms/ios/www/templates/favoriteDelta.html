@@ -1,0 +1,68 @@
+
+<h1>Recommendations for you</h1>
+<% if(Util.isTablet()) { %>
+    <div class="cf">
+        <div style="width: 375px; float: left; overflow: hidden;">
+            <% for(var i=0; i < recs.length; i+=2) { var item = recs[i]; %>
+                <div class="feed-item rec-delta-item" data-movie-id="<%= item.id %>">
+                    <div class="cf">
+                        <div class="recommendation-action">
+                            <p><%= item.title %></p>
+                            <p>Recommended by <%= uName %></p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="delta-poster">
+                            <img src="<%= Api.appSettings.cdn + '/posters/'+ item.moviePublishedID + '_poster.jpg'%>" width="260"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-footer recommendations-footer" data-movie-id="<%= item.id %>" data-movie-published-id="<%= item.moviePublishedID %>">
+                    <span class="movie-info">Info</span>
+                    <span class="add-queue">+Want-To</span>
+                </div>
+            <% } %>
+        </div>
+        <div style="width: 375px; float: right; overflow: hidden;">
+            <% for(var i=1; i < recs.length; i+=2) { var item = recs[i]; %>
+                <div class="feed-item rec-delta-item" data-movie-id="<%= item.id %>">
+                    <div class="cf">
+                        <div class="recommendation-action">
+                            <p><%= item.title %></p>
+                            <p>Recommended by <%= uName %></p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="delta-poster">
+                            <img src="<%= Api.appSettings.cdn + '/posters/'+ item.moviePublishedID + '_poster.jpg'%>" width="260"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-footer recommendations-footer" data-movie-id="<%= item.id %>" data-movie-published-id="<%= item.moviePublishedID %>">
+                    <span class="movie-info">Info</span>
+                    <span class="add-queue">+Want-To</span>
+                </div>
+            <% } %>
+        </div>
+    </div>
+<% } else { %>
+    <% _.each(recs, function(item) { %>
+        <div class="feed-item rec-delta-item" data-movie-id="<%= item.id %>">
+            <div class="cf">
+                <div class="recommendation-action">
+                    <p><%= item.title %></p>
+                    <p>Recommended by <%= uName %></p>
+                </div>
+            </div>
+            <div class="content">
+                <div class="delta-poster">
+                    <img src="<%= Api.appSettings.cdn + '/posters/'+ item.moviePublishedID + '_poster.jpg'%>" width="260"/>
+                </div>
+            </div>
+        </div>
+        <div class="feed-footer recommendations-footer" data-movie-id="<%= item.id %>" data-movie-published-id="<%= item.moviePublishedID %>">
+            <span class="movie-info">Info</span>
+            <span class="add-queue">+Want-To</span>
+        </div>
+    <% }); %>
+<% } %>

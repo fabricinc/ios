@@ -1,0 +1,11 @@
+<% var i = 0; _.each(data, function(item) { %>
+    <div class="result" data-publishedid="<%= item.moviePublishedID %>" data-movieid="<%= item.movieID %>" data-arrpos="<%= i %>">
+        <div class="poster"<% if(item.imageThumbnail) { %> style="background-image: url(<%= Api.appSettings.cdn %><%= item.imageThumbnail.replace('/files','') %>)"<% } %>></div>
+        <div class="info">
+            <h1><%= item.movieTitle %></h1>
+            <% if(parseInt(item.releaseYear) > 0) { %>
+                <h2><%= item.releaseYear %></h2>
+            <% } %>
+        </div>
+    </div>
+<% i++; }); %>

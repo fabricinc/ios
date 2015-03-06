@@ -1,0 +1,20 @@
+<div id="contest" style="background-image: url(<%= contest.bkgImage %>); background-size: 100% auto">
+    <header>
+        <a href="#back" class="button exit">Exit</a>
+    </header>
+
+    <div id="inner">
+        <div class="padding">
+            <div id="contest-logo"></div>
+            <div id="heading"><%= contest.heading %></div>
+            <div id="body-text">
+                <%= contest.bodyHtml %>
+            </div>
+
+            <div class="buy button" rel="<%= contest.publishedID %>">Get the movie</div>
+            <div class="play button" rel="<%= contest.publishedID %>">Enter</div>
+
+            <div id="rules"><%= contest.finePrint %></div>
+        </div>
+    </div>
+</div>

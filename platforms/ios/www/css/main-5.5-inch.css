@@ -1,0 +1,301 @@
+/* iPhone 6+ */
+
+#wrapper { width: 414px; height: 736px; position: relative; }
+#home-filters { width: 414px; height: 52px; }
+#home-filters div { height: 52px; width: 138px; }
+#activity-filter-x,
+#activity-filter { right: 139px; }
+#category-container { height: 617px; }
+#category-container div .title { width: 380px; }
+#category-container .catItem { max-height: 200px; }
+#category-container #side-swipe { width: 395px; }
+.feed-item { width: 375px; }
+.poster img.movie-img { height: auto; }
+#side-nav { width: 346px; }
+#profile,
+#fabric-menu,
+#user-matches,
+#list-row-wrapper,
+#notifications-container,
+#list-row-wrapper.no-edit,
+#list-row-wrapper.friend-list,
+.follow-list #list-row-wrapper,
+.movie-seen-list #list-row-wrapper,
+#settings-wrapper { height: 686px; }
+#fabric-menu { top: -686px; }
+.settings-button { background-position: 390px; }
+#discovery-background {
+    background-image: url(../images/discovery/rateOverlay3.png);
+    background-size: 320px 430px;
+    height: 430px;
+}
+.div-swiper {
+    width: 172px !important;
+    height: 258px !important;
+    background-size: 172px 258px;
+    top: 120px;
+    left: 70px;
+}
+#swiper-content .highlight-holder #favorite-highlight { top: 308px; }
+#discovery-complete {
+    top: 0px;
+    height: 480px;
+    background-size: 320px 480px;
+}
+#discovery-complete h1 { margin: 75px 0 0 0; }
+#discovery-complete #share { bottom: 175px; }
+#discovery-complete #done { bottom: 88px; }
+#slider-container { width: 2070px; }
+#slider,
+#slider-container .intro-slide {
+    width: 414px;
+    height: 736px;
+}
+#indicator { left: 173px; }
+.login-button { left: 98px; }
+#side-swipe .contain,
+.empty-concierge {
+    width: 395px;
+    height: 195px;
+}
+#side-swipe .watching-next.contain input {
+    margin-left: 42px;
+    width: 300px;
+}
+#profile .sub-header div { width: 206px; }
+#profile .sub-header div:first-child { width: 207px; }
+.lists-nav { background-position: 390px; }
+#friends #list-row-wrapper { height: 601px; }
+header nav h1 {
+    width: 320px;
+    height: 65px;
+    font-size: 20px;
+}
+div#mask .wheel {
+    top: 320px;
+    left: 180px;
+}
+.div-swiper {
+    width: 275px !important;
+    height: 409px !important;
+    background-size: 275px 409px;
+    top: 160px;
+    left: 67px;
+}
+.swipe-icon.favorite { top: 100px; left: 193px; }
+.swipe-icon.queue { bottom: 90px; left: 193px; }
+.swipe-icon.seen,
+.swipe-icon.not-seen { top: 350px; }
+#progress { width: 360px; left: 20px; top: 71px; }
+#progress .outer-bar { width: 300px; }
+#profile .action-buttons .button.follow { margin-left: 42px; }
+#player,
+#video-src { height: 233px; }
+#fake-lobby-scroller { height: 452px; }
+#fake-lobby-scroller #services,
+#fake-lobby-scroller .list-buttons,
+#seen-data, #movie-info { width: 394px; }
+#poster-layover {
+    width: 414px;
+    clip: rect(0px, 414px, 233px, 0px); /* 197 */
+}
+#play::before { top: 70%; left: 10%; }
+.bottom-info span { background-size: 14px; }
+.list-summary #image { background-size: 414px 197px; }
+.list-summary #info { width: 414px; height: 197px; }
+.discovery #list-items-container { height: 671px; }
+#list-items-container { height: 686px; }
+#list-items .share-buttons .btn {
+    width: 96px;
+    background-position: 12px 0;
+}
+#list-items .share-buttons #fb.btn { margin-left: 7px; }
+#profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
+.feed-item .recommendation-action { width: 384px; }
+#favorite-delta .delta-poster { height: auto; }
+#favorite-delta .delta-poster img { width: 360px; }
+.feed-footer { width: 100%; }
+#favorite-delta .feed-footer { width: 95%; margin: 0 auto; }
+#facebook { top: 327px; }
+#sign-up { top: 411px; }
+#ready-to-start { margin-top: 30px; }
+.share-icons div {
+    padding-right: 0;
+    text-align: center;
+    width: 206px;
+}
+.share-icons div.twitter { padding-right: 0; }
+.share-icons div.facebook { width: 207px; }
+.feed-item .action { width: 305px; }
+#user-matches .match { margin: 10px auto 0; }
+.fl .login-text { width: 230px; }
+#registration { left: 43px; }
+#registration .row.double .icon { height: 59px; }
+#match-found,
+#rate-first,
+#get-started {
+    width: 414px;
+    height: 736px;
+    background-size: 414px 736px;
+}
+#slide-filters div,
+#home-filters div {
+    height: 52px;
+    line-height: 52px;
+    font-size: 15px;
+}
+#dashboard header nav h1 {
+    height: 46px !important;
+    width: 122px;
+    font-size: 34px;
+    line-height: 46px;
+}
+#dashboard header nav h1 span {
+    top: 21px;
+    margin: 0 0 0 14px;
+    height: 30px;
+    width: 26px;
+    background-size: 22px;
+}
+header nav { height: 65px; }
+#current-icon.all,
+#dashboard header nav h1.open span { top: 28px; }
+header nav #tap-menu,
+header nav #share-icon,
+header nav #shopping-cart,
+header nav #notifications-menu,
+header nav #chat-menu { top: 8px; }
+#friends #list-row-wrapper.no-friends { height: 586px; }
+#category-container .concierge-poster { height: 185px; width: 123px; }
+.concierge-text { height: 152px; }
+.concierge-info {
+    width: 260px;
+    height: 195px;
+}
+#category-container .concierge-info h1 { margin: 10px 0; }
+.concierge-info h2, .concierge-button { margin: 20px auto 0; }
+#menu-search-form input { width: 100%; height: 25px; }
+#search-form input {
+    margin: 10px 0px 10px 16px;
+    width: 90%;
+    height: 25px;
+}
+#up-next { top: 65px; height: 661px; }
+#up-next-wrapper { height: 641px; }
+.recommended-filter #category-container {
+    max-height: 194px;
+    height: 194px;
+}
+#up-next-wrapper div .title { width: 370px; }
+#dashboard header nav h1.notify { line-height: 45px; }
+#seen-avatars .avatar { margin-left: 35px; }
+#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 15px 11px; }
+#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 22px 11px; }
+#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 29px 11px; }
+#statusUpdates .text-box textarea { width: 310px; height: 120px; }
+#category-container #status-drop { top: 136px; }
+#status-drop, #menu-drop { max-height: 546px; }
+#user-matches h1.credits { background-position: 20px 2px; }
+#search #list-row-wrapper { height: 613px; }
+div#messages-slider { height: 670px; }
+#conversation-slider { height: 619px; }
+#profile .info { height: 280px; background-position: 0 -25px; }
+#feed-container { height: 650px; }
+img.movie-img,
+img.category-img { width: 350px; }
+.side-menu-icon {
+    height: 30px;
+    width: 30px;
+    background-size: 30px 30px;
+}
+#profile #side-swipe .slick-list, #profile #side-swipe .contain { height: 280px; }
+header nav #chat-menu { background-size: 24px 24px; }
+header nav #share-icon {
+    background-size: 24px 28px;
+    top: 5px;
+    right: 10px;
+}
+div.left.button { background-position: 10px 22px !important; top: 0; }
+#notifications-container { top: 65px; }
+#done-button,
+#more-button,
+#done-inter-button,
+#rec-filter-button { line-height: 60px !important; top: 0; }
+#menu-drop {
+    top: 48px;
+    left: 31px;
+    width: 290px;
+    max-height: 671px;
+}
+#menu-drop .result .info { width: 245px; }
+#profile .poster:nth-child(2) { left: 98px; }
+#profile .poster:nth-child(3) { left: 194px; }
+#profile .poster:nth-child(4) { left: 290px; }
+#user-matches .match { width: 360px; }
+#user-matches .match .buttons .greet { background-position: 42px 10px; }
+#messages-container .message .conversation-info { width: 330px; }
+#dashboard header nav h1.notify {
+    height: 65px !important;
+    line-height: 65px;
+}
+.recommended-filter #category-container { height: 565px; }
+.onoffswitch { width: 54px; }
+.onoffswitch-label { border-radius: 12px; }
+.onoffswitch-switch { width: 24px; border-radius: 12px; }
+.lists #list-row-wrapper { height: 736px; }
+input.slider-search-form { width: 383px; }
+
+#up-next-wrapper .catItem {
+    height: 196px;
+    max-height: 196px;
+}
+#video-player, #fabric-player { width: 415px; }
+#movie-list .movie-poster { width: 128px; }
+#movie-list .movie-poster.active { width: 122px; }
+#movie-list { height: 490px; }
+
+/* Rtina Images */
+
+#slider-container #slide1 { background-image: url(../images/6p/login/01_slide.png); }
+#slider-container #slide2 { background-image: url(../images/6p/login/02_slide.png); }
+#slider-container #slide3 { background-image: url(../images/6p/login/03_slide.png); }
+#slider-container #slide4 { background-image: url(../images/6p/login/04_slide.png); }
+div#mask .wheel { background-image: url(../images/6p/discovery/loader.png); }
+#category-container div .title .icon.icon4,
+#up-next-wrapper div .title .icon.icon4 { background-image: url(../images/6p/discovery/music.png); }
+#category-container div .title .icon.icon3,
+#up-next-wrapper div .title .icon.icon3 { background-image: url(../images/6p/discovery/travel.png); }
+#category-container div .title .icon.icon2,
+#up-next-wrapper div .title .icon.icon2 { background-image: url(../images/6p/discovery/tv.png); }
+#category-container div .title .icon.icon1,
+#up-next-wrapper div .title .icon.icon1 { background-image: url(../images/6p/discovery/movies.png); }
+header nav #share-icon { background-image: url(../images/6p/discovery/share.png); }
+header nav #chat-menu { background-image: url(../images/6p/discovery/chat.png); }
+#current-icon.all { background-image: url(../images/6p/discovery/fabricIcons/arrowBlack.png); }
+.list header nav h1.open span,
+#dashboard header nav h1.open span { background-image: url(../images/6p/discovery/fabricIcons/arrowRed.png); }
+header nav .slide,
+header nav #tap-menu { background-image: url(../images/6p/discovery/hamIcon.png); }
+header nav #shopping-cart,
+header nav #notifications-menu { background-image: url(../images/6p/discovery/bell2.png); }
+header nav #notifications-menu.on { background-image: url(../images/6p/discovery/bell-on.png); }
+#all-nav { background-image: url(../images/6p/discovery/fabricIcons/alldot.png); }
+#movies-nav { background-image: url(../images/6p/discovery/fabricIcons/movieMenuIcon.png); }
+#tv-nav { background-image: url(../images/6p/discovery/fabricIcons/tvMenuIcon.png); }
+#travel-nav { background-image: url(../images/6p/discovery/fabricIcons/travelMenuIcon.png); }
+#music-nav { background-image: url(../images/6p/discovery/fabricIcons/musicMenuIcon.png); }
+.check-list-check { background-image: url(../images/6p/discovery/lightgrey-check.png); }
+.check-list-check.checked { background-image: url(../images/6p/discovery/redcheck.png); }
+#rate-first.coach0 { background-image: url(../images/6p/discovery/coach/coach0.png); }
+#rate-first.coach1 { background-image: url(../images/6p/discovery/coach/coach1.png); }
+#rate-first.coach2 { background-image: url(../images/6p/discovery/coach/coach2.png); }
+#rate-first.coach3 { background-image: url(../images/6p/discovery/coach/coach3.png); }
+#welcome-container #welcome-content.next { background-image: url(../images/discovery/05_scrim.png); }
+#side-menu-rate .side-menu-icon { background-image: url(../images/6p/discovery/HamburgerIcons/rate.png); }
+#side-menu-friends .side-menu-icon { background-image: url(../images/6p/discovery/HamburgerIcons/friends.png); }
+#side-menu-matches .side-menu-icon { background-image: url(../images/6p/discovery/HamburgerIcons/matches.png); }
+#side-menu-settings .side-menu-icon { background-image: url(../images/6p/discovery/HamburgerIcons/settings.png); }
+#profile #top-genres .category.section1 .passion { background-image: url(../images/6p/discovery/fabricIcons/movieMenuIcon.png); }
+#profile #top-genres .category.section2 .passion { background-image: url(../images/6p/discovery/fabricIcons/tvMenuIcon.png); }
+#profile #top-genres .category.section3 .passion { background-image: url(../images/6p/discovery/fabricIcons/travelMenuIcon.png); }
+#profile #top-genres .category.section4 .passion { background-image: url(../images/6p/discovery/fabricIcons/musicMenuIcon.png); }

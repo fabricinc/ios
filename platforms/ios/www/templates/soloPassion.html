@@ -1,0 +1,17 @@
+<div class="content">
+    <div class="cf">
+        <h1 stlye="text-align: center; margin: 10px 0;"><%= APP.gameState.totalSeen %> Done</h1>
+        <div class="other" style="width: 100%;">
+            <div class="cf">
+                <div class="profile-pic"></div>
+                <div class="seen-pic"></div>
+            </div>
+            <%  _.each(user, function(category) { %>
+            <div class="category section<%= category.section_id %>">
+                <div class="passion" style="width: <%= parseInt(category.passion) %>%"></div>
+                <div class="cat-name"><%= category.key_genre %></div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</div>

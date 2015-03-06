@@ -1,0 +1,11 @@
+[
+    {
+        "name": "jquery",
+        "version": "1.9.1"
+    },
+
+    {
+        "name": "cordova",
+        "version": "2.1.0"
+    }
+]

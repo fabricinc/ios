@@ -1,0 +1,24 @@
+<% var z = 0 %>
+
+<div id="list-row-wrapper" class="movie-seen-list">
+    <div id="lists">
+        <% if(followers.success === true) { %>
+            <% var length = followers.recommendedBy.length %>
+            <p class="friend-lable">Favorited</p>
+            <% _.each(followers.recommendedBy, function(friend) { %>
+                <%  var x = followers.recommendedBy[z].followType %>
+                <% if(z != length - 1) z++ %>
+                <div class="lists-row" data-followid="<%= friend.userID %>">
+                	<img class="profile-picture<% if(parseInt(friend.userID) == 252990) { %> msPop<% } %>" src="https://graph.facebook.com/<%= friend.facebookID %>/picture?height=100&width=100" onerror="UI.imgError(this);" />
+                	<div class="follow-info">
+    	                <div class="follow-name"><%= friend.userName %></div>
+    	                <div class="follow-location gry"><%= friend.city %></div>
+                	</div>
+                </div>
+                <% if (x != followers.recommendedBy[z].followType) { %>
+                    <p class="friend-lable">Queued</p>
+                <% } %>
+            <% }); %>
+        <% } %>
+    </div>
+</div>

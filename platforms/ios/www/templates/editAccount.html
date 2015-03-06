@@ -1,0 +1,29 @@
+<div id="settings-wrapper" class="edit-account">
+    <div id="settings">
+        <h4 class="settings-button">Email
+            <input type="text" name="email" id="email" value="<%= APP.gameState.email %>">
+        </h4>
+        <h4 class="settings-button">Name
+            <input type="text" name="name" id="name" value="<%= APP.gameState.uName %>">
+        </h4>
+        <!--
+        <h4 class="settings-button">Last Name
+            <input type="text" name="lastname" id="lastname" placeholder="Last Name">
+        </h4>
+        -->
+        <h4 class="settings-button">Age
+            <input type="text" name="birthdDate" id="age" placeholder="Age"<% if(APP.gameState.age) { %> value="<%= APP.gameState.age %>"<% } %>>
+        </h4>
+        <h4 class="settings-button">Location Services
+            <div class="onoffswitch">
+                <input type="checkbox" class="onoffswitch-checkbox" id="locationServices" checked="">
+                <label class="onoffswitch-label" for="locationServices">
+                    <div class="onoffswitch-inner"></div>
+                    <div class="onoffswitch-switch"></div>
+                </label>
+            </div>
+        </h4>
+        <button id="update">Update Account</button>
+        <button id="logout">Delete Account</button>
+    </div>
+</div>

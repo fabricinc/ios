@@ -1,0 +1,51 @@
+<% 
+    section = parseInt(section);
+    var sectionID = 0;
+    if(section == 3) { sectionID = 1; }
+    else if(section == 4 || section == 5) { sectionID = 2; }
+
+var terms = [{
+        "present": "see",
+        "past": "seen"
+    },{
+        "present": "visit",
+        "past": "visited"
+        
+    },{
+        "present": "hear",
+        "past": "heard"
+    }];
+%>
+
+<div id="progress">
+    <div class="outer-bar">
+        <div id="inner-bar"></div>
+    </div>
+    <div class="numbers">
+        <span id="rated"><%= currentPos %></span> / <%= totalMovies %>
+    </div>
+</div>
+
+<div id="swiper-content" class="div-swiper">
+    <div class="highlight-holder">
+        <div id="not-seen-highlight"></div>
+        <div id="seen-highlight"></div>
+        <div id="favorite-highlight"></div>
+        <div id="queue-highlight"></div>
+    </div>
+</div>
+<div id="swiper-content-two" class="div-swiper"></div>
+<div id="swiper-content-three" class="div-swiper"></div>
+<div id="swiper-content-four" class="div-swiper"></div>
+<div id="swiper-mask" class="div-swiper"></div>
+
+<div id="favorite" class="swipe-icon favorite"><span>Favorite</span></div>
+<div id="queue" class="swipe-icon queue"><span>Want to <%= terms[sectionID].present %></span></div>
+<div id="seen" class="swipe-icon seen"><span><%= terms[sectionID].past %></span></div>
+<div id="not-seen" class="swipe-icon not-seen"><span>Not <%= terms[sectionID].past %></span></div>
+
+<div id="gravity"></div>
+
+<div id="critic-rating" class="bottom-info"><span class="fresh"></span></div>
+<div id="friends-favorited" class="bottom-info"><span></span></div>
+<div id="friends-queued" class="bottom-info"><span></span></div>

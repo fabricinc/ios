@@ -1,0 +1,46 @@
+<div id="list-row-wrapper" 
+    <% if(userID){ %> 
+        class="no-edit"
+    <% } %> >
+    <div id="lists" data-userID="<%= userID %>">
+        <% _.each(standardLists, function(list) { 
+            var movieCount = list.memberCount === "1" ? "item" : "items",
+                title;
+
+            switch(list.name){
+                case 'Watchlist': title = 'Want-To'; break; 
+                case 'Seen':  title = 'Done'; break;
+                default: title = list.name; 
+            }
+
+            if(list.name !== "History") { %>
+                <div class="lists-row <%= list.classStr %>" listid="<%= list.ID %>" id="sortOrder_<%= list.ID %>">
+                    <div class="info">
+                        <div class="list-name"><%= title %></div>
+                        <div class="list-count gry"><%= list.memberCount + " " + movieCount %></div>
+                    </div>
+                    <% if(list.memberCount !== "0") { %>
+                        <img class="list-image" src="<%= list.imagePath %>" >
+                    <% } %>
+                </div>
+            <% } %>
+        <% }); %>
+        <% _.each(customLists, function(list) { %>
+            <div class="lists-row custom" listid="<%= list.ID %>" id="sortOrder_<%= list.ID %>">
+                <div class="info">
+                    <div class="list-name"><%= list.name %></div>
+                    <div class="list-count gry"><%= list.memberCount %>
+                        <% if(list.memberCount === "1") { %>
+                            Movie
+                        <% } else { %>
+                            Movies
+                        <% } %>
+                    </div>
+            	</div>
+                <% if(list.memberCount !== "0") { %>
+                    <img class="list-image" src="<%= list.imagePath %>" >
+                <% } %>
+            </div>
+        <% }); %>
+    </div>
+</div>

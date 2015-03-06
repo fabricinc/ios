@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	id="com.flurry.sdk-ios"
+	version="5.1.0">
+      
+    <name>Flurry SDK for iOS</name>
+	<description>add Flurry Ads SDK for iOS to cordova project, as dependency of other plugins</description>
+    <keywords>flurry,sdk</keywords>
+
+	<engines>
+	    <engine name="cordova" version=">=3.0" />
+	</engines>
+
+     <!-- ios -->
+     <platform name="ios">    
+         
+         <header-file src="src/ios/Flurry.h" />
+         <header-file src="src/ios/FlurryAds.h" />
+         <header-file src="src/ios/FlurryAdDelegate.h" />
+         <source-file src="src/ios/libFlurry_5.1.0.a" framework="true" />
+         <source-file src="src/ios/libFlurryAds_5.1.0.a" framework="true" />
+         
+         <framework src="AdSupport.framework" />
+         <framework src="CoreGraphics.framework" />
+         <framework src="Foundation.framework" />
+ 	 <framework src="MediaPlayer.framework" />
+ 	 <framework src="Security.framework" />
+ 	 <framework src="StoreKit.framework" />
+         <framework src="MessageUI.framework" />
+         <framework src="SystemConfiguration.framework" />
+         <framework src="UIKit.framework" />
+         <framework src="libz.dylib" />
+	</platform>
+
+</plugin>

@@ -1,0 +1,43 @@
+<% _.each(movies, function(movie) { %>
+<div class="item">
+    <img src="<%= movie.imageThumbnail %>" />
+    <div class="info">
+        <div class="cf">
+            <h1><%= movie.movieTitle %></h1>
+            <% if(movie.criticsScore != "") { %>
+            <% if(parseInt(movie.criticsScore) > 60) { %>
+            <span><%= movie.criticsScore %>% <img src="images/game/game-tomato_fresh.png" class="fresh" /></span>
+            <% } else { %>
+            <span><%= movie.criticsScore %>% <img src="images/game/game-tomato_rotten.png" class="rotten" /></span>
+            <% } %>
+            <% } %>
+        </div>
+        <div class="icons cf">
+            <div class="holder">
+                <% if(movie.movieWatchlist == "1") { %>
+                <div class="watch-icon" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>" />
+                <% } else { %>
+                <div class="watch-icon off" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>" />
+                <% } %>
+                <span>Queue</span>
+            </div>
+            <div class="holder">
+                <% if(movie.movieFavorite == "1") { %>
+                <div class="favorite-icon" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>" />
+                <% } else { %>
+                <div class="favorite-icon off" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>" />
+                <% } %>
+                <span>Favorite</span>
+            </div>
+            <div class="holder">
+                <% if(movie.movieSeen == "1") { %>
+                <div class="seen-icon" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>" />
+                <% } else { %>
+                <div class="seen-icon off" data-publishedid="<%= movie.moviePublishedID %>" data-movieid="<%= movie.movieID %>" />
+                <% } %>
+                <span>Seen</span>
+            </div>
+        </div>
+    </div>
+</div>
+<% }); %>

@@ -1,0 +1,18 @@
+<div id="recommendation-filters">
+    <div class="filter check" id="friendRecs" data-filter="friendRecs">Popularity with Friends</div>
+    <div class="filter" id="totalCount" data-filter="totalCount">Popularity with Everyone</div>
+    <div class="filter" id="movieTitle" data-filter="movieTitle">A to Z</div>
+    <div class="filter" id="theatricalReleaseDate" data-filter="theatricalReleaseDate">Release Date</div>
+    <div class="filter" id="criticsScore" data-filter="criticsScore">Rotten Tomatoes Score</div>
+</div>
+<div id="list-items" class="scroller-settings">
+    <div id="list-scroller" class="card-flow-column js-masonry" data-masonry-options="{ 'columnWidth': '.feed-item-card', 'itemSelector': '.feed-item-card', 'gutter': 10 }">
+        <% if(movies.length > 0) { %>
+        <div id="fabric-player-button">Play all trailers</div>
+        <% } %>
+        <%= APP.load("recItems", { movies: movies }) %>
+    </div>
+</div>
+<div id="screen"></div>
+<video id="trailer-player"></video>
+<div id="trailer-loader"></div>

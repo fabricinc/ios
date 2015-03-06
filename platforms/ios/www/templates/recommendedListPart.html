@@ -1,0 +1,13 @@
+<% 	_.each(items, function(item) { %>
+<div data-listid="<%= item.listID %>" data-userID="<%= item.userID %>" data-parent="<%= item.Parent %>" class="recommendation list-item<% if(item.completed == 1) { %> completed<% } %><% if(item.facebook_id !== null || (item.userID && item.userID != '252990')) { %> userChoice<% } %>">
+    <div class="title">
+        <% if(item.facebook_id !== null || (item.userID && item.userID != "252990")) { %>
+        <% var src = item.facebook_id !== null ? "https://graph.facebook.com/"+ item.facebook_id +"/picture?height=200&width=200" : "images/discovery/avatar.png"; %>
+        <img class="fl" src="<%= src %>"/>
+        <span class="compatibility fl"><%= item.compatibility %>%</span>
+        <% } %>
+        <span class="rec-list-title"><%= item.listname %></span>
+    </div>
+    <img src="<%= item.trailer_still %>" />
+</div>
+<% }); %>

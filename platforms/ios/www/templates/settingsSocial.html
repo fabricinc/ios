@@ -1,0 +1,28 @@
+<% gender = settings.matchGender == "all" ? "Everyone" : settings.matchGender; %>
+<% maxAge = parseInt(settings.matchMaxAge) == 60 ? "No Limit" : settings.matchMaxAge; %>
+<% maxDistance = parseInt(settings.matchMaxDistance) > 49 ? "No Limit" : settings.matchMaxDistance + " Miles"; %>
+
+<div id="settings-wrapper">
+	<div id="settings">
+		<div class="white-wide notification">
+			<div class="settings-button gender-settings">
+				<p id="match-heading">Looking to connect with...</p>
+				<span id="all"></span>
+				<span id="male"></span>
+				<span id="female"></span>
+			</div>
+			<div class="settings-button ageSettings">Ages<span id="age-range" class="gry fr"><%= settings.matchMinAge + " - " + maxAge %></span>
+				<div id="age-slider"></div>
+			</div>
+			<div class="settings-button searchDistanceSettings">Search Distance<span id="distance-range" class="gry fr"><%= maxDistance %></span> 
+				<div id="distance-slider"></div>
+			</div>
+		</div>
+	</div>
+	<!-- <div id="gender-options">
+		<button id="everyone">Everyone<span class="check fr"></span></button>
+		<button id="male">Male<span class="check fr"></span></button>
+		<button id="female">Female<span class="check fr"></span></button>
+		<button id="done">Done</button>
+	</div> -->
+</div>

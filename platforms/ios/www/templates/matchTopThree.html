@@ -1,0 +1,18 @@
+<% if(favMovies.length > 0) { %>
+    <% _.each(favMovies, function(movie) { %>
+        <% if(movie.imageThumbnail) { %>
+        <div class="poster" data-movieid="<%= movie.movieID %>" style="background-image: url(http://api.trailerpop.com<%= movie.imageThumbnail %>)"></div>
+        <% } %>
+    <% }); %>
+    <% if(favMovies.length == 2) { %>
+        <div class="poster"></div>
+    <% } %>
+    <% if(favMovies.length == 1) { %>
+        <div class="poster"></div>
+        <div class="poster"></div>
+    <% } %>
+<% } else { %>
+    <div class="poster"></div>
+    <div class="poster"></div>
+    <div class="poster"></div>
+<% } %>

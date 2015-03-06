@@ -1,0 +1,26 @@
+<%
+if(typeof progressiveLoad == "undefined") {
+    if(lastStatus && lastStatus.trailerStill) {
+        var check = true;
+        var statusBackground = Api.appSettings.cdn + lastStatus.trailerStill;
+    } else {
+        var check = false;
+        var statusBackground = "";
+    }
+%>
+
+<div id="side-swipe">
+    <div class="contain watching-next" id="watching-next" style="background-image: url(<%= statusBackground %>)">
+        <% if(check) { %>
+            <p>Previously: <%= lastStatus.objectName %></p>
+            <h1>What do you want to do today?</h1>
+        <% } else { %>
+            <h1 class="empty-status">What do you want to do today?</h1>
+        <% } %>
+        <form id="status-update-form" action="javascript:void(0);">
+            <input id="slide-status-update" class="slider-status-update" type="text" placeholder="Search for movies, shows, etc..."/>
+        </form>
+        <div id="close-status-drop" style="display: none;"></div>
+    </div>
+</div>
+<% } %>

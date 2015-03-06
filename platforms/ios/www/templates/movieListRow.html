@@ -1,0 +1,30 @@
+<% _.each(items, function(item) { %>
+
+<div class="list-row user-lists">
+    <div class="info">
+        <div class="list-icon fade-in" style="background-image: url(https://graph.facebook.com/<%= item.fbID %>/picture?type=large); background-size: auto 100%; background-repeat: no-repeat;"></div>
+        <div>
+            <div class="list-name">
+                <span class="text">
+                    <span class="name"><%= item.name %></span>
+                </span>
+                <span class="editable-list-name"></span>
+                <form class="list-input-form" movieid="" listid="">
+                    <input class="custom-list-item text-select-ok" type="text" placeholder="New List" name="new-list" autocapitalize="on" autocorrect="on" autocomplete="off"><span class="custom-list-close"></span>
+                    <input type="submit">
+                </form>
+            </div>
+            <div class="list-member-count">By <%= item.uName %></div>
+        </div>
+    </div>
+    <div class="list-image fade-in" style="background-image: url(<%= item.imagePath %>); background-size: auto 100%; background-repeat: no-repeat no-repeat;"></div>
+    <div class="list-icons">
+		<a href="#movieLists/<%= item.listID %>" class="list-view button" rel="0" name="Watchlist" typeid="" listid="<%= item.listID %>">View</a>
+    </div>
+    <div class="list-edit-icons">
+        <div class="list-row-move"></div>
+        <div class="list-row-delete"></div>
+	</div>
+</div>
+
+<% }); %>

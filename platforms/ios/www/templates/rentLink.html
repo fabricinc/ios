@@ -1,0 +1,11 @@
+<div id="rentLinkWrapper" style="max-width: 640px;min-width:320px;">
+<% _.each(items, function(item) { %>
+	<div class="purchase-link <%= item.vendor %>">
+		<div class="commerce <%= item.vendor %>"
+            href="<%= item.link %>"
+            vendor="<%= item.vendor %>"<% if(item.webView) { %> webView="<%= item.webView %>" <% } %><% if(item.appStoreUrl) { %> appstoreurl="<%= item.appStoreUrl %>" <% } %>><!-- publishedid="{645091}" -->
+				<img src="images/com/<%= item.vendor %>.png"/>
+		</div>
+	</div>
+<% }); %>
+</div>

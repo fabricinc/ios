@@ -1,0 +1,10 @@
+<div class="cf">
+    <% if(sender) { %>
+    <div class="message sent">
+    <% } else { %>
+    <div class="message received">
+    <% } %>
+        <%= message %>
+        <div class="tail"></div>
+    </div>
+</div>

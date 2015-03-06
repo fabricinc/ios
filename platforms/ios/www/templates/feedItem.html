@@ -1,0 +1,52 @@
+<% _.each(feed, function(item) { item.data = $.parseJSON(item.feed_data); %>
+<div class="feed-item-card">
+    <div id="feed<%= item.feedID %>" class="feed-item" data-type="<%= item.type %>">
+        <div class="cf">
+            <a href="#profile/<%= item.actorID %>">
+                <div class="avatar<% if(item.actorID == '252990') { %> msPop<% } %>" data-actorid="<%= item.actorID %>" <% if(item.data.actorFbID) { %>style="background-image: url(https://graph.facebook.com/<%= item.data.actorFbID %>/picture?height=200&width=200)"<% } %>></div>
+            </a>
+            <div class="action">
+                <p><%= item.data.actorName %> <span class="verb"><%= item.data.verb %></span> <b class="object"><%= item.data.objectName %></b>
+                <p class="timeago"><%= $.timeago(item.createdAt).replace("about", "") %></p>
+                <% if(item.data.ratio) { %>
+                <p><%= item.data.ratio %>% Seen</p>
+                <% } %>
+            </div>
+        </div>
+        <div class="content">
+            <div class="poster">
+                <% if(item.type == "favorite" || item.type == "queue" || item.type == "watchstatus") { %>
+                    <img class="movie-img" 
+                        src="<%= Api.appSettings.cdn %>/posters/<%= item.data.publishedID %>_poster.jpg"
+                        data-movieid="<%= item.data.objectID %>" 
+                        width="260" 
+                        onerror="$(this).parent().parent().hide();"
+                    />
+                <% } else if(item.type == "ratecompletecategory" || item.type == "ratecompletelist") { %>
+                    <% var path = Api.appSettings.cdn + item.data.objectAsset.replace("http://api-admin.trailerpop.com", "").replace(Api.appSettings.cdn, '').replace("/files", "") %>
+                    <img class= "category-img" 
+                        src= "<%= path %>" 
+                        data-catid= "<%= item.data.objectID %>" 
+                        width= "260" 
+                        onerror= "$(this).parent().parent().hide();"
+                    />
+                <% } %>
+            </div>
+        </div>
+        <div class="feed-social" data-feedid="<%= item.feedID %>">
+            <span id="like_<%= item.feedID %>" class="likes"<% if(item.totalLikes <= 0) { %> style="display:none;"<% } %>>
+            <span class="totalLikes"><%= item.totalLikes %></span> Like<% if(item.totalLikes > 1) { %>s<% } %></span>
+            <% if(item.totalComments > 0) { %>
+                <span class="comment"><%= item.totalComments %> Comments</span>
+            <% } %>
+        </div>
+    </div>
+    <div class="feed-footer" data-feedid="<%= item.feedID %>" data-type="<%= item.type %>">
+        <span class="like<% if(item.liked > 0) { %> liked<% } %>">Like</span>
+        <span class="comment">Comment</span>
+        <span class="share">Share</span>
+        <!-- <span class="queue">+Queue</span> -->
+    </div>
+</div>
+<% }); %>
+<div class="load-more-spinner"></div>

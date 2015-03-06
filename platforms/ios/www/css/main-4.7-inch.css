@@ -1,0 +1,300 @@
+/* iPhone 6 */
+#wrapper { width: 375px; height: 667px; position: relative; }
+#home-filters { width: 375px; height: 45px;}
+#home-filters div { width: 124px; height: 46px; line-height: 46px; }
+#home-filters div#recommended-filter { width: 125px; }
+#activity-filter-x,
+#activity-filter { right: 126px; }
+#category-container { height: 560px; }
+.recommended-filter #category-container{ height: 510px; }
+#category-container div .title { width: 340px; }
+#category-container .catItem { max-height: 200px; }
+#category-container #side-swipe { width: 355px; }
+.feed-item { width: 335px; }
+.poster img.movie-img { height: auto; }
+#notifications-container { height: 606px; }
+#side-nav { width: 306px; }
+#search #list-row-wrapper { height: 559px; }
+#list-row-wrapper.friend-list { height: 532px; }
+.list-movie-images { margin-right: 30px; }
+#user-matches,
+#settings-wrapper { height: 616px; }
+.settings-button { background-position: 340px; }
+#notifications-container { top: 60px; }
+input.slider-search-form {
+    width: 343px;
+}
+#recommendation-filters.show { top: 61px;}
+#video-player , #fabric-player { width: 375px; }
+#movie-list {height: 421px;}
+.list-movie-image { margin-right: 25px; }
+#movie-list .movie-poster.active {
+    height: 167px;
+    width: 110px;
+}
+#movie-list .movie-poster {
+    width: 115px;
+    height: 173px;
+    margin: 8px 0 0 7px;
+}
+
+/* discovery */
+#discovery-background {
+    background-image: url(../images/discovery/rateOverlay3.png);
+    background-size: 320px 430px;
+    height: 430px;
+}
+.div-swiper {
+    width: 172px !important;
+    height: 258px !important;
+    background-size: 172px 258px;
+    top: 120px;
+    left: 70px; 
+}
+#up-next-wrapper { height: 403px; }
+#up-next-wrapper .catItem { height: 112px; }
+
+#discovery-complete {
+    top: 0px;
+    height: 480px;
+    background-size: 320px 480px;
+}
+#discovery-complete h1 { margin: 75px 0 0 0; }
+#discovery-complete #share { bottom: 175px; }
+#discovery-complete #done { bottom: 88px; }
+
+#slider-container { width: 1875px; }
+#indicator { left: 153px; }
+.login-button { left: 80px; }
+
+
+/* iPhone 6+ */
+
+#category-container .catItem { max-height: 200px; }
+
+.poster img.movie-img { height: auto; }
+#profile,
+#user-matches,
+#list-row-wrapper,
+#list-row-wrapper.no-edit,
+#list-row-wrapper.friend-list,
+.follow-list #list-row-wrapper,
+.movie-seen-list #list-row-wrapper,
+#settings-wrapper { height: 601px; }
+#fabric-menu { top: -686px; }
+#dashboard #fabric-menu.open { top: 59px; }
+.settings-button { background-position: 390px; }
+#discovery-background {
+    background-image: url(../images/discovery/rateOverlay3.png);
+    background-size: 320px 430px;
+    height: 430px;
+}
+.div-swiper {
+    width: 172px !important;
+    height: 258px !important;
+    background-size: 172px 258px;
+    top: 120px;
+    left: 70px;
+}
+
+#up-next-wrapper { height: 403px; }
+#up-next-wrapper .catItem { height: 112px; }
+#swiper-content .highlight-holder #favorite-highlight { top: 270px; }
+#discovery-complete {
+    top: 0px;
+    height: 480px;
+    background-size: 320px 480px;
+}
+#discovery-complete h1 { margin: 75px 0 0 0; }
+#discovery-complete #share { bottom: 175px; }
+#discovery-complete #done { bottom: 88px; }
+#slider,
+#slider-container .intro-slide {
+    width: 375px;
+    height: 667px;
+}
+
+#side-swipe .contain,
+.empty-concierge {
+    height: 185px;
+}
+#side-swipe .watching-next.contain input { margin-left: 22px; width: 300px; }
+#slide-status-update::-webkit-input-placeholder{ text-align: center; }
+#profile .sub-header div { width: 187px; }
+#profile .poster:first-child { left: 2px; z-index: 4; }
+#profile .poster:nth-child(2) { left: 87px; z-index: 3; }
+#profile .poster:nth-child(3) { left: 172px; z-index: 2; }
+#profile .poster:nth-child(4) { left: 252px; z-index: 1; }
+.lists-nav { background-position: 380px; }
+#friends #list-row-wrapper { height: 517px; }
+header nav h1 { width: 280px; height: 65px; }
+div#mask .wheel {
+    top: 300px;
+    left: 160px;
+}
+.div-swiper {
+    width: 250px !important;
+    height: 371px !important;
+    background-size: 250px 371px;
+    top: 160px;
+    left: 60px;
+}
+.follow-name { width: 220px; }
+.swipe-icon.favorite { top: 100px; left: 173px; }
+.swipe-icon.queue { bottom: 70px; left: 173px; }
+.swipe-icon.seen,
+.swipe-icon.not-seen { top: 350px; }
+#progress { width: 360px; left: 2px; top: 71px; }
+#progress .outer-bar { width: 300px; }
+.action-buttons { margin: 0 25px;}
+#profile .action-buttons .button.follow { margin-left: 2px; }
+#player,
+#video-src { height: 210px; }
+#fake-lobby-scroller { height: 397px; }
+#fake-lobby-scroller #services,
+#fake-lobby-scroller .list-buttons,
+#seen-data, #movie-info { width: 354px; }
+.movie-info .buttons div { width: 138px; }
+#poster-layover {
+    width: 100%;
+    clip: rect(0px, 375px, 210px, 0px);
+}
+#conversation-slider {
+    height: 550px;
+}
+#play::before { top: 70%; left: 10%; }
+.bottom-info span { background-size: 14px; }
+.list-summary #image { background-size: 414px 197px; }
+.list-summary #info { width: 364px; height: 197px; }
+#list-items-container { height: 602px; }
+#list-items .share-buttons .btn { width: 87px; background-position: 8px 0; }
+#profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
+.feed-item .recommendation-action { width: 384px; }
+#favorite-delta .delta-poster { height: auto; }
+#favorite-delta .delta-poster img { width: 314px; }
+.feed-footer { width: 100%; }
+#favorite-delta .feed-footer { width: 95%; margin: 0 auto; }
+#facebook { top: 327px; }
+#sign-up { top: 411px; }
+#ready-to-start { margin-top: 30px; }
+.share-icons div {
+    padding-right: 0;
+    text-align: center;
+    width: 187px;
+}
+#feed-container { height: 581px; }
+.share-icons div.twitter { padding-right: 0; }
+.feed-item .action { width: 260px; }
+#user-matches .match { margin: 10px auto 0; }
+.fl .login-text { width: 230px; }
+#registration { left: 18px; }
+#registration .row.double .icon { height: 59px; }
+#match-found,
+#rate-first,
+#get-started {
+    width: 100%;
+    height: 667px;
+    background-size: 100%;
+}
+#slide-filters div,
+
+#dashboard header nav h1 {
+    height: 40px !important;
+    width: 110px;
+    font-size: 38px;
+    line-height: 40px;
+}
+#current-icon.all, #dashboard header nav h1.open span {
+    height: 10px;
+}
+#dashboard header nav h1 span {
+    top: 21px;
+    margin: 0 0 0 7px;
+    height: 30px;
+    width: 26px;
+    background-size: 22px;
+}
+header nav { height: 59px; }
+#current-icon.all,
+#dashboard header nav h1.open span { top: 28px; }
+header nav #tap-menu,
+header nav #share-icon,
+header nav #shopping-cart,
+header nav #notifications-menu,
+header nav #chat-menu { top: 5px; }
+#friends #list-row-wrapper.no-friends { height: 586px; }
+#category-container .concierge-poster { height: 185px; width: 123px; }
+.concierge-text { height: 140px; }
+#category-container .concierge-info h1 { margin: 10px 0; }
+.concierge-info h2, .concierge-button { margin: 20px auto 0; }
+#menu-search-form { width: 87%; }
+#menu-search-form input { width: 100%; height: 18px; }
+#search-form input { width: 80%; height: 25px; }
+#up-next { top: 60px; height: 666px; }
+#up-next-wrapper { height: 573px; }
+#up-next-wrapper .catItem { height: 169px; }
+#up-next-wrapper div .title { width: 330px; }
+#dashboard header nav h1.notify { line-height: 65px; }
+#seen-avatars .avatar { margin-left: 25px; }
+#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 15px 11px; }
+#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 22px 11px; }
+#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 29px 11px; }
+#statusUpdates .text-box textarea { width: 270px; height: 120px; }
+#category-container #status-drop { top: 136px; }
+#status-drop { max-height: 486px; }
+#menu-drop  { max-height: 526px; width: 270px; }
+#user-matches h1.credits { background-position: 20px 2px; }
+.greeting .credits { background-position: 120px 10px; }
+div.left.button { top: 6px; }
+#profile #side-swipe .slick-list,
+#profile #side-swipe .contain,
+#profile .info { height: 300px;}
+
+/* Rtina Images */
+
+#slider-container #slide1 { background-image: url(../images/6p/login/01_slide.png); }
+#slider-container #slide2 { background-image: url(../images/6p/login/02_slide.png); }
+#slider-container #slide3 { background-image: url(../images/6p/login/03_slide.png); }
+#slider-container #slide4 { background-image: url(../images/6p/login/04_slide.png); }
+div#mask .wheel { background-image: url(../images/6p/discovery/loader.png); }
+#category-container div .title .icon.icon4,
+#up-next-wrapper div .title .icon.icon4 { background-image: url(../images/6p/discovery/music.png); }
+#category-container div .title .icon.icon3,
+#up-next-wrapper div .title .icon.icon3 { background-image: url(../images/6p/discovery/travel.png); }
+#category-container div .title .icon.icon2,
+#up-next-wrapper div .title .icon.icon2 { background-image: url(../images/6p/discovery/tv.png); }
+#category-container div .title .icon.icon1,
+#up-next-wrapper div .title .icon.icon1 { background-image: url(../images/6p/discovery/movies.png); }
+header nav #share-icon {
+    background-image: url(../images/6p/discovery/share.png);
+    background-image: url(../images/6p/discovery/share.png);
+    background-size: 24px 28px;
+    top: 5px;
+    right: 10px
+}
+header nav #chat-menu {
+    background-image: url(../images/6p/discovery/chat.png);
+    background-size: 24px 24px;
+    right: 3px;
+}
+#current-icon.all { background-image: url(../images/6p/discovery/fabricIcons/arrowBlack.png); }
+.list header nav h1.open span,
+#dashboard header nav h1.open span { background-image: url(../images/6p/discovery/fabricIcons/arrowRed.png); }
+header nav .slide, header nav #tap-menu { background-image: url(../images/6p/discovery/hamIcon.png); }
+header nav #shopping-cart,
+header nav #notifications-menu { background-image: url(../images/6p/discovery/bell2.png); }
+header nav #notifications-menu.on { background-image: url(../images/6p/discovery/bell-on.png); }
+#done-button, #more-button, #done-inter-button, #rec-filter-button { top: 24px;}
+#all-nav { background-image: url(../images/6p/discovery/fabricIcons/alldot.png); }
+#movies-nav { background-image: url(../images/6p/discovery/fabricIcons/movieMenuIcon.png); }
+#tv-nav { background-image: url(../images/6p/discovery/fabricIcons/tvMenuIcon.png); }
+#travel-nav { background-image: url(../images/6p/discovery/fabricIcons/travelMenuIcon.png); }
+#music-nav { background-image: url(../images/6p/discovery/fabricIcons/musicMenuIcon.png); }
+.check-list-check { background-image: url(../images/6p/discovery/lightgrey-check.png); border: none;}
+.check-list-check.checked { background-image: url(../images/6p/discovery/redcheck.png); }
+#get-started { background-image: url(../images/6/login/iphone-tut.png); }
+#rate-first.coach0 { background-image: url(../images/6/discovery/coach/coach0.png); }
+#rate-first.coach1 { background-image: url(../images/6/discovery/coach/coach1.png); }
+#rate-first.coach2 { background-image: url(../images/6/discovery/coach/coach2.png); }
+#rate-first.coach3 { background-image: url(../images/6/discovery/coach/coach3.png); }
+#welcome-container #welcome-content.next { background-image: url(../images/discovery/05_scrim.png); }
