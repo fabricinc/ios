@@ -19,7 +19,7 @@ var RateModel = Backbone.Model.extend({
 
     initialize: function(options) {
         var self = this;
-        if (options.firstRate) {
+        if (APP.firstRate) {
             self.filter = "recommended-filter";
         }
     },
@@ -124,8 +124,7 @@ var RateView = Backbone.View.extend({
         var self = this, options = {};
         callback = callback || function() {};
 
-        options.firstRate = true;
-        this.model = new RateModel(options);
+        this.model = new RateModel();
 
         if (APP.firstRate) {
             APP.feedFilter = "recommended-filter";
@@ -591,7 +590,7 @@ var RateView = Backbone.View.extend({
             count = 0,
             bkgr, img;
 
-        if(APP.firstRate){
+        if(APP.firstRate) {
             // Pre load images to improve load performance
             var imagePath = Util.isIPad() ? "images/discovery/coach/iPad/coach" : "images/discovery/coach/coach";
 
