@@ -15,7 +15,7 @@
                 <% $("#profile .info").css("background-image", "none"); $("#profile .info").css("background-color", "#EFEFEF"); %>
                 <div id="side-swipe" style="background-color: #EFEFEF;">
                     <% _.each(fbImages, function(image) { %>
-                    <div class="contain" style="background-image: url(<%= image.source %>)"></div>
+                        <div class="contain" style="background-image: url(<%= image.source %>)"></div>
                     <% }); %>
                 </div>
             <% } %>
