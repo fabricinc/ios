@@ -89,7 +89,7 @@ div#mask .wheel {
 .swipe-icon.not-seen { top: 350px; }
 #progress { width: 360px; left: 20px; top: 71px; }
 #progress .outer-bar { width: 300px; }
-#profile .action-buttons .button.follow { margin-left: 42px; }
+#profile .action-buttons .button.follow { margin-left: 25px; }
 #player,
 #video-src { height: 233px; }
 #fake-lobby-scroller { height: 452px; }
@@ -202,7 +202,7 @@ header nav #chat-menu { top: 8px; }
 #search #list-row-wrapper { height: 613px; }
 div#messages-slider { height: 670px; }
 #conversation-slider { height: 619px; }
-#profile .info { height: 280px; background-position: 0 -25px; }
+#profile .info { height: 300px; background-position: 0 -25px; }
 #feed-container { height: 650px; }
 img.movie-img,
 img.category-img { width: 350px; }
@@ -218,7 +218,7 @@ header nav #share-icon {
     top: 5px;
     right: 10px;
 }
-div.left.button { background-position: 10px 22px !important; top: 0; }
+div.left.button { background-position: 10px 22px !important; top: 2px; }
 #notifications-container { top: 65px; }
 #done-button,
 #more-button,
@@ -256,6 +256,7 @@ input.slider-search-form { width: 383px; }
 #movie-list .movie-poster { width: 128px; }
 #movie-list .movie-poster.active { width: 122px; }
 #movie-list { height: 490px; }
+#dashboard #fabric-menu.open { top: 65px; }
 
 /* Rtina Images */
 
