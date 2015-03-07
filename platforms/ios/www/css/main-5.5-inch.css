@@ -211,7 +211,8 @@ img.category-img { width: 350px; }
     width: 30px;
     background-size: 30px 30px;
 }
-#profile #side-swipe .slick-list, #profile #side-swipe .contain { height: 280px; }
+.movie-info .buttons div { width: 158px; }
+#profile #side-swipe .slick-list, #profile #side-swipe .contain { height: 300px; }
 header nav #chat-menu { background-size: 24px 24px; }
 header nav #share-icon {
     background-size: 24px 28px;
