@@ -2637,6 +2637,7 @@ div.check-list-wrapper div.check-list-item {
 #list-items div.item-icons {
     float: left;
     margin:10px 0 0 10px;
+    min-width: 100px;
 }
 #list-items div.item-icons div { float: left; }
 #list-items div.item-icons div.recs {
