@@ -170,10 +170,12 @@ div#mask .wheel {
 #list-items .share-buttons .btn { width: 87px; background-position: 8px 0; }
 #profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
 .feed-item .recommendation-action { width: 384px; }
-#favorite-delta .delta-poster { height: auto; }
+#favorite-delta .delta-poster { height: 470px; }
 #favorite-delta .delta-poster img { width: 314px; }
+#favorite-delta .feed-item { width: 345px; padding-bottom: 0;}
+#favorite-delta .feed-footer { border-top: none; }
 .feed-footer { width: 100%; }
-#favorite-delta .feed-footer { width: 95%; margin: 0 auto; }
+#favorite-delta .feed-footer { width: 345px; margin: 0 auto; }
 #facebook { top: 327px; }
 #sign-up { top: 411px; }
 #ready-to-start { margin-top: 30px; }
