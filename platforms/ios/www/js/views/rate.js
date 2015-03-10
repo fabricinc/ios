@@ -253,6 +253,7 @@ var RateView = Backbone.View.extend({
             self.bindCategoryEvents();
             cb();
         } else if(filter == "recommended-filter") {
+            
             if(!self.model.recsLoaded || self.model.recs == null) {
                 self.recsInterval = setInterval(function() {
                     if(self.model.recsLoaded && self.model.recs) {
@@ -270,6 +271,7 @@ var RateView = Backbone.View.extend({
                             $("#content-container .content-scroller").html(html);
                         }
                         clearInterval(self.recsInterval);
+                        self.bindRecommendedEvents();
                     }
                 });
             } else {
@@ -286,6 +288,8 @@ var RateView = Backbone.View.extend({
                     });
                     $("#content-container .content-scroller").html(html);
                 }
+                // bind category feed events
+                self.bindRecommendedEvents();
             }
 
             // bind category feed events
@@ -935,8 +939,7 @@ var RateView = Backbone.View.extend({
             return false;
         });
         $(".check-list-poster").click(function(e){
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault(); e.stopPropagation();
 
             var parent = $(this).parent().parent(),
                 id = parent.data("movieid");

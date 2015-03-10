@@ -112,7 +112,6 @@
         <% } %>
     </div>
 <% } else { 
-    console.log(feed);
     for(var i = 0; i < feed.length; i++) {
         var item = feed[i];
         item.data = $.parseJSON(item.feed_data);

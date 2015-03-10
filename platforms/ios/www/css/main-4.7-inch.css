@@ -189,7 +189,7 @@ div#mask .wheel {
 #list-items .item .movie-info .watch-icon { background-position-y: 8px; }
 #list-items .item .movie-info .seen-icon { background-position-y: 8px; }
 #list-items-container { height: 602px; }
-#list-items .share-buttons .btn { width: 87px; background-position: 8px 0; }
+#list-items .share-buttons .btn { width: 87px; background-position: 0; }
 #profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
 .feed-item .recommendation-action { width: 384px; }
 #favorite-delta .delta-poster { height: 470px; }

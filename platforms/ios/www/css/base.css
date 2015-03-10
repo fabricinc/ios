@@ -2755,11 +2755,12 @@ div.right.button, div.left.button {
 
 #list-items .share-buttons { overflow: hidden; }
 #list-items .share-buttons .btn {
-    float: left;
+    background-repeat: no-repeat;
+    background-size: 100%;
     margin: 5px 0 5px 5px;
-    width: 73px;
     height: 40px;
-    background-size: 73px 40px;
+    width: 73px;
+    float: left;
 }
 #list-items .share-buttons #fb.btn { margin-left: 6px; background-image: url(../images/discovery/share-fb.png); }
 #list-items .share-buttons #twitter.btn { background-image: url(../images/discovery/share-tw.png); }
