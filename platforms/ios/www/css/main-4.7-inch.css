@@ -154,7 +154,7 @@ div#mask .wheel {
 #fake-lobby-scroller #services,
 #fake-lobby-scroller .list-buttons,
 #seen-data, #movie-info { width: 354px; }
-.movie-info .buttons div { width: 138px; }
+
 #poster-layover {
     width: 100%;
     clip: rect(0px, 375px, 210px, 0px);
@@ -164,8 +164,30 @@ div#mask .wheel {
 }
 #play::before { top: 70%; left: 10%; }
 .bottom-info span { background-size: 14px; }
-.list-summary #image { background-size: 414px 197px; }
-.list-summary #info { width: 364px; height: 197px; }
+.list-summary #image {  }
+.list-summary #info { width: 364px; height: 197px; font-size: 25px; }
+.list-summary #info h1 { margin-top: 10px; }
+#list-items .item .movie-info .poster-img {
+    width: 70px;
+    height: 105px;
+}
+#list-items .item .movie-info h1 {
+    font-size: 18px; 
+    width: 75%;
+}
+.movie-info .buttons div { 
+    background-size: 15px;
+    line-height: 30px;
+    font-size: 13px;
+    height: 30px;
+    width: 125px; 
+}
+#list-items div.item-icons { margin-bottom: 10px; font-size: 20px; }
+#list-items div.item-icons div.recs {
+    background-size: 15px 15px; 
+}
+#list-items .item .movie-info .watch-icon { background-position-y: 8px; }
+#list-items .item .movie-info .seen-icon { background-position-y: 8px; }
 #list-items-container { height: 602px; }
 #list-items .share-buttons .btn { width: 87px; background-position: 8px 0; }
 #profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }

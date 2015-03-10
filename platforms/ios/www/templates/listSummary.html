@@ -32,54 +32,9 @@ var terms = [{
                 </div>
                 <h1><%= categoryName %></h1>
                 <h2>You've <%= terms[sectionID].pastVerb %> <span><%= ratio %>%</span></h2>
-                <!--<div id="share-button">Share</div>-->
             </div>
         </div>
         <div class="category-info">
-            <!--
-            <div id="category-header">
-                <div id="items" class="active">View List</div>
-                <div id="friends">People</div>
-            </div>
-
-            <div id="list-friends" style="display: none;">
-                <% if(friends.length == 0 && suggestions.length == 0) { %>
-                    <div id="empty-set">
-                        <h1>Anybody There?</h1>
-                        <p>We haven't found any people like you just yet. <br /> Try the next category for more opportunities.</p>
-                    </div>
-                <% } else { %>
-                    <% if(friends.length > 0) { %>
-                        <div class="full-header">Top Friends</div>
-                    <% } %>
-                    <% var num = 0; _.each(friends, function(friend) { num++; %>
-                        <div class="user" data-userid="<%= friend.userID %>">
-                            <div class="avatar"<% if(friend.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= friend.facebook_id %>/picture?height=100&width=100)"<% } %>></div>
-                            <div class="info">
-                                <div class="seen"><span class="bold"><%= friend.percentageSeen %>% <%=terms[sectionID].pastVerb %></span></div>
-                                <div class="name"><span class="bold"><%= friend.uName %></span></div>
-                            </div>
-                            <div class="num"><%= num %>.</div>
-                        </div>
-                    <% }); %>
-
-                    <% if(suggestions.length > 0) { %>
-                        <div class="full-header">People like you</div>
-                    <% } %>
-
-                    <% _.each(suggestions, function(suggestee) { %>
-                        <div class="user" data-userid="<%= suggestee.userID %>">
-                            <div class="avatar"<% if(suggestee.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= suggestee.facebook_id %>/picture?height=100&width=100)"<% } %>></div>
-                        <div class="info">
-                            <div class="name"><span class="bold"><%= suggestee.uName %></span></div>
-                            <div class="movie-in-common"><span class="title"><%= suggestee.title %></span></div>
-                        </div>
-                        <div class="follow">Follow</div>
-                    </div>
-                    <% }); %>
-                <% } %>
-            </div>
-            -->
             <div id="list-items" class="card-flow-column js-masonry" data-masonry-options="{ 'columnWidth': '.feed-item-card', 'itemSelector': '.feed-item-card', 'gutter': 10 }">
                 <div class="share-buttons">
                     <div id="fb" class="btn" data-service="Facebook"></div>
