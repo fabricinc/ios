@@ -104,20 +104,22 @@ div#mask .wheel {
 .bottom-info span { background-size: 14px; }
 .list-summary { line-height: 40px; }
 .list-summary #info { width: 394px; height: 230px; padding: 0 10px; }
-.list-summary #info h1 { margin-top: 30px; padding: 0 10px; }
+.list-summary #info h1 { margin: 20px 0; line-height: 25px; padding: 0 10px; }
 .list-summary #info .avatar { height: 60px; width: 60px; border-radius: 30px; }
 .list-summary #info .name { line-height: 80px; }
 .discovery #list-items-container { height: 671px; }
 #list-items-container { height: 686px; }
 #list-items .share-buttons .btn {
+    background-position: 0;
+    height: 53px;
     width: 96px;
-    background-position: 12px 0;
 }
 #list-items .item .movie-info .poster-img { width: 80px; height: 120px; }
 #list-items .item .movie-info h1 { font-size: 20px; }
 #list-items div.item-icons { margin-bottom: 10px; font-size: 20px; }
 #list-items div.item-icons div.recs {
     background-size: 15px 15px; 
+    padding-left: 18px;
 }
 .movie-info .buttons div { 
     background-size: 15px;
