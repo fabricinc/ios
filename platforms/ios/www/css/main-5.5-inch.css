@@ -7,7 +7,7 @@
 #activity-filter-x,
 #activity-filter { right: 139px; }
 #category-container { height: 617px; }
-#category-container div .title { width: 380px; }
+#category-container div .title { width: 380px; font-size: 19px; }
 #category-container .catItem { max-height: 200px; }
 #category-container #side-swipe { width: 395px; }
 .feed-item { width: 375px; }
@@ -148,7 +148,7 @@ div#mask .wheel {
 }
 .share-icons div.twitter { padding-right: 0; }
 .share-icons div.facebook { width: 207px; }
-.feed-item .action { width: 305px; }
+.feed-item .action { width: 305px; font-size: 18px; line-height: 22px; }
 #user-matches .match { margin: 10px auto 0; }
 .fl .login-text { width: 230px; }
 #registration { left: 43px; }
@@ -278,6 +278,11 @@ input.slider-search-form { width: 383px; }
 #movie-list .movie-poster.active { width: 122px; }
 #movie-list { height: 490px; }
 #dashboard #fabric-menu.open { top: 65px; }
+#category-container .concierge-info h1 span { font-size: 13px; }
+.concierge-info h6,
+#side-swipe .watching-next.contain p { font-size: 16px; }
+.check-list-title { font-size: 20px; }
+#side-swipe .watching-next.contain h1 { font-size: 22px; }
 
 /* Rtina Images */
 
