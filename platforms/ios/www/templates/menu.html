@@ -19,7 +19,7 @@
     <ul id="nav-menu">
         <% 	_.each(menuItem, function(item) { %>
             <li id="side-menu-<%= item.classes %>" data-actionID="<%= item.classes %>" class="nav-menu-item">
-                <div class="side-menu-icon"<% if(item.classes == 'profile') { %> style="background-image: url(<%= userPicture %>); border-radius: 15px;"<% } %>></div>
+                <div class="side-menu-icon"<% if(item.classes == 'profile') { %> style="background-image: url(<%= userPicture %>);"<% } %>></div>
                 <span class="menu-text"><%= item.title %></span>
             </li>
         <% }); %>

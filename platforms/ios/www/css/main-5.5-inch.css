@@ -1,5 +1,4 @@
 /* iPhone 6+ */
-
 #wrapper { width: 414px; height: 736px; position: relative; }
 #home-filters div { height: 52px; width: 138px; }
 #home-filters { width: 414px; height: 52px; }
@@ -132,7 +131,7 @@ div#mask .wheel {
 #list-items .item .movie-info .seen-icon { background-position-y: 10px; }
 #list-items .share-buttons #fb.btn { margin-left: 7px; }
 #profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
-.feed-item .recommendation-action { width: 384px; }
+.feed-item .recommendation-action { width: 384px; line-height: 26px; font-size: 18px; }
 #favorite-delta .delta-poster { height: 540px; }
 #favorite-delta .delta-poster img { width: 360px; }
 #favorite-delta .feed-item { width: 385px; }
@@ -217,8 +216,8 @@ header nav #chat-menu { top: 8px; }
 #fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 22px 11px; }
 #fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 29px 11px; }
 #statusUpdates .text-box textarea { width: 310px; height: 120px; }
-#category-container #status-drop { top: 136px; }
-#status-drop, #menu-drop { max-height: 546px; }
+#category-container #status-drop { width: 100%; top: 196px; }
+#status-drop, #menu-drop { max-height: 486px; }
 #user-matches h1.credits { background-position: 20px 2px; }
 #search #list-row-wrapper { height: 613px; }
 div#messages-slider { height: 670px; }
@@ -228,9 +227,9 @@ div#messages-slider { height: 670px; }
 img.movie-img,
 img.category-img { width: 350px; }
 .side-menu-icon {
-    height: 30px;
-    width: 30px;
-    background-size: 30px 30px;
+    height: 39px;
+    width: 39px;
+    background-size: 39px 39px;
 }
 #profile #side-swipe .slick-list, #profile #side-swipe .contain { height: 300px; }
 header nav #chat-menu { background-size: 24px 24px; }
@@ -256,7 +255,7 @@ div.left.button { background-position: 10px 22px !important; top: 2px; }
 #profile .poster:nth-child(3) { left: 194px; }
 #profile .poster:nth-child(4) { left: 290px; }
 #user-matches .match { width: 360px; }
-#user-matches .match .buttons .greet { background-position: 42px 10px; }
+#user-matches .match .buttons .greet { background-position: 32px 9px; background-size: 20px 19px; }
 #messages-container .message .conversation-info { width: 330px; }
 #dashboard header nav h1.notify {
     height: 65px !important;
@@ -278,14 +277,82 @@ input.slider-search-form { width: 383px; }
 #movie-list .movie-poster.active { width: 122px; }
 #movie-list { height: 490px; }
 #dashboard #fabric-menu.open { top: 65px; }
-#category-container .concierge-info h1 span { font-size: 13px; }
-.concierge-info h6,
-#side-swipe .watching-next.contain p { font-size: 16px; }
-.check-list-title { font-size: 20px; }
+.nav-menu-item { height: 39px; }
+.menu-text { line-height: 39px; font-size: 22px; }
+#services .commerce, 
+#available-services .commerce { background-size: 38px; }
+.commerce h2 { font-size: 20px; padding: 15px 0; }
+#side-menu-profile .side-menu-icon { border-radius: 20px; }
+#profile .bio .name {
+    font-size: 24px;
+    margin: 5px 0;
+}
+#friends .lists-row, .movie-seen-list .lists-row, .friend-list .lists-row { height: 56px; }
+.search-users .profile-picture, .lists-row .profile-picture, 
+.movie-seen-list .profile-picture, .follow-list .profile-picture { height: 55px; border-radius: 27px; }
+div#search-for-friends { background-size: 30px; }
+#search-for-friends, #invite-facebook {
+    background-size: 35px;
+    line-height: 50px;
+    padding: 0 55px;
+    font-size: 16px;
+}
+.follow-compatibility { width: 40px; }
+.percent-match { margin-bottom: 5px; padding-top: 5px; }
+#user-matches .match .avatar {
+    width: 145px;
+    height: 155px;
+    background-size: 145px 155px;
+}
+.match .match-compatibility {
+    height: 55px;
+    width: 65px;
+}
+.greeting .dash { height: 135px; }
+.greeting .dash .avatar {
+    width: 100px;
+    height: 100px;
+    background-size: 100px 100px;
+    border-radius: 50px;
+}
+.greeting .content .box .info { width: 69%; }
+.greeting .content .box #send-suggestion, 
+.greeting .content .box form #send-message {
+    background-size: 20px 19px;
+    background-position: 6px 8px;
+}
+.greeting .content .box form input[type="text"] { width: 95%; }
+.greeting .credits {
+    background-size: 20px 19px;
+    background-position: 125px 10px;
+}
+.share-icons { height: 55px; }
+.share-icons div { line-height: 55px; font-size: 20px; }
+.share-icons div.facebook { background-size: 34px; }
+.share-icons div.twitter { background-size: 35px; }
+#post-button { padding: 10px 15px; }
+#statusUpdates .text-box textarea { width: 300px; }
+#status-poster.poster { width: 85px; height: 122px; }
+
+
+/* font fixes */
+#category-container .concierge-info h1 span, #synopsis { font-size: 13px; }
+#fake-lobby-scroller .list-buttons .list-button, #title-synopsis-block h3, #disclaimer { font-size: 14px; }
+.follow-location { font-size: 15px; }
+.concierge-info h6, #side-swipe .watching-next.contain p, #seen-by-container, .greeting .content .box h1,
+.settings-button { font-size: 16px; }
+#profile .bio .location, #favorite-delta h1, #profile #top-genres .content h1, .greeting .content .box form #send-message, 
+.greeting .content .box #send-suggestion { font-size: 18px; }
+.check-list-title, .button2, .lists-nav, .recommendation-action p:first-of-type, .follow-name,
+.percent-match, #user-matches .match .buttons .follow, #user-matches .match .buttons .greet,
+#update, #logout { font-size: 20px; }
 #side-swipe .watching-next.contain h1 { font-size: 22px; }
+#user-matches h1 , .greeting .credits{ font-size: 26px; }
+/* importants */
+div.right.button, div.left.button { font-size: 18px !important; }
 
-/* Rtina Images */
 
+/* Retina Images */
 #slider-container #slide1 { background-image: url(../images/6p/login/01_slide.png); }
 #slider-container #slide2 { background-image: url(../images/6p/login/02_slide.png); }
 #slider-container #slide3 { background-image: url(../images/6p/login/03_slide.png); }
