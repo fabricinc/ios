@@ -10,29 +10,29 @@
 	<string>Fabric</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B08780509ED3A91E2CE44BD46C56555F2BBDCF1A</key>
+		<key>8E3F36376CEAC99E02473AF2D2DB8E62E485630B</key>
 		<string>pl2.projectlocker.com:Fabric.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Fabric.xcodeproj</string>
+	<string>platforms/ios/Fabric.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B08780509ED3A91E2CE44BD46C56555F2BBDCF1A</key>
-		<string>../..</string>
+		<key>8E3F36376CEAC99E02473AF2D2DB8E62E485630B</key>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>pl2.projectlocker.com:Fabric.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B08780509ED3A91E2CE44BD46C56555F2BBDCF1A</string>
+	<string>8E3F36376CEAC99E02473AF2D2DB8E62E485630B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B08780509ED3A91E2CE44BD46C56555F2BBDCF1A</string>
+			<string>8E3F36376CEAC99E02473AF2D2DB8E62E485630B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Fabric</string>
 		</dict>
