@@ -3,7 +3,7 @@
         <div class="user">
             <div class="fr">
                 <% var fbID = APP.gameState.facebookID; %>
-                <div class="avatar"<% if(APP.gameState.isFacebook) { %> style="background-image: url(https://graph.facebook.com/<%= fbID %>/picture?height=380&width=320);"<% }%>></div>
+                <div class="avatar"<% if(APP.gameState.isFacebook) { %> style="background-image: url(https://graph.facebook.com/<%= fbID %>/picture?height=300&width=300);"<% }%>></div>
                 <div class="seen"><%= Util.addCommas(APP.gameState.totalSeen) %> Done</div>
             </div>
         </div>

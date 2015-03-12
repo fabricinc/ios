@@ -154,7 +154,19 @@ div#mask .wheel {
 .action-buttons { margin: 0 25px;}
 #profile .action-buttons .button.follow { margin-left: 2px; background-position-x: 20px; }
 #profile .button, .follow-button, .say-hi { font-size: 20px; }
+#profile .action-buttons .button.follow, 
+#profile .action-buttons .button.greeting {  
+    background-position-x: 20px; 
+    width: 150px; 
+}
+#profile .action-buttons .button.greeting {  
+    margin: 10px 0 10px 10px;
+}
 #profile .sub-header h4 { font-size: 19px; }
+#profile #top-genres .category {height: 40px; }
+#profile #top-genres .category .passion { height: 40px; background-position-y: 3px;}
+#profile #top-genres .category .cat-name { top: 13px; font-size: 16px; }
+#profile #top-genres .content .user .avatar { width: 65px; height: 65px; border-radius: 33px; }
 #player,
 #video-src { height: 200px; }
 #fake-lobby-scroller { height: 397px; }
@@ -212,7 +224,7 @@ div#mask .wheel {
 #list-items .item .movie-info .seen-icon { background-position-y: 8px; }
 #list-items-container { height: 602px; }
 #list-items .share-buttons .btn { width: 87px; background-position: 0; }
-#profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; background-position-x: 20px; }
+
 .feed-item .recommendation-action { width: 384px; }
 .feed-item .avatar { height: 55px; width: 55px; border-radius: 30px; }
 .feed-item .action { 

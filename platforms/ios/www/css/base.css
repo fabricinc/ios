@@ -3846,17 +3846,15 @@ h2#see-more-matches {
 #profile #top-genres .content .user .avatar {
     width: 60px;
     height: 60px;
-
     background-repeat: no-repeat;
     background-image: url(../images/discovery/avatar.png);
     border-radius: 30px;
     margin-bottom: 10px;
-
     background-size: 87px;
-    background-position: -12px -13px;
+    background-position: 0;
 }
 #profile #top-genres .content .user .avatar.fb {
-    background-size: 60px;
+    background-size: 100%;
     background-position: 0 0;
 }
 #profile #top-genres .content .user:first-child { float: left; }
