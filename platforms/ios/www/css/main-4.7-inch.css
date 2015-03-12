@@ -212,7 +212,7 @@ div#mask .wheel {
 #list-items .item .movie-info .seen-icon { background-position-y: 8px; }
 #list-items-container { height: 602px; }
 #list-items .share-buttons .btn { width: 87px; background-position: 0; }
-#profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
+#profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; background-position-x: 20px; }
 .feed-item .recommendation-action { width: 384px; }
 .feed-item .avatar { height: 55px; width: 55px; border-radius: 30px; }
 .feed-item .action { 
