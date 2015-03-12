@@ -165,6 +165,7 @@ header nav h1, #available-services h1 {
     line-height: 32px;
     border: 1px solid lightgray;
     border-radius: 3px;
+    position: relative;
 }
 
 header nav h1 {

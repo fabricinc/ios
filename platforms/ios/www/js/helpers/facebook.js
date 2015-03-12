@@ -291,8 +291,7 @@ Facebook = {
     getAlbum: function(albumID, callback) {
         callback = callback || function() {};
         if(Api.connected) {
-            FB.api('/' + albumID + "/photos",
-                function (response) {
+            facebookConnectPlugin.api('/' + albumID + "/photos", [], function (response) {
                     if (response && !response.error) {
                         callback(response.data);
                     } else {
@@ -307,7 +306,7 @@ Facebook = {
     getLikes: function(callback) {
         callback = callback || function() {};
         if(Api.connected) {
-            FB.api('/me/likes', function(response) {
+            facebookConnectPlugin.api('/me/likes', [], function(response) {
                 if (response && !response.error) {
                     callback(response);
                 } else {
@@ -326,7 +325,7 @@ Facebook = {
     getMovies: function(callback) {
         callback = callback || function() {};
         if(Api.connected) {
-            FB.api('/me/movies', function(response) {
+            facebookConnectPlugin.api('/me/movies', [], function(response) {
                 if (response && !response.error) {
                     callback(response.data);
                 } else {

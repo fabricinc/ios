@@ -225,7 +225,6 @@ var ProfileView = Backbone.View.extend({
 
         self.model.getProfileData(function() {
             var data = self.model.toJSON();
-
             self.$el.html(APP.load("profile", data));
 
             if (!self.header) {

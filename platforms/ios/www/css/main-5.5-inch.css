@@ -7,12 +7,13 @@
 #activity-filter { right: 139px; }
 #category-container { height: 617px; }
 #category-container div .title { width: 380px; font-size: 19px; }
-#category-container .catItem { max-height: 200px; }
+#category-container .catItem { max-height: 300px; }
 #category-container #side-swipe { width: 395px; }
 .feed-item { width: 375px; }
 .poster img.movie-img { height: auto; }
 #side-nav { width: 346px; }
 #profile,
+.greeting,
 #fabric-menu,
 #user-matches,
 #list-row-wrapper,
@@ -21,9 +22,10 @@
 #list-row-wrapper.friend-list,
 .follow-list #list-row-wrapper,
 .movie-seen-list #list-row-wrapper,
-#settings-wrapper { height: 686px; }
-#fabric-menu { top: -686px; }
-.settings-button { background-position: 390px; }
+#settings-wrapper { height: 670px; } /* 686 */
+#fabric-menu { top: -670px; }
+.greeting .content { height: 100%; }
+.settings-button { background-position: 390px; line-height: 55px; }
 #discovery-background {
     background-image: url(../images/discovery/rateOverlay3.png);
     background-size: 320px 430px;
@@ -65,11 +67,12 @@
 #profile .sub-header div { width: 206px; }
 #profile .sub-header div:first-child { width: 207px; }
 .lists-nav { background-position: 390px; }
-#friends #list-row-wrapper { height: 601px; }
+#friends #list-row-wrapper { height: 566px; }
 header nav h1 {
     width: 320px;
     height: 65px;
     font-size: 20px;
+    line-height: 22px;
 }
 div#mask .wheel {
     top: 320px;
@@ -100,7 +103,16 @@ div#mask .wheel {
     clip: rect(0px, 414px, 233px, 0px); /* 197 */
 }
 #play::before { top: 70%; left: 10%; }
-.bottom-info span { background-size: 14px; }
+.bottom-info span {
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+div#friends-queued.bottom-info span {
+    background-size: 22px;
+    height: 22px;
+    width: 22px;
+}
 .list-summary { line-height: 40px; }
 .list-summary #info { width: 394px; height: 230px; padding: 0 10px; }
 .list-summary #info h1 { margin: 20px 0; line-height: 25px; padding: 0 10px; }
@@ -147,7 +159,7 @@ div#mask .wheel {
 }
 .share-icons div.twitter { padding-right: 0; }
 .share-icons div.facebook { width: 207px; }
-.feed-item .action { width: 305px; font-size: 18px; line-height: 22px; }
+.feed-item .action { width: 290px; font-size: 18px; line-height: 22px; }
 #user-matches .match { margin: 10px auto 0; }
 .fl .login-text { width: 230px; }
 #registration { left: 43px; }
@@ -163,7 +175,7 @@ div#mask .wheel {
 #home-filters div {
     height: 52px;
     line-height: 52px;
-    font-size: 15px;
+    font-size: 16px;
 }
 #dashboard header nav h1 {
     height: 46px !important;
@@ -180,22 +192,31 @@ div#mask .wheel {
 }
 header nav { height: 65px; }
 #current-icon.all,
-#dashboard header nav h1.open span { top: 28px; }
+#dashboard header nav h1.open span {
+    top: 0px;
+    height: 50px;
+    right: 0px;
+    background-size: 21px
+}
 header nav #tap-menu,
 header nav #share-icon,
 header nav #shopping-cart,
 header nav #notifications-menu,
-header nav #chat-menu { top: 8px; }
+header nav #chat-menu { top: 5px; }
 #friends #list-row-wrapper.no-friends { height: 586px; }
 #category-container .concierge-poster { height: 185px; width: 123px; }
-.concierge-text { height: 152px; }
+.concierge-text { height: 152px; width: 240px; }
 .concierge-info {
     width: 260px;
     height: 195px;
 }
-#category-container .concierge-info h1 { margin: 10px 0; }
-.concierge-info h2, .concierge-button { margin: 20px auto 0; }
-#menu-search-form input { width: 100%; height: 25px; }
+#category-container .concierge-info h1 {
+    margin: 10px 0;
+    font-size: 18px;
+    line-height: 22px;
+}
+.concierge-info h2, .concierge-button { margin: 10px auto 0; line-height: 22px; }
+#menu-search-form input { width: 100%; height: 30px; font-size: 16px; }
 #search-form input {
     margin: 10px 0px 10px 16px;
     width: 90%;
@@ -203,24 +224,18 @@ header nav #chat-menu { top: 8px; }
 }
 #up-next { top: 65px; height: 661px; }
 #up-next-wrapper { height: 641px; }
-/*
-.recommended-filter #category-container {
-    max-height: 194px;
-    height: 194px;
-}
-*/
 #up-next-wrapper div .title { width: 370px; }
 #dashboard header nav h1.notify { line-height: 45px; }
-#seen-avatars .avatar { margin-left: 35px; }
-#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 15px 11px; }
-#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 22px 11px; }
-#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 29px 11px; }
+#seen-avatars .avatar { margin-left: 32px; }
+#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 8px 11px; }
+#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 7px 12px; }
+#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 27px 12px; }
 #statusUpdates .text-box textarea { width: 310px; height: 120px; }
 #category-container #status-drop { width: 100%; top: 196px; }
-#status-drop, #menu-drop { max-height: 486px; }
+#status-drop, #menu-drop { max-height: 501px; }
 #user-matches h1.credits { background-position: 20px 2px; }
 #search #list-row-wrapper { height: 613px; }
-div#messages-slider { height: 670px; }
+div#messages-slider,
 #conversation-slider { height: 619px; }
 #profile .info { height: 300px; background-position: 0 -25px; }
 #feed-container { height: 650px; }
@@ -232,13 +247,23 @@ img.category-img { width: 350px; }
     background-size: 39px 39px;
 }
 #profile #side-swipe .slick-list, #profile #side-swipe .contain { height: 300px; }
-header nav #chat-menu { background-size: 24px 24px; }
+header nav #chat-menu { background-size: 28px 28px; right: 8px; }
 header nav #share-icon {
     background-size: 24px 28px;
     top: 5px;
     right: 10px;
 }
-div.left.button { background-position: 10px 22px !important; top: 2px; }
+header nav .slide,
+header nav #tap-menu,
+div.left.button {
+    background-position: 17px 22px !important;
+    background-size: 29px 20px;
+    top: 0;
+    left: 0;
+    height: 65px !important;
+    width: 65px;
+}
+div.left.button.back, #services-egress { padding-top: 0px; }
 #notifications-container { top: 65px; }
 #done-button,
 #more-button,
@@ -261,7 +286,7 @@ div.left.button { background-position: 10px 22px !important; top: 2px; }
     height: 65px !important;
     line-height: 65px;
 }
-.recommended-filter #category-container { height: 566px; }
+.recommended-filter #category-container { height: 556px; }
 .onoffswitch { width: 54px; }
 .onoffswitch-label { border-radius: 12px; }
 .onoffswitch-switch { width: 24px; border-radius: 12px; }
@@ -276,7 +301,7 @@ input.slider-search-form { width: 383px; }
 #movie-list .movie-poster { width: 128px; }
 #movie-list .movie-poster.active { width: 122px; }
 #movie-list { height: 490px; }
-#dashboard #fabric-menu.open { top: 65px; }
+#dashboard #fabric-menu.open { top: 66px; }
 .nav-menu-item { height: 39px; }
 .menu-text { line-height: 39px; font-size: 22px; }
 #services .commerce, 
@@ -333,23 +358,111 @@ div#search-for-friends { background-size: 30px; }
 #post-button { padding: 10px 15px; }
 #statusUpdates .text-box textarea { width: 300px; }
 #status-poster.poster { width: 85px; height: 122px; }
+header nav #notifications-menu { background-size: 28px 28px; right: 50px; }
+#menu-search-form { margin: 20px auto; }
+.feed-item .avatar {
+    height: 65px;
+    width: 65px;
+    border-radius: 33px;
+}
+.list-item .compatibility,
+.feed-item .compatibility {
+    width: 35px;
+    height: 35px;
+    border-radius: 19px;
+    line-height: 35px;
+    font-size: 14px;
+}
+#category-container .concierge-info h1 span { margin-top: 10px; }
+.check-list-title { width: 252px; line-height: 22px; }
+.check-list-wrapper { height: 143px; }
+#category-container div img.check-list-poster { width: 88px; }
+div.check-list-wrapper div.check-list-item { height: 133px; }
+.check-list-ratings span { background-size: 18px; background-position: 0 0; margin-left: 5px;  }
+.check-list-ratings span.fresh { background-position: 0 -3px; }
+#sort-button { line-height: 60px; }
+#sort-button::before { font-size: 22px; }
+div#critic-rating.bottom-info { left: 120px; }
+div#friends-favorited.bottom-info { left: 195px; }
+div#friends-queued.bottom-info { left: 250px; }
+#gravity { background-position: center 525px; }
+#swiper-content .highlight-holder #queue-highlight, #swiper-content .highlight-holder #favorite-highlight, #swiper-content .highlight-holder #not-seen-highlight, #swiper-content .highlight-holder #seen-highlight {
+    width: 100px;
+    height: 100px;
+    background-size: 100px 100px;
+}
+.swipe-icon { width: 42px; height: 38px; }
+.swipe-icon span { top: 39px; left: 4px; }
+.swipe-icon.not-seen span { left: -11px; width: 63px; }
+.swipe-icon.favorite span { left: -5px; }
+#synopsis-wrapper { height: 86px; }
+#movie-poster { width: 75px; }
+#profile #top-genres .category .passion { background-position-y: 7px; }
+#profile #top-genres .category .passion,
+#profile #top-genres .category { height: 50px; }
+#profile #top-genres .category .cat-name { top: 16px; font-size: 18px; }
+#close-status-drop {
+    top: 128px;
+    right: 46px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px 30px;
+}
+#status-drop .result, #menu-drop .result { height: 90px; }
+#status-drop .result .poster, #menu-drop .result .poster {
+    width: 60px;
+    height: 90px;
+    background-size: 60px 90px;
+}
+#status-drop .result h1, #menu-drop .result h1 {
+    margin: 5px 0;
+    font-size: 20px;
+    line-height: 22px;
+}
+#sort-button { bottom: -62px; }
+#update, #logout { height: 43px; }
+#user-matches #match-config {
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    top: 6px;
+    right: 10px;
+}
+.list-movie-info { width: 285px; }
+.list-title {
+    width: 235px;
+    max-height: 60px;
+    line-height: 20px;
+}
+#notifications-container .notification .content { width: 320px; }
+#notifications-container .notification .content p { font-size: 16px; margin-top: 5px; }
+#notifications-container .notification .avatar {
+    width: 60px;
+    height: 60px;
+    background-size: 60px;
+    border-radius: 30px;
+}
+.lists-nav { background-size: 13px; }
+
 
 
 /* font fixes */
 #category-container .concierge-info h1 span, #synopsis { font-size: 13px; }
-#fake-lobby-scroller .list-buttons .list-button, #title-synopsis-block h3, #disclaimer { font-size: 14px; }
+#fake-lobby-scroller .list-buttons .list-button, #disclaimer, .check-list-title span { font-size: 14px; }
 .follow-location { font-size: 15px; }
-.concierge-info h6, #side-swipe .watching-next.contain p, #seen-by-container, .greeting .content .box h1,
-.settings-button { font-size: 16px; }
+#seen-by-container, .greeting .content .box h1, #side-swipe .watching-next.contain input,
+.settings-button, #title-synopsis-block h3 { font-size: 16px; }
 #profile .bio .location, #favorite-delta h1, #profile #top-genres .content h1, .greeting .content .box form #send-message, 
-.greeting .content .box #send-suggestion { font-size: 18px; }
+.greeting .content .box #send-suggestion, #side-swipe .watching-next.contain p, concierge-info h6 { font-size: 18px; }
 .check-list-title, .button2, .lists-nav, .recommendation-action p:first-of-type, .follow-name,
 .percent-match, #user-matches .match .buttons .follow, #user-matches .match .buttons .greet,
-#update, #logout { font-size: 20px; }
+#update, #logout, .feed-footer span, #sort-button-text { font-size: 20px; }
 #side-swipe .watching-next.contain h1 { font-size: 22px; }
 #user-matches h1 , .greeting .credits{ font-size: 26px; }
 /* importants */
 div.right.button, div.left.button { font-size: 18px !important; }
+
+
 
 
 /* Retina Images */
