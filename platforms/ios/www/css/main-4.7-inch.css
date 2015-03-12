@@ -7,7 +7,13 @@
 #activity-filter { right: 126px; }
 #category-container { height: 560px; }
 .recommended-filter #category-container{ height: 510px; }
-#category-container div .title { width: 340px; }
+#category-container div .title { 
+    width: 340px; 
+    font-size: 20px;
+    line-height: 22px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 #category-container .catItem { max-height: 200px; }
 #category-container #side-swipe { width: 355px; }
 .feed-item { width: 335px; }
@@ -44,13 +50,7 @@ input.slider-search-form {
     background-size: 320px 430px;
     height: 430px;
 }
-.div-swiper {
-    width: 172px !important;
-    height: 258px !important;
-    background-size: 172px 258px;
-    top: 120px;
-    left: 70px; 
-}
+
 #up-next-wrapper { height: 403px; }
 #up-next-wrapper .catItem { height: 112px; }
 
@@ -89,13 +89,6 @@ input.slider-search-form {
     background-size: 320px 430px;
     height: 430px;
 }
-.div-swiper {
-    width: 172px !important;
-    height: 258px !important;
-    background-size: 172px 258px;
-    top: 120px;
-    left: 70px;
-}
 
 #up-next-wrapper { height: 403px; }
 #up-next-wrapper .catItem { height: 112px; }
@@ -118,7 +111,11 @@ input.slider-search-form {
 .empty-concierge {
     height: 185px;
 }
-#side-swipe .watching-next.contain input { margin-left: 22px; width: 300px; }
+#side-swipe .watching-next.contain p {
+    padding: 25px 5px;
+}
+#side-swipe .watching-next.contain input { margin-left: 22px; width: 300px; top: 125px; height: 30px; }
+#side-swipe .watching-next.contain h1 { font-size: 20px; }
 #slide-status-update::-webkit-input-placeholder{ text-align: center; }
 #profile .sub-header div { width: 187px; }
 #profile .poster:first-child { left: 2px; z-index: 4; }
@@ -127,7 +124,7 @@ input.slider-search-form {
 #profile .poster:nth-child(4) { left: 252px; z-index: 1; }
 .lists-nav { background-position: 380px; }
 #friends #list-row-wrapper { height: 517px; }
-header nav h1 { width: 280px; height: 65px; }
+header nav h1 { width: 270px; height: 65px; }
 div#mask .wheel {
     top: 300px;
     left: 160px;
@@ -135,25 +132,41 @@ div#mask .wheel {
 .div-swiper {
     width: 250px !important;
     height: 371px !important;
-    background-size: 250px 371px;
+    background-size: 100% 100%;
     top: 160px;
     left: 60px;
 }
 .follow-name { width: 220px; }
+.swipe-icon {
+    height: 33px; 
+    width: 37px;
+}
+.swipe-icon span { font-size: 14px; top: 33px; }
+.swipe-icon.not-seen span { font-size: 13px; left: -9px;}
 .swipe-icon.favorite { top: 100px; left: 173px; }
-.swipe-icon.queue { bottom: 70px; left: 173px; }
+.swipe-icon.queue { bottom: 60px; left: 173px; }
 .swipe-icon.seen,
 .swipe-icon.not-seen { top: 350px; }
 #progress { width: 360px; left: 2px; top: 71px; }
-#progress .outer-bar { width: 300px; }
+#progress .outer-bar { width: 300px; height: 12px; }
+#progress .outer-bar #inner-bar { height: 12px; }
+#progress .numbers { line-height: 12px; }
 .action-buttons { margin: 0 25px;}
-#profile .action-buttons .button.follow { margin-left: 2px; }
+#profile .action-buttons .button.follow { margin-left: 2px; background-position-x: 20px; }
+#profile .button, .follow-button, .say-hi { font-size: 20px; }
+#profile .sub-header h4 { font-size: 19px; }
 #player,
-#video-src { height: 210px; }
+#video-src { height: 200px; }
 #fake-lobby-scroller { height: 397px; }
 #fake-lobby-scroller #services,
 #fake-lobby-scroller .list-buttons,
 #seen-data, #movie-info { width: 354px; }
+#movie-poster { width: 60px; }
+#synopsis-wrapper { height: 70px; }
+#movie-title-heading img {width: 13px; background-size: 100% 100%; }
+#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 8px 11px; background-size: 12px; }
+#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 15px 12px; }
+#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 26px 12px; }
 
 #poster-layover {
     width: 100%;
@@ -162,8 +175,17 @@ div#mask .wheel {
 #conversation-slider {
     height: 550px;
 }
-#play::before { top: 70%; left: 10%; }
-.bottom-info span { background-size: 14px; }
+#play::before { top: 50%; left: 10%; font-size: 60px; }
+#gravity { background-position: center 490px; }
+.bottom-info {
+    font-size: 17px;
+}
+.bottom-info span { 
+    background-size: 100% 100%; 
+    background-position: 0;
+    height: 16px;
+    width: 16px;
+}
 .list-summary #image {  }
 .list-summary #info { width: 364px; height: 197px; font-size: 25px; }
 .list-summary #info h1 { margin-top: 10px; }
@@ -192,6 +214,15 @@ div#mask .wheel {
 #list-items .share-buttons .btn { width: 87px; background-position: 0; }
 #profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
 .feed-item .recommendation-action { width: 384px; }
+.feed-item .avatar { height: 55px; width: 55px; border-radius: 30px; }
+.feed-item .action { 
+    line-height: 22px;
+    font-size: 19px;
+    width: 255px; 
+}
+.feed-footer .span { font-size: 18px; }
+.feed-item .like-you {font-size: 11px; top: 70px; }
+.feed-item .content { margin-top: 15px; }
 #favorite-delta .delta-poster { height: 470px; }
 #favorite-delta .delta-poster img { width: 314px; }
 #favorite-delta .feed-item { width: 345px; padding-bottom: 0;}
@@ -208,7 +239,7 @@ div#mask .wheel {
 }
 #feed-container { height: 581px; }
 .share-icons div.twitter { padding-right: 0; }
-.feed-item .action { width: 260px; }
+
 #user-matches .match { margin: 10px auto 0; }
 .fl .login-text { width: 230px; }
 #registration { left: 18px; }
@@ -248,9 +279,17 @@ header nav #notifications-menu,
 header nav #chat-menu { top: 5px; }
 #friends #list-row-wrapper.no-friends { height: 586px; }
 #category-container .concierge-poster { height: 185px; width: 123px; }
-.concierge-text { height: 140px; }
-#category-container .concierge-info h1 { margin: 10px 0; }
-.concierge-info h2, .concierge-button { margin: 20px auto 0; }
+.concierge-text { height: 140px; width: 202px; }
+#category-container .concierge-info h1 { margin: 15px 0; }
+#category-container .concierge-info h1 span { margin-top: 15px; }
+#synopsis {
+
+}
+.concierge-info h2, .concierge-button { 
+    margin: 20px auto; 
+    font-size: 16px; 
+    width: 100px; 
+}
 #menu-search-form { width: 87%; }
 #menu-search-form input { width: 100%; height: 18px; }
 #search-form input { width: 80%; height: 25px; }
@@ -259,10 +298,16 @@ header nav #chat-menu { top: 5px; }
 #up-next-wrapper .catItem { height: 169px; }
 #up-next-wrapper div .title { width: 330px; }
 #dashboard header nav h1.notify { line-height: 65px; }
-#seen-avatars .avatar { margin-left: 25px; }
-#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 15px 11px; }
-#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 22px 11px; }
-#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 29px 11px; }
+#more { font-size: 13px; }
+#seen-avatars .avatar { 
+    border-radius: 30px;
+    margin-left: 23px; 
+    height: 60px; 
+    width: 60px;
+}
+.commerce h2 { font-size: 18px; }
+#services .commerce, #available-services .commerce { background-size: 30px; }
+
 #statusUpdates .text-box textarea { width: 270px; height: 120px; }
 #category-container #status-drop { top: 136px; }
 #status-drop { max-height: 486px; }
@@ -308,17 +353,44 @@ header nav .slide, header nav #tap-menu { background-image: url(../images/6p/dis
 header nav #shopping-cart,
 header nav #notifications-menu { background-image: url(../images/6p/discovery/bell2.png); }
 header nav #notifications-menu.on { background-image: url(../images/6p/discovery/bell-on.png); }
-#done-button, #more-button, #done-inter-button, #rec-filter-button { top: 24px;}
+#done-button, #more-button, #done-inter-button, #rec-filter-button { 
+    font-size: 18px !important;
+    top: 24px;
+}
 #all-nav { background-image: url(../images/6p/discovery/fabricIcons/alldot.png); }
 #movies-nav { background-image: url(../images/6p/discovery/fabricIcons/movieMenuIcon.png); }
 #tv-nav { background-image: url(../images/6p/discovery/fabricIcons/tvMenuIcon.png); }
 #travel-nav { background-image: url(../images/6p/discovery/fabricIcons/travelMenuIcon.png); }
 #music-nav { background-image: url(../images/6p/discovery/fabricIcons/musicMenuIcon.png); }
-.check-list-check { background-image: url(../images/6p/discovery/lightgrey-check.png); border: none;}
+.check-list-wrapper { height: 125px; line-height: 125px; }
+div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; }
+#category-container div img.check-list-poster { width: 78px; }
+.check-list-check { 
+    background-image: url(../images/6p/discovery/lightgrey-check.png); border: none;
+    height: 40px;
+    width: 40px;
+}
 .check-list-check.checked { background-image: url(../images/6p/discovery/redcheck.png); }
+.check-list-ratings span {
+    background-position-y: 0;
+    background-size: 14px;
+    font-size: 18px;
+}
+#sort-button-text.cancel { left: 100px; }
 #get-started { background-image: url(../images/6/login/iphone-tut.png); }
 #rate-first.coach0 { background-image: url(../images/6/discovery/coach/coach0.png); }
 #rate-first.coach1 { background-image: url(../images/6/discovery/coach/coach1.png); }
 #rate-first.coach2 { background-image: url(../images/6/discovery/coach/coach2.png); }
 #rate-first.coach3 { background-image: url(../images/6/discovery/coach/coach3.png); }
 #welcome-container #welcome-content.next { background-image: url(../images/discovery/05_scrim.png); }
+
+
+/* font fixes */
+#category-container .concierge-info h1 span, #synopsis { font-size: 13px; }
+#fake-lobby-scroller .list-buttons .list-button, #title-synopsis-block h3 { font-size: 14px; }
+.follow-location { font-size: 15px; }
+.concierge-info h6, #side-swipe .watching-next.contain p, #seen-by-container { font-size: 16px; }
+#profile .bio .location, #favorite-delta h1, #profile #top-genres .content h1 { font-size: 18px; }
+.check-list-title, .button2, .lists-nav, .recommendation-action p:first-of-type, .follow-name,
+.percent-match { font-size: 20px; }
+#profile .bio .name { font-size: 25px; }
