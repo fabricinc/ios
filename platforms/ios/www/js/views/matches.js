@@ -52,7 +52,7 @@ var MatchesModel = Backbone.Model.extend({
             return false;
         });
 
-        $(".greet").fastClick(function(e) {
+        $(".greet").click(function(e) {
             e.preventDefault();
             e.stopPropagation();
 
