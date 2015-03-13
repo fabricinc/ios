@@ -345,7 +345,13 @@ Facebook = {
         if(Api.connected) {
             this.getLikes(function(likes) {
                 if(likes) {
-                    Api.loadFBLikes(likes.data);
+                    // loop through
+                    var i,j,temparray,chunk = 10;
+                    for (i=0,j=likes.data.length; i<j; i+=chunk) {
+                        temparray = likes.data.slice(i,i+chunk);
+                        // do whatever
+                        Api.loadFBLikes(temparray);
+                    }
                 }
             });
         }

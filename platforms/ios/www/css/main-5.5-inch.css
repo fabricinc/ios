@@ -91,7 +91,13 @@ div#mask .wheel {
 .swipe-icon.not-seen { top: 350px; }
 #progress { width: 360px; left: 20px; top: 71px; }
 #progress .outer-bar { width: 300px; }
-#profile .action-buttons .button.follow { margin-left: 25px; }
+#profile .action-buttons .button.follow { margin-left: 2px; }
+#profile .action-buttons .button.follow,
+#profile .action-buttons .button.greeting {
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+}
 #player,
 #video-src { height: 233px; }
 #fake-lobby-scroller { height: 452px; }
@@ -184,7 +190,7 @@ div#friends-queued.bottom-info span {
     line-height: 46px;
 }
 #dashboard header nav h1 span {
-    top: 21px;
+    top: 14px;
     margin: 0 0 0 14px;
     height: 30px;
     width: 26px;
@@ -194,9 +200,9 @@ header nav { height: 65px; }
 #current-icon.all,
 #dashboard header nav h1.open span {
     top: 0px;
-    height: 50px;
     right: 0px;
-    background-size: 21px
+    height: 50px;
+    background-size: 21px;
 }
 header nav #tap-menu,
 header nav #share-icon,
@@ -226,10 +232,10 @@ header nav #chat-menu { top: 5px; }
 #up-next-wrapper { height: 641px; }
 #up-next-wrapper div .title { width: 370px; }
 #dashboard header nav h1.notify { line-height: 45px; }
-#seen-avatars .avatar { margin-left: 32px; }
-#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 8px 11px; }
-#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 7px 12px; }
-#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 27px 12px; }
+#seen-avatars .avatar { margin-left: 30px; }
+#fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 10px 11px; }
+#fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 27px 11px; }
+#fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 18px 11px; }
 #statusUpdates .text-box textarea { width: 310px; height: 120px; }
 #category-container #status-drop { width: 100%; top: 196px; }
 #status-drop, #menu-drop { max-height: 501px; }
@@ -270,12 +276,12 @@ div.left.button.back, #services-egress { padding-top: 0px; }
 #done-inter-button,
 #rec-filter-button { line-height: 60px !important; top: 0; }
 #menu-drop {
-    top: 48px;
+    top: 62px;
     left: 31px;
     width: 290px;
     max-height: 671px;
 }
-#menu-drop .result .info { width: 245px; }
+#menu-drop .result .info { width: 225px; }
 #profile .poster:nth-child(2) { left: 98px; }
 #profile .poster:nth-child(3) { left: 194px; }
 #profile .poster:nth-child(4) { left: 290px; }
@@ -325,9 +331,9 @@ div#search-for-friends { background-size: 30px; }
 .follow-compatibility { width: 40px; }
 .percent-match { margin-bottom: 5px; padding-top: 5px; }
 #user-matches .match .avatar {
-    width: 145px;
-    height: 155px;
-    background-size: 145px 155px;
+    width: 175px;
+    height: 175px;
+    background-size: 175px 175px;
 }
 .match .match-compatibility {
     height: 55px;
@@ -356,8 +362,12 @@ div#search-for-friends { background-size: 30px; }
 .share-icons div.facebook { background-size: 34px; }
 .share-icons div.twitter { background-size: 35px; }
 #post-button { padding: 10px 15px; }
-#statusUpdates .text-box textarea { width: 300px; }
-#status-poster.poster { width: 85px; height: 122px; }
+#statusUpdates .text-box textarea {
+    width: 290px;
+    font-size: 18px;
+    margin-top: 20px;
+}
+#status-poster.poster { width: 100px; height: 150px; background-size: 100px 150px; }
 header nav #notifications-menu { background-size: 28px 28px; right: 50px; }
 #menu-search-form { margin: 20px auto; }
 .feed-item .avatar {
@@ -372,6 +382,7 @@ header nav #notifications-menu { background-size: 28px 28px; right: 50px; }
     border-radius: 19px;
     line-height: 35px;
     font-size: 14px;
+    left: 50px;
 }
 #category-container .concierge-info h1 span { margin-top: 10px; }
 .check-list-title { width: 252px; line-height: 22px; }
@@ -396,7 +407,7 @@ div#friends-queued.bottom-info { left: 250px; }
 .swipe-icon.not-seen span { left: -11px; width: 63px; }
 .swipe-icon.favorite span { left: -5px; }
 #synopsis-wrapper { height: 86px; }
-#movie-poster { width: 75px; }
+#movie-poster { width: 100px; }
 #profile #top-genres .category .passion { background-position-y: 7px; }
 #profile #top-genres .category .passion,
 #profile #top-genres .category { height: 50px; }
@@ -426,7 +437,6 @@ div#friends-queued.bottom-info { left: 250px; }
     height: 25px;
     background-size: 25px 25px;
     top: 6px;
-    right: 10px;
 }
 .list-movie-info { width: 285px; }
 .list-title {
@@ -443,8 +453,21 @@ div#friends-queued.bottom-info { left: 250px; }
     border-radius: 30px;
 }
 .lists-nav { background-size: 13px; }
-
-
+#close-menu-drop { top: 28px; }
+#user-matches .match .buttons .follow, #user-matches .match .buttons .greet {
+    height: 40px;
+    line-height: 40px;
+}
+#fake-lobby-scroller .list-buttons .list-button {
+    padding-left: 5px;
+    width: 31%;
+}
+.passion-poster-container { height: 160px; }
+#profile .poster { width: 100px; height: 150px; background-size: 100px 150px; }
+#profile .poster:nth-child(2) { left: 95px; }
+#profile .poster:nth-child(3) { left: 190px; }
+#profile .poster:nth-child(4) { left: 285px; }
+.poster img.movie-img.music { height: auto; }
 
 /* font fixes */
 #category-container .concierge-info h1 span, #synopsis { font-size: 13px; }
