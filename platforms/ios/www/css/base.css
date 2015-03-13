@@ -3680,7 +3680,7 @@ h2#see-more-matches {
     width: 90px;
     height: 139px;
     margin: 5px 4px;
-    background-size: 93px 139px;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-image: url(../images/discovery/no-favorites.png);
 }
@@ -4887,7 +4887,7 @@ button#done {
 #user-matches #match-config {
     width: 18px;
     height: 18px;
-    background-size: 18px 18px;
+    background-size: 100% 100%;
     background-image: url(../images/discovery/settings.png);
     position: absolute;
     top: 10px;
@@ -5383,7 +5383,7 @@ div#movie-list-view {
 .greeting .dash .avatar {
     width: 75px;
     height: 75px;
-    background-size: 75px 75px;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     margin: 0 auto;
     background-image: url(../images/discovery/avatar.png);
