@@ -118,10 +118,11 @@ input.slider-search-form {
 #side-swipe .watching-next.contain h1 { font-size: 20px; }
 #slide-status-update::-webkit-input-placeholder{ text-align: center; }
 #profile .sub-header div { width: 187px; }
+.passion-poster-container { height: 154px; }
 #profile .poster:first-child { left: 2px; z-index: 4; }
-#profile .poster:nth-child(2) { left: 87px; z-index: 3; }
-#profile .poster:nth-child(3) { left: 172px; z-index: 2; }
-#profile .poster:nth-child(4) { left: 252px; z-index: 1; }
+#profile .poster:nth-child(2) { left: 84px; z-index: 3; }
+#profile .poster:nth-child(3) { left: 166px; z-index: 2; }
+#profile .poster:nth-child(4) { left: 249px; z-index: 1; }
 .lists-nav { background-position: 380px; }
 #friends #list-row-wrapper { height: 517px; }
 header nav h1 { width: 270px; height: 65px; }
@@ -151,16 +152,22 @@ div#mask .wheel {
 #progress .outer-bar { width: 300px; height: 12px; }
 #progress .outer-bar #inner-bar { height: 12px; }
 #progress .numbers { line-height: 12px; }
-.action-buttons { margin: 0 25px;}
+.action-buttons { margin: 0 15px;}
 #profile .action-buttons .button.follow { margin-left: 2px; background-position-x: 20px; }
 #profile .button, .follow-button, .say-hi { font-size: 20px; }
 #profile .action-buttons .button.follow, 
 #profile .action-buttons .button.greeting {  
     background-position-x: 20px; 
-    width: 150px; 
+    line-height: 37px; 
+    height: 37px;
+    width: 160px;
+}
+#profile .poster {
+    height: 143px;
+    width: 95px;
 }
 #profile .action-buttons .button.greeting {  
-    margin: 10px 0 10px 10px;
+    margin: 10px 0 10px 15px;
 }
 #profile .sub-header h4 { font-size: 19px; }
 #profile #top-genres .category {height: 40px; }
@@ -245,8 +252,9 @@ div#mask .wheel {
 #sign-up { top: 411px; }
 #ready-to-start { margin-top: 30px; }
 .share-icons div {
-    padding-right: 0;
     text-align: center;
+    line-height: 55px;
+    padding-right: 0;
     width: 187px;
 }
 #feed-container { height: 581px; }
@@ -320,16 +328,49 @@ header nav #chat-menu { top: 5px; }
 .commerce h2 { font-size: 18px; }
 #services .commerce, #available-services .commerce { background-size: 30px; }
 
-#statusUpdates .text-box textarea { width: 270px; height: 120px; }
-#category-container #status-drop { top: 136px; }
+#statusUpdates .text-box textarea { width: 260px; height: 120px; font-size: 18px; margin-top: 12px; }
+.share-icons { height: 55px; }
+#category-container #status-drop { 
+    max-height: 454px;
+    margin-left: -1px;
+    width: 100%; 
+    top: 185px;
+    right: 4px;
+}
+#close-status-drop {
+    width: 354px;
+    top: 185px;
+}
 #status-drop { max-height: 486px; }
+#status-drop .result, #menu-drop .result {
+    height: 75px;
+}
+#status-drop .result .poster, #menu-drop .result .poster {
+    background-size: 100% 100%; 
+    height: 75px; 
+    width: 50px;
+}
+#status-drop .result h1, #menu-drop .result h1{
+    padding-left: 10px;
+    line-height: 18px;
+    padding-top: 2px; 
+    font-size: 18px;
+}
+#status-drop .result h2, #menu-drop .result h2 {
+    padding-left: 10px;
+}
 #menu-drop  { max-height: 526px; width: 270px; }
-#user-matches h1.credits { background-position: 20px 2px; }
-.greeting .credits { background-position: 120px 10px; }
 div.left.button { top: 6px; }
 #profile #side-swipe .slick-list,
 #profile #side-swipe .contain,
 #profile .info { height: 300px;}
+
+#post-button { top: 14px; }
+#status-poster.poster {
+    background-size: 100% 100%;
+    height: 128px;
+    width: 85px;
+}
 
 /* Rtina Images */
 
@@ -397,6 +438,82 @@ div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; 
 #welcome-container #welcome-content.next { background-image: url(../images/discovery/05_scrim.png); }
 
 
+#search-for-friends, #invite-facebook {
+    background-position: 8px;
+    background-size: 30px;
+    line-height: 45px;
+    font-size: 17px; 
+}
+div#search-for-friends { background-size: 24px; }
+#search-for-friends input, #search-for-friends input::-webkit-input-placeholder {
+    font-size: 17px; 
+}
+.lists-row .profile-picture {
+    border-radius: 25px;
+    height: 50px; 
+}
+#friends .lists-row {
+    padding: 22px 0 18px 18px;
+    height: 50px;
+}
+.follow-compatibility { width: 33px; font-size: 10px; }
+.percent-match { margin-top: 34px; }
+.greeting .credits,
+#user-matches h1.credits { 
+    background-position: 15px 2px; 
+    background-size: 23px 20px; 
+}
+#use h1 { font-size: 24px; }
+.greeting .credits { background-position: 110px 9px; }
+#user-matches #match-config {
+    height: 20px;
+    width: 20px;
+}
+#user-matches .match {
+    width: 289px;
+}
+#user-matches .match .avatar {
+    height: 140px;
+    width: 140px;
+}
+.match .match-compatibility {
+    padding-top: 13px; 
+    font-size: 14px;
+    height: 50px;
+    width: 60px;
+}
+#user-matches .match .buttons .follow,
+#user-matches .match .buttons .greet {
+    line-height: 40px;
+    font-size: 19px;
+    height: 40px;
+}
+.greeting .dash .avatar {
+    border-radius: 40px;
+    height: 80px;
+    width: 80px;
+
+}
+.greeting .content .box .info {
+    font-size: 18px; 
+    width: 220px; 
+}
+.suggested-message {
+    line-height: 19px;
+}
+.greeting .content .box form input[type="text"] {
+    width: 296px;
+}
+.greeting .content h1 {
+    font-size: 17px; 
+}
+
+.settings-button { line-height: 50px; font-size: 15px; }
+#logout {
+    font-size: 19px;
+    height: 45px; 
+}
+#update {height: 45px; }
 /* font fixes */
 #category-container .concierge-info h1 span, #synopsis { font-size: 13px; }
 #fake-lobby-scroller .list-buttons .list-button, #title-synopsis-block h3 { font-size: 14px; }
@@ -404,5 +521,7 @@ div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; 
 .concierge-info h6, #side-swipe .watching-next.contain p, #seen-by-container { font-size: 16px; }
 #profile .bio .location, #favorite-delta h1, #profile #top-genres .content h1 { font-size: 18px; }
 .check-list-title, .button2, .lists-nav, .recommendation-action p:first-of-type, .follow-name,
-.percent-match { font-size: 20px; }
+.percent-match { font-size: 18px; }
 #profile .bio .name { font-size: 25px; }
+.greeting .credits,
+#user-matches h1.credits { font-size: 25px; }
