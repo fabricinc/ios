@@ -346,7 +346,7 @@ Facebook = {
             this.getLikes(function(likes) {
                 if(likes) {
                     // loop through
-                    var i,j,temparray,chunk = 10;
+                    var i,j,temparray,chunk = 5;
                     for (i=0,j=likes.data.length; i<j; i+=chunk) {
                         temparray = likes.data.slice(i,i+chunk);
                         // do whatever

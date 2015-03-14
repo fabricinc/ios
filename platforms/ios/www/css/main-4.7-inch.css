@@ -280,18 +280,19 @@ div#mask .wheel {
     line-height: 40px;
 }
 #current-icon.all, #dashboard header nav h1.open span {
-    height: 10px;
+    background-size: 17px 43px;;
+    height: 100%;
+    top: 0px; 
 }
 #dashboard header nav h1 span {
-    top: 21px;
+    top: 12px;
     margin: 0 0 0 7px;
     height: 30px;
     width: 26px;
     background-size: 17px;
 }
 header nav { height: 59px; }
-#current-icon.all,
-#dashboard header nav h1.open span { top: 28px; }
+
 header nav #tap-menu,
 header nav #share-icon,
 header nav #shopping-cart,
@@ -359,7 +360,7 @@ header nav #chat-menu { top: 5px; }
 #status-drop .result h2, #menu-drop .result h2 {
     padding-left: 10px;
 }
-#menu-drop  { max-height: 526px; width: 270px; }
+#menu-drop  { max-height: 606px; width: 270px; }
 div.left.button { top: 6px; }
 #profile #side-swipe .slick-list,
 #profile #side-swipe .contain,
@@ -420,8 +421,10 @@ div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; 
 #category-container div img.check-list-poster { width: 78px; }
 .check-list-check { 
     background-image: url(../images/6p/discovery/lightgrey-check.png); border: none;
-    height: 40px;
-    width: 40px;
+    background-size: 100% 100%;
+    background-position: 0;
+    height: 35px;
+    width: 35px;
 }
 .check-list-check.checked { background-image: url(../images/6p/discovery/redcheck.png); }
 .check-list-ratings span {
@@ -452,6 +455,7 @@ div#search-for-friends { background-size: 24px; }
     border-radius: 25px;
     height: 50px; 
 }
+.friend-list .lists-row,
 #friends .lists-row {
     padding: 22px 0 18px 18px;
     height: 50px;
