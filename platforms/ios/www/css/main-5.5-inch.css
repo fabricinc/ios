@@ -329,7 +329,7 @@ div#search-for-friends { background-size: 30px; }
     font-size: 16px;
 }
 .follow-compatibility { width: 40px; }
-.percent-match { margin-bottom: 5px; padding-top: 5px; }
+.percent-match { margin-bottom: 5px; padding-top: 0px; margin-top: 30px; }
 #user-matches .match .avatar {
     width: 175px;
     height: 175px;
@@ -359,7 +359,10 @@ div#search-for-friends { background-size: 30px; }
 }
 .share-icons { height: 55px; }
 .share-icons div { line-height: 55px; font-size: 20px; }
-.share-icons div.facebook { background-size: 34px; }
+.share-icons div.facebook {
+    background-size: 34px;
+    background-position: 15px 50%
+}
 .share-icons div.twitter { background-size: 35px; }
 #post-button { padding: 10px 15px; }
 #statusUpdates .text-box textarea {
@@ -389,7 +392,7 @@ header nav #notifications-menu { background-size: 28px 28px; right: 50px; }
 .check-list-wrapper { height: 143px; }
 #category-container div img.check-list-poster { width: 88px; }
 div.check-list-wrapper div.check-list-item { height: 133px; }
-.check-list-ratings span { background-size: 18px; background-position: 0 0; margin-left: 5px;  }
+.check-list-ratings span { background-size: 18px; background-position: 0 0; margin-left: 5px; line-height: 18px; }
 .check-list-ratings span.fresh { background-position: 0 -3px; }
 #sort-button { line-height: 60px; }
 #sort-button::before { font-size: 22px; }
@@ -445,7 +448,7 @@ div#friends-queued.bottom-info { left: 250px; }
     line-height: 20px;
 }
 #notifications-container .notification .content { width: 320px; }
-#notifications-container .notification .content p { font-size: 16px; margin-top: 5px; }
+#notifications-container .notification .content p { font-size: 16px; margin-top: 5px; line-height: 20px; }
 #notifications-container .notification .avatar {
     width: 60px;
     height: 60px;
@@ -469,6 +472,9 @@ div#friends-queued.bottom-info { left: 250px; }
 #profile .poster:nth-child(4) { left: 285px; }
 .poster img.movie-img.music { height: auto; }
 
+
+
+
 /* font fixes */
 #category-container .concierge-info h1 span, #synopsis { font-size: 13px; }
 #fake-lobby-scroller .list-buttons .list-button, #disclaimer, .check-list-title span { font-size: 14px; }
@@ -476,7 +482,8 @@ div#friends-queued.bottom-info { left: 250px; }
 #seen-by-container, .greeting .content .box h1, #side-swipe .watching-next.contain input,
 .settings-button, #title-synopsis-block h3 { font-size: 16px; }
 #profile .bio .location, #favorite-delta h1, #profile #top-genres .content h1, .greeting .content .box form #send-message, 
-.greeting .content .box #send-suggestion, #side-swipe .watching-next.contain p, concierge-info h6 { font-size: 18px; }
+.greeting .content .box #send-suggestion, #side-swipe .watching-next.contain p, concierge-info h6,
+#conversation-container .message { font-size: 18px; }
 .check-list-title, .button2, .lists-nav, .recommendation-action p:first-of-type, .follow-name,
 .percent-match, #user-matches .match .buttons .follow, #user-matches .match .buttons .greet,
 #update, #logout, .feed-footer span, #sort-button-text { font-size: 20px; }
