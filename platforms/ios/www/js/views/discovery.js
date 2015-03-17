@@ -56,6 +56,8 @@ var DiscoveryModel = Backbone.Model.extend({
 
 
 		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
+            console.log(data);
+
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
 
@@ -550,6 +552,7 @@ var DiscoveryModel = Backbone.Model.extend({
         var self = this;
         Api.getFabricCategoryData(self.categoryID, function(response) {
             if(response.data) {
+                console.log(response.data);
                 if(response.data.movies) {
                     if (response.data.movies.list) { var list = response.data.movies.list; }
                     else { var list = response.data.movies; }
