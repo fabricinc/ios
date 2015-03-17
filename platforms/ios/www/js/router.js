@@ -900,7 +900,7 @@
             // prefetch user data
             setTimeout(function() {
                 Api.getUserCache();
-            }, 5000);
+            }, 2000);
 		} else {
             Backbone.history.start({ silent: true });
             Backbone.history.navigate("start", true);
