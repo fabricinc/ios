@@ -1554,29 +1554,58 @@ Api.fetch = function(options, callback, success) {
     callback = callback || function() {};
     Util.checkAPI(function(connected) {
         if(connected) {
-            $.ajax({
-                url: Api.url + 'api.php?callback=?',
-                data: options,
-                dataType: "jsonp",
-                timeout: Api.appSettings.timeout,
-                success: function(response) {
-                    if(!Api.connected) {
-                        Api.connected = true;
-                        $("#no-connection").remove();
-                        UI.unmask();
+            // fetch the data, but callback on the old data if it exists
+            if(Api.response[Util.encode(options)]) {
+                console.log("use cache: " + options.action);
+                // we have a cache, so use it!
+                success();
+                callback(JSON.parse(Api.response[Util.encode(options)]));
+                $.ajax({
+                    url: Api.url + 'api.php?callback=?',
+                    data: options,
+                    dataType: "jsonp",
+                    timeout: Api.appSettings.timeout,
+                    success: function(response) {
+                        if(!Api.connected) {
+                            Api.connected = true;
+                            $("#no-connection").remove();
+                            UI.unmask();
+                        }
+                        Api.response[Util.encode(options)] = JSON.stringify(response);
+                    },
+                    error: function(response) {
+                        if(options.action == "getUnseenActivity") {
+                            //callback(null);
+                        } else {
+                            Api.refetch(options, callback, success);
+                        }
                     }
-                    Api.response[Util.encode(options)] = JSON.stringify(response);
-                    success();
-                    callback(response);
-                },
-                error: function(response) {
-                    if(options.action == "getUnseenActivity") {
-                        callback(null);
-                    } else {
-                        Api.refetch(options, callback, success);
+                });
+            } else {
+                $.ajax({
+                    url: Api.url + 'api.php?callback=?',
+                    data: options,
+                    dataType: "jsonp",
+                    timeout: Api.appSettings.timeout,
+                    success: function(response) {
+                        if(!Api.connected) {
+                            Api.connected = true;
+                            $("#no-connection").remove();
+                            UI.unmask();
+                        }
+                        Api.response[Util.encode(options)] = JSON.stringify(response);
+                        success();
+                        callback(response);
+                    },
+                    error: function(response) {
+                        if(options.action == "getUnseenActivity") {
+                            callback(null);
+                        } else {
+                            Api.refetch(options, callback, success);
+                        }
                     }
-                }
-            });
+                });
+            }
         } else {
             Api.connected = false;
             if(options.action == "getUnseenActivity") {
