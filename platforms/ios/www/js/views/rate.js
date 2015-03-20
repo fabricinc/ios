@@ -859,7 +859,8 @@ var RateView = Backbone.View.extend({
         });
     },
     bindRecommendedEvents: function() {
-        var self = this;
+        var self = this,
+            active = false;
         // self.swipeRemove();
 
         $(".concierge-button, .concierge-poster").click(function(e) {
@@ -916,12 +917,18 @@ var RateView = Backbone.View.extend({
         $("#sort-button, #want-to-sort div.filter").fastClick(function(e){
             e.preventDefault();     e.stopPropagation();
 
+            if(active) { return; }
+
+            active = true;
+
             var buttonText = $("#sort-button-text").text() == "sort" ? "cancel" : "sort",
                 filter = $(this).data("filter"),
                 filterText = $(this).html();
 
             $("#want-to-sort, #screen").toggleClass("show");
-            $("#sort-button-text").attr("class", buttonText).on("transitionend", function(){
+            $("#sort-button-text").attr("class", buttonText).on("transitionend", function(e){
+                e.preventDefault();     e.stopPropagation();
+                active = false;
                 $(this).html(buttonText);
                 if(filter){
                     $("#current-filter").html(filterText);

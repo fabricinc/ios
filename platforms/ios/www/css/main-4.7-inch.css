@@ -302,7 +302,7 @@ header nav #chat-menu { top: 5px; }
 #category-container .concierge-poster { height: 185px; width: 123px; }
 .concierge-text { height: 140px; width: 202px; }
 #category-container .concierge-info h1 { margin: 15px 0; }
-#category-container .concierge-info h1 span { margin-top: 15px; line-height: 2px; }
+#category-container .concierge-info h1 span { margin-top: 15px; }
 #synopsis {
 
 }

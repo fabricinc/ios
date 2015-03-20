@@ -195,7 +195,7 @@
                     mixpanel.alias();
                     mixpanel.people.set({ "$email": email });
   
-                    if(Analytics) { Analytics.eventAndParams("Facebook auth", JSON.stringify(response)); }
+                    if(Analytics) { Analytics.eventAndParams("Facebook auth", JSON.stringify(data)); }
                 } else {
                     Util.alert("Oops! There was an error during registration. Please wait a few minutes and try again.", "registration failed");
                 }
@@ -371,7 +371,6 @@
                     self.createRegistrationWithFacebookData(facebookData, tpFbFriends);
                 });
             } else if(response.authorized && !response.active) {
-                //console.log("hwatnsadkansdkjasdkjs");
                 //cb(false);
                 // deactivated user is authorized but not active - was deleted at some point but returned
                 $("input").blur();

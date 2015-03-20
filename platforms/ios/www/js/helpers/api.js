@@ -938,11 +938,13 @@ Api.notificationsSeen = function(callback) {
     this.fetch(options, callback);
 }
 Api.welcomeCompleted = function(friendList, callback) {
+    var facebookID = APP.gameState.facebookID || null; 
     friendList = friendList || [];
     callback = callback || function() {};
     var options = {
-        "action": "welcomeCompleted",
-        name: APP.gameState.uName
+        "action" : "welcomeCompleted",
+        "name" : APP.gameState.uName,
+        "facebookID" : facebookID
     };
     if(friendList) { options.friendList = friendList.join(); }
     this.fetch(options, callback);
@@ -1582,12 +1584,14 @@ Api.fetch = function(options, callback, success) {
                     }
                 });
             } else {
+                Util.log("Not using cache");
                 $.ajax({
                     url: Api.url + 'api.php?callback=?',
                     data: options,
                     dataType: "jsonp",
                     timeout: Api.appSettings.timeout,
                     success: function(response) {
+
                         if(!Api.connected) {
                             Api.connected = true;
                             $("#no-connection").remove();
