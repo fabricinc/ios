@@ -312,9 +312,25 @@ var UI = {
 	        });
 	    },
         imgError: function(image){
+            console.log(image);
             image.onerror = "";
             image.src = "images/discovery/avatar.png";
             return true;
+        },
+        avatar: function(facebookID, userID){
+            facebookID = facebookID || null; 
+
+
+            var msPop = parseInt(userID) === 252990 ? " msPop" : "", 
+                src = facebookID ? "https://graph.facebook.com/"+ facebookID +"/picture?height=100&width=100" : "images/discovery/avatar.png";
+                
+            var avatar = $('<img />', { 
+                class : 'profile-picture'+ msPop, 
+                src : src, 
+            });
+
+
+            return avatar[0].outerHTML;
         },
         loadSideMenu: function(options) {
             var userPicture = User.getFacebookAvatar() || "images/discovery/avatar.png",
@@ -419,8 +435,7 @@ var UI = {
             });
 
             $("#close-menu-drop").fastClick(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+                e.preventDefault();  e.stopPropagation();
 
                 sUpdate.val("");
                 $("#close-menu-drop").hide();

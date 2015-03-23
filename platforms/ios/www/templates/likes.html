@@ -2,7 +2,9 @@
     <div id="messages-container">
         <% if(context !== null) { %>
             <div id="message-context">
-                <div class="profile-image<% if(parseInt(objects[0].creatorID) == 252990) { %> msPop<% } %>" data-senderid="<%= objects[0].creatorID %>" <% if(context.actorFbID && context.actorFbID != '') { %> style="background-image: url(https://graph.facebook.com/<%= context.actorFbID %>/picture?width=100&height=100);"<% } %> onerror="UI.imgError(this);"></div>
+                <div class="profile-image<% if(parseInt(objects[0].creatorID) == 252990) { %> msPop<% } %>" data-senderid="<%= objects[0].creatorID %>" <% if(context.actorFbID && context.actorFbID != '') { %> 
+                        style="background-image: url(https://graph.facebook.com/<%= context.actorFbID %>/picture?width=100&height=100);" 
+                    <% } %> onerror="UI.imgError(this);"></div>
                 <% if(context.objectType == "movie") { %>
                     <img src="<%= Api.appSettings.cdn %><%= context.objectAsset.replace('/files', '') %>" data-catid="<%= context.objectID %>" />
                 <% } %>

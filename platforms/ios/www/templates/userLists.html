@@ -2,13 +2,14 @@
 <% var action = followAction === "following" ? "followedID" : "followerID"; %>
 <div id="list-row-wrapper" class="friend-list">
     <div id="lists">
-        <% if(followers.length) { %>
-            <% _.each(followers, function(follower) { %>
-                <% var userID = follower.userID || null; %>
-                <% compatibility = parseInt(follower.compatibility) %>
-                <% opacity = compatibility > 20 ? (compatibility / 100) : .2 %>
+        <% if(followers.length) {  console.log(followers); 
+            _.each(followers, function(follower) { 
+                var userID = follower.userID || null,
+                    compatibility = parseInt(follower.compatibility),
+                    profilePic = UI.avatar(follower.facebookID, follower.userID), 
+                    opacity = compatibility > 20 ? (compatibility / 100) : .2; console.log(profilePic); %>
                 <div class="lists-row" data-followid="<%= follower[action] %>" data-userID="<%= userID %>">
-                	<img class="profile-picture<% if(parseInt(userID) == 252990) { %> msPop<% } %>" src="https://graph.facebook.com/<%= follower.facebookID %>/picture?height=100&width=100" onerror="UI.imgError(this);" />
+                	<%= profilePic %> 
                 	<div class="follow-info">
     	                <div class="follow-name"><%= follower.userName %></div>
     	                <div class="follow-location gry"><%= follower.city %></div>
