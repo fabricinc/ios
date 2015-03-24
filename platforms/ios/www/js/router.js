@@ -316,7 +316,6 @@
         },
         bindLoginEvents: function() {
             var self = this;
-
             this.on("route:start", function() {
                 self.loadView(new StartView(), function() {
 					// callback
@@ -362,9 +361,11 @@
                 if (!APP.click) {
                     APP.click = true;
                     Facebook.promptLogin(function(success) {
+                        
                         if(!APP.router) {
                             APP.router = initializeRouter({ bindAppRoutes: success });
                         } else {
+
                             APP.router.bindAppEvents();
                             Backbone.history.navigate("welcome", true);
                         }
@@ -396,6 +397,7 @@
                 }, "home");
             });
             this.on("route:welcome", function() {
+
                 if (APP.gameState && APP.gameState.welcomeCompleted == 0) {
                     self.loadView(new WelcomeView(), function() {
                         // Callback?
@@ -891,6 +893,8 @@
             bindAppRoutes = (options.bindAppRoutes === false) ? false : true; // Default to true.
 
         router.bindLoginEvents();
+
+
 		if (bindAppRoutes) {
             if(User.isFacebook) {
                 Facebook.uploadLikes();

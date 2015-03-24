@@ -950,11 +950,13 @@ Api.notificationsSeen = function(callback) {
     this.fetch(options, callback);
 }
 Api.welcomeCompleted = function(friendList, callback) {
+    var facebookID = APP.gameState.facebookID || null;
     friendList = friendList || [];
     callback = callback || function() {};
     var options = {
-        "action": "welcomeCompleted",
-        name: APP.gameState.uName
+        "action" : "welcomeCompleted",
+        "name" : APP.gameState.uName,
+        "facebookID" : facebookID
     };
     if(friendList) { options.friendList = friendList.join(); }
     this.fetch(options, callback);
@@ -1075,7 +1077,7 @@ Api.updateUserPref = function(preference, value, callback) {
         "preference": preference,
         "value": value
     };
-    
+
     // special case because of success function
     // depending on how often this happens I may add it as a parameter
     $.ajax({
@@ -1085,8 +1087,8 @@ Api.updateUserPref = function(preference, value, callback) {
         success: function(response) {
             if (response.success) {
                 APP.gameState[preference] = value;
-            } 
-            callback(response); 
+            }
+            callback(response);
         },
         error: function() {
             Util.log("Oops! Something went wrong!");
@@ -1450,7 +1452,7 @@ Api.getHomeRecs = function(sectionID, callback) {
         "bitRate": Player.bitRate,
         "sectionID": sectionID
     };
-    
+
     this.fetch(options, callback);
 }
 Api.getQ = function(QID, sectionID, callback) {
@@ -1592,6 +1594,7 @@ Api.fetch = function(options, callback, success) {
                         }
                 });
             } else {
+                Util.log("Not using cache");
                 $.ajax({
                     url: Api.url + 'api.php?callback=?',
                     data: options,
