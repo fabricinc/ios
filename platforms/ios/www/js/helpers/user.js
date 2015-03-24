@@ -447,6 +447,7 @@
 
             Api.abortAll(function() { // This will kill any outstanding requests
                 Api.dispatcher({ action:"logout" }, function(response) {
+                    Api.clearUserCache();
                     if (response.success) {
                         self.clearClasses();
                         APP.models.currentUser = null;

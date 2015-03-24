@@ -444,7 +444,7 @@ var RateView = Backbone.View.extend({
                             if(moreMoves.length < Api.appSettings.wantToLimit) {
                                 self.model.prlf = true;
                             }
-                            self.model.startR += moreMoves.length;
+                            self.model.startR += 50;
 
                             var html = APP.load("homeQ", {
                                 removedList: self.model.removedList,
@@ -453,13 +453,13 @@ var RateView = Backbone.View.extend({
                                 items: moreMoves
                             });
                             $("#content-container .content-scroller").append(html);
-                            APP.working = false;
 
                             self.bindRecommendedEvents();
-                            setTimeout(function() { if(UI.scroller) { UI.scroller.refresh(); } }, 500);
+                            setTimeout(function() { if(UI.scroller) { APP.working = false; UI.scroller.refresh(); } }, 500);
                         } else {
                             APP.working = false;
                         }
+                    } else {
                     }
                 }
             });
