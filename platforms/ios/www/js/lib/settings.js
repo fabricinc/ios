@@ -1,7 +1,7 @@
 // Useful settings for testing.
 var TESTING_SETTINGS = false;
 var STAGE_API = false,
-    LOGGING = true;
+    LOGGING = false;
 
 // Set API location
 var API_URL = "http://dev.api.tryfabric.com/";

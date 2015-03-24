@@ -687,6 +687,7 @@
     #search-users .profile-picture, .lists-row .profile-picture, .movie-seen-list .profile-picture, .follow-list .profile-picture {
         border-radius: 28px;
         height: 55px;
+        width: 55px;
     }
 
     .follow-name {

@@ -17,6 +17,18 @@ Api.appSettings = {
 };
 Api.levelSettings = {};
 Api.response = {};
+// api responses we do not cache
+Api.skipCache = {
+    loadFBLikes: true,
+    getUserMatches: true,
+    getUnseenActivity: true,
+    getSwipeCategoryData: true
+};
+// api responses that do not trigger offline mode if no response is received
+Api.skipData = {
+    loadFBLikes: true,
+    getUnseenActivity: true
+};
 
 Api.queueRequest = function(xhr) {
     var pointer = 'index' + Object.keys(this.queue).length,
@@ -1552,34 +1564,32 @@ Api.getAppSettings = function(callback) {
 Api.fetch = function(options, callback, success) {
     success = success || function() {};
     callback = callback || function() {};
+    var key = Util.encode(options); // the access key for he last response, based off options
+
     Util.checkAPI(function(connected) {
         if(connected) {
             // fetch the data, but callback on the old data if it exists
-            if(Api.response[Util.encode(options)]) {
-                console.log("use cache: " + options.action);
+            if(Api.response[key]) {
                 // we have a cache, so use it!
                 success();
-                callback(JSON.parse(Api.response[Util.encode(options)]));
+                callback(JSON.parse(Api.response[key]));
+
                 $.ajax({
-                    url: Api.url + 'api.php?callback=?',
-                    data: options,
-                    dataType: "jsonp",
-                    timeout: Api.appSettings.timeout,
-                    success: function(response) {
-                        if(!Api.connected) {
-                            Api.connected = true;
-                            $("#no-connection").remove();
-                            UI.unmask();
+                        url: Api.url + 'api.php?callback=?',
+                        data: options,
+                        dataType: "jsonp",
+                        timeout: Api.appSettings.timeout,
+                        success: function(response) {
+                            Api.reconnect();
+                            Api.storeResponse(options, response);
+                        },
+                        error: function(response) {
+                            if(Api.skippableData(options.action)) {
+                                callback(null);
+                            } else {
+                                Api.refetch(options, callback, success);
+                            }
                         }
-                        Api.response[Util.encode(options)] = JSON.stringify(response);
-                    },
-                    error: function(response) {
-                        if(options.action == "getUnseenActivity") {
-                            //callback(null);
-                        } else {
-                            Api.refetch(options, callback, success);
-                        }
-                    }
                 });
             } else {
                 $.ajax({
@@ -1588,17 +1598,13 @@ Api.fetch = function(options, callback, success) {
                     dataType: "jsonp",
                     timeout: Api.appSettings.timeout,
                     success: function(response) {
-                        if(!Api.connected) {
-                            Api.connected = true;
-                            $("#no-connection").remove();
-                            UI.unmask();
-                        }
-                        Api.response[Util.encode(options)] = JSON.stringify(response);
+                        Api.reconnect();
+                        Api.storeResponse(options, response);
                         success();
                         callback(response);
                     },
                     error: function(response) {
-                        if(options.action == "getUnseenActivity") {
+                        if(Api.skippableData(options.action)) {
                             callback(null);
                         } else {
                             Api.refetch(options, callback, success);
@@ -1607,13 +1613,13 @@ Api.fetch = function(options, callback, success) {
                 });
             }
         } else {
-            Api.connected = false;
-            if(options.action == "getUnseenActivity") {
+            Api.disconnect();
+            if(Api.skippableData(options.action)) {
                 callback(null);
             } else {
-                var e = Util.encode(options);
-                if(Api.response[e]) {
-                    callback(JSON.parse(Api.response[Util.encode(options)])); // send back last known response
+                if(Api.response[key]) {
+                    success();
+                    callback(JSON.parse(Api.response[key])); // send back last known response
                 } else {
                     UI.noConnection(options, callback);
                 }
@@ -1621,37 +1627,59 @@ Api.fetch = function(options, callback, success) {
         }
     });
 }
+
 // handles the refetch specifically
 Api.refetch = function(options, callback, success) {
     success = success || function() {};
     callback = callback || function() {};
-    $.ajax({
-        url: Api.url + 'api.php?callback=?',
-        data: options,
-        dataType: "jsonp",
-        timeout: 20000,
-        success: function(response) {
-            if(!Api.connected) {
-                Api.connected = true;
-                $("#no-connection").remove();
-                UI.unmask();
-            }
-            Api.response[Util.encode(options)] = JSON.stringify(response);
-            success();
-            callback(response);
-        },
-        error: function() {
-            Api.connected = false;
-            var e = Util.encode(options);
+    var key = Util.encode(options); // the access key for he last response, based off options
 
-            if(Api.response[e]) {
-                callback(JSON.parse(Api.response[Util.encode(options)]));
-            } else {
-                UI.noConnection(options, callback);
+    if(Api.response[key]) {
+        success();
+        callback(JSON.parse(Api.response[key]));
+
+        $.ajax({
+            url: Api.url + 'api.php?callback=?',
+            data: options,
+            dataType: "jsonp",
+            timeout: 20000,
+            success: function(response) {
+                Api.reconnect();
+                Api.storeResponse(options, response);
+            },
+            error: function() {
+                Api.disconnect();
+                if(Api.response[key]) {
+                    callback(JSON.parse(Api.response[key]));
+                } else {
+                    UI.noConnection(options, callback);
+                }
             }
-        }
-    });
+        });
+    } else {
+        $.ajax({
+            url: Api.url + 'api.php?callback=?',
+            data: options,
+            dataType: "jsonp",
+            timeout: 20000,
+            success: function(response) {
+                Api.reconnect();
+                Api.storeResponse(options, response);
+                success();
+                callback(response);
+            },
+            error: function() {
+                Api.disconnect();
+                if(Api.response[key]) {
+                    callback(JSON.parse(Api.response[key]));
+                } else {
+                    UI.noConnection(options, callback);
+                }
+            }
+        });
+    }
 }
+
 // Api load settings
 Api.loadSettings = function(response, cb) {
     cb = cb || function() {};
@@ -1686,4 +1714,38 @@ Api.getUserCache = function() {
         },
         error: function() {}
     });
+}
+
+Api.storeResponse = function(options, response) {
+    // if action is NOT skippable,
+    if(!Api.skippableCache(options.action)) {
+        // the actual cache storing happens here
+        Api.response[Util.encode(options)] = JSON.stringify(response);
+    }
+}
+
+Api.skippableCache = function(action) {
+    // return true if we skip cache of this action
+    return Api.skipCache.hasOwnProperty(action);
+}
+
+Api.skippableData = function(action) {
+    // return true if response data not necessary for online mode
+    return Api.skipData.hasOwnProperty(action);
+}
+
+Api.clearUserCache = function() {
+    Api.response = {};
+}
+
+Api.reconnect = function() {
+    if(!Api.connected) {
+        Api.connected = true;
+        $("#no-connection").remove();
+        UI.unmask();
+    }
+}
+
+Api.disconnect = function() {
+    Api.connected = false;
 }

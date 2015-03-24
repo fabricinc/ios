@@ -320,7 +320,7 @@ input.slider-search-form { width: 383px; }
 }
 #friends .lists-row, .movie-seen-list .lists-row, .friend-list .lists-row { height: 56px; }
 .search-users .profile-picture, .lists-row .profile-picture, 
-.movie-seen-list .profile-picture, .follow-list .profile-picture { height: 55px; border-radius: 27px; }
+.movie-seen-list .profile-picture, .follow-list .profile-picture { height: 55px; border-radius: 27px; width: 55px; }
 div#search-for-friends { background-size: 30px; }
 #search-for-friends, #invite-facebook {
     background-size: 35px;

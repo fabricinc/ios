@@ -4507,6 +4507,7 @@ h6.like-you + .action {
 .follow-list .profile-picture {
     border-radius: 23px;
     height: 45px;
+    width: 45px;
     float: left;
     margin: 0 7px;
 }
