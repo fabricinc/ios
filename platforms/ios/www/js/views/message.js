@@ -140,7 +140,8 @@ var MessageModel = Backbone.Model.extend({
 });
 
 var MessageView = Backbone.View.extend({
-    model: null,
+    model : null,
+    id : 'messages',
 
     initialize: function(options, callback) {
         options = options || {};
@@ -159,13 +160,21 @@ var MessageView = Backbone.View.extend({
 
         self.model.init(function(result) {
             if(self.model.otherID) {
-                var html = APP.load("conversation", { messages: result.reverse(), otherID: self.model.otherID, totalSeen: self.model.totalSeen, totalMovies: self.model.totalMovies });
+                
+
+                var html = APP.load("conversation", { 
+                    messages: result.reverse(), 
+                    otherID: self.model.otherID, 
+                    totalSeen: self.model.totalSeen, 
+                    totalMovies: self.model.totalMovies 
+                });
 
                 self.$el.html(html);
+
                 self.header = new HeaderView({ title: self.model.userData.userName.split(" ")[0] });
                 self.$el.prepend(self.header.el);
 
-                $("#wrapper").html(self.$el.html());
+                $("#wrapper").html(self.$el);
                 $("#notifications-menu").hide();
 
                 if(self.model.userData.facebookID) {

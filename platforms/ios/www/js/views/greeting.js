@@ -71,6 +71,31 @@ var GreetingModel = Backbone.Model.extend({
             }
         });
 
+        $("input#custom-message")
+            .on('focus', function(e){
+                e.preventDefault();
+
+
+                $('body').scrollTop(0);
+                $("#greeting-content").addClass('up');
+
+                $("#greeting-content.up").on('transitionend', function(e){
+                    
+                    // $('body').scrollTop(0);
+                    
+                }.bind(this));
+
+            })
+            .on('blur', function(e){
+                e.preventDefault(); e.stopPropagation();
+                $("#greeting-content").removeClass('up');
+            });
+
+        $(document).on("keydown", function(e) {
+            console.log(e.keyCode);
+            if(e.keyCode == 13) { $("#greeting-content").removeClass('up'); }
+        });
+
         $("#send-message").fastClick(function() {
             if(parseInt(APP.gameState.credits) > 0) {
                 var msg = $("#custom-message").val();
@@ -91,6 +116,7 @@ var GreetingModel = Backbone.Model.extend({
 });
 
 var GreetingView = Backbone.View.extend({
+    id: "greeting",
     model: null,
 
     initialize: function(options, callback) {
@@ -115,7 +141,7 @@ var GreetingView = Backbone.View.extend({
             self.header = new HeaderView({ title: "Greeting" });
             self.$el.prepend(self.header.el);
 
-            $("#wrapper").html(self.$el.html());
+            $("#wrapper").html(self.$el);
 
             self.model.bindEvents();
 

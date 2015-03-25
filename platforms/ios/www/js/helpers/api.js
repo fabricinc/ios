@@ -22,7 +22,8 @@ Api.skipCache = {
     loadFBLikes: true,
     getUserMatches: true,
     getUnseenActivity: true,
-    getSwipeCategoryData: true
+    getSwipeCategoryData: true,
+    getFabricCategoryData: true
 };
 // api responses that do not trigger offline mode if no response is received
 Api.skipData = {

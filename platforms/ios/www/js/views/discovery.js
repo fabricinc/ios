@@ -315,233 +315,84 @@ var DiscoveryModel = Backbone.Model.extend({
             }
 
             Api.categoryDiscovered(self.categoryID);
-            /*
-            APP.gameState.catsDiscovered = parseInt(APP.gameState.catsDiscovered) + 1;
-            if(APP.gameState.catsDiscovered >= User.currentLevelThreshold()) {
-                alert("level up!");
-            }
-            */
 
-            UI.mask(function() {
-                self.loadCategoryListSummary(function(movies, friends, suggestions) {
-                    // set the finished flag as true so the done button goes to suggestions
-                    self.justFinished = true;
-                    var sortedMovies = self.sortMovies(movies);
-                    var html = APP.load("listSummary", {
-                        ratio: self.ratioSeen,
-                        categoryName: self.categoryName,
-                        categoryTile: self.categoryData.tile_image,
-                        totalSeen: self.totalSeen,
-                        totalMovies: self.totalMovies,
-                        movies: sortedMovies,
-                        lists: APP.gameState,
-                        friends: friends,
-                        suggestions: suggestions,
-                        section: movies[0].sectionID
-                    });
+            self.loadCategoryListSummary(function(movies, friends, suggestions) {
+                // set the finished flag as true so the done button goes to suggestions
+                self.justFinished = true;
+                var sortedMovies = self.sortMovies(movies);
+                var html = APP.load("listSummary", {
+                    ratio: self.ratioSeen,
+                    categoryName: self.categoryName,
+                    categoryTile: self.categoryData.tile_image,
+                    totalSeen: self.totalSeen,
+                    totalMovies: self.totalMovies,
+                    movies: sortedMovies,
+                    lists: APP.gameState,
+                    friends: friends,
+                    suggestions: suggestions,
+                    section: movies[0].sectionID
+                });
 
-                    /*var thresh = User.currentLevelThreshold();
-                    APP.gameState.catsDiscovered = parseInt(APP.gameState.catsDiscovered) + 1;
-                    if(APP.gameState.catsDiscovered >= thresh && 2 == 1) {
-                        UI.launchPopUpTwo(APP.load("levelUp"), function() {
-                            $("#level-confirm").fastClick(function() {
-                                UI.closePopUp();
-                                UI.mask(function() {
-                                    self.loadCategoryListSummary(function(movies, friends, suggestions) {
-                                        // set the finished flag as true so the done button goes to suggestions
-                                        self.justFinished = true;
-                                        var sortedMovies = self.sortMovies(movies);
-                                        var html = APP.load("listSummary", {
-                                            ratio: self.ratioSeen,
-                                            categoryName: self.categoryName,
-                                            categoryTile: self.categoryData.tile_image,
-                                            totalSeen: self.totalSeen,
-                                            totalMovies: self.totalMovies,
-                                            movies: sortedMovies,
-                                            lists: APP.gameState,
-                                            friends: friends,
-                                            suggestions: suggestions,
-                                            section: self.movies[0].sectionID
-                                        });
 
-                                        if(!self.ratioSeen) { self.ratioSeen = 0; }
-                                        Api.createFeed(self.feedType, self.categoryID, { ratio: self.ratioSeen });
-                                        var header = new HeaderView({ title: "Nice Job!", leftButton: {class: ""}, doneInter: true });  // Set to done inter
+                if(!self.ratioSeen) { self.ratioSeen = 0; }
+                Api.createFeed(self.feedType, self.categoryID, { ratio: self.ratioSeen });
+                var header = new HeaderView({ title: "Nice Job!", leftButton: {class: ""}, doneInter: true });  // Set to done inter
 
-                                        $("#wrapper").html(html);
-                                        $("#wrapper").prepend(header.el);
+                $("#wrapper").html(html);
+                $("#wrapper").prepend(header.el);
 
-                                        setTimeout(function() {
-                                            UI.scroller.refresh();
-                                        }, 200);
+                setTimeout(function() {
+                    if(UI.scroller) { UI.scroller.refresh(); }
+                }, 200);
 
-                                        $("#ratio span").html("0");
+                $("#ratio span").html("0"); //set percentage at zero to roll it up later
 
-                                        UI.unmask();
 
-                                        Util.trailerPlayer();
-                                        APP.router.bindHeaderEvents();
-                                        self.bindListRecommended();
+                //analytics
+                var params = {
+                    name: self.categoryName,
+                    listID: self.categoryID,
+                    sectionID: movies[0].sectionID
+                };
+                var gS = APP.gameState;
 
-                                        Api.getNextCategories(self.categoryID, function(response) {
-                                            if(response.success){
-                                                var nextCats = APP.load("categoryFeed", { items: response.data }),
-                                                    upNext = APP.load("upNext"),
-                                                    upNextCats = $(upNext).find("#up-next-wrapper").append(nextCats);
+                Analytics.eventAndParams("Finished category", params);
 
-                                                $("#list-items-container").append(upNext);
-                                                $("#up-next-wrapper").append(nextCats);
-                                                self.bindCategoryEvents();
-                                                // callback();
-                                            } else { // if there are no more next recommendations
-                                                $("#done-inter-button").attr({ id : "done-button" });
-                                                $("#done-button").fastClick(function(){
-                                                    Backbone.history.navigate("rate", true);
-                                                });
-                                            }
-                                        });
+                mixpanel.track("Category Completed", {
+                    "Category name": self.categoryName,
+                    "Facebook-account": gS.isFacebook,
+                    "sectionID": movies[0].sectionID,
+                    "List ID": self.categoryName,
+                    "Seen %": self.ratioSeen,
+                    "City": gS.city,
+                    "Age": gS.age
+                });
 
-                                        //analytics
-                                        var params = {
-                                            sectionID: movies[0].sectionID,
-                                            name: self.categoryName,
-                                            listID: self.categoryID
-                                        };
-                                        var gS = APP.gameState;
+                Util.trailerPlayer();
+                APP.router.bindHeaderEvents();
+                self.bindListRecommended();
 
-                                        Analytics.eventAndParams("Finished category", params);
+                Api.getNextCategories(self.categoryID, function(response) {
+                    if(response.success) {
+                        var nextCats = APP.load("categoryFeed", { items: response.data }),
+                            upNext = APP.load("upNext"),
+                            upNextCats = $(upNext).find("#up-next-wrapper").append(nextCats);
 
-                                        mixpanel.track("Category Completed", {
-                                            "sectionID": movies[0].sectionID,
-                                            "Category name": self.categoryName,
-                                            "Facebook-account": gS.isFacebook,
-                                            "List ID": self.categoryName,
-                                            "Seen %": self.ratioSeen,
-                                            "City": gS.city,
-                                            "Age": gS.age
-                                        });
-
-                                        //Roll up the percentage seen if
-                                        if(document.height > 480) {
-                                            var totalSeen = self.ratioSeen,
-                                                rolledBack = 0,
-                                                x = totalSeen % 2 === 0 ? 2 : 3,
-                                                timer = setInterval(function() {
-                                                    rolledBack >= totalSeen && clearInterval(timer);
-                                                    $("#ratio span").text(rolledBack);
-                                                    rolledBack += x;
-                                                }, 1);
-                                        } else {
-                                            $("#ratio span").text(self.ratioSeen);
-                                        }
-
-                                        UI.initScroller($("#list-items-container")[0]);
-                                        self.bindDiscoveryCompleteEvents();
-                                    });
-                                });
-                                return false
-                            });
+                        $("#list-items-container").append(upNext);
+                        $("#up-next-wrapper").append(nextCats);
+                        self.bindCategoryEvents();
+                        // callback();
+                    } else { // if there are no more next recommendations
+                        $("#done-inter-button").attr({ id : "done-button" });
+                        $("#done-button").fastClick(function(){
+                            Backbone.history.navigate("rate", true);
                         });
-                    } else {*/
-                        UI.mask(function() {
-                            self.loadCategoryListSummary(function(movies, friends, suggestions) {
-                                // set the finished flag as true so the done button goes to suggestions
-                                self.justFinished = true;
-                                var sortedMovies = self.sortMovies(movies);
-                                var html = APP.load("listSummary", {
-                                    ratio: self.ratioSeen,
-                                    categoryName: self.categoryName,
-                                    categoryTile: self.categoryData.tile_image,
-                                    totalSeen: self.totalSeen,
-                                    totalMovies: self.totalMovies,
-                                    movies: sortedMovies,
-                                    lists: APP.gameState,
-                                    friends: friends,
-                                    suggestions: suggestions,
-                                    section: movies[0].sectionID
-                                });
+                    }
 
-                                if(!self.ratioSeen) { self.ratioSeen = 0; }
-                                Api.createFeed(self.feedType, self.categoryID, { ratio: self.ratioSeen });
-                                var header = new HeaderView({ title: "Nice Job!", leftButton: {class: ""}, doneInter: true });  // Set to done inter
+                    $("#ratio span").text(self.ratioSeen);
 
-                                $("#wrapper").html(html);
-                                $("#wrapper").prepend(header.el);
-
-                                setTimeout(function() {
-                                    /*$("#items").removeClass("active");
-                                    $("#friends").addClass("active");
-                                    $("#list-items").hide();
-                                    $("#list-friends").show();*/
-                                    if(UI.scroller) { UI.scroller.refresh(); }
-                                }, 200);
-
-                                $("#ratio span").html("0"); //set percentage at zero to roll it up later
-                                // $("#header-edit-button").html("Done").css({ "margin-right" : "5px" });
-                                // $(".left.button.back").hide();
-
-                                UI.unmask();
-
-                                //analytics
-                                var params = {
-                                    name: self.categoryName,
-                                    listID: self.categoryID,
-                                    sectionID: movies[0].sectionID
-                                };
-                                var gS = APP.gameState;
-
-                                Analytics.eventAndParams("Finished category", params);
-
-                                mixpanel.track("Category Completed", {
-                                    "Category name": self.categoryName,
-                                    "Facebook-account": gS.isFacebook,
-                                    "sectionID": movies[0].sectionID,
-                                    "List ID": self.categoryName,
-                                    "Seen %": self.ratioSeen,
-                                    "City": gS.city,
-                                    "Age": gS.age
-                                });
-
-                                Util.trailerPlayer();
-                                APP.router.bindHeaderEvents();
-                                self.bindListRecommended();
-
-                                Api.getNextCategories(self.categoryID, function(response) {
-                                    if(response.success) {
-                                        var nextCats = APP.load("categoryFeed", { items: response.data }),
-                                            upNext = APP.load("upNext"),
-                                            upNextCats = $(upNext).find("#up-next-wrapper").append(nextCats);
-
-                                        $("#list-items-container").append(upNext);
-                                        $("#up-next-wrapper").append(nextCats);
-                                        self.bindCategoryEvents();
-                                        // callback();
-                                    } else { // if there are no more next recommendations
-                                        $("#done-inter-button").attr({ id : "done-button" });
-                                        $("#done-button").fastClick(function(){
-                                            Backbone.history.navigate("rate", true);
-                                        });
-                                    }
-                                    //Roll up the percentage seen if
-                                    if(document.height > 480) {
-                                        var totalSeen = self.ratioSeen,
-                                            rolledBack = 0,
-                                            x = totalSeen % 2 === 0 ? 2 : 3,
-                                            timer = setInterval(function() {
-                                                rolledBack >= totalSeen && clearInterval(timer);
-                                                $("#ratio span").text(rolledBack);
-                                                rolledBack += x;
-                                            }, 1);
-                                    } else {
-                                        $("#ratio span").text(self.ratioSeen);
-                                    }
-
-                                    UI.initScroller($("#list-items-container")[0]);
-                                    self.bindDiscoveryCompleteEvents();
-                                });
-                            });
-                        });
-                    //}
+                    UI.initScroller($("#list-items-container")[0]);
+                    self.bindDiscoveryCompleteEvents();
                 });
             });
         } else {
@@ -1170,25 +1021,6 @@ var DiscoveryView = Backbone.View.extend({
                     self.model.bindDiscoveryCompleteEvents();
                     Util.trailerPlayer();
 
-                    //if(Util.isIPad()) { $('.js-masonry').masonry(); }
-
-                    /*
-                    $("#ratio span").html("0"); //set percentage at zero to roll it up later
-
-                    //Roll up the percentage seen IN VIEW
-                    if(document.height > 480){
-                        var totalSeen = self.model.ratioSeen,
-                            rolledBack = 0,
-                            x = totalSeen % 2 === 0 ? 2 : 3,
-                            timer = setInterval(function() {
-                                rolledBack >= totalSeen && clearInterval(timer);
-                                $("#ratio span").text(rolledBack);
-                                rolledBack += x;
-                            }, 1);
-                    } else {
-                        $("#ratio span").text(self.model.ratioSeen);
-                    }
-                    */
 
                     callback();
 

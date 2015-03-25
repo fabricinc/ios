@@ -1,4 +1,4 @@
-<div class="greeting">
+<div id="greeting-content">
     <div class="credits"><%= APP.gameState.credits %> Credits</div>
     <div class="dash">
         <div class="avatar"<% if(user.facebook_id) { %> style="background-image: url(https://graph.facebook.com/<%= user.facebook_id %>/picture?height=300&width=300)"<% } %>></div>
@@ -27,7 +27,7 @@
             <div class="inner">
                 <h1>Try something creative</h1>
                 <form id="custom-message-form" action="javascript:void(0)">
-                    <input id="custom-message" type="text" name="message" placeholder="Write a custom message...">
+                    <input id="custom-message" type="text" name="message" placeholder="Write a custom message..." >
                     <button id="send-message">Send</button>
                 </form>
             </div>

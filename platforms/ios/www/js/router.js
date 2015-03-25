@@ -399,7 +399,7 @@
             this.on("route:welcome", function() {
 
                 if (APP.gameState && APP.gameState.welcomeCompleted == 0) {
-                    self.loadView(new WelcomeView(), function() {
+                    self.loadView(new WelcomeCategoryView(), function() {
                         // Callback?
                     }, {
                         fadeImageClass: false,
@@ -467,22 +467,7 @@
                     scroller: false
                 }, "profile");
             });
-            this.on("route:leaderboard ", function() {
-				self.loadView(new LeaderboardView(), function() {
-                    // Stub for callback
-                }, {
-                    scroller: false,
-					loadPageHtml: false
-                }, "leaderboard");
-            });
-            this.on("route:screeningRoom", function() {
-				self.loadView(new ScreeningRoomView(), function() {
-                    // Stub for callback
-                }, {
-                    scroller: false,
-					loadPageHtml: false
-                }, "producersClub");
-            });
+
             this.on("route:settings", function() {				
 				self.loadView(new SettingsView(), function() {
                     // Stub for callback

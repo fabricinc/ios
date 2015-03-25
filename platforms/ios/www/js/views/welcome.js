@@ -15,7 +15,6 @@ var WelcomeModel = Backbone.Model.extend({
     dist: 0,
     swipePosX: 0,
     swipePosY: 0,
-    categoryID: null,
     categoryName: null,
     categoryItems: [],
     currentPos: 0,

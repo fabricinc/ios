@@ -370,6 +370,9 @@ header nav #tap-menu,
     height: 100%; 
     left: 0;
 }
+#messages {
+    height: 100%;
+}
 #dashboard.slide { left: 87%; }
 #intro-nav {
     position: absolute;
@@ -1467,7 +1470,7 @@ div.recommendation.list-item.userChoice .title {
     position: absolute;
     height: 508px;
     top: 50px;
-    background-color: rgba(0, 0, 0, 0.72);
+    background-color: rgba(0, 0, 0, 0.82);
     padding: 5px;
     display: none;
     transition: top 300ms 100ms ease-in-out;
@@ -5327,6 +5330,7 @@ button#done {
 }
 
 /* slider css bug fix - must use this for all views not rendering slider properly */
+#messages,
 #user-matches-wrapper,
 #profile-view,
 div#movie-list-view {
@@ -5356,7 +5360,13 @@ div#movie-list-view {
     margin: 10px auto 5px;
 }
 
-.greeting {}
+#greeting-content {
+    position: relative;
+    top: 0;
+}
+#greeting-content.up{
+    top: -280px;
+}
 .greeting .content h1 {
     font-size: 14px;
     line-height: 18px;
