@@ -2,7 +2,7 @@
 <% var action = followAction === "following" ? "followedID" : "followerID"; %>
 <div id="list-row-wrapper" class="friend-list">
     <div id="lists">
-        <% if(followers.length) {  console.log(followers); 
+        <% if(followers.length) {  
             _.each(followers, function(follower) { 
                 var userID = follower.userID || null,
                     compatibility = parseInt(follower.compatibility),

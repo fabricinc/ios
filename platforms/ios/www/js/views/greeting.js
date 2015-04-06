@@ -92,7 +92,7 @@ var GreetingModel = Backbone.Model.extend({
             });
 
         $(document).on("keydown", function(e) {
-            console.log(e.keyCode);
+
             if(e.keyCode == 13) { $("#greeting-content").removeClass('up'); }
         });
 

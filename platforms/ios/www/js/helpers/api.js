@@ -363,6 +363,14 @@ Api.setMovieHistory = function(movieID, percentWatched) {
     };
     this.dispatcher(options);
 }
+Api.getWelcomeCategories = function(callback){
+    callback = callback || function() {};
+    var options = {
+        action: "getWelcomeCategories"
+    };
+
+    this.dispatcher(options, callback);
+}
 Api.getShoppingLinks = function(publishedID, callback) {
     callback = callback || function() {};
     var options = {
@@ -963,9 +971,9 @@ Api.welcomeCompleted = function(friendList, callback) {
     this.fetch(options, callback);
 }
 Api.getLikes = function(objectType, objectID, callback) {
+    callback = callback || function() {};
     objectType = objectType || null;
     objectID = objectID || null;
-    callback = callback || function() {};
     var options = {
         "action": "getLikes",
         "objectType": objectType,
@@ -1095,6 +1103,21 @@ Api.updateUserPref = function(preference, value, callback) {
             Util.log("Oops! Something went wrong!");
         }
     });
+}
+Api.updateOnboard = function(section, callback){
+    section = section || null; 
+
+    if(!section) { return; }
+    
+    var options = {
+        action : "updateOnboard",
+        section : section
+    };
+
+    APP.gameState[section] = "1";
+
+
+    this.fetch(options, callback);
 }
 Api.updateUserInfo = function(data, callback) {
     data = data || null;
@@ -1474,6 +1497,7 @@ Api.loadFBMovies = function(movieTitles) {
 }
 Api.loadFBLikes = function(likes, callback) {
     callback = callback || function() {};
+
     var options = {
         "action": "loadFBLikes",
         "likes": likes
@@ -1565,59 +1589,48 @@ Api.getAppSettings = function(callback) {
 
 // parent ajax function to handle timeouts
 Api.fetch = function(options, callback, success) {
-    success = success || function() {};
     callback = callback || function() {};
+    success = success || function() {};
     var key = Util.encode(options); // the access key for he last response, based off options
-
+    
+    
     Util.checkAPI(function(connected) {
         if(connected) {
-            // fetch the data, but callback on the old data if it exists
-            if(Api.response[key]) {
-                // we have a cache, so use it!
-                success();
-                callback(JSON.parse(Api.response[key]));
 
-                $.ajax({
-                        url: Api.url + 'api.php?callback=?',
-                        data: options,
-                        dataType: "jsonp",
-                        timeout: Api.appSettings.timeout,
-                        success: function(response) {
-                            Api.reconnect();
-                            Api.storeResponse(options, response);
-                        },
-                        error: function(response) {
-                            if(Api.skippableData(options.action)) {
-                                callback(null);
-                            } else {
-                                Api.refetch(options, callback, success);
-                            }
-                        }
-                });
-            } else {
-                Util.log("Not using cache");
-                $.ajax({
-                    url: Api.url + 'api.php?callback=?',
-                    data: options,
-                    dataType: "jsonp",
-                    timeout: Api.appSettings.timeout,
-                    success: function(response) {
-                        Api.reconnect();
-                        Api.storeResponse(options, response);
-                        success();
-                        callback(response);
-                    },
-                    error: function(response) {
-                        if(Api.skippableData(options.action)) {
-                            callback(null);
+            $.ajax({
+                url: Api.url + 'api.php?callback=?',
+                data: options,
+                dataType: "jsonp",
+                timeout: Api.appSettings.timeout,
+                success: function(response) {
+                    Api.reconnect();
+                    Api.storeResponse(options, response);
+
+                    success();
+                    callback(response);
+                },
+                error: function(response) {
+
+                    Api.disconnect();
+
+                    // If data is skippable (get unseen activity) don't send back cached version and don't trigger no connection
+                    if(Api.skippableData(options.action)) {
+                        callback(null);
+                    } else {
+                        if(Api.response[key]) {
+                            success();
+                            callback(JSON.parse(Api.response[key])); // send back last known response
                         } else {
-                            Api.refetch(options, callback, success);
+                            UI.noConnection(options, callback);
                         }
                     }
-                });
-            }
+                }
+            });
+
         } else {
             Api.disconnect();
+
+            // If data is skippable (get unseen activity) don't send back cached version and don't trigger no connection
             if(Api.skippableData(options.action)) {
                 callback(null);
             } else {
@@ -1722,6 +1735,7 @@ Api.getUserCache = function() {
 
 Api.storeResponse = function(options, response) {
     // if action is NOT skippable,
+    
     if(!Api.skippableCache(options.action)) {
         // the actual cache storing happens here
         Api.response[Util.encode(options)] = JSON.stringify(response);

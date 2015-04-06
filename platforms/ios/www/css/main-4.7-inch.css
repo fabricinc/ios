@@ -1,12 +1,14 @@
 /* iPhone 6 */
 #wrapper { width: 375px; height: 667px; position: relative; }
 #home-filters { width: 375px; height: 45px;}
-#home-filters div { width: 124px; height: 46px; line-height: 46px; }
-#home-filters div#recommended-filter { width: 125px; }
+#home-filters div, #coach-section div { width: 124px; height: 46px; line-height: 46px; }
+#home-filters div#recommended-filter, #coach-section.want-to div { width: 125px; }
+#coach-section.feed div,
 #activity-filter-x,
 #activity-filter { right: 126px; }
 #category-container { height: 560px; }
 .recommended-filter #category-container{ height: 510px; }
+#welcome div .title,
 #category-container div .title { 
     width: 340px; 
     font-size: 19px;
@@ -14,6 +16,14 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+#welcome div .title { 
+    padding-bottom: 5px;  
+    line-height: 19px;
+    padding-top: 5px; 
+    font-size: 15px;
+}
+#welcome-categories { height: 607px; }
+#welcome .catItem { max-height: 140px; } 
 #category-container .catItem { max-height: 200px; }
 #category-container #side-swipe { width: 355px; }
 .feed-item { width: 335px; }
@@ -273,6 +283,7 @@ div#mask .wheel {
 }
 #slide-filters div,
 
+#coach-section h1,
 #dashboard header nav h1 {
     height: 40px !important;
     width: 110px;
@@ -284,6 +295,7 @@ div#mask .wheel {
     height: 100%;
     top: 0px; 
 }
+#coach-section h1 span,
 #dashboard header nav h1 span {
     top: 12px;
     margin: 0 0 0 7px;
@@ -380,12 +392,16 @@ div.left.button { top: 6px; }
 #slider-container #slide3 { background-image: url(../images/6p/login/03_slide.png); }
 #slider-container #slide4 { background-image: url(../images/6p/login/04_slide.png); }
 div#mask .wheel { background-image: url(../images/6p/discovery/loader.png); }
+#welcome div .title .icon.icon4,
 #category-container div .title .icon.icon4,
 #up-next-wrapper div .title .icon.icon4 { background-image: url(../images/6p/discovery/music.png); }
+#welcome div .title .icon.icon3,
 #category-container div .title .icon.icon3,
 #up-next-wrapper div .title .icon.icon3 { background-image: url(../images/6p/discovery/travel.png); }
+#welcome div .title .icon.icon2,
 #category-container div .title .icon.icon2,
 #up-next-wrapper div .title .icon.icon2 { background-image: url(../images/6p/discovery/tv.png); }
+#welcome div .title .icon.icon1,
 #category-container div .title .icon.icon1,
 #up-next-wrapper div .title .icon.icon1 { background-image: url(../images/6p/discovery/movies.png); }
 header nav #share-icon {
@@ -418,7 +434,7 @@ header nav #notifications-menu.on { background-image: url(../images/6p/discovery
 #music-nav { background-image: url(../images/6p/discovery/fabricIcons/musicMenuIcon.png); }
 .check-list-wrapper { height: 125px; line-height: 125px; }
 div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; }
-#category-container div img.check-list-poster { width: 78px; }
+© div img.check-list-poster { width: 78px; }
 .check-list-check { 
     background-image: url(../images/6p/discovery/lightgrey-check.png); border: none;
     background-size: 100% 100%;
@@ -433,6 +449,19 @@ div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; 
     font-size: 18px;
 }
 #sort-button-text.cancel { left: 100px; }
+
+/*  COACH MARK STYLE  */
+#coach-section div { margin-top: 60px; }
+#coach-section.feed #coach-text { margin-top: 140px; }
+#coach-section.swipe {
+    background-image: url(../images/6/discovery/coach/directional.png);
+    background-size: 320px 568px;
+}
+
+#coach-section.swipe #coach-button {
+    margin-top: 550px;
+}
+
 #get-started { background-image: url(../images/6/login/iphone-tut.png); }
 #rate-first.coach0 { background-image: url(../images/6/discovery/coach/coach0.png); }
 #rate-first.coach1 { background-image: url(../images/6/discovery/coach/coach1.png); }

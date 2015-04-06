@@ -1,11 +1,13 @@
 /* iPhone 6+ */
 #wrapper { width: 414px; height: 736px; position: relative; }
-#home-filters div { height: 52px; width: 138px; }
+#home-filters div, #coach-section div { height: 52px; width: 138px; }
 #home-filters { width: 414px; height: 52px; }
-#home-filters div#recommended-filter { width: 138px; }
+#home-filters div#recommended-filter, #coach-section.want-to div { width: 138px; }
 #activity-filter-x,
+#coach-section.feed div,
 #activity-filter { right: 139px; }
 #category-container { height: 617px; }
+#welcome-categories div .title, 
 #category-container div .title { width: 380px; font-size: 19px; }
 #category-container .catItem { max-height: 300px; }
 #category-container #side-swipe { width: 395px; }
@@ -64,6 +66,7 @@
     margin-left: 42px;
     width: 300px;
 }
+#welcome-categories { height: 670px; }
 #profile .sub-header div { width: 206px; }
 #profile .sub-header div:first-child { width: 207px; }
 .lists-nav { background-position: 390px; }
@@ -85,6 +88,9 @@ div#mask .wheel {
     top: 160px;
     left: 67px;
 }
+/* COACH */
+#coach-section div { margin-top: 66px; }
+#coach-section.feed div { right: ;}
 .swipe-icon.favorite { top: 100px; left: 193px; }
 .swipe-icon.queue { bottom: 90px; left: 193px; }
 .swipe-icon.seen,
@@ -177,12 +183,13 @@ div#friends-queued.bottom-info span {
     height: 736px;
     background-size: 414px 736px;
 }
-#slide-filters div,
+#coach-section div,
 #home-filters div {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
 }
+#coach-section h1,
 #dashboard header nav h1 {
     height: 46px !important;
     width: 122px;
@@ -501,14 +508,21 @@ div.right.button, div.left.button { font-size: 18px !important; }
 #slider-container #slide3 { background-image: url(../images/6p/login/03_slide.png); }
 #slider-container #slide4 { background-image: url(../images/6p/login/04_slide.png); }
 div#mask .wheel { background-image: url(../images/6p/discovery/loader.png); }
+
+#welcome-categories div .title .icon.icon4,
 #category-container div .title .icon.icon4,
 #up-next-wrapper div .title .icon.icon4 { background-image: url(../images/6p/discovery/music.png); }
+#welcome-categories div .title .icon.icon3,
 #category-container div .title .icon.icon3,
 #up-next-wrapper div .title .icon.icon3 { background-image: url(../images/6p/discovery/travel.png); }
+#welcome-categories div .title .icon.icon2,
 #category-container div .title .icon.icon2,
 #up-next-wrapper div .title .icon.icon2 { background-image: url(../images/6p/discovery/tv.png); }
+#welcome-categories div .title .icon.icon1,
 #category-container div .title .icon.icon1,
 #up-next-wrapper div .title .icon.icon1 { background-image: url(../images/6p/discovery/movies.png); }
+
+
 header nav #share-icon { background-image: url(../images/6p/discovery/share.png); }
 header nav #chat-menu { background-image: url(../images/6p/discovery/chat.png); }
 #current-icon.all { background-image: url(../images/6p/discovery/fabricIcons/arrowBlack.png); }

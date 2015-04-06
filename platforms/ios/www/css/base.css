@@ -49,6 +49,10 @@ table {
     font-family: Knockout;
     src: url(font/Knockout-HTF29-JuniorLiteweight.otf);
 }
+@font-face {
+    font-family: Symbola;
+    src: url(font/Symbola605.ttf);
+}
 * {
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
@@ -117,6 +121,9 @@ header {
 .follow-list header {
     top: initial;
 }
+.scroll-container {
+    overflow: hidden;   
+}
 #wrapper {
     left: 0%;
     right: 0%;
@@ -150,7 +157,9 @@ header nav h1, #available-services h1 {
     border: none;
     font-weight: bold;
 }
+#coach-section h1, 
 #dashboard header nav h1 {
+    background: white;
     color:#4A4A4A;
     font-weight: normal;
     font-family: Knockout;
@@ -189,6 +198,7 @@ header nav h1 {
 }
 
 /* Fabric Navigation */
+#coach-section h1 span,
 .list header nav h1 span,
 #dashboard header nav h1 span {
     background-image: url(../images/discovery/fabricIcons/movieTabIcon.png);
@@ -1182,7 +1192,7 @@ input.slider-search-form {
     height: 40px;
     transition: top 300ms ease-in-out;
 }
-#slide-filters div, 
+#coach-section div,
 #home-filters div {
     text-transform: uppercase;
     background-color: white;
@@ -1195,6 +1205,8 @@ input.slider-search-form {
     width: 106px;
     float: left;
 }
+
+#coach-section div,
 #slide-filters div.filter, 
 #home-filters div.filter {
     background-color: #C0322F;
@@ -1281,7 +1293,7 @@ input.slider-search-form {
     display: inline-block;
 }
 .place-holder.active { background-color: white; }
-
+#welcome .catItem,
 #recommended-list .list-item,
 #up-next-wrapper .catItem,
 #category-container .catItem,
@@ -1294,7 +1306,17 @@ input.slider-search-form {
     min-height: 100px;
     max-height: 169px;
 }
+#welcome .catItem { max-height: 119px; }
 #category-container div.completed { opacity: 0.5; }
+#welcome-categories {
+    overflow: hidden;
+    margin: 0 10px;
+    height: 517px; 
+}
+#welcome {
+    background-color: rgb(223, 223, 223);
+}
+#welcome div img,
 #feed-container div img,
 #up-next-wrapper div img, 
 #category-container div img,
@@ -1326,6 +1348,7 @@ input.slider-search-form {
     background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 0;
 }
+#welcome div .title, 
 #recommended-list div .title,
 #up-next-wrapper div .title,
 #category-container div .title,
@@ -1345,16 +1368,21 @@ input.slider-search-form {
     background-color: rgba(12, 41, 83, 0.8);
     margin-bottom: 0px;
 }
+
 #category-container div.catItem.section1 .title,
+#welcome div.catItem.section1 .title,
 #up-next-wrapper div.catItem.section1 .title { background-color: rgba(248, 58, 64, 0.9); }
 #category-container div.catItem.section2 .title,
+#welcome div.catItem.section2 .title,
 #up-next-wrapper div.catItem.section2 .title { background-color: rgba(63, 184, 209, 0.9); }
 #category-container div.catItem.section3 .title,
+#welcome div.catItem.section3 .title,
 #up-next-wrapper div.catItem.section3 .title { background-color: rgba(0, 55, 255, 0.9); }
 #category-container div.catItem.section4 .title,
+#welcome div.catItem.section4 .title,
 #up-next-wrapper div.catItem.section4 .title { background-color: rgba(255, 167, 13, 0.9); }
 
-
+#welcome div .title .icon,
 #recommended-list div .title .icon,
 #up-next-wrapper div .title .icon,
 #category-container div .title .icon,
@@ -1363,17 +1391,25 @@ input.slider-search-form {
     float: left;
     width: 20px;
     height: 20px;
-    background-size: 20px 20px;
+    background-size: 100% 100%;
     margin-right: 5px;
 }
+#welcome div .title .icon.icon1,
 #category-container div .title .icon.icon1,
 #up-next-wrapper div .title .icon.icon1 { background-image: url(../images/discovery/movies.png); }
+
+#welcome div .title .icon.icon2,
 #category-container div .title .icon.icon2,
 #up-next-wrapper div .title .icon.icon2 { background-image: url(../images/discovery/tv.png); }
+
+#welcome div .title .icon.icon3,
 #category-container div .title .icon.icon3,
 #up-next-wrapper div .title .icon.icon3 { background-image: url(../images/discovery/travel.png); }
+
+#welcome div .title .icon.icon4,
 #category-container div .title .icon.icon4,
 #up-next-wrapper div .title .icon.icon4 { background-image: url(../images/discovery/music.png); }
+
 
 div.recommendation.list-item .title {
     background-color: rgba(192, 50, 47, 0.9) !important;
@@ -5784,6 +5820,58 @@ div#critic-rating.bottom-info { left: 80px;  }
     font-size: 16px;
     background-color: #C0322F;
     margin: 10px auto;
+}
+
+/*  COACH MARK STYLE  */
+#coach-section {
+    background-color: rgba(0, 0, 0, 0.86);
+    transition: opacity 500ms ease-out;
+    background-repeat: no-repeat;
+    font-weight: lighter;
+    position: absolute;
+    text-align: center;
+    font-size: 2.3em;
+    z-index: 1002;
+    color: white;
+    height: 100%;
+    width: 100%;
+    opacity: 1; 
+    top: 0;
+}
+#coach-section.want-to div { right: 0; }
+#coach-arrow {
+    margin-bottom: 20px; 
+    font-size: 50px;
+    display: block;
+    font-family: 'Symbola';
+}
+.want-to #coach-arrow {
+    -webkit-transform: rotate(220deg);
+    font-size: 90px;
+}
+#coach-text {
+    margin: 90px 10px; 
+}
+#coach-button {
+    -webkit-appearance: none;
+    border-radius: 3px;
+    border: 1px solid;
+    font-weight: bold;
+    padding: 5px 10px;
+    font-size: .8em;
+    margin: 0 auto;
+    display: block;
+    color: white;
+}
+#coach-section.swipe #coach-button {
+    
+}
+#coach-section.swipe {
+    background-position: center center;
+}
+#coach-button:active{ 
+    background-color: #C0322F;
+    border-color: #C0322F; 
 }
 
 /* buttons */

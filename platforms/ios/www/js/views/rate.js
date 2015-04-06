@@ -19,9 +19,6 @@ var RateModel = Backbone.Model.extend({
 
     initialize: function(options) {
         var self = this;
-        if (APP.firstRate) {
-            self.filter = "recommended-filter";
-        }
     },
     fetchData: function(callback) {
         var self = this;
@@ -33,6 +30,7 @@ var RateModel = Backbone.Model.extend({
 
         // check the active tab to change the load order
         if(self.filter == "activity-filter") {
+            // !!!!!!!!!!!!! LOAD FEED !!!!!!!!!!!!!
             Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
                 var resp = response;
                 self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
@@ -56,6 +54,7 @@ var RateModel = Backbone.Model.extend({
                 });
             });
         } else if(self.filter == "recommended-filter") {
+            // !!!!!!!!!!!!! LOAD Q !!!!!!!!!!!!!
             Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
                 var resp = response;
                 self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
@@ -78,7 +77,9 @@ var RateModel = Backbone.Model.extend({
                 });
             });
         } else {
+            // !!!!!!!!!!!!! LOAD CATEGORIES !!!!!!!!!!!!!
             Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
+
                 self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
                 self.categories = response.data.categories;
                 if(self.categories.length < Api.appSettings.discoveryLimit) { self.pclf = true; }
@@ -126,9 +127,7 @@ var RateView = Backbone.View.extend({
 
         this.model = new RateModel();
 
-        if (APP.firstRate) {
-            APP.feedFilter = "recommended-filter";
-        } else if(typeof APP.feedFilter === "undefined") {
+        if(typeof APP.feedFilter === "undefined") {
             APP.feedFilter = "category-filter"; // filters: category-filter, activity-filter, recommended-filter
         }  
 
@@ -217,9 +216,16 @@ var RateView = Backbone.View.extend({
             if(!self.model.feedLoaded || self.model.feed == null) {
                 self.feedInterval = setInterval(function() {
                     if(self.model.feedLoaded && self.model.feed) {
-                        var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
+                        // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
                         var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
-                        $("#content-container .content-scroller").append(lastStatus + activityFeed);
+                        
+
+                        // $("#content-container .content-scroller").append(lastStatus + activityFeed);
+                        //REMOVE LAST SATUS
+
+                        $("#content-container .content-scroller").append(activityFeed);
+
+
                         // lay out cards in masonry (Pinterest) fashion if ipad
                         self.freeMasons();
                         // bind activity feed events
@@ -231,9 +237,12 @@ var RateView = Backbone.View.extend({
                     }
                 }, 100);
             } else {
-                var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
+                // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
                 var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
-                $("#content-container .content-scroller").html(lastStatus + activityFeed);
+                
+                $("#content-container .content-scroller").html(activityFeed);
+
+
                 // lay out cards in masonry (Pinterest) fashion if ipad
                 self.freeMasons();
                 // bind activity feed events
@@ -470,7 +479,7 @@ var RateView = Backbone.View.extend({
         var sUpdate = $("#slide-status-update"),
             self = this;
 
-        self.coach();       //Check to if first time in app and guide though
+        
         $(".user-avatar").click(function() {
             Backbone.history.navigate("profile", true);
             return false;
@@ -503,13 +512,35 @@ var RateView = Backbone.View.extend({
                 $("#" +filter).addClass("filter");
 
                 if(filter === "activity-filter") {
+                    // !!!!!!!!!!!!!!!!!!! ACTIVITY FILTER !!!!!!!!!!!!!!!!!!!
+
+
+                    // ONBOARD THE FEED
+                    if(APP.gameState.feed === "0"){
+
+
+                        var coach = APP.load("coach", { section : 'feed' }),
+                            _  = this.cloneNode(true),
+                            clone;
+
+                        // SET ID OF DIV TO '' (can't have two divs with the same id)
+                        _.id = '';
+
+                        $('#coach-overlay').html(coach);
+                        $("#coach-section").prepend( $(_) );
+
+                        UI.bindCoachEvents('feed');
+
+                    }
+
+
                     if(!self.model.feedLoaded || self.model.feed == null) {
                         $("#content-container .content-scroller").html("");
                         self.feedInterval = setInterval(function() {
                             if(self.model.feedLoaded && self.model.feed) {
-                                var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
+                                // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
                                 var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
-                                $("#content-container .content-scroller").html(lastStatus + activityFeed);
+                                $("#content-container .content-scroller").html(activityFeed);
                                 // lay out cards in masonry (Pinterest) fashion
                                 self.freeMasons();
                                 self.bindActivityFeedEvents();
@@ -519,9 +550,9 @@ var RateView = Backbone.View.extend({
                             }
                         }, 100);
                     } else {
-                        var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
+                        // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
                         var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
-                        $("#content-container .content-scroller").html(lastStatus + activityFeed);
+                        $("#content-container .content-scroller").html(activityFeed);
                         // lay out cards in masonry (Pinterest) fashion
                         self.freeMasons();
                         self.bindActivityFeedEvents();
@@ -529,7 +560,8 @@ var RateView = Backbone.View.extend({
                         var curPos = self.actPos;
                     }
                 } else if(filter === "category-filter") {
-                    // Category feed
+
+                    // !!!!!!!!!!!!!!!!!!! CATEGORY FEED !!!!!!!!!!!!!!!!!!!
                     self.model.lastFeed = $("#content-container .content-scroller").html(); // Update feed html to show current likes and comments
                     $("#content-container .content-scroller").html(APP.load("categoryFeed", { items: self.model.categories }));
                     self.freeMasons();  // lay out cards in masonry (Pinterest) fashion
@@ -537,7 +569,28 @@ var RateView = Backbone.View.extend({
                     APP.feedFilter = "category-filter";
                     var curPos = self.catPos;
                 } else if(filter == "recommended-filter") {
-                    // recommended feed
+
+                    // !!!!!!!!!!!!!!!!!!! WANT-TO  !!!!!!!!!!!!!!!!!!!
+
+                    // ONBOARD THE WANT-TO
+                    if(APP.gameState.wantTo === "0"){
+
+
+                        var coach = APP.load("coach", { section : 'wantTo' }),
+                            _  = this.cloneNode(true),
+                            clone;
+
+                        // SET ID OF DIV TO '' (can't have two divs with the same id)
+                        _.id = '';
+
+                        $('#coach-overlay').html(coach);
+                        $("#coach-section").prepend( $(_) );
+
+                        UI.bindCoachEvents('wantTo');
+
+                    }
+
+
                     $("#content-container .content-scroller").html(APP.load("homeQ", {
                         removedList: self.model.removedList,
                         items: self.model.recs ? self.model.recs.slice(0, Api.appSettings.wantToLimit) : [],

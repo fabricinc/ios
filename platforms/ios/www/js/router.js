@@ -8,18 +8,6 @@
                         classes : "rate",
                         title   : "home"
                     },
-                    /*{
-                        classes : "home",
-                        title   : "discovery feed"
-                    },*/
-                    /*{
-                        classes : "events",
-                        title   : "events"
-                    },*/
-                    /*{
-                        classes : "queue",
-                        title   : "Want To Do"
-                    },*/
                     {
                         classes : "friends",
                         title   : "friends"
@@ -193,8 +181,23 @@
 
                 $("#fabric-menu, #dashboard header nav h1").toggleClass("open"); 
 
+                // SHOW COACH 
+                if(this.id !== 'fabric-menu' && APP.gameState.fabricMenu === "0"){
+
+                    var coach = APP.load("coach", { section : 'fabricMenu' }),
+                        clone = $(this).clone();
+
+                    $('#coach-overlay').html(coach);
+                    $("#coach-section").prepend(clone);
+
+                    UI.bindCoachEvents('fabricMenu');
+
+                }
+
                 return false;
             });
+
+            // SHOW FABRIC MENU LIST ? not sure why
             $(".list header nav h1").fastClick(function(e) {
                 e.preventDefault(); e.stopPropagation();
 
@@ -231,6 +234,7 @@
                 var sectionID = $(this).data("section-id"),
                     title = $(this).data("title"),
                     button = $(this);
+
 
                 // Darken the selected section button for 400 ms
                 button.addClass("honda");
@@ -398,7 +402,7 @@
             });
             this.on("route:welcome", function() {
 
-                if (APP.gameState && APP.gameState.welcomeCompleted == 0) {
+                if (APP.gameState && APP.gameState.welcomeCompleted === "0") {
                     self.loadView(new WelcomeCategoryView(), function() {
                         // Callback?
                     }, {
@@ -882,14 +886,15 @@
 
 		if (bindAppRoutes) {
             if(User.isFacebook) {
+                
                 Facebook.uploadLikes();
             }
 			router.bindAppEvents();
 			Backbone.history.start();
             // prefetch user data
-            setTimeout(function() {
-                Api.getUserCache();
-            }, 2000);
+            // setTimeout(function() {
+            //     Api.getUserCache();
+            // }, 2000);
 		} else {
             Backbone.history.start({ silent: true });
             Backbone.history.navigate("start", true);

@@ -76,6 +76,20 @@ var UI = {
                 callback();
             });
         },
+        bindCoachEvents: function(section){
+            section = section || null
+            $("#coach-button").fastClick(function(){
+                $("#coach-section").css({ opacity : 0 });
+                
+                //Update the gameState and database
+                Api.updateOnboard(section);
+
+            });
+            $("#coach-section").on('transitionend', function(){
+
+                $(this).hide().empty();
+            });
+        },
         launchPopUp: function(popUpHTML, callback) {
             callback = callback || function() {};
             var self = this,
@@ -878,11 +892,13 @@ var UI = {
             if($("#no-connection").length) {
                 return false;
             }
-                
+
             var html = APP.load("noConnection");
             $(html).appendTo("#wrapper").click(function() {
                 $("#no-connection p").html("Loading...");
                 $("#retry").addClass("spin");
+
+                
                 Api.fetch(options, callback);
                 // add rotating animation
                 return false;

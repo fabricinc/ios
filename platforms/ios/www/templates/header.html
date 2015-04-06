@@ -1,10 +1,14 @@
-<% var editButton = editButton || false %>
-<% var lobbyButtons = lobbyButtons || false %>
-<% var doneButton = doneButton || false %>
-<% var moreButton = moreButton || false %>
-<% var postButton = postButton || false %>
-<% var doneInter = doneInter || false %> 
-<% var filterButton = filterButton || false %> 
+<% 
+ var filterButton = filterButton || false,
+     lobbyButtons = lobbyButtons || false, 
+     editButton = editButton || false, 
+     doneButton = doneButton || false, 
+     moreButton = moreButton || false, 
+     postButton = postButton || false, 
+     doneInter = doneInter || false, 
+     welcome = welcome || false;
+
+%>
 
 <nav>
     <div id="scroll-top"></div>
@@ -12,8 +16,11 @@
     <div class="left button <%= leftButton.class %>" rel="main"></div>
     <% if(editButton) { %>
         <span id="header-edit-button">Edit</span>
+    <% } else if(welcome) { %>
+        <!-- 
+            ########## NO BUTTONS FOR THIS SECTION ##########
+         -->
     <% } else if(lobbyButtons) { %>
-        <!-- <div id="shopping-cart"></div> -->
         <div id="share-icon"></div>
     <% } else if(doneButton) { %>
         <div class="right button done" id="done-button">Done</div>

@@ -1,0 +1,41 @@
+<% 
+ 
+	var text = {
+		categorySelect : {
+			text :  "Discover things to do through Fabric's daily packs. Here are some popular ones to get started!",
+			classes : 'category-select',
+			arrow : false,
+		}, 
+		fabricMenu : {
+			text : "Use the Fabric menu to filter the app by a specific category",
+			classes : 'fabric-menu',
+			arrow : "&uarr;",
+		},
+		feed : {
+			text : "Follow people with similar taste to add their activity to your feed",
+			classes : 'feed',
+			arrow : "&uarr;",
+		},
+		wantTo : {
+			text : "Your Want-To list saves everything you want to do",
+			classes : 'want-to',
+			arrow : " &#10552;",
+		},
+		finishSwipe : {
+			text : "Let's finish swiping before accessing this movie's details",
+			classes : 'finish-swipe',
+			arrow : false,
+		}
+	};
+
+	var arrow = text[section].arrow ? text[section].arrow : "",
+		image = text[section].image ? text[section].image : ""; 	
+
+%>
+<div id="coach-section" class=<%= text[section].classes %>> 
+	<p id='coach-text'>
+		<span id='coach-arrow'><%= arrow %> </span>
+		<%= text[section].text %>
+	</p>
+	<button id='coach-button'>Got it</button>
+</div>

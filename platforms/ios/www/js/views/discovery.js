@@ -12,6 +12,7 @@ var DiscoveryModel = Backbone.Model.extend({
     swipePosY: 0,
     categoryID: null,
     categoryName: null,
+    welcomeCompleted: 0,
     categoryItems: [],
     currentPos: 0,
     movieList: null,
@@ -44,6 +45,7 @@ var DiscoveryModel = Backbone.Model.extend({
     initialize: function(opts) {
         this.categoryID = opts.categoryID || null;
         this.listID = opts.listID || null;
+        this.welcomeCompleted = parseInt(APP.gameState.welcomeCompleted);
     },
     init: function(callback) {
         var self = this;
@@ -56,19 +58,16 @@ var DiscoveryModel = Backbone.Model.extend({
 
 
 		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
-            console.log(data);
 
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
 
             self.categoryData = data.data[0];
+
             self.movieList = [];
             for (var i in list) {
                 if(list[i].movieID) { self.movieList.push(list[i]); }
                 else { self.randData.push(list[i]); }
-            }
-            if(self.movieList.length > 0) {
-                self.categoryData = data.data[0];
             }
 
 			callback();
@@ -316,85 +315,101 @@ var DiscoveryModel = Backbone.Model.extend({
 
             Api.categoryDiscovered(self.categoryID);
 
-            self.loadCategoryListSummary(function(movies, friends, suggestions) {
-                // set the finished flag as true so the done button goes to suggestions
-                self.justFinished = true;
-                var sortedMovies = self.sortMovies(movies);
-                var html = APP.load("listSummary", {
-                    ratio: self.ratioSeen,
-                    categoryName: self.categoryName,
-                    categoryTile: self.categoryData.tile_image,
-                    totalSeen: self.totalSeen,
-                    totalMovies: self.totalMovies,
-                    movies: sortedMovies,
-                    lists: APP.gameState,
-                    friends: friends,
-                    suggestions: suggestions,
-                    section: movies[0].sectionID
+            if(APP.gameState.welcomeCompleted === "0"){
+
+                // IF part of the welcome round take them to rate (Home) screen after swiping
+                // And mark them as welcome completed
+
+                User.welcomeCompleted();
+                if(Analytics) { Analytics.event("Welcome completed"); }
+                mixpanel.track("Welcome completed");
+                Backbone.history.navigate("rate", true);
+
+            } else {
+
+                // Load the list summary at the end of swiping the pack if they have completed welcome competed
+
+                self.loadCategoryListSummary(function(movies, friends, suggestions) {
+                    // set the finished flag as true so the done button goes to suggestions
+                    self.justFinished = true;
+                    var sortedMovies = self.sortMovies(movies);
+                    var html = APP.load("listSummary", {
+                        ratio: self.ratioSeen,
+                        categoryName: self.categoryName,
+                        categoryTile: self.categoryData.tile_image,
+                        totalSeen: self.totalSeen,
+                        totalMovies: self.totalMovies,
+                        movies: sortedMovies,
+                        lists: APP.gameState,
+                        friends: friends,
+                        suggestions: suggestions,
+                        section: movies[0].sectionID
+                    });
+
+
+                    if(!self.ratioSeen) { self.ratioSeen = 0; }
+                    Api.createFeed(self.feedType, self.categoryID, { ratio: self.ratioSeen });
+                    var header = new HeaderView({ title: "Nice Job!", leftButton: {class: ""}, doneInter: true });  // Set to done inter
+
+                    $("#wrapper").html(html);
+                    $("#wrapper").prepend(header.el);
+
+                    setTimeout(function() {
+                        if(UI.scroller) { UI.scroller.refresh(); }
+                    }, 200);
+
+                    $("#ratio span").html("0"); //set percentage at zero to roll it up later
+
+
+                    //analytics
+                    var params = {
+                        name: self.categoryName,
+                        listID: self.categoryID,
+                        sectionID: movies[0].sectionID
+                    };
+                    var gS = APP.gameState;
+
+                    Analytics.eventAndParams("Finished category", params);
+
+                    mixpanel.track("Category Completed", {
+                        "Category name": self.categoryName,
+                        "Facebook-account": gS.isFacebook,
+                        "sectionID": movies[0].sectionID,
+                        "List ID": self.categoryName,
+                        "Seen %": self.ratioSeen,
+                        "City": gS.city,
+                        "Age": gS.age
+                    });
+
+                    Util.trailerPlayer();
+                    APP.router.bindHeaderEvents();
+                    self.bindListRecommended();
+
+                    Api.getNextCategories(self.categoryID, function(response) {
+                        if(response.success) {
+                            var nextCats = APP.load("categoryFeed", { items: response.data }),
+                                upNext = APP.load("upNext"),
+                                upNextCats = $(upNext).find("#up-next-wrapper").append(nextCats);
+
+                            $("#list-items-container").append(upNext);
+                            $("#up-next-wrapper").append(nextCats);
+                            self.bindCategoryEvents();
+                            // callback();
+                        } else { // if there are no more next recommendations
+                            $("#done-inter-button").attr({ id : "done-button" });
+                            $("#done-button").fastClick(function(){
+                                Backbone.history.navigate("rate", true);
+                            });
+                        }
+
+                        $("#ratio span").text(self.ratioSeen);
+
+                        UI.initScroller($("#list-items-container")[0]);
+                        self.bindDiscoveryCompleteEvents();
+                    });
                 });
+            }
 
-
-                if(!self.ratioSeen) { self.ratioSeen = 0; }
-                Api.createFeed(self.feedType, self.categoryID, { ratio: self.ratioSeen });
-                var header = new HeaderView({ title: "Nice Job!", leftButton: {class: ""}, doneInter: true });  // Set to done inter
-
-                $("#wrapper").html(html);
-                $("#wrapper").prepend(header.el);
-
-                setTimeout(function() {
-                    if(UI.scroller) { UI.scroller.refresh(); }
-                }, 200);
-
-                $("#ratio span").html("0"); //set percentage at zero to roll it up later
-
-
-                //analytics
-                var params = {
-                    name: self.categoryName,
-                    listID: self.categoryID,
-                    sectionID: movies[0].sectionID
-                };
-                var gS = APP.gameState;
-
-                Analytics.eventAndParams("Finished category", params);
-
-                mixpanel.track("Category Completed", {
-                    "Category name": self.categoryName,
-                    "Facebook-account": gS.isFacebook,
-                    "sectionID": movies[0].sectionID,
-                    "List ID": self.categoryName,
-                    "Seen %": self.ratioSeen,
-                    "City": gS.city,
-                    "Age": gS.age
-                });
-
-                Util.trailerPlayer();
-                APP.router.bindHeaderEvents();
-                self.bindListRecommended();
-
-                Api.getNextCategories(self.categoryID, function(response) {
-                    if(response.success) {
-                        var nextCats = APP.load("categoryFeed", { items: response.data }),
-                            upNext = APP.load("upNext"),
-                            upNextCats = $(upNext).find("#up-next-wrapper").append(nextCats);
-
-                        $("#list-items-container").append(upNext);
-                        $("#up-next-wrapper").append(nextCats);
-                        self.bindCategoryEvents();
-                        // callback();
-                    } else { // if there are no more next recommendations
-                        $("#done-inter-button").attr({ id : "done-button" });
-                        $("#done-button").fastClick(function(){
-                            Backbone.history.navigate("rate", true);
-                        });
-                    }
-
-                    $("#ratio span").text(self.ratioSeen);
-
-                    UI.initScroller($("#list-items-container")[0]);
-                    self.bindDiscoveryCompleteEvents();
-                });
-            });
         } else {
             self.loadPoster();
         }
@@ -403,8 +418,7 @@ var DiscoveryModel = Backbone.Model.extend({
         var self = this;
         Api.getFabricCategoryData(self.categoryID, function(response) {
             if(response.data) {
-                console.log(response.data);
-                if(response.data.movies) {
+                if(response.data.movies.list.length) {
                     if (response.data.movies.list) { var list = response.data.movies.list; }
                     else { var list = response.data.movies; }
                     if(!self.categoryName) { self.categoryName = response.data.movies.title; }
@@ -423,6 +437,15 @@ var DiscoveryModel = Backbone.Model.extend({
                     callback(newArr, response.data.friends, response.data.suggestedFriends);
                 } else {
                     // no movies
+
+                    //If there welcome completed is true take the to the rate/home page else welcome packs
+                    var route = this.welcomeCompleted ? "rate" : "welcome";
+
+                    Util.alert("Great Scott! There seems to be a problem. Please select another pack");
+                    
+
+                    Backbone.history.navigate(route, true);
+
                 }
             }
         });
@@ -494,10 +517,20 @@ var DiscoveryModel = Backbone.Model.extend({
             Backbone.history.navigate("movieLobby/" + movieID, true);
         });
 
+        
         $("#swiper-mask, #lobby-info").fastClick(function() {
             var movieID = $(self.SwiperContent).attr("data-movieid");
-            Backbone.history.navigate("movieLobby/" + movieID, true);
+
+            if(self.welcomeCompleted){
+                Backbone.history.navigate("movieLobby/" + movieID, true);
+            } else {
+                // Show coach to finsh swiping
+                var coach = APP.load("coach", { section : 'finishSwipe' });
+                $('#coach-overlay').html(coach);
+                UI.bindCoachEvents('feed');
+            }
         });
+
 
         $("#discovery-background").fastClick(function(){
             $(this).removeClass("show");
@@ -801,7 +834,6 @@ var DiscoveryModel = Backbone.Model.extend({
         });
     },
     bindListRecommended: function() {
-
     },
     bindCategoryEvents: function() {
         $("#up-next-wrapper div.catItem").click(function() {
@@ -933,34 +965,45 @@ var DiscoveryView = Backbone.View.extend({
         return this;
     },
     render: function(callback) {
-        var self = this;
+        var self = this,
+            sMod = self.model;
         callback = callback || function() {};
 
         APP.models.discovery = self.model;
 
         self.model.init(function() {
+
+            // !!!!!!!!!!!! Load Swipe !!!!!!!!!!!!!
+
             if(self.model.movieList.length > 0) {
                 self.model.loadCategoryListSummary(function(movies, friends, suggestions) {
+
+                    // 
+                    var onboardDone = sMod.welcomeCompleted ? true : false;     
                     var html = APP.load("discovery", {
-                        totalSeen: self.model.totalSeen,
-                        totalMovies: self.model.totalMovies,
-                        ratioSeen: self.model.ratioSeen,
-                        currentPos: self.model.totalMovies - self.model.movieList.length,
-                        categoryName: self.model.categoryData.title,
+                        totalSeen: sMod.totalSeen,
+                        totalMovies: sMod.totalMovies,
+                        ratioSeen: sMod.ratioSeen,
+                        currentPos: sMod.totalMovies - sMod.movieList.length,
+                        categoryName: sMod.categoryData.title,
                         friends: friends,
                         suggestions: suggestions,
                         section: movies[0].sectionID
                     });
 
-                    self.$el.html(html);
                     self.header = new HeaderView({
                         title: self.model.categoryData.title,
                         leftButton: { class: "" },
-                        doneButton: true
+                        welcome: !onboardDone,
+                        doneButton: onboardDone
                     });
-                    self.$el.prepend(self.header.el);
+
+                    self.$el
+                        .html(html)
+                        .prepend(self.header.el);
 
                     $("#wrapper").html(self.$el.html());
+
 
                     if(self.model.movieList[0].sectionID === "4"){
                         $('#wrapper').addClass("music-section");
@@ -970,6 +1013,7 @@ var DiscoveryView = Backbone.View.extend({
                         self.model.bindDiscoveryEvents();
                         setTimeout(function() { callback(); }, 500);
                     });
+
                     if(Analytics) {
                         Analytics.eventAndParams("Category selected", {
                             category: self.model.categoryName,
@@ -989,8 +1033,11 @@ var DiscoveryView = Backbone.View.extend({
                     }
                 }, self.model.interval);
             } else {
+
+                // !!!!!!!!!!!! Load List Summary !!!!!!!!!!!!!
+
                 Api.categoryDiscovered(self.model.categoryID);
-                // show the discovery complete list page
+                
                 self.model.loadCategoryListSummary(function(movies, friends, suggestions) {
                     var sMod = self.model,
                         sortedMovies = sMod.sortMovies(movies);

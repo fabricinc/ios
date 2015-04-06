@@ -125,10 +125,11 @@ Facebook = {
                     self.firstName = response.first_name;
                     self.birthday = response.birthday;
 
-                    Facebook.getFbFriends();
-                    Facebook.updateFBImages();
+                    self.getFbFriends();
+                    self.updateFBImages();
 
                     if (flurry) { Analytics.eventAndParams("Facebook auth", JSON.stringify(response)); }
+
                     APP.click = false;
                     Api.checkLogin(undefined, undefined, response, function(response, facebookData) {
                         User.loginCallback(response, facebookData, cb);
@@ -273,6 +274,9 @@ Facebook = {
         if(Api.connected) {
             callback = callback || function() {};
             facebookConnectPlugin.api('/me/albums', [], function(response) {
+
+
+
                 if (response && !response.error) {
                     Util.log("Response successful for /me/albums");
                     callback(response.data);
@@ -307,6 +311,7 @@ Facebook = {
         callback = callback || function() {};
         if(Api.connected) {
             facebookConnectPlugin.api('/me/likes', [], function(response) {
+                
                 if (response && !response.error) {
                     callback(response);
                 } else {
@@ -345,6 +350,9 @@ Facebook = {
         if(Api.connected) {
             this.getLikes(function(likes) {
                 if(likes) {
+
+
+                    
                     // loop through
                     var i,j,temparray,chunk = 5;
                     for (i=0,j=likes.data.length; i<j; i+=chunk) {
@@ -359,7 +367,9 @@ Facebook = {
     updateFBImages: function() {
         var self = this;
         if(User.isFacebook && Api.connected) {
+            
             self.getAlbums(function(albums) {
+
                 if(albums.length > 0) {
                     albums.some(function(album) {
                         if(album.name == "Profile Pictures") {

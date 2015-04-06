@@ -80,7 +80,9 @@
         background-size: 172px 172px;
         top: 178px;
     }
+    #coach-section { font-size: 2em; }
     /* END MUSIC */
+    #welcome-categories,
     #rec-list-wrapper { height: 429px; }
     #recommended-list  #list-items { height: 379px; }
 
