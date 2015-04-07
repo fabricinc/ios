@@ -1106,6 +1106,23 @@
         padding-left: 10px;
         line-height: 26px;
     }
+
+    /*
+    ==============================================================    
+        Weclome
+    ============================================================== 
+    */
+    #welcome-categories {
+        margin: 0 20px;
+        height: 973px; 
+    }
+    #welcome-categories .catItem {
+        margin-top: 20px;
+    }
+    #welcom .catItem {
+        max-height: 218px; 
+        width: 713px;
+    }
 }
 
 
