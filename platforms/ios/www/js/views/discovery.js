@@ -527,7 +527,7 @@ var DiscoveryModel = Backbone.Model.extend({
                 // Show coach to finsh swiping
                 var coach = APP.load("coach", { section : 'finishSwipe' });
                 $('#coach-overlay').html(coach);
-                UI.bindCoachEvents('feed');
+                UI.bindCoachEvents();
             }
         });
 
