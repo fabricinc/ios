@@ -134,8 +134,10 @@
         top: 0;
         width: 780px;
     }
-
-    #home-filters #category-filter, #home-filters #activity-filter, #home-filters #recommended-filter {
+    #coach-section.feed div,
+    #home-filters #category-filter,
+    #home-filters #activity-filter, 
+    #home-filters #recommended-filter {
         float: none;
         width: 260px;
         font-size: 1.2em;
@@ -145,6 +147,7 @@
         left: 0;
     }
 
+    #coach-section.feed div,
     #home-filters #activity-filter {
         left: 260px;
     }
