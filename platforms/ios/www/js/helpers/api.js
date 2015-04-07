@@ -231,9 +231,7 @@ Api.checkLogin = function(username, password, facebookData, callback) {
             deviceUUID: APP.token
         },
         self = this;
-
-    console.log('API - CHECK LOGIN options : ');
-    console.log(options);
+        
     // we might be trying to log in via facebook
     if(facebookData) {
         options.facebookID = facebookData.id;

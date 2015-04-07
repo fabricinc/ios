@@ -34,6 +34,7 @@
 		},
 
 		setPushNotifications: function(){
+			
 		    var pushOptions = {
 		            "badge":"true",
 			        "sound":"true",
