@@ -134,7 +134,7 @@
         top: 0;
         width: 780px;
     }
-    #coach-section.feed div,
+    #coach-section div,
     #home-filters #category-filter,
     #home-filters #activity-filter, 
     #home-filters #recommended-filter {
@@ -151,7 +151,7 @@
     #home-filters #activity-filter {
         left: 260px;
     }
-
+    #coach-section.want-to div,
     #home-filters #recommended-filter {
         left: 520px;
     }
@@ -1134,7 +1134,7 @@
         Coach
     ============================================================== 
     */
-    #coach-section.feed div {
+    #coach-section div {
         margin-top: 50px;
         font-size: 30px;
     }
