@@ -216,6 +216,7 @@ Api.createNewRegistration = function(name, email, password, facebookID, friendli
     });
 }
 Api.checkLogin = function(username, password, facebookData, callback) {
+    console.log('check login');
     var age = null;
     if(facebookData && facebookData.birthday) {
         var age = Math.abs(new Date(Date.now() - new Date(facebookData.birthday.toString()).getTime()).getUTCFullYear() - 1970);
@@ -230,6 +231,9 @@ Api.checkLogin = function(username, password, facebookData, callback) {
             deviceUUID: APP.token
         },
         self = this;
+
+    console.log('API - CHECK LOGIN options : ');
+    console.log(options);
     // we might be trying to log in via facebook
     if(facebookData) {
         options.facebookID = facebookData.id;
@@ -238,7 +242,7 @@ Api.checkLogin = function(username, password, facebookData, callback) {
         if(age) { options.age = age; }
     }
 
-    Util.log("Api.checklogin options: " + JSON.stringify(options));
+    
     var FAIL = 'There was a problem connecting to the server. Please try again!';
     $.ajax({
         url: Api.surl + 'checkLogin.php',
@@ -250,8 +254,6 @@ Api.checkLogin = function(username, password, facebookData, callback) {
             var error = self.checkForErrorResponse(response);
             if(error) { return false; }
 
-            Util.log(JSON.stringify(response));
-            Util.log(callback);
             callback(response, facebookData);
         },
         error : function(e) {

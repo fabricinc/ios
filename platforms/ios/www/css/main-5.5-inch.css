@@ -9,6 +9,7 @@
 #category-container { height: 617px; }
 #welcome-categories div .title, 
 #category-container div .title { width: 380px; font-size: 19px; }
+#welcome-categories .catItem { max-height: 160px; }
 #category-container .catItem { max-height: 300px; }
 #category-container #side-swipe { width: 395px; }
 .feed-item { width: 375px; }

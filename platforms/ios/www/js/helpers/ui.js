@@ -326,7 +326,6 @@ var UI = {
 	        });
 	    },
         imgError: function(image){
-            console.log(image);
             image.onerror = "";
             image.src = "images/discovery/avatar.png";
             return true;
