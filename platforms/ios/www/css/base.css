@@ -5851,6 +5851,7 @@ div#critic-rating.bottom-info { left: 80px;  }
 }
 #coach-text {
     margin: 90px 10px; 
+    font-size: .8em;
 }
 #coach-button {
     -webkit-appearance: none;
