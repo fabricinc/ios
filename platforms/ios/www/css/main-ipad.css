@@ -1121,6 +1121,9 @@
     }
     #welcome .catItem {
         max-height: 218px; 
+    }
+    #welcome div .title {
+        font-size: 20px;
         width: 713px;
     }
 }
