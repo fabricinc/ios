@@ -59,7 +59,6 @@
 		83D3574396EA46BB86D53A06 /* CDVGlobalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 847CBE0403CE447E99B819F4 /* CDVGlobalization.m */; };
 		8EAA7AEAA8BD4EA8A586AC17 /* FlurryPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 559E98F02426405794612918 /* FlurryPlugin.m */; };
 		8FF568F155F64D599A0C8036 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A32C2648CD4D4886819A7C /* CoreLocation.framework */; };
-		90C2BD3725DF49EE96B4E0C1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609943CC4A47433983F666C9 /* AdSupport.framework */; };
 		95A7817340DD4C15A163346E /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F94854305940058BC4D1DC /* CDVDevice.m */; };
 		9A6E894BF5CD4EB8A1AF781F /* libFlurry_5.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A71AE8BAAE34D5BADD9B666 /* libFlurry_5.1.0.a */; };
 		9FE9033DCD024459B6A1F784 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8015E8BBDB1E4E3DBAFB173C /* libz.dylib */; };
@@ -68,7 +67,6 @@
 		BA050C32490F48D8B09FC90D /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1298CFB90E1B43D3A4ADCEAC /* CDVInAppBrowser.m */; };
 		BF836879707D4CC2A0D84788 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3CA969CCA847CB9C18ABB2 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
-		DC8334D941F4467ABB92C5C5 /* libFlurryAds_5.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E4920EAEA0948468FA794E1 /* libFlurryAds_5.1.0.a */; };
 		DD1D4B4BFD3B49969F956E2A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63806CD6164416AC8E6E69 /* MediaPlayer.framework */; };
 		E1A178FE3F6C4770BA81E5E9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 878ACC01D38F4DD8AFCA60D1 /* AudioToolbox.framework */; };
 		E1E2B29E2FE44321B90C511E /* PushPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA10691FC04741A7DBEF23 /* PushPlugin.m */; };
@@ -227,8 +225,6 @@
 				F9EF03631A8C433400C4BDA5 /* FacebookSDK.framework in Frameworks */,
 				06D18160E8284F27AE88917D /* CFNetwork.framework in Frameworks */,
 				9A6E894BF5CD4EB8A1AF781F /* libFlurry_5.1.0.a in Frameworks */,
-				DC8334D941F4467ABB92C5C5 /* libFlurryAds_5.1.0.a in Frameworks */,
-				90C2BD3725DF49EE96B4E0C1 /* AdSupport.framework in Frameworks */,
 				DD1D4B4BFD3B49969F956E2A /* MediaPlayer.framework in Frameworks */,
 				FD3FFC1EE90E4A3F831F0B50 /* StoreKit.framework in Frameworks */,
 				B3088F4971EC4F9D9DCD6D5B /* MessageUI.framework in Frameworks */,
