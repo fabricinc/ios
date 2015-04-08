@@ -22,10 +22,10 @@
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     if(NSClassFromString(@"SKStoreProductViewController")){
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        [self writeJavascript: [pluginResult toSuccessCallbackString:command.callbackId]];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-        [self writeJavascript: [pluginResult toErrorCallbackString:command.callbackId]];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
 }
 
@@ -55,7 +55,7 @@
     } @catch (NSException* exception) {
         // invoke JS failed callback
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-        [self writeJavascript: [pluginResult toErrorCallbackString:self.initializePluginCallback]];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
     
 }
