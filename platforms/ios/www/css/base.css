@@ -1196,7 +1196,6 @@ input.slider-search-form {
 #home-filters div {
     text-transform: uppercase;
     background-color: white;
-    position: absolute;
     text-align: center;
     line-height: 40px;
     font-size: 13px;
@@ -1212,14 +1211,7 @@ input.slider-search-form {
     background-color: #C0322F;
     color: white;
 }
-#category-filter-x,
-#category-filter {
-}
-#category-filter-x span,
-#category-filter span {
-    /*why this? margin-right: 152px;*/
-}
-#category-filter-x.filter .cat-sub-filter,
+
 #category-filter.filter .cat-sub-filter{
     opacity: 1;
 }
@@ -1232,19 +1224,15 @@ input.slider-search-form {
 #activity-filter.filter {
     border-left: 1px solid rgb(214, 213, 217);
 }
-#activity-filter-x,
+
 #activity-filter {
     border-left: 1px solid rgb(214, 213, 217);
-    position: absolute;
-    width: 106px;
     right: 107px;
 }
 
-#recommended-filter-x.filter,
 #recommended-filter.filter {
     border-left: 1px solid rgb(214, 213, 217);
 }
-#recommended-filter-x,
 #recommended-filter {
     border-left: 1px solid rgb(214, 213, 217);
     position: absolute;

@@ -1,11 +1,8 @@
 /* iPhone 6 */
 #wrapper { width: 375px; height: 667px; position: relative; }
 #home-filters { width: 375px; height: 45px;}
-#home-filters div, #coach-section div { width: 124px; height: 46px; line-height: 46px; }
+#home-filters div, #coach-section div { width: 187px; height: 46px; line-height: 46px; }
 #home-filters div#recommended-filter, #coach-section.want-to div { width: 125px; }
-#coach-section.feed div,
-#activity-filter-x,
-#activity-filter { right: 126px; }
 #category-container { height: 560px; }
 .recommended-filter #category-container{ height: 510px; }
 #welcome div .title,

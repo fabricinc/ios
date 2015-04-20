@@ -26,7 +26,6 @@ var RateModel = Backbone.Model.extend({
 
         Api.appSettings.discoveryLimit = parseInt(Api.appSettings.discoveryLimit);
         Api.appSettings.feedLimit = parseInt(Api.appSettings.feedLimit);
-        Api.appSettings.wantToLimit = parseInt(Api.appSettings.wantToLimit);
 
         // check the active tab to change the load order
         if(self.filter == "activity-filter") {
@@ -46,35 +45,6 @@ var RateModel = Backbone.Model.extend({
                     callback(resp.data.categories, resp.data.concierge, resp.data.lastStatus);
                 });
 
-                Api.getQ(APP.gameState.watchListID, APP.sectionID, function(response) {
-                    if(response) {
-                        self.recs = response;
-                        self.recsLoaded = true;
-                    }
-                });
-            });
-        } else if(self.filter == "recommended-filter") {
-            // !!!!!!!!!!!!! LOAD Q !!!!!!!!!!!!!
-            Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
-                var resp = response;
-                self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
-                self.categories = response.data.categories;
-                if(self.categories.length < Api.appSettings.discoveryLimit) { self.pclf = true; }
-
-                Api.getQ(APP.gameState.watchListID, APP.sectionID, function(response) {
-                    if(response) {
-                        self.recs = response;
-                        self.recsLoaded = true;
-                    }
-                    callback(resp.data.categories, resp.data.concierge, resp.data.lastStatus);
-                });
-
-                Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
-                    self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
-                    self.feed = { feed: response.data.activityFeed.data };
-                    self.feedLoaded = true;
-                    if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
-                });
             });
         } else {
             // !!!!!!!!!!!!! LOAD CATEGORIES !!!!!!!!!!!!!
@@ -89,13 +59,6 @@ var RateModel = Backbone.Model.extend({
                     self.feed = { feed: response.data.activityFeed.data };
                     self.feedLoaded = true;
                     if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
-                });
-
-                Api.getQ(APP.gameState.watchListID, APP.sectionID, function(response){
-                    if(response) {
-                        self.recs = response;
-                        self.recsLoaded = true;
-                    }
                 });
 
                 callback(response.data.categories, response.data.concierge, response.data.lastStatus);
@@ -170,7 +133,9 @@ var RateView = Backbone.View.extend({
                         }
 
                         $("#wrapper").html(self.$el);
-                        $("#"+ self.filter +", #"+ self.filter +"-x").addClass("filter");
+
+                        // Highlight corect filter
+                        $("#"+ self.filter).addClass("filter");
 
                         var cb = function() {
                             UI.initScrollerOpts($("#category-container")[0], { // #home-slider
@@ -203,14 +168,15 @@ var RateView = Backbone.View.extend({
 
         return this;
     },
-    freeMasons: function() {
-        /* if(Util.isIPad()) { $('.js-masonry').masonry(); } */
-    },
     displayFeed: function(filter, cb) {
         cb = cb || function() {};
         if(!filter){ return; }      //If filter is not set exit
         var self = this;
+
+        // add current filter class to the scroller/slider container
         $("#home-slider").attr("class", filter);
+
+
         if(filter === "activity-filter") {
             // show activity filter
             if(!self.model.feedLoaded || self.model.feed == null) {
@@ -225,9 +191,6 @@ var RateView = Backbone.View.extend({
 
                         $("#content-container .content-scroller").append(activityFeed);
 
-
-                        // lay out cards in masonry (Pinterest) fashion if ipad
-                        self.freeMasons();
                         // bind activity feed events
                         self.bindActivityFeedEvents();
                         $("#category-container").css("background-color", "rgb(228, 226, 225)");
@@ -243,8 +206,6 @@ var RateView = Backbone.View.extend({
                 $("#content-container .content-scroller").html(activityFeed);
 
 
-                // lay out cards in masonry (Pinterest) fashion if ipad
-                self.freeMasons();
                 // bind activity feed events
                 self.bindActivityFeedEvents();
                 $("#category-container").css("background-color", "rgb(228, 226, 225)");
@@ -256,147 +217,11 @@ var RateView = Backbone.View.extend({
             // show category filter
             var categoryFeed = APP.load("categoryFeed", { items: self.model.categories });
             $("#content-container .content-scroller").html(categoryFeed);
-            // lay out cards in masonry (Pinterest) fashion
-            self.freeMasons();
+
             // bind category feed events
             self.bindCategoryEvents();
             cb();
-        } else if(filter == "recommended-filter") {
-            
-            if(!self.model.recsLoaded || self.model.recs == null) {
-                self.recsInterval = setInterval(function() {
-                    if(self.model.recsLoaded && self.model.recs) {
-                        if (APP.homeQFilter) {
-                            self.sortQ(self.model.recs, APP.homeQFilter);
-                            APP.homeQFilter = null;
-                        } else {
-                            // show recommended filter
-                            var html = APP.load("homeQ", {
-                                removedList: self.model.removedList,
-                                items: self.model.recs.slice(0, Api.appSettings.wantToLimit),
-                                concierge: self.concierge,
-                                count: self.startR
-                            });
-                            $("#content-container .content-scroller").html(html);
-                        }
-                        clearInterval(self.recsInterval);
-                        self.bindRecommendedEvents();
-                    }
-                });
-            } else {
-                if (APP.homeQFilter) {
-                    self.sortQ(self.model.recs, APP.homeQFilter);
-                    APP.homeQFilter = null;
-                } else {
-                    // show recommended filter
-                    var html = APP.load("homeQ", {
-                        removedList: self.model.removedList,
-                        items: self.model.recs.slice(0, Api.appSettings.wantToLimit),
-                        concierge: self.concierge,
-                        count: self.startR
-                    });
-                    $("#content-container .content-scroller").html(html);
-                }
-                // bind category feed events
-                self.bindRecommendedEvents();
-            }
-
-            // bind category feed events
-            self.bindRecommendedEvents();
-            cb();
-        }
-    },
-    swipeRemove: function(){
-        var remove = $("h3.check-list-remove"),
-            scroll = $("#category-container").children(),
-            items = $(".check-list-item"),
-            thresh = 80,
-            self = this,
-            move = 0,
-            scrolling,
-            tObject,
-            startX,
-            startY,
-            Xdiff,
-            Ydiff;
-
-        //Bind Remove Events
-        items.on("touchstart", onTouchStart);
-        items.on("touchmove", onTouchMove);
-        items.on("touchend", onTouchEnd);
-
-        setTimeout(function() {
-            UI.scroller.on("scrollStart", function() { scrolling = true; });
-            UI.scroller.on("scrollEnd", function() { scrolling = false; });
-        }, 500);
-
-        function onTouchStart(e) {
-            var touches = e.originalEvent.touches;
-
-            tObject = e.currentTarget;
-            startX = touches[0].pageX;
-            startY = touches[0].pageY;
-
-            $(tObject).siblings().show(); //Show 'Remove' button on touch start
-
-        }
-
-        function onTouchMove(e) {
-            var touches = e.originalEvent.touches;
-
-            Xdiff = startX - touches[0].pageX;
-            Ydiff = startY - touches[0].pageY;
-
-            if(scrolling) { return; }
-            //Disablle scroller
-            if(Xdiff > 5 && UI.scroller.enabled) { UI.scroller.disable(); }
-            setCSS(Xdiff);
-        }
-
-        function onTouchEnd(e) {
-            var touches = e.originalEvent.touches,
-                swipeMove = Xdiff < 40 ? 0 : 80;
-
-            $(tObject).addClass("swiped");
-
-            setCSS(swipeMove);
-
-            move = 0;
-            UI.scroller.enable(); //Reenable Scroller
-        }
-        function removeMovie() {
-            var parent = $(tObject).parent(),
-                publishedID = parent.data("publishedid"),
-                moviesArray = self.model.recs,
-                removedMovie;
-
-            // Hide Element on the DOM
-            parent.addClass("remove");
-
-            // Remove item from list
-            Api.setMovieToFabricList(publishedID, APP.gameState.watchListID, false);
-
-            $.each(moviesArray, function(i, v){
-                if(parseInt(v.moviePublishedID) === publishedID){
-                    removedMovie = i;
-                    return false;
-                }
-            });
-
-            self.model.recs.splice(removedMovie, 1);
-
-        }
-        function setCSS(XMove) {
-
-            if(XMove < 0 || XMove > 80){ return; }
-
-            $(tObject).css({ "right" : XMove });
-
-        }
-        remove.click(function(e) {
-            removeMovie();
-        });
-
+        } 
     },
     moreFeedPlease: function() {
         var self = this;
@@ -415,8 +240,6 @@ var RateView = Backbone.View.extend({
                                 self.model.pflf = true;
                             }
                             self.model.startF += response.data.activityFeed.data.length;
-                            // lay out cards in masonry (Pinterest) fashion
-                            self.freeMasons();
 
                             // bind activity feed events
                             self.bindActivityFeedEvents();
@@ -479,11 +302,6 @@ var RateView = Backbone.View.extend({
         var sUpdate = $("#slide-status-update"),
             self = this;
 
-        
-        $(".user-avatar").click(function() {
-            Backbone.history.navigate("profile", true);
-            return false;
-        });
 
         // Change filters from categories to feed
         $("#home-filters div").fastClick(function() {
@@ -541,8 +359,7 @@ var RateView = Backbone.View.extend({
                                 // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
                                 var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
                                 $("#content-container .content-scroller").html(activityFeed);
-                                // lay out cards in masonry (Pinterest) fashion
-                                self.freeMasons();
+
                                 self.bindActivityFeedEvents();
                                 APP.feedFilter = filter;
                                 var curPos = self.actPos;
@@ -553,8 +370,6 @@ var RateView = Backbone.View.extend({
                         // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
                         var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
                         $("#content-container .content-scroller").html(activityFeed);
-                        // lay out cards in masonry (Pinterest) fashion
-                        self.freeMasons();
                         self.bindActivityFeedEvents();
                         APP.feedFilter = filter;
                         var curPos = self.actPos;
@@ -564,42 +379,10 @@ var RateView = Backbone.View.extend({
                     // !!!!!!!!!!!!!!!!!!! CATEGORY FEED !!!!!!!!!!!!!!!!!!!
                     self.model.lastFeed = $("#content-container .content-scroller").html(); // Update feed html to show current likes and comments
                     $("#content-container .content-scroller").html(APP.load("categoryFeed", { items: self.model.categories }));
-                    self.freeMasons();  // lay out cards in masonry (Pinterest) fashion
+
                     self.bindCategoryEvents();
                     APP.feedFilter = "category-filter";
                     var curPos = self.catPos;
-                } else if(filter == "recommended-filter") {
-
-                    // !!!!!!!!!!!!!!!!!!! WANT-TO  !!!!!!!!!!!!!!!!!!!
-
-                    // ONBOARD THE WANT-TO
-                    if(APP.gameState.wantTo === "0"){
-
-
-                        var coach = APP.load("coach", { section : 'wantTo' }),
-                            _  = this.cloneNode(true),
-                            clone;
-
-                        // SET ID OF DIV TO '' (can't have two divs with the same id)
-                        _.id = '';
-
-                        $('#coach-overlay').html(coach);
-                        $("#coach-section").prepend( $(_) );
-
-                        UI.bindCoachEvents('wantTo');
-
-                    }
-
-
-                    $("#content-container .content-scroller").html(APP.load("homeQ", {
-                        removedList: self.model.removedList,
-                        items: self.model.recs ? self.model.recs.slice(0, Api.appSettings.wantToLimit) : [],
-                        concierge: self.concierge,
-                        count: self.model.startR
-                    }));
-                    self.bindRecommendedEvents();
-                    APP.feedFilter = "recommended-filter";
-                    var curPos = self.recPos;
                 }
 
                 UI.scroller.refresh();
@@ -638,47 +421,6 @@ var RateView = Backbone.View.extend({
             return false;
         });
 
-    },
-    coach: function() {
-        var feed = ["category-filter", "activity-filter"],
-            fMenu = $("#fabric-menu"),
-            self = this,
-            images = [],
-            count = 0,
-            bkgr, img;
-
-        if(APP.firstRate) {
-            // Pre load images to improve load performance
-            var imagePath = Util.isIPad() ? "images/discovery/coach/iPad/coach" : "images/discovery/coach/coach";
-
-            //for (var i = 1; i < 4; i++) {
-            //    img = new Image();
-            //    img.src = imagePath + i + ".png";
-            //    images.push(img);
-            //}
-
-            $("#rate-first").addClass("on coach0").click(function() {
-
-                //bkgr = count < 3 ? images[count].src : "";
-                //$(this).css({"background-image" : "url("+ bkgr +")"});
-                $(this).removeClass("coach" + String(count)).addClass("coach" + String(count + 1));
-
-                if (count < 2) {
-                    self.displayFeed(feed[count], null);
-                    $("div.filter").removeClass('filter');
-                    $("#"+ feed[count]).addClass('filter');
-                } else if (count === 2) {
-                    fMenu.addClass("open");
-                } else {
-                    fMenu.removeClass("open");
-                    APP.firstRate = false;
-                    APP.feedFilter = "category-filter";
-                    APP.dispatcher("home");
-                    $(this).removeClass("on");
-                }
-                count++;
-            });
-        }
     },
     bindActivityFeedEvents: function() {
         var sUpdate = $("#slide-status-update"),
@@ -911,108 +653,15 @@ var RateView = Backbone.View.extend({
             return false;
         });
     },
-    bindRecommendedEvents: function() {
-        var self = this,
-            active = false;
-        // self.swipeRemove();
-
-        $(".concierge-button, .concierge-poster").click(function(e) {
-            e.preventDefault(); e.stopPropagation();
-
-            var type = $(this).data("button"),
-                route;
-
-            if(type === "movie") {
-                route = "movieLobby/"+ $(this).data("movieid");
-            } else if(type === "dvd") {
-                route = "userRecommendations/1622854";
-            } else if(type === "theaters") {
-                route = "userRecommendations/1622853";
-            } else if(type === "recommendations") {
-                route = "userRecommendations/1622854";
-            }
-            mixpanel.track("Concierge tapped");
-            if(Analytics) { Analytics.event("Concierge tapped"); }
-
-            Backbone.history.navigate(route, true);
-
-            return false;
-        });
-        $("#category-container div#content-container div.content-scroller div.check-list-wrapper .check-list-check").unbind("click").fastClick(function(e) {
-            e.preventDefault(); e.stopPropagation();
-
-            var parent = $(this).parent().parent(),
-                set = parent.hasClass("off") ? true : false,
-                publishedID = parent.data("publishedid"),
-                movieID = parent.data("movieid");
-
-            parent.toggleClass("off");
-            $(this).toggleClass("checked");
-
-            Api.setMovieToFabricList(publishedID, APP.gameState.watchListID, set);
-            Api.setMovieSeen(publishedID, !set);
-
-            if(!set) {
-                self.model.removedList.push(publishedID);
-                mixpanel.track("Want-To check mark - Done");
-                if(Analytics) {
-                    Analytics.event("Want-To check mark - Done");
-                }
-            } else {
-                var index = self.model.removedList.indexOf(publishedID);
-                if (index > -1) {
-                    self.model.removedList.splice(index, 1);
-                }
-            }
-
-            return false;
-        });
-        $("#sort-button, #want-to-sort div.filter").fastClick(function(e){
-            e.preventDefault();     e.stopPropagation();
-
-            if(active) { return; }
-
-            active = true;
-
-            var buttonText = $("#sort-button-text").text() == "sort" ? "cancel" : "sort",
-                filter = $(this).data("filter"),
-                filterText = $(this).html();
-
-            $("#want-to-sort, #screen").toggleClass("show");
-            $("#sort-button-text").attr("class", buttonText).on("transitionend", function(e){
-                e.preventDefault();     e.stopPropagation();
-                active = false;
-                $(this).html(buttonText);
-                if(filter){
-                    $("#current-filter").html(filterText);
-                }
-            });
-            //There is a filter (clicked a filter button not sort/cancel) so we are going to filter the list
-            if(filter){
-                self.sortQ(self.model.recs, filter);
-                APP.homeQFilter = filter;
-                UI.scroller.scrollTo(0,0,0);
-                UI.scroller.refresh();
-                if(Analytics) { Analytics.eventAndParams("Want-To Sorted", { "filter": filter }); }
-            }
-
-            return false;
-        });
-        $(".check-list-poster").click(function(e){
-            e.preventDefault(); e.stopPropagation();
-
-            var parent = $(this).parent().parent(),
-                id = parent.data("movieid");
-
-            Backbone.history.navigate("movieLobby/"+ id, true);
-        })
-    },
     sortQ: function(array, filter){
         var self = this,
             cleanArray, sortedArray;
 
         cleanArray = Util.validArray(array, filter); //Separate values that don't have the filter field (cities don't have rotten tomato scores)
-        sortedArray = cleanArray[0].sort(Util.sortFunction(filter)).concat(cleanArray[1]); // sort the array that has the filter values and concat the items that don't
+        
+        sortedArray = cleanArray[0]                    // sort the array that has the filter values and concat the items that don't
+                            .sort(Util.sortFunction(filter))
+                            .concat(cleanArray[1]); 
 
         var html = APP.load("homeQ", {
             removedList: self.model.removedList,
