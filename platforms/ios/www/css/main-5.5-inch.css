@@ -528,7 +528,7 @@ header nav #chat-menu { background-image: url(../images/6p/discovery/chat.png); 
 .list header nav h1.open span,
 #dashboard header nav h1.open span { background-image: url(../images/6p/discovery/fabricIcons/arrowRed.png); }
 header nav .slide,
-header nav #tap-menu { background-image: url(../images/6p/discovery/hamIcon.png); }
+
 header nav #shopping-cart,
 header nav #notifications-menu { background-image: url(../images/6p/discovery/bell2.png); }
 header nav #notifications-menu.on { background-image: url(../images/6p/discovery/bell-on.png); }

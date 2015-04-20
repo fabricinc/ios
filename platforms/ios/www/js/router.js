@@ -280,7 +280,7 @@
 
             $("#tap-menu, .left.button.slide").fastClick(function(e) {
                 e.preventDefault();
-                UI.menuSlideAction();
+                Backbone.history.navigate("profile", true);
             });
 
             $("#scroll-top").fastClick(function() {
@@ -292,9 +292,7 @@
 
         bindGlobalEvents: function() {
             this.loadRequests();
-            //create html for side menu
-            // UI.loadRightMenu();
-            UI.loadSideMenu(this.menuItems);
+
         },
         loadRequests: function() {
             this.unseenActivityRequest();

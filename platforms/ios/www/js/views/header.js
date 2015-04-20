@@ -43,7 +43,6 @@
                 var html = APP.load(tmp, data);
 
             this.$el.html(html);
-            // this.bindEvents();
 
             callback();
 

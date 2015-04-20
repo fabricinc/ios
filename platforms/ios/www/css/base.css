@@ -310,10 +310,12 @@ header nav #notifications-menu:active{ opacity: 0.5; }
 #wrapper.messages header nav #chat-menu div.rel
 #messages-slider { overflow: hidden; }
 #wrapper.list header nav #chat-menu {}
+header nav #tap-avatar {
+    left: 0;
+}
 header nav .slide,
 header nav #tap-menu {
     left: 0;
-    background-image: url(../images/discovery/hamIcon.png);
     background-size: 25px 16px;
     background-position: 10px 16px;
 }

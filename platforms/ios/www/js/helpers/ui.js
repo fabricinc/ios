@@ -345,17 +345,6 @@ var UI = {
 
             return avatar[0].outerHTML;
         },
-        loadSideMenu: function(options) {
-            var userPicture = User.getFacebookAvatar() || "images/discovery/avatar.png",
-                queued      = 'hello';
-
-            if(!$("#side-nav").length){
-                var html = APP.load("menu", { userPicture: userPicture, queued: queued, menuItem: options });
-                $("#wrapper").prepend(html);
-                UI.bindSideMenuEvents();
-            }   
-
-        },
         loadRightMenu: function(options) {
             if(!$("#right-menu").length) {
                 var html = APP.load("rightMenu");

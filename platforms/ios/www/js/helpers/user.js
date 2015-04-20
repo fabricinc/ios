@@ -13,8 +13,10 @@
 
     User = {
         emailRegex: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
+        avatar: null,
         fbWait: false,
         isFacebook: false,
+
         // TODO: move User model stuff into a separate file.
         createUserModel: function(data) {
             data = data || {};
@@ -57,6 +59,8 @@
                         } else {
                             APP.models.currentUser.set(response);
                         }
+
+                        User.createUserAvatar();
 
                         if (parseInt(response.facebookID) > 0 && !User.isFacebookUser()) {
                             Facebook.promptLogin(callback);
@@ -570,7 +574,20 @@
         isFacebookUser: function() {
             return this.isFacebook;
         },
+        createUserAvatar: function() {
 
+
+            if(this.avatar) { return; }
+
+
+            var backUpAvatar = "images/discovery/avatar.png",
+                avatar = new Image(50);
+
+            avatar.src = this.isFacebook ? this.getFacebookAvatar() : backUpAvatar;
+            avatar.id = 'tap-avatar';
+
+            this.avatar = avatar;
+        },
         getFacebookAvatar: function(facebookID, size, rank) {
             if (!facebookID || facebookID === null) {
                 if (facebookID !== null && this.isFacebookUser()) {

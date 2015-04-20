@@ -121,7 +121,6 @@ var APP = {
             "movieListSeen",
             "searchUserList",
             "profile",
-            "menu",
             "search",
             "lists",
             "listRow",
