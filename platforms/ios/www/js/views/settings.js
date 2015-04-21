@@ -162,7 +162,6 @@
             callback = callback || function() {};
 
             this.template = (typeof options.template !== 'undefined') ? options.template : this.template;
-            this.backButton = this.template  === "settings" ? "slide" : this.backButton;
 			this.model = new SettingsModel();
 
             return this;

@@ -1,6 +1,7 @@
 <div id="profile" class="bgwhite<% if(!userID) { %> owner<% } %>">
     <div class="profile-scroll-content cf">
         <div class="info<% if(userID == '252990') { %> msPop<% } %>" <% if(profileData.facebookID) { %>style="background-image: url(https://graph.facebook.com/<%= profileData.facebookID %>/picture?height=380&width=320);"<% } %>>
+            <% if(self) { %><img id="settings-gear" src="images/discovery/settings.png" /><% } %>
             <% if(userID != '252990') { %>
                 <% if(moviesInCommon[0].compatibility && moviesInCommon[0].compatibility != "0") { %>
                 <div class="outer">
@@ -24,21 +25,21 @@
         <div class="bio">
             <div class="name"><%= profileData.uName %><% if(profileData.age && parseInt(profileData.age) > 18) { %>, <%= profileData.age %><% } %></div>
             <% if(profileData.city) { %>
-            <div class="location"><%= profileData.city %></div>
+                <div class="location"><%= profileData.city %></div>
             <% } %>
         </div>
 
         <% if(!self && userID != "252990") { %>
-        <div class="action-buttons">
-            <div id="follow-button" class="button follow<% if(following) { %> following <% } %>">Follow<% if(following) { %>ing<% } %></div>
-            <div id="send-greeting" class="button greeting<% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %> greeted<% } %>" data-messagecount="<%= messageCount[0].messageCount %>">
-                <% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %>
-                    Message
-                <% } else { %>
-                    Say Hi
-                <% } %>
+            <div class="action-buttons">
+                <div id="follow-button" class="button follow<% if(following) { %> following <% } %>">Follow<% if(following) { %>ing<% } %></div>
+                <div id="send-greeting" class="button greeting<% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %> greeted<% } %>" data-messagecount="<%= messageCount[0].messageCount %>">
+                    <% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %>
+                        Message
+                    <% } else { %>
+                        Say Hi
+                    <% } %>
+                </div>
             </div>
-        </div>
         <% } %>
 
         <% if(userID != "252990") { %>

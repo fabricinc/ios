@@ -1,3 +1,10 @@
+<div id="suggested-follow-section">
+	<div class='suggested-follow'></div>
+	<div class='suggested-follow'></div>
+	<div class='suggested-follow'></div>
+	<div class='suggested-follow'></div>
+	<div class='suggested-follow'></div>
+</div>
 <% 	_.each(items, function(item) { %>
 	<% var category = item.tile_image.indexOf("_tv") === -1 ? "movie" : "tv"; %>
 	<div data-catid="<%= item.category_id %>" data-listid="<%= item.list_id %>" class="section<%= item.section_id %> catItem <%= category %><% if(item.completed == 1) { %> completed<% } %>">

@@ -22,6 +22,8 @@ var ProfileModel = Backbone.Model.extend({
                 self.isFriend = response.isFriend;
                 self.set(response);
 
+
+                console.log(response);
                 // fetch new FBImages if own profile
                 if(response.self) {
                     Facebook.updateFBImages();
@@ -63,6 +65,10 @@ var ProfileModel = Backbone.Model.extend({
         $("#feed").click(function() {
             Backbone.history.navigate("userFeed/" + self.userID, true);
             return false;
+        });
+
+        $("#settings-gear").fastClick(function(){
+            Backbone.history.navigate("settings", true);
         });
 
         $("#follow-button").click(function() {

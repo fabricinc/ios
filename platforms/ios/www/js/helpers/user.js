@@ -40,7 +40,8 @@
                         response.success = true;
                         response.isFacebook = (parseInt(response.facebookID) > 0) ? true : false;
                         response.facebookID = (response.facebookID == "null") ? 0 : parseInt(response.facebookID);
-                            
+                        
+                        User.isFacebook = response.isFacebook;
                         APP.gameState = response;
 
                         MobileDevice.getGeolocation(function(pos) {
@@ -583,6 +584,8 @@
             var backUpAvatar = "images/discovery/avatar.png",
                 avatar = new Image(50);
 
+            console.log(this);
+            console.log(this.isFacebook);
             avatar.src = this.isFacebook ? this.getFacebookAvatar() : backUpAvatar;
             avatar.id = 'tap-avatar';
 

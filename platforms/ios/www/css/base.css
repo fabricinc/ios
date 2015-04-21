@@ -315,7 +315,8 @@ header nav #tap-avatar {
 }
 header nav .slide,
 header nav #tap-menu {
-    left: 0;
+    left: 5px;
+    border-radius: 25px;
     background-size: 25px 16px;
     background-position: 10px 16px;
 }
@@ -3682,6 +3683,13 @@ h2#see-more-matches {
     background-repeat: no-repeat;
     background-position: 0 0;
     background-image: url(../images/discovery/noPhotoAvailable.png);
+}
+#settings-gear {
+    position: absolute;
+    height: 25px;
+    z-index: 3;
+    right: 3px;
+    top: 3px;
 }
 #profile .info.msPop { background-image: url(https://s3.amazonaws.com/trailerpop/images/MsPop/fakeMsPop_large.png) !important; }
 .avatar.msPop { background-image: url(https://s3.amazonaws.com/trailerpop/images/MsPop/fakeMsPop.png) !important; }

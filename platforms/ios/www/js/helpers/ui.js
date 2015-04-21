@@ -447,41 +447,6 @@ var UI = {
                 return false;
             });
         },
-        menuSlideAction: function() {
-            if(!$("#wrapper").hasClass("leftMenu")) {
-                if(UI.scroller) {
-                    APP.lastFeedPos = UI.scroller.y;
-                }
-            }
-            var sideNav = $("#side-nav"),
-                delay   = sideNav.hasClass("open-slide") ? 500 : 10,
-                wrapperClass = $("#wrapper")[0].className.split(" ")[0] != "list" ? $("#wrapper")[0].className.split(" ")[0] : "queue" ;
-
-            UI.deallocScroller();
-
-            if(delay == 500) {
-                // $("#side-swipe").slickPlay();
-            } else {
-                $("#side-menu-"+ wrapperClass).addClass("active"); //Show user where they are on side menu
-                // $("#side-swipe").slickPause();
-            }
-            $("#wrapper").toggleClass("leftMenu");
-            setTimeout(function() {
-                $(sideNav).toggleClass('open-slide');
-                $("#menu-search-form input").blur();
-
-                if(!$("#wrapper").hasClass("leftMenu")) {
-                    //alert("wrapper has leftMenu - re-init");
-                    UI.initScrollerOpts(APP.scrollerEle, {
-                        vScrollbar: false,
-                        hScroll: false,
-                        bounce: true,
-                        startY: APP.lastFeedPos,
-                        click: true
-                    });
-                }
-            }, delay);
-        },
         rightMenuSlide: function(html) {
             var sideNav = $("#right-menu"),
                 delay   = (sideNav.hasClass("open-slide")) ? 500 : 10;
