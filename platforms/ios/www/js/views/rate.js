@@ -19,6 +19,13 @@ var RateModel = Backbone.Model.extend({
 
     initialize: function(options) {
         var self = this;
+        if(typeof APP.feedFilter === "undefined") {
+            APP.feedFilter = "category-filter"; // filters: category-filter, activity-filter, recommended-filter
+        }
+
+        self.filter = APP.feedFilter;
+
+
     },
     fetchData: function(callback) {
         var self = this;
@@ -27,45 +34,35 @@ var RateModel = Backbone.Model.extend({
         Api.appSettings.discoveryLimit = parseInt(Api.appSettings.discoveryLimit);
         Api.appSettings.feedLimit = parseInt(Api.appSettings.feedLimit);
 
-        // check the active tab to change the load order
-        if(self.filter == "activity-filter") {
-            // !!!!!!!!!!!!! LOAD FEED !!!!!!!!!!!!!
-            Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
-                var resp = response;
-                self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
-                self.categories = response.data.categories;
-                if(self.categories.length < Api.appSettings.discoveryLimit) { self.pclf = true; }
 
-                Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
-                    self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
-                    self.feed = { feed: response.data.activityFeed.data };
-                    self.feedLoaded = true;
-                    if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
+        Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
+            
 
-                    callback(resp.data.categories, resp.data.concierge, resp.data.lastStatus);
-                });
+            console.log(response);
 
+
+            self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
+            self.categories = response.data.categories;
+            if(self.categories.length < Api.appSettings.discoveryLimit) { self.pclf = true; }
+
+
+
+            Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
+                self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
+                self.feed = { feed: response.data.activityFeed.data };
+                self.feedLoaded = true;
+                if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
+
+                // Only run this callback (wait for activity feed data) if we are on the activity feed
+                if(self.filter == "activity-filter") { callback(response.data.categories, response.data.concierge); }
             });
-        } else {
-            // !!!!!!!!!!!!! LOAD CATEGORIES !!!!!!!!!!!!!
-            Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
 
-                self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
-                self.categories = response.data.categories;
-                if(self.categories.length < Api.appSettings.discoveryLimit) { self.pclf = true; }
 
-                Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
-                    self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
-                    self.feed = { feed: response.data.activityFeed.data };
-                    self.feedLoaded = true;
-                    if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
-                });
+            // This is only run if the category feed is selected
+            if(self.filter == "category-filter") { callback(response.data.categories, response.data.concierge); }
 
-                callback(response.data.categories, response.data.concierge, response.data.lastStatus);
-            });
-        }
+        });
 
-        return this;
     }
 });
 
@@ -137,6 +134,7 @@ var RateView = Backbone.View.extend({
                         // Highlight corect filter
                         $("#"+ self.filter).addClass("filter");
 
+
                         var cb = function() {
                             UI.initScrollerOpts($("#category-container")[0], { // #home-slider
                                 vScrollbar: false,
@@ -179,15 +177,13 @@ var RateView = Backbone.View.extend({
 
         if(filter === "activity-filter") {
             // show activity filter
+            var recommendedPeople = new RecommendedPeopleView({people : 'hi' });
+
             if(!self.model.feedLoaded || self.model.feed == null) {
                 self.feedInterval = setInterval(function() {
                     if(self.model.feedLoaded && self.model.feed) {
-                        // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
                         var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
                         
-
-                        // $("#content-container .content-scroller").append(lastStatus + activityFeed);
-                        //REMOVE LAST SATUS
 
                         $("#content-container .content-scroller").append(activityFeed);
 
@@ -217,6 +213,7 @@ var RateView = Backbone.View.extend({
             // show category filter
             var categoryFeed = APP.load("categoryFeed", { items: self.model.categories });
             $("#content-container .content-scroller").html(categoryFeed);
+
 
             // bind category feed events
             self.bindCategoryEvents();
@@ -265,35 +262,7 @@ var RateView = Backbone.View.extend({
                             setTimeout(function() { if(UI.scroller) { UI.scroller.refresh(); } APP.working = false; }, 500); // we refresh again in 0.5 seconds to give the images time to load more properly
                         });
                     }
-                } else if(APP.feedFilter == "recommended-filter" && Math.abs(this.maxScrollY) - Math.abs(this.y) < 800) {
-                    if(!APP.working & !self.model.prlf) {
-                        APP.working = true;
-                        //$(".load-more-spinner").css("visibility", "visible");
-                        var cut = self.model.startR + Api.appSettings.wantToLimit,
-                            moreMoves = self.model.recs.slice(cut, cut + Api.appSettings.wantToLimit);
-
-                        if(moreMoves.length > 0) {
-                            if(moreMoves.length < Api.appSettings.wantToLimit) {
-                                self.model.prlf = true;
-                            }
-                            self.model.startR += 50;
-
-                            var html = APP.load("homeQ", {
-                                removedList: self.model.removedList,
-                                count: self.model.startR,
-                                concierge: false,
-                                items: moreMoves
-                            });
-                            $("#content-container .content-scroller").append(html);
-
-                            self.bindRecommendedEvents();
-                            setTimeout(function() { if(UI.scroller) { APP.working = false; UI.scroller.refresh(); } }, 500);
-                        } else {
-                            APP.working = false;
-                        }
-                    } else {
-                    }
-                }
+                } 
             });
         }, 500);
     },
@@ -374,6 +343,10 @@ var RateView = Backbone.View.extend({
                         APP.feedFilter = filter;
                         var curPos = self.actPos;
                     }
+
+                    // Add people 
+                    var recommendedPeople = new RecommendedPeopleView();
+
                 } else if(filter === "category-filter") {
 
                     // !!!!!!!!!!!!!!!!!!! CATEGORY FEED !!!!!!!!!!!!!!!!!!!

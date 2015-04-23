@@ -98,6 +98,7 @@
         <script src="js/views/start.js"></script>
 		<script src="js/views/welcome.js"></script>
         <script src="js/views/welcomeCategory.js"></script>
+        <script src="js/views/recommendedPeople.js"></script>
 
 		<script src="js/router.js"></script>
 		<script src="js/lib/vendor/mixpanel.js"></script>
@@ -106,6 +107,7 @@
 
         <script>
             function appInit() {
+                alert();
                 if (!window.APP) window.APP = APP;
                 if(Util.isMobile()) {
                     document.addEventListener("deviceready", function() { MobileDevice.onDeviceReady(); }, false);

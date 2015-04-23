@@ -1287,6 +1287,13 @@ Api.getUserMatches = function(callback) {
     };
     this.fetch(options, callback);
 }
+Api.getRecommendedPeople = function(callback) {
+    callback = callback || function() {};
+    var options = {
+        "action": "getRecommendedPeople"
+    }
+    this.fetch(options, callback);
+}
 Api.incBalance = function(amount, note, callback) {
     callback = callback || function() {};
     amount = amount || null;

@@ -584,8 +584,6 @@
             var backUpAvatar = "images/discovery/avatar.png",
                 avatar = new Image(50);
 
-            console.log(this);
-            console.log(this.isFacebook);
             avatar.src = this.isFacebook ? this.getFacebookAvatar() : backUpAvatar;
             avatar.id = 'tap-avatar';
 

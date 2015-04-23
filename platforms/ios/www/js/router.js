@@ -1,25 +1,5 @@
     var Router = Backbone.Router.extend({
         $wrapper: $("#wrapper"),
-        menuItems: [{
-                        classes : "profile",
-                        title   : "profile"
-                    },
-                    {
-                        classes : "rate",
-                        title   : "home"
-                    },
-                    {
-                        classes : "friends",
-                        title   : "friends"
-                    },
-                    {
-                        classes : "matches",
-                        title   : "People Like You"
-                    },
-                    {
-                        classes : "settings",
-                        title   : "settings"
-                    }],
 
         routes: {
             "": "welcome", // home, rate

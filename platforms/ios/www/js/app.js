@@ -145,6 +145,8 @@ var APP = {
             "settings",
             "settingsNotifications",
             "recommendationsUserList",
+            "recommendedPeople",
+            "recommendedPerson",
             "activityFeed",
             "categoryFeed",
             "userRecs",
