@@ -16,6 +16,7 @@ var RateModel = Backbone.Model.extend({
     recsLoaded: false,
     concierge: null,
     removedList: [],
+    people: null,
 
     initialize: function(options) {
         var self = this;
@@ -38,8 +39,6 @@ var RateModel = Backbone.Model.extend({
         Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
             
 
-            console.log(response);
-
 
             self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
             self.categories = response.data.categories;
@@ -48,18 +47,31 @@ var RateModel = Backbone.Model.extend({
 
 
             Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
+
+
                 self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
                 self.feed = { feed: response.data.activityFeed.data };
                 self.feedLoaded = true;
                 if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
 
+
+                Api.getRecommendedPeople(function(response) {
+
+                    this.set("people", response.data);
+
+                }.bind(self));
+
+
                 // Only run this callback (wait for activity feed data) if we are on the activity feed
-                if(self.filter == "activity-filter") { callback(response.data.categories, response.data.concierge); }
+                if(self.filter == "activity-filter") { callback(response.data.categories); }
+
+
             });
 
 
             // This is only run if the category feed is selected
-            if(self.filter == "category-filter") { callback(response.data.categories, response.data.concierge); }
+            if(self.filter == "category-filter") { callback(response.data.categories); }
+
 
         });
 
@@ -81,6 +93,10 @@ var RateView = Backbone.View.extend({
     actPos: 0,
     recPos: 0,
 
+    events: {
+
+    },
+
     initialize: function(callback) {
         var self = this, options = {};
         callback = callback || function() {};
@@ -93,13 +109,30 @@ var RateView = Backbone.View.extend({
 
         self.filter = APP.feedFilter;
 
+
+        this.listenTo(this.model, 'change', this.test);
+
         callback();
         return this;
+    },
+
+    test: function() {
+        var people = this.model.get("people");
+    
+
+        // Only show recommended people on activity filter
+        if(this.filter !== "activity-filter") { return; }
+
+
+        var recommendedPeople = new RecommendedPeopleView( people );
+
     },
     render: function(callback, update) {
         var self = this;
         callback = callback || function() {};
 
+
+        this.model
         APP.refreshSettings(function() {
             User.fetchMinData(function(success) {
                 if(success) {
@@ -109,14 +142,16 @@ var RateView = Backbone.View.extend({
                         Backbone.history.navigate(APP.url.route, true);
                         return false;
                     }
-                    mixpanel.register({ "Section": APP.sectionID });
-                    self.model.fetchData(function(categories, concierge, lastStatus) {
-                        APP.models.rate = self.model;
-                        self.concierge = concierge;
-                        self.categories = categories;
-                        self.lastStatus = lastStatus;
+                    
 
-                        var html = APP.load("rate", { lastStatus: lastStatus }),
+                    mixpanel.register({ "Section": APP.sectionID });
+
+
+                    self.model.fetchData(function(categories) {
+                        APP.models.rate = self.model;
+                        self.categories = categories;
+
+                        var html = APP.load("rate"),
                             feedPos = APP.feedPos < 0 && APP.feedPos ? APP.feedPos : 0;
 
                         self.$el.html(html);
@@ -177,7 +212,8 @@ var RateView = Backbone.View.extend({
 
         if(filter === "activity-filter") {
             // show activity filter
-            var recommendedPeople = new RecommendedPeopleView({people : 'hi' });
+            // console.log(this.model);
+            // var recommendedPeople = new RecommendedPeopleView(this.model.get('people'));
 
             if(!self.model.feedLoaded || self.model.feed == null) {
                 self.feedInterval = setInterval(function() {
@@ -210,6 +246,7 @@ var RateView = Backbone.View.extend({
                 cb();
             }
         } else if(filter == "category-filter") {
+
             // show category filter
             var categoryFeed = APP.load("categoryFeed", { items: self.model.categories });
             $("#content-container .content-scroller").html(categoryFeed);
@@ -218,6 +255,7 @@ var RateView = Backbone.View.extend({
             // bind category feed events
             self.bindCategoryEvents();
             cb();
+            
         } 
     },
     moreFeedPlease: function() {
@@ -345,7 +383,9 @@ var RateView = Backbone.View.extend({
                     }
 
                     // Add people 
-                    var recommendedPeople = new RecommendedPeopleView();
+                    if(self.model.get("people").length){
+                        var recommendedPeople = new RecommendedPeopleView(self.model.get('people'));
+                    }
 
                 } else if(filter === "category-filter") {
 

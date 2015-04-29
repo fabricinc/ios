@@ -23,7 +23,7 @@ var ProfileModel = Backbone.Model.extend({
                 self.set(response);
 
 
-                console.log(response);
+
                 // fetch new FBImages if own profile
                 if(response.self) {
                     Facebook.updateFBImages();

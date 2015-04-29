@@ -1433,6 +1433,8 @@
 
         curLeft = _.getLeft(_.currentSlide);
 
+        console.log('curLeft '+ curLeft);
+
         if (!_.$list.hasClass('dragging') || touches && touches.length !== 1) {
             return false;
         }
@@ -1470,6 +1472,8 @@
             _.swipeLeft = null;
             return false;
         }
+
+        console.log('swipeLeft '+ _.swipeLeft);
 
         _.setCSS(_.swipeLeft);
 
