@@ -64,6 +64,7 @@
             "greeting/:id": "greeting",
             "whosGoing/:movieID": "whosGoing",
             "statusUpdate/:id": "statusUpdateMovie",
+            "searchStatusUpdate": "searchStatusUpdate",
             "getFavsInCommon/:id": "getFavsInCommon",
             "getQueueInCommon/:id": "getQueueInCommon",
             "reportUser/:id": "reportUser",
@@ -135,10 +136,11 @@
 
         bindHeaderEvents: function(className) {
             var self = this;
+            console.log('bind header events');
             $(".left.button.back").fastClick(function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-
+                console.log('hi');
                 Backbone.history.navigate("back", true);
             });
             $("#done-button").fastClick(function(e){
@@ -797,6 +799,14 @@
                     scroller: false,
                     loadPageHtml: false
                 }, "status-update");
+            });
+            this.on("route:searchStatusUpdate", function() {
+                self.loadView(new SearchStatusUpdateView(), function() {
+                    // Stub for callback
+                }, {
+                    scroller: false,
+                    loadPageHtml: false
+                }, "search-status-update");
             });
             this.on("route:getFavsInCommon", function(userID) {
                 self.loadView(new ListView({ objectID: userID, listType: "favInCommon" }), function() {

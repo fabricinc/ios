@@ -166,6 +166,7 @@ var APP = {
             "statusUpdateMovie",
             "upNext",
             "userFeed",
+            "searchStatusUpdate",
             "feedSearchResults",
             "recommendations",
             "recItems",

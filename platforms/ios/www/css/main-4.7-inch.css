@@ -1,9 +1,8 @@
 /* iPhone 6 */
 #wrapper { width: 375px; height: 667px; position: relative; }
-#home-filters { width: 375px; height: 45px;}
-#home-filters div, #coach-section div { width: 187px; height: 46px; line-height: 46px; }
+#home-filters div, #coach-section div { width: 50%; }
 #home-filters div#recommended-filter, #coach-section.want-to div { width: 125px; }
-#category-container { height: 560px; }
+#category-container { height: 550px; }
 .recommended-filter #category-container{ height: 510px; }
 #welcome div .title,
 #category-container div .title { 
@@ -302,7 +301,9 @@ div#mask .wheel {
 }
 header nav { height: 59px; }
 
-header nav #tap-menu,
+header nav #tap-menu {
+    top: 3px;
+}
 header nav #share-icon,
 header nav #shopping-cart,
 header nav #notifications-menu,
@@ -352,21 +353,29 @@ header nav #chat-menu { top: 5px; }
     top: 185px;
 }
 #status-drop { max-height: 486px; }
-#status-drop .result, #menu-drop .result {
+#search-results .result,
+#status-drop .result, 
+#menu-drop .result {
     height: 75px;
 }
-#status-drop .result .poster, #menu-drop .result .poster {
+#search-results .result .poster,
+#status-drop .result .poster, 
+#menu-drop .result .poster {
     background-size: 100% 100%; 
     height: 75px; 
     width: 50px;
 }
-#status-drop .result h1, #menu-drop .result h1{
+#search-results .result h1,
+#status-drop .result h1, 
+#menu-drop .result h1{
     padding-left: 10px;
     line-height: 18px;
     padding-top: 2px; 
     font-size: 18px;
 }
-#status-drop .result h2, #menu-drop .result h2 {
+#search-results .result h2,
+#status-drop .result h2, 
+#menu-drop .result h2 {
     padding-left: 10px;
 }
 #menu-drop  { max-height: 606px; width: 270px; }
@@ -418,8 +427,8 @@ header nav #chat-menu {
 #dashboard header nav h1.open span { background-image: url(../images/6p/discovery/fabricIcons/arrowRed.png); }
 
 header nav #shopping-cart,
-header nav #notifications-menu { background-image: url(../images/6p/discovery/bell2.png); }
-header nav #notifications-menu.on { background-image: url(../images/6p/discovery/bell-on.png); }
+
+
 #done-button, #more-button, #done-inter-button, #rec-filter-button { 
     font-size: 18px !important;
     top: 24px;

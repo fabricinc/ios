@@ -29,6 +29,7 @@ var RecommendedPeopleModel = Backbone.Model.extend({
 var RecommendedPeopleView = Backbone.View.extend({
     el: "#suggested-follow-section",
     touchObject: {},
+    style: null,
     model: null,
     offset: 0,
 
@@ -36,8 +37,12 @@ var RecommendedPeopleView = Backbone.View.extend({
     initialize: function(people) {
         this.model = new RecommendedPeopleModel(people);
 
-        console.log("NEW PEOPLE");
         this.render();
+
+        this.$el.on('transitionend', function(event) {
+            
+            event.currentTarget.style.transitionDuration = 0;
+        });
 
     },
 
@@ -85,14 +90,21 @@ var RecommendedPeopleView = Backbone.View.extend({
     // People card slide events 
     start: function(event) {
 
-        var touches;
-        
-        if(event.originalEvent !== undefined && event.originalEvent.touches !== undefined){
-            touches = event.originalEvent.touches[0];
-        }
+        // set the elements style on the view
+        if(!this.style) { this.style = event.currentTarget.style; }
 
-        this.touchObject.startX = this.touchObject.curX = touches !== undefined ? touches.pageX : event.clientX;
-        this.touchObject.currentPosition = this.$el.position().left;
+        // Stop transition durration
+        this.style.transitionDuration = 0;
+
+        UI.scroller.disable();
+
+
+        var touches = event.originalEvent.touches[0],
+            tO = this.touchObject;
+
+        tO.currentPosition = this.$el.position().left;
+        tO.startX = touches.pageX;
+        tO.startTime = Date.now();
 
         this.$el.addClass('dragging');
 
@@ -100,31 +112,31 @@ var RecommendedPeopleView = Backbone.View.extend({
 
     move: function(event) {
 
-        var touches, curLeft;
+        var touches = event.originalEvent.touches,
+            tO = this.touchObject;
 
-        // get our touch events
-        touches = event.originalEvent !== undefined ? event.originalEvent.touches : null;
 
-        curLeft = this.$el.position().left;
 
         // Return if the touches object has not been created or class 'dragging' isn't present
         if(!this.$el.hasClass('dragging') || touches && touches.length !== 1){
             return false;
         }
 
-        // short and sweet
-        var tO = this.touchObject;
-
         // Now set our current touch position in the touchObject
-        this.touchObject.curX = touches !== undefined ? touches[0].pageX : event.clientX;
+        tO.curX =  touches[0].pageX;
 
         // Now get swipe length
-        this.touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(this.touchObject.curX - this.touchObject.startX, 2)));
+        tO.swipeLength = tO.curX - tO.startX;
 
-        // Muliplyer to determine the swipe direct
-        positionOffset = this.touchObject.curX > this.touchObject.startX ? 1 : -1;
+        // Return if swipe is less than 10px; 
+        if(tO < 10) { return; }
 
-        var swipeMove =  (this.touchObject.currentPosition - 10)+ this.touchObject.swipeLength * positionOffset;
+        var swipeMove = tO.currentPosition + tO.swipeLength;
+
+
+        console.log(swipeMove);
+
+        if(swipeMove > 0 || swipeMove < -1750) { return; }
 
 
         // Set the CSS with the swipeLength
@@ -134,28 +146,56 @@ var RecommendedPeopleView = Backbone.View.extend({
 
     end: function(event) {
 
-        this.$el.removeClass('dragging');
+        var tO              = this.touchObject,
+            durration       = Date.now() - tO.startTime,
+            start           = Math.round(tO.startX),
+            currentPosition = Math.round(tO.curX);
 
+
+        // Only add momentum is swipe durration is > 300
+        if(durration < 300) {
+            // Calculate momentum
+            this.momentum(currentPosition, start, durration);
+        }
+        UI.scroller.enable();
     },
 
     setCSS: function(swipeLength) {
 
-        var stop = swipeLength > 0 || swipeLength < -1780 ? true : false;
-        
-
-        // If we are at the end prefent css update
-        if(stop) { return; }
-
-        var move = {"-webkit-transform" : "translate3d("+ swipeLength +"px, 0px, 0px)"}
 
 
-        this.$el.css(move);
+        this.style.webkitTransform = "translate3d("+ swipeLength +"px, 0px, 0px)";
     },
 
 
-    bounceBack: function(position) {
-        // var bounceAmount = position > 10
+    momentum: function(currentPosition, startPosition, time) {
+        
+        var distance = currentPosition - startPosition,
+            direction = distance < 0 ? -1 : 1,
+            speed = Math.abs(distance) / time,
+            x = this.$el.position().left,
+            destination,
+            d = 0.0006,
+            transition,
+            durration;
 
+
+        destination =  x + ( speed * speed ) / ( 2 * d ) * ( direction );
+
+        durration =  speed / d;
+
+
+
+        //Don't go past max right distance or min left distance 
+
+
+        destination = destination < -1750 ? -1750 : destination;
+        destination = destination > 0 ? 0 : destination;
+
+
+        this.style.transitionDuration = durration+"ms";
+        console.log(this.style.transitionDuration);
+        this.setCSS(destination);
 
 
     }

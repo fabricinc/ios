@@ -53,7 +53,11 @@ var utils = (function () {
 			destination,
 			duration;
 
+
+
+
 		deceleration = deceleration === undefined ? 0.0006 : deceleration;
+
 
 		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
 		duration = speed / deceleration;
@@ -67,6 +71,8 @@ var utils = (function () {
 			distance = Math.abs(current) + destination;
 			duration = distance / speed;
 		}
+
+		
 
 		return {
 			destination: Math.round(destination),
@@ -413,6 +419,7 @@ IScroll.prototype = {
 		this.pointX    = point.pageX;
 		this.pointY    = point.pageY;
 
+
 		this._execEvent('beforeScrollStart');
 	},
 
@@ -559,6 +566,7 @@ IScroll.prototype = {
 		}
 
 		if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
+			console.log('flick');
 			this._execEvent('flick');
 			return;
 		}
@@ -566,6 +574,8 @@ IScroll.prototype = {
 		// start momentum animation if needed
 		if ( this.options.momentum && duration < 300 ) {
 			momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
+
+
 			momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: newY, duration: 0 };
 			newX = momentumX.destination;
 			newY = momentumY.destination;
@@ -787,6 +797,7 @@ IScroll.prototype = {
 		time = time || 0;
 
 		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
+
 
 		if ( !time && utils.isBadAndroid ) {
 			this.scrollerStyle[utils.style.transitionDuration] = '0.001s';

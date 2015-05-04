@@ -428,13 +428,19 @@ div#friends-queued.bottom-info { left: 250px; }
     height: 30px;
     background-size: 30px 30px;
 }
-#status-drop .result, #menu-drop .result { height: 90px; }
-#status-drop .result .poster, #menu-drop .result .poster {
+#search-results .result,
+#status-drop .result, 
+#menu-drop .result { height: 90px; }
+#search-results .result .poster,
+#status-drop .result .poster, 
+#menu-drop .result .poster {
     width: 60px;
     height: 90px;
     background-size: 60px 90px;
 }
-#status-drop .result h1, #menu-drop .result h1 {
+#search-results .result h1, 
+#status-drop .result h1, 
+#menu-drop .result h1 {
     margin: 5px 0;
     font-size: 20px;
     line-height: 22px;

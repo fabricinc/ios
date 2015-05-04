@@ -310,6 +310,10 @@ var RateView = Backbone.View.extend({
             self = this;
 
 
+        $("#home-filters img").fastClick(function() {
+            Backbone.history.navigate('searchStatusUpdate', true);
+        });
+
         // Change filters from categories to feed
         $("#home-filters div").fastClick(function() {
             if(APP.working) { return false; }
