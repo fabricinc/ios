@@ -4,7 +4,7 @@
 #home-filters { width: 414px; height: 52px; }
 #home-filters div#recommended-filter, #coach-section.want-to div { width: 138px; }
 
-#category-container { height: 617px; }
+#category-container { height: 618px; }
 #welcome-categories div .title, 
 #category-container div .title { width: 380px; font-size: 19px; }
 #welcome-categories .catItem { max-height: 155px; }
@@ -266,8 +266,15 @@ header nav #share-icon {
     top: 5px;
     right: 10px;
 }
+header nav #tap-menu {
+    background-size: 100%;
+    border-radius: 30px;
+    height: 55px;
+    width: 55px;
+    left: 5px;
+    top: 5px;
+}
 header nav .slide,
-header nav #tap-menu,
 div.left.button {
     background-position: 17px 22px !important;
     background-size: 29px 20px;
