@@ -1,23 +1,36 @@
 <div id="notifications">
     <% if(notifications.length > 0) { %>
         <% _.each(notifications, function(notification) { %>
-        <div class="notification" data-senderid="<%= notification.senderID %>" data-objecttype="<%= notification.objectType %>" data-objectid="<%= notification.objectID %>" data-notificationtype="<%= notification.notificationType %>">
-            <div class="avatar<% if(notification.senderID == '252990') { %> msPop<% } %>" <% if(notification.facebookID) { %> style="background-image: url(http://graph.facebook.com/<%= notification.facebookID %>/picture?width=100&height=100)"<% } %>></div>
-            <div class="content">
-                <% if(notification.objectType == "feed") { %>
-                    <p><span class="bold"><%= notification.userName %></span> <%= notification.verb %> your activity for <span class="bold"><%= $.parseJSON(notification.objectData).objectName %></span></p>
-                    <% if(notification.notificationType == "comment") { %>
-                    <p style="margin: 5px 0; font-style: italic;">"<%= $.parseJSON(notification.objectData).message.comment %>"</p>
-                    <% } %>
-                    <p style="margin: 5px 0 0 5px; font-size: 12px;"><%= Util.timeAgo(notification.createdAt) %></p>
-                <% } else if(notification.objectType == "user") { %>
-                    <% if(notification.notificationType == "follow" || notification.notificationType == "followback") { %>
-                        <p><span class="bold"><%= notification.userName %></span> <%= notification.verb %></p>
+            <div class="notification" data-senderid="<%= notification.senderID %>" data-objecttype="<%= notification.objectType %>" data-objectid="<%= notification.objectID %>" data-notificationtype="<%= notification.notificationType %>">
+                <div class="avatar<% if(notification.senderID == '252990') { %> msPop<% } %>" <% if(notification.facebookID) { %> style="background-image: url(http://graph.facebook.com/<%= notification.facebookID %>/picture?width=100&height=100)"<% } %>></div>
+                <div class="content">
+                    <% if(notification.objectType == "feed") { 
+                        var string = notification.notificationType == "thread" ? "about " : "your activity for ";
+                    %>
+                        <p>
+                            <span class="bold"><%= notification.userName %></span> 
+                            <%= notification.verb + " " + string %> 
+                            <span class="bold"><%= $.parseJSON(notification.objectData).objectName %></span></p>
+                        
+                        <% if(notification.notificationType == "comment" || notification.notificationType == "thread") { 
+                            if($.parseJSON(notification.objectData).message.comment) { %>
+
+                                <p style="margin: 5px 0; font-style: italic;">
+                                    "<%= $.parseJSON(notification.objectData).message.comment %>"
+                                </p>
+
+                            <% } %>
+
+                        <% } %>
                         <p style="margin: 5px 0 0 5px; font-size: 12px;"><%= Util.timeAgo(notification.createdAt) %></p>
+                    <% } else if(notification.objectType == "user") { %>
+                        <% if(notification.notificationType == "follow" || notification.notificationType == "followback") { %>
+                            <p><span class="bold"><%= notification.userName %></span> <%= notification.verb %></p>
+                            <p style="margin: 5px 0 0 5px; font-size: 12px;"><%= Util.timeAgo(notification.createdAt) %></p>
+                        <% } %>
                     <% } %>
-                <% } %>
+                </div>
             </div>
-        </div>
         <% }); %>
     <% } else { %>
         <p class="blank-message">No notifications yet</p>

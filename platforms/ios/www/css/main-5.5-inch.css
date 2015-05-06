@@ -243,6 +243,7 @@ header nav #chat-menu { top: 5px; }
 #fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 27px 11px; }
 #fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 18px 11px; }
 #statusUpdates .text-box textarea { width: 310px; height: 120px; }
+#status-update-input { width: 387px; }
 #category-container #status-drop { width: 100%; top: 196px; }
 #status-drop, #menu-drop { max-height: 501px; }
 #user-matches h1.credits { background-position: 20px 2px; }
@@ -536,7 +537,7 @@ header nav #chat-menu { background-image: url(../images/6p/discovery/chat.png); 
 header nav .slide,
 
 header nav #shopping-cart,
-header nav #notifications-menu { background-image: url(../images/6p/discovery/bell2.png); }
+
 header nav #notifications-menu.on { background-image: url(../images/6p/discovery/bell-on.png); }
 #all-nav { background-image: url(../images/6p/discovery/fabricIcons/alldot.png); }
 #movies-nav { background-image: url(../images/6p/discovery/fabricIcons/movieMenuIcon.png); }

@@ -116,10 +116,13 @@ var StatusUpdatesView = Backbone.View.extend({
             }
 
             Api.createFeed("watchstatus", self.model.movieID, { comment: $(".text-box textarea").val() }, function(response) {
+                // set filter so user goes to acitivity feed
+                APP.feedFilter = 'activity-filter';
+                
                 Backbone.history.navigate("rate", true);
             });
-            Api.setMovieSeen(movie.moviePublishedID, true);
-            Api.setMovieToFabricList(movie.moviePublishedID, APP.gameState.watchListID, false);
+            
+            
 
             if(Analytics) { Analytics.eventAndParams("Staus Updated ", params); }
             mixpanel.track("Status Update", params);

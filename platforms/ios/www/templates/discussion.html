@@ -1,3 +1,8 @@
+<% 
+var feedType = objects.context.feedType;
+var watchStatus = typeof feedType !== 'undefined' && feedType === 'watchstatus' ? true : false;
+%>
+
 <div id="messages-slider" class="<%= type %>">
     <div id="messages-container">
         <% if(context !== null) { %>
@@ -10,17 +15,28 @@
                 </div>
             <% } else { %>
                 <div id="message-context">
-                    <div class="profile-image<% if(context.creatorID == 252990) { %> msPop<% } %>" data-senderid="<%= context.creatorID %>" <% if(context.actorFbID) { %> style="background-image: url(https://graph.facebook.com/<%= context.actorFbID %>/picture?width=100&height=100);"<% } %>></div>
+                    <div class="profile-image<% if(context.creatorID == 252990) { %> msPop<% } %>" data-senderid="<%= context.creatorID %>" <% if(context.actorFbID) { %> 
+                        style="background-image: url(https://graph.facebook.com/<%= context.actorFbID %>/picture?width=100&height=100);"<% } %>>
+                    </div>
                     <% if(context.objectType == "movie") { %>
                         <img src="<%= Api.appSettings.cdn %><%= context.objectAsset.replace('/files','') %>" data-catid="<%= context.objectID %>" />
                     <% } %>
-                    <p class="context-info">
-                        <span class="bold"><%= context.actorName %></span>
-                        <span><%= context.verb %></span>
-                        <% if(context.ratio) { %><span><%= context.ratio %>% of </span><% } %>
+                    <% if(watchStatus) { %>
                         <% contextObject = context.objectName.length > 60 ? context.objectName.slice(0, 63) +"..." : context.objectName; %>
-                        <span class="bold"><%= contextObject %></span>
-                    </p>
+                        <p class="context-info">
+                            <span class="bold"><%= context.actorName.split(' ')[0] %> </span>said: 
+                            <i> '<%= context.comment %>' </i><br /> about
+                            <span class="bold"><%= contextObject %></span>
+                        </p>
+                    <% } else { %>
+                        <p class="context-info">
+                            <span class="bold"><%= context.actorName %></span>
+                            <span><%= context.verb %></span>
+                            <% if(context.ratio) { %><span><%= context.ratio %>% of </span><% } %>
+                            <% contextObject = context.objectName.length > 60 ? context.objectName.slice(0, 63) +"..." : context.objectName; %>
+                            <span class="bold"><%= contextObject %></span>
+                        </p>
+                    <% } %>
                 </div>
             <% } %>
         <% } %>

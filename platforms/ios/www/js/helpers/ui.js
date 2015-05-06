@@ -820,7 +820,7 @@ var UI = {
                 var notificationType = $(this).parent().data("notificationtype");
                 var senderID = $(this).parent().data("senderid");
 
-                if(notificationType == "comment") {
+                if(notificationType == "comment" || notificationType == "thread") {
                     APP.feedPos = self.oldScrollPos;
                     Backbone.history.navigate("feedDiscussion/" + objectID, true);
                 } else if(notificationType == "follow") {

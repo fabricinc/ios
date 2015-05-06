@@ -136,7 +136,7 @@
 
         bindHeaderEvents: function(className) {
             var self = this;
-            console.log('bind header events');
+            
             $(".left.button.back").fastClick(function(e) {
                 e.preventDefault();
                 e.stopPropagation();
