@@ -31,6 +31,7 @@ var MovieLobbyModel = Backbone.Model.extend({
 
             self.movie = response.movie;
             Api.getShoppingLinks(self.movie.moviePublishedID, function(response) {
+                console.log(response);
                 if(response.success){
                     self.services = response.data;
                 } 

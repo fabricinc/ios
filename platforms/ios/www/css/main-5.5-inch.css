@@ -171,6 +171,7 @@ div#friends-queued.bottom-info span {
 .share-icons div.twitter { padding-right: 0; }
 .share-icons div.facebook { width: 207px; }
 .feed-item .action { width: 290px; font-size: 18px; line-height: 22px; }
+.feed-item .action .comment { margin-top: 45px; }
 #user-matches .match { margin: 10px auto 0; }
 .fl .login-text { width: 230px; }
 #registration { left: 43px; }
@@ -388,9 +389,10 @@ div#search-for-friends { background-size: 30px; }
 header nav #notifications-menu { background-size: 28px 28px; right: 50px; }
 #menu-search-form { margin: 20px auto; }
 .feed-item .avatar {
+    border-radius: 33px;
+    margin-right: 15px; 
     height: 65px;
     width: 65px;
-    border-radius: 33px;
 }
 .list-item .compatibility,
 .feed-item .compatibility {

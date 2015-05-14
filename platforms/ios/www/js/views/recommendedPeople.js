@@ -51,7 +51,6 @@ var RecommendedPeopleView = Backbone.View.extend({
         "touchstart" : "start",
         "touchmove" : "move",
         "touchend" : "end",
-        "swipe" : "swipe",
     },
 
 
@@ -134,8 +133,6 @@ var RecommendedPeopleView = Backbone.View.extend({
         var swipeMove = tO.currentPosition + tO.swipeLength;
 
 
-        console.log(swipeMove);
-
         if(swipeMove > 0 || swipeMove < -1750) { return; }
 
 
@@ -179,6 +176,9 @@ var RecommendedPeopleView = Backbone.View.extend({
             transition,
             durration;
 
+        console.log(currentPosition);
+        // console.log();
+
 
         destination =  x + ( speed * speed ) / ( 2 * d ) * ( direction );
 
@@ -195,6 +195,7 @@ var RecommendedPeopleView = Backbone.View.extend({
 
         this.style.transitionDuration = durration+"ms";
         console.log(this.style.transitionDuration);
+        
         this.setCSS(destination);
 
 

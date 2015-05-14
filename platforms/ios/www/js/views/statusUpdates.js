@@ -50,7 +50,7 @@ var StatusUpdatesView = Backbone.View.extend({
             self.$el.html(html);
 
             if (!self.header) {
-                self.header = new HeaderView({ title: "Status", postButton: true });
+                self.header = new HeaderView({ title: "Write Question", postButton: true });
                 self.$el.prepend(self.header.el);
             }
 
@@ -76,8 +76,9 @@ var StatusUpdatesView = Backbone.View.extend({
             var text = $(".text-box textarea").val(),
                 url = Api.appSettings.shareLocation + "/item.php?movieID=" + movie.movieID;
 
-            if(text == "" || text.indexOf("Write a comment about") > -1) {
-                Util.alert("Please make sure your message is not blank and that it was written by you","Invalid Message");
+            if(text == "") {
+                $(".text-box textarea").addClass('false');
+                // Util.alert("Please make sure your message is not blank","Invalid Message");
                 return false;
             }
 
@@ -128,17 +129,10 @@ var StatusUpdatesView = Backbone.View.extend({
             mixpanel.track("Status Update", params);
         });
 
-        $(".text-box textarea").click(function() {
-            if(this.value.indexOf("Write a comment about") > -1) {
-                this.value = "";
-            }
+        $(".text-box textarea").on('focus', function() {
+            $(this).removeClass('false');
         });
 
-        $(".text-box textarea").blur(function() {
-            if(this.value == "") {
-                this.value = "Write a comment about " + self.model.movieData.title;
-            }
-        });
 
         $(".share-icons div").click(function(){
             $(this).toggleClass('active');

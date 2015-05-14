@@ -116,7 +116,7 @@ var SearchStatusUpdateView = Backbone.View.extend({
 
 
         var header = new HeaderView({
-            title: "Search",
+            title: "Pick Topic",
             home: false,
         });
 

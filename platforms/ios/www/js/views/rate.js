@@ -55,6 +55,10 @@ var RateModel = Backbone.Model.extend({
                 if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
 
 
+                console.log(response.data.activityFeed.data);
+
+                
+
                 Api.getRecommendedPeople(function(response) {
 
                     this.set("people", response.data);
@@ -367,7 +371,7 @@ var RateView = Backbone.View.extend({
                         $("#content-container .content-scroller").html("");
                         self.feedInterval = setInterval(function() {
                             if(self.model.feedLoaded && self.model.feed) {
-                                // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
+
                                 var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
                                 $("#content-container .content-scroller").html(activityFeed);
 

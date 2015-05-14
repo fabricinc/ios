@@ -128,10 +128,16 @@
                         <% } %>
                         <%= suggestedFriend %>
                         <div class="action">
-                            <p><%= item.data.actorName %> <span class="verb"><%= item.data.verb %></span><% if(item.data.ratio) { %> <%= item.data.ratio %>% of<% } %> <b class="object"><%= item.data.objectName %></b></p>
-                            <% if(item.data.comment) { %>
-                                <p class="comment">"<%= item.data.comment %>"</p>
-                            <% } %>
+                            <p class="action-content"><%= item.data.actorName %> 
+                                <% if(item.data.comment) { %>
+                                    <p class="comment"><%= item.data.comment %></p>
+                                <% } else { %>
+                                    <span class="verb"><%= item.data.verb %></span>
+                                    <% if(item.data.ratio) { %> <%= item.data.ratio %>% of<% } %> 
+                                <% } %>
+                                <b class="object"><%= item.data.objectName %></b>
+                            </p>
+
                             <p class="timeago"><%= Util.timeAgo(item.modified) %></p>
                         </div>
                     </div>

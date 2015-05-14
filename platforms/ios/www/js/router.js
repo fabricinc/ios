@@ -335,6 +335,8 @@
                 self.dealloc(); // Unbind all routes.
                 self.bindLoginEvents(); // Rebind login routes.
                 User.logout();
+                User.avatar = null;
+
 
                 if (Analytics) {
                     Analytics.event("Logout selected");

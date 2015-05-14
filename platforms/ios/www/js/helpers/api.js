@@ -658,6 +658,7 @@ Api.setMovieToFabricList = function(moviePublishedID, listID, setter, callback) 
         "listID": listID,
         "moviePublishedID": moviePublishedID
     };
+    console.log(listID);
 
     if(setter) { options.action = "setMovieToFabricList"; }
     else { options.action = "unsetMovieFromList"; }

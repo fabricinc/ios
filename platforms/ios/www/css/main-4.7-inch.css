@@ -1,7 +1,17 @@
 /* iPhone 6 */
 #wrapper { width: 375px; height: 667px; position: relative; }
-#home-filters div, #coach-section div { width: 50%; }
 #home-filters div#recommended-filter, #coach-section.want-to div { width: 125px; }
+#home-filters div#activity-filter {
+    background-size: 30px;
+}
+#coach-section div,
+#home-filters div {
+    background-size: 40px;
+    height: 57px;
+}
+#home-filters img {
+    right: 42%;
+}
 #category-container { height: 550px; }
 .recommended-filter #category-container{ height: 510px; }
 #welcome div .title,
@@ -242,8 +252,7 @@ div#mask .wheel {
 .feed-item .avatar { height: 55px; width: 55px; border-radius: 30px; }
 .feed-item .action { 
     line-height: 22px;
-    font-size: 19px;
-    width: 255px; 
+    font-size: 17px;
 }
 .feed-footer .span { font-size: 18px; }
 .feed-item .like-you {font-size: 11px; top: 70px; }

@@ -359,6 +359,9 @@
                 MobileDevice.getGeolocation(function(pos) {
                     Api.updateUserGeoData(pos);
                 });
+
+                User.createUserAvatar();
+                
                 if (facebookData) {
                     if (Analytics) { Analytics.event("Facebook login"); }
                     self.setFacebookID(facebookData.id);
@@ -578,11 +581,13 @@
         createUserAvatar: function() {
 
 
-            if(this.avatar) { return; }
+            if(this.avatar) { return this.avatar.src; }
 
 
-            var backUpAvatar = "images/discovery/avatar.png",
+            var backUpAvatar = "images/discovery/avatarDark.png",
                 avatar = new Image(50);
+
+            console.log(this.isFacebook);
 
             avatar.src = this.isFacebook ? this.getFacebookAvatar() : backUpAvatar;
             avatar.id = 'tap-avatar';

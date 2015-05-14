@@ -1196,7 +1196,7 @@ input.slider-search-form {
 #home-filters div#activity-filter {
     background-image: url(../images/discovery/friends.png);
     background-position-x: 55%;
-    background-size: 30px;
+    background-size: 25px;
 }
 #category-filter {
     background-image: url(../images/discovery/explore.png);
@@ -1206,8 +1206,8 @@ input.slider-search-form {
 #home-filters div {
     background-position: 43% center;
     background-repeat: no-repeat;
-    background-size: 40px;
-    height: 57px;
+    background-size: 35px;
+    height: 41px;
     float: left;
     width: 50%;
 }
@@ -1215,7 +1215,7 @@ input.slider-search-form {
     position: absolute;
     margin: 3px 0;
     height: 90%;
-    right: 42%;
+    right: 43%;
 }
 
 #category-filter.filter .cat-sub-filter{
@@ -4547,26 +4547,25 @@ div#search-for-friends {
 }
 .feed-item:first-child { margin-top: 0; }
 .feed-item .avatar {
+    background-image: url(../images/discovery/avatar.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 25px;
+    margin-right: 10px;
+    height: 50px;
     float: left;
     width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-image: url(../images/discovery/avatar.png);
 }
 h6.like-you + .action {
     min-height: 66px;
 }
 .feed-item .action {
-    float: left;
-    width: 210px;
-    margin-left: 20px;
-    font-size: 16px;
-    line-height: 20px;
     position: relative;
+    line-height: 20px;
+    font-weight: bold;
+    font-size: 16px;
 }
-.feed-item .action span.verb { color: rgb(117, 117, 117); }
+.feed-item .action span.verb { color: rgb(117, 117, 117); font-weight:  normal; }
 .feed-item .action .timeago {
     color: rgb(117, 117, 117);
     font-size: 14px;
@@ -4574,15 +4573,18 @@ h6.like-you + .action {
     line-height: 18px;
 }
 .feed-item .action .comment {
-    color: rgb(117, 117, 117);
-    font-size: 16px;
-    line-height: 18px;
-    margin: 0;
+    line-height: 24px;
+    font-weight: 300;
+    font-size: 20px;
+    margin: 35px 0 5px;
+    color: black;
 }
+.feed-item .action .action-content {
+
+}
+
 .feed-item .content {
     margin-top: 10px;
-    padding: 10px;
-    border: 1px solid rgb(228, 226, 225);
 }
 .feed-item .action .follow-button {
     width: 80px;
@@ -5355,7 +5357,16 @@ button#done {
 #statusUpdates .text-box {
     float: left;
 }
+#statusUpdates .text-box textarea:focus::-webkit-input-placeholder,
+#statusUpdates .text-box textarea::-webkit-input-placeholder {
+    color: gray;
+}
+#statusUpdates .text-box textarea.false::-webkit-input-placeholder {
+    color: red;
+}
+
 #statusUpdates .text-box textarea {
+    color: black;
     border: none;
     font-size: 16px;
     margin: 0;
@@ -5475,6 +5486,10 @@ button#done {
 
     top: 15px;
     right: 25px;
+}
+#search-head {
+    padding: 15px;
+    color: gray;
 }
 #status-update-search {
     background-color: lightgray;
