@@ -113,22 +113,30 @@
         <% } %>
     </div>
 <% } else { 
+
     for(var i = 0; i < feed.length; i++) {
+
         var item = feed[i];
         item.data = $.parseJSON(item.feed_data);
+
         if(item.data && item.data.objectAsset) {
+
             var msPop = item.userID == '252990' ? true : false,
-            suggestedFriend = parseInt(item.suggested) > 0 ? "<h6 class='like-you'>Like You</h6>" : "";  %>
+            likeYou = "",
+            suggestedFriend = parseInt(item.suggested) > 0 ? (likeYou = "av-like-you" , "<h6 class='like-you'>Like You</h6>") : "",
+            compatibilityPercent = item.compatibility && parseInt(item.compatibility) > 0 && !msPop ? '<div class="compatibility">'+ item.compatibility +' %</div>' : "";
+
+            %> 
             <div class="feed-item-card">
                 <div id="feed<%= item.feedID %>" class="feed-item" data-type="<%= item.feed_type %>">
                     <div class="cf">
-                        <div class="avatar<% if(msPop) { %> msPop<% } %>" data-actorid="<%= item.userID %>"<% if(item.data.actorFbID) { %> style="background-image: url(https://graph.facebook.com/<%= item.data.actorFbID %>/picture?height=200&width=200)"<% } %>></div>
-                        <% if(item.compatibility && parseInt(item.compatibility) > 0 && !msPop) { %>
-                            <div class="compatibility"><%= item.compatibility %>%</div>
-                        <% } %>
-                        <%= suggestedFriend %>
+                        <div class="avatar<% if(msPop) { %> msPop<% } %> <%= likeYou %>" data-actorid="<%= item.userID %>"<% if(item.data.actorFbID) { %> style="background-image: url(https://graph.facebook.com/<%= item.data.actorFbID %>/picture?height=200&width=200)"<% } %>></div>
+                        
+                        <%= compatibilityPercent + suggestedFriend %>
+
                         <div class="action">
-                            <p class="action-content"><%= item.data.actorName %> 
+                            <p class="action-content"><%= item.data.actorName %>
+                                <p class="timeago"><%= Util.timeAgo(item.modified) %></p> 
                                 <% if(item.data.comment) { %>
                                     <p class="comment"><%= item.data.comment %></p>
                                 <% } else { %>
@@ -138,7 +146,7 @@
                                 <b class="object"><%= item.data.objectName %></b>
                             </p>
 
-                            <p class="timeago"><%= Util.timeAgo(item.modified) %></p>
+                            
                         </div>
                     </div>
                     <div class="content">

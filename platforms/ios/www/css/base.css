@@ -4556,6 +4556,9 @@ div#search-for-friends {
     float: left;
     width: 50px;
 }
+.feed-item .avatar.av-like-you {
+    margin-bottom: 20px;
+}
 h6.like-you + .action {
     min-height: 66px;
 }
