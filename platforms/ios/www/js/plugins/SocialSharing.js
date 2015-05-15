@@ -84,6 +84,7 @@ SocialSharing.prototype.silentTweet = function (message, url, successCallback, e
 
 SocialSharing.prototype.silentFBPost = function (message, url, successCallback, errorCallback) {
     var ecb = this._getErrorCallback(errorCallback, "silentFBPost");
+    console.log(ecb);
     cordova.exec(successCallback, ecb, "SocialSharing", "silentFBPost", [message, url]);
 };
 

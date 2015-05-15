@@ -613,6 +613,7 @@
     
     [accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL granted, NSError *e) {
          if (granted) {
+             
              NSArray *accounts = [accountStore accountsWithAccountType:facebookAccountType];
              facebookAccount = [accounts lastObject];
              

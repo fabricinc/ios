@@ -9,12 +9,16 @@ var UI = {
         oldScrollID: null,
         oldScrollPos: 0,
         oldTitle: null,
-        mask: function(callback) {
+        mask: function(spinner, callback) {
+
+
+            // if(!spinner) { callback(); }
+
             var el = document.getElementById("mask"),
                 self = this;
             callback = callback || function() { };
 
-            if (el.className == "off") {
+            if (el.className == "off" && spinner) {
                 el.className = "on";
 
                 var maskTime = 0;

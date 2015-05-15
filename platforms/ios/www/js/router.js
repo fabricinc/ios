@@ -94,12 +94,12 @@
                 fade = options.fadeImageClass === false ? false : true, // Default to true
                 scroller = options.scroller === false ? false : true, // Default to true
                 load = options.loadPageHtml === false ? false : true, // Default to true
+                spinner = options.spinner === false ? false : true, 
                 self = this;
     
             className = className || Backbone.history.fragment;
             callback = callback || function() {};
 
-            UI.mask(function() {
                 // A little cleanup may be in order.
                 if (APP.view.previous) { APP.view.current.dealloc(); }
                 
@@ -110,6 +110,8 @@
 
                 $("#wrapper").attr("class", className);
 
+            UI.mask(spinner, function() {
+                
                 // Render the view.
                 view.render(function() {
                     if (load) { APP.$wrapper.html(view.$el.html()); }
@@ -132,6 +134,8 @@
                     callback();
                 });
             });
+
+
         },
 
         bindHeaderEvents: function(className) {
@@ -743,7 +747,8 @@
                     // Stub for callback
                 }, {
                     scroller: false,
-                    loadPageHtml: false
+                    loadPageHtml: false,
+                    spinner: false
                 }, "discussion feed");
             });
             this.on("route:feedLikes", function(feedID) {

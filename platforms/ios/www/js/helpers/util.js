@@ -23,6 +23,10 @@ Util.addCommas = function(nStr) {
     }
     return x1 + x2;
 }
+Util.defined = function(variable) {
+
+    return typeof variable === 'undefined' ? false : true;
+}
 
 Util.isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);

@@ -62,9 +62,7 @@ var DiscussionView = Backbone.View.extend({
             } else {
                 context = response.context;
             }
-            console.log(response);
-            console.log(context);
-            console.log(self.model.type);
+
             
 
             if(type == "comment") {

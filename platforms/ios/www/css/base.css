@@ -324,7 +324,7 @@ header nav #tap-menu {
     background-position: 10px 16px;
 }
 header nav #chat-menu {
-    top: 4px;
+    top: 0px;
 }
 header nav #share-icon,
 header nav #chat-menu {
