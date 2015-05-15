@@ -170,7 +170,7 @@ div#friends-queued.bottom-info span {
 }
 .share-icons div.twitter { padding-right: 0; }
 .share-icons div.facebook { width: 207px; }
-.feed-item .action { width: 290px; font-size: 18px; line-height: 22px; }
+.feed-item .action { font-size: 18px; line-height: 22px; }
 .feed-item .action .comment { margin-top: 45px; }
 #user-matches .match { margin: 10px auto 0; }
 .fl .login-text { width: 230px; }
@@ -393,6 +393,9 @@ header nav #notifications-menu { background-size: 28px 28px; right: 50px; }
     margin-right: 15px; 
     height: 65px;
     width: 65px;
+}
+.feed-item .like-you {
+    font-size: 13px; 
 }
 .list-item .compatibility,
 .feed-item .compatibility {
