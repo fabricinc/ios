@@ -4570,6 +4570,7 @@ h6.like-you + .action {
     font-weight: bold;
     padding-top: 5px;
     font-size: 16px;
+    min-height: 45px;
 }
 .feed-item .action-info {
     line-height: 19px;
