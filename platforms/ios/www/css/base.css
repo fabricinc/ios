@@ -379,8 +379,10 @@ header nav #notifications-menu #notifications-num {
 .messages #chat-num { display: none !important; }
 header nav #tap-menu,
 #dashboard header nav #message-menu {
-    width: 50px;
-    height: 50px;
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    top: 5px;
 }
 #friends,
 #dashboard {
@@ -4566,20 +4568,27 @@ h6.like-you + .action {
     position: relative;
     line-height: 20px;
     font-weight: bold;
+    padding-top: 5px;
     font-size: 16px;
 }
-.feed-item .action span.verb { color: rgb(117, 117, 117); font-weight:  normal; }
+.feed-item .action-info {
+    line-height: 19px;
+}
+.feed-item .object {
+    font-weight: 500;
+}
+.feed-item span.verb { color: rgb(117, 117, 117); font-weight:  normal; }
 .feed-item .action .timeago {
     color: rgb(117, 117, 117);
+    line-height: 18px;
+    font-weight: 400;
     font-size: 14px;
     margin-top: 0px;
-    line-height: 18px;
 }
-.feed-item .action .comment {
+.feed-item .action-info .comment {
     line-height: 24px;
     font-weight: 300;
     font-size: 20px;
-    margin: 35px 0 5px;
     color: black;
 }
 .feed-item .action .action-content {

@@ -135,19 +135,28 @@
                         <%= compatibilityPercent + suggestedFriend %>
 
                         <div class="action">
-                            <p class="action-content"><%= item.data.actorName %>
-                                <p class="timeago"><%= Util.timeAgo(item.modified) %></p> 
-                                <% if(item.data.comment) { %>
-                                    <p class="comment"><%= item.data.comment %></p>
-                                <% } else { %>
-                                    <span class="verb"><%= item.data.verb %></span>
-                                    <% if(item.data.ratio) { %> <%= item.data.ratio %>% of<% } %> 
-                                <% } %>
-                                <b class="object"><%= item.data.objectName %></b>
-                            </p>
+                            <p class="action-content"><%= item.data.actorName %></p>
+                            <p class="timeago"><%= Util.timeAgo(item.modified) %></p> 
+                        </div>
+
+                        <div class="action-info">
+                            <% if(item.data.comment) { %>
+
+                                <p class="comment"><%= item.data.comment %></p>
+
+                            <% } else { %>
+
+                                <span class="verb"><%= item.data.verb %></span>
+
+                                <% if(item.data.ratio) { %> <%= item.data.ratio %>% of<% } %> 
+
+                            <% } %>
+
+                            <b class="object"><%= item.data.objectName %></b>
+                        </div>
 
                             
-                        </div>
+                        
                     </div>
                     <div class="content">
                         <div class="poster">

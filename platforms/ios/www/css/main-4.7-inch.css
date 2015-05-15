@@ -249,6 +249,7 @@ div#mask .wheel {
 #list-items .share-buttons .btn { width: 87px; background-position: 0; }
 
 .feed-item .recommendation-action { width: 384px; }
+
 .feed-item .avatar { height: 55px; width: 55px; border-radius: 30px; }
 .feed-item .avatar.av-like-you {
     margin-bottom: 20px;
@@ -256,10 +257,13 @@ div#mask .wheel {
 .feed-item .action { 
     line-height: 22px;
     font-size: 17px;
+    min-height: 50px;
+}
+h6.like-you + .action {
+    min-height:75px;
 }
 .feed-footer .span { font-size: 18px; }
 .feed-item .like-you {font-size: 11px; top: 70px; }
-.feed-item .content { margin-top: 15px; }
 #favorite-delta .delta-poster { height: 470px; }
 #favorite-delta .delta-poster img { width: 314px; }
 #favorite-delta .feed-item { width: 345px; padding-bottom: 0;}
