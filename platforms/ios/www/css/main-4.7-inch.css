@@ -250,6 +250,9 @@ div#mask .wheel {
 
 .feed-item .recommendation-action { width: 384px; }
 .feed-item .avatar { height: 55px; width: 55px; border-radius: 30px; }
+.feed-item .avatar.av-like-you {
+    margin-bottom: 20px;
+}
 .feed-item .action { 
     line-height: 22px;
     font-size: 17px;
