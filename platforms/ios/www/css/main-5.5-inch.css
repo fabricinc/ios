@@ -61,6 +61,15 @@
     width: 395px;
     height: 195px;
 }
+#message-context {
+    line-height: 25px; 
+}
+#message-context img {
+    height: 105px;
+}
+.context-info {
+    width: 255px; 
+}
 #side-swipe .watching-next.contain input {
     margin-left: 42px;
     width: 300px;
@@ -176,6 +185,13 @@ h6.like-you + .action {
 }
 .feed-item .action-info {
     line-height: 29px;
+}
+.feed-item .action-info .comment { 
+    line-height: 29px;
+    font-size: 24px;
+}
+.feed-item .object, .action-content {
+    font-size: 19px;
 }
 .feed-item .action .comment { margin-top: 45px; }
 #user-matches .match { margin: 10px auto 0; }

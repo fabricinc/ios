@@ -2803,11 +2803,10 @@ div.right.button, div.left.button {
 #list-items .share-buttons #sms.btn { background-image: url(../images/discovery/share-sms.png); }
 
 #message-context {
-    width: 100%;
-    height: 75px;
+    background-color: rgb(234, 234, 234);
     line-height: 75px;
     padding: 5px;
-    background-color: rgb(234, 234, 234);
+    width: 100%;
     color: gray;
 }
 #message-context img {
@@ -2847,13 +2846,12 @@ div.right.button, div.left.button {
 }
 
 .context-info {
-    line-height: 17px;
-    min-width: 180px;
-    max-width: 250px;
-    position: absolute;
-    max-height: 75px; 
     display: inline-block;
     vertical-align: top;
+    position: relative;
+    line-height: 17px;
+    min-width: 180px;
+    width:90px;
 }
 .context-info .i {
     
@@ -2975,7 +2973,7 @@ div.right.button, div.left.button {
     font-size: 16px;
     box-shadow: none;
     border-radius: 5px;
-    border: 1px solid rgb(203, 206, 209);
+    border: none;
     color: rgb(0, 0, 0);
     width: 72%;
 }
@@ -4574,8 +4572,10 @@ h6.like-you + .action {
 }
 .feed-item .action-info {
     line-height: 19px;
+    margin-top: 10px;
 }
 .feed-item .object {
+    display: inline-block;
     font-weight: 500;
 }
 .feed-item span.verb { color: rgb(117, 117, 117); font-weight:  normal; }
@@ -4587,9 +4587,10 @@ h6.like-you + .action {
     margin-top: 0px;
 }
 .feed-item .action-info .comment {
-    line-height: 24px;
+    line-height: 22px;
+    margin-bottom: 5px;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 18px;
     color: black;
 }
 .feed-item .action .action-content {

@@ -132,7 +132,6 @@ var APP = {
             "welcome",
             "movieServices",
             "discussion",
-            "threadDiscussion",
             "discussionMessage",
             "passwordRecovery",
             "rightMenu",

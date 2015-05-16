@@ -60,6 +60,9 @@ input.slider-search-form {
     margin: 8px 0 0 7px;
 }
 
+.context-info {
+    width: 235px; 
+}
 /* discovery */
 #discovery-background {
     background-image: url(../images/discovery/rateOverlay3.png);
@@ -258,6 +261,11 @@ div#mask .wheel {
     line-height: 22px;
     font-size: 17px;
     min-height: 50px;
+}
+.feed-item .action-info .comment {
+    margin-bottom: 10px;
+    line-height: 25px;
+    font-size: 20px;
 }
 h6.like-you + .action {
     min-height:75px;
