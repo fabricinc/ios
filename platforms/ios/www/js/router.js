@@ -880,16 +880,14 @@
 
 
 		if (bindAppRoutes) {
-            if(User.isFacebook) {
-                
-                Facebook.uploadLikes();
-            }
+
+            // if(User.isFacebook) { Facebook.uploadLikes(); }
+
 			router.bindAppEvents();
+            
 			Backbone.history.start();
-            // prefetch user data
-            // setTimeout(function() {
-            //     Api.getUserCache();
-            // }, 2000);
+
+
 		} else {
             Backbone.history.start({ silent: true });
             Backbone.history.navigate("start", true);

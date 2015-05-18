@@ -105,6 +105,9 @@ Api.dispatcher = function(options, callback) {
     var self = this;
     callback = callback || function() { };
     Util.log(JSON.stringify(options));
+
+    console.log('dispatcher : '+ options.action);
+    
     var xhr = $.getJSON(Api.url + 'api.php?' + 'callback=?', options, function(response) {
         Util.log(options.action + ": " + JSON.stringify(response));
     }).success(function(response) {
@@ -1604,7 +1607,7 @@ Api.fetch = function(options, callback, success) {
     
     Util.checkAPI(function(connected) {
         if(connected) {
-
+            console.log('api call : '+ options.action);
             $.ajax({
                 url: Api.url + 'api.php?callback=?',
                 data: options,

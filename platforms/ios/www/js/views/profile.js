@@ -204,9 +204,7 @@ var ProfileModel = Backbone.Model.extend({
                 userID: this.userID
             });
 
-        } else {
-            return APP.load("soloPassion", { user: APP.userPassion });
-        }
+        } 
     }
 });
 
@@ -243,7 +241,7 @@ var ProfileView = Backbone.View.extend({
             }
 
             $("#wrapper").html(self.$el);
-            // $("#top-genres").html(self.model.loadPassion());
+            $("#top-genres").html(self.model.loadPassion());
 
             if(!data.self && data.favDelta && data.favDelta.length > 0) {
                 $("#favorite-delta").html(
