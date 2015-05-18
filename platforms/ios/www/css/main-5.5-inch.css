@@ -1,6 +1,6 @@
 /* iPhone 6+ */
 #wrapper { width: 414px; height: 736px; position: relative; }
-#home-filters div, #coach-section div { height: 52px; width: 206px; }
+#home-filters div, #coach-section div { height: 52px; background-size: 46px; }
 #home-filters { width: 414px; height: 52px; }
 #home-filters div#recommended-filter, #coach-section.want-to div { width: 138px; }
 
@@ -205,12 +205,22 @@ h6.like-you + .action {
     height: 736px;
     background-size: 414px 736px;
 }
+#home-filters div::after{
+    width: 80px;
+}
+#home-filters div#activity-filter::after {
+    right: 50px;
+}
+#category-filter::after {
+    left: 50px;
+}
 #coach-section div,
 #home-filters div {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
 }
+#home-filters img { right: 44%; }
 #coach-section h1,
 #dashboard header nav h1 {
     height: 46px !important;

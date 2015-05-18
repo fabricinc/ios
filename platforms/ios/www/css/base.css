@@ -1195,20 +1195,34 @@ input.slider-search-form {
 }
 
 
-#home-filters div#activity-filter {
+#home-filters div#activity-filter::after {
     background-image: url(../images/discovery/friends.png);
-    background-position-x: 55%;
     background-size: 25px;
+    right: 40px;
 }
-#category-filter {
+#category-filter::after {
     background-image: url(../images/discovery/explore.png);
+    left: 40px;
 
+}
+#home-filters div.filter::after {
+    background-color: #8f2523;
+}
+
+#home-filters div::after {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 35px;
+    position: absolute;
+    border-radius: 4px;
+    width: 60px;
+    height: 93%; 
+    content: "";
+    top: 2px;
 }
 #coach-section div,
 #home-filters div {
-    background-position: 43% center;
-    background-repeat: no-repeat;
-    background-size: 35px;
+    position: relative;
     height: 41px;
     float: left;
     width: 50%;

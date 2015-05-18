@@ -4,6 +4,15 @@
 #home-filters div#activity-filter {
     background-size: 30px;
 }
+#home-filters div::after {
+    width: 70px;
+}
+#category-filter::after {
+    left: 45px;
+}
+#activity-filter::after {
+    right: 45px;
+}
 #coach-section div,
 #home-filters div {
     background-size: 40px;
