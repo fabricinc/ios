@@ -449,7 +449,7 @@ var RateView = Backbone.View.extend({
 
         // avatar click goes to that user's profile page
         $(".feed-item .action").click(function() {
-            var actorID = $(this).data("actorid");
+            var actorID = $('.avatar').data("actorid");
 
             APP.feedPos = UI.scroller.y;
             Backbone.history.navigate("profile/" + actorID, true);
