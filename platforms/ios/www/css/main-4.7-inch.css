@@ -571,6 +571,10 @@ div#search-for-friends { background-size: 24px; }
     font-size: 18px; 
     width: 220px; 
 }
+#messages-slider {
+    overflow: hidden;
+    height: 556px;
+}
 .suggested-message {
     line-height: 19px;
 }

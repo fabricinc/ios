@@ -2969,6 +2969,10 @@ div.right.button, div.left.button {
     right: -8px;
     background-image: url(../images/messages/sbubble_sender.png);
 }
+#message-slider {
+    height: 556px;
+    overflow: hidden;
+}
 .likes #message-textarea {display: none;}
 #message-textarea {
     border-top: 1px solid rgb(175, 178, 177);
