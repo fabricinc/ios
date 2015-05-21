@@ -16,6 +16,7 @@ var RateModel = Backbone.Model.extend({
     recsLoaded: false,
     concierge: null,
     removedList: [],
+    Q: null,
     people: null,
 
     initialize: function(options) {
@@ -46,7 +47,7 @@ var RateModel = Backbone.Model.extend({
 
 
 
-            Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
+            Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function (response) {
 
 
                 self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
@@ -62,6 +63,12 @@ var RateModel = Backbone.Model.extend({
                 Api.getRecommendedPeople(function(response) {
 
                     this.set("people", response.data);
+
+                }.bind(self));
+
+                Api.getQ(APP.gameState.watchListID, APP.sectionID, function (response) {
+
+                    this.set("Q", response)
 
                 }.bind(self));
 
@@ -123,7 +130,7 @@ var RateView = Backbone.View.extend({
     test: function() {
         var people = this.model.get("people");
     
-
+        console.log('test');
         // Only show recommended people on activity filter
         if(this.filter !== "activity-filter") { return; }
 
@@ -382,7 +389,7 @@ var RateView = Backbone.View.extend({
                             }
                         }, 100);
                     } else {
-                        // var lastStatus = APP.load("lastStatus", { lastStatus: self.lastStatus });
+
                         var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
                         $("#content-container .content-scroller").html(activityFeed);
                         self.bindActivityFeedEvents();
@@ -392,7 +399,7 @@ var RateView = Backbone.View.extend({
 
                     // Add people 
                     if(self.model.get("people").length){
-                        var recommendedPeople = new RecommendedPeopleView(self.model.get('people'));
+                        new RecommendedPeopleView(self.model.get('people'));
                     }
 
                 } else if(filter === "category-filter") {
@@ -404,6 +411,11 @@ var RateView = Backbone.View.extend({
                     self.bindCategoryEvents();
                     APP.feedFilter = "category-filter";
                     var curPos = self.catPos;
+
+                } else if(filter === "want-to-filter") {
+
+                    new WantToListView(self.model.get('Q'));
+                    
                 }
 
                 UI.scroller.refresh();
@@ -449,7 +461,7 @@ var RateView = Backbone.View.extend({
 
         // avatar click goes to that user's profile page
         $(".feed-item .action").click(function() {
-            var actorID = $('.avatar').data("actorid");
+            var actorID = $(this).data("actorid");
 
             APP.feedPos = UI.scroller.y;
             Backbone.history.navigate("profile/" + actorID, true);
@@ -719,3 +731,4 @@ var RateView = Backbone.View.extend({
         return this;
     }
 });
+

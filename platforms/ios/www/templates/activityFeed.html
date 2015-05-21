@@ -134,7 +134,7 @@
                         
                         <%= compatibilityPercent + suggestedFriend %>
 
-                        <div class="action">
+                        <div class="action" data-actorid="<%= item.userID %>">
                             <p class="action-content"><%= item.data.actorName %></p>
                             <p class="timeago"><%= Util.timeAgo(item.modified) %></p> 
                         </div>

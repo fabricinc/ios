@@ -161,6 +161,7 @@ var APP = {
             "homeHeader",
             "header",
             "homeQ",
+            "wantToItem",
             "welcomeCategories", 
             "concierge",
             "statusUpdateMovie",

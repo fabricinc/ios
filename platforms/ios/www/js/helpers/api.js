@@ -1489,6 +1489,7 @@ Api.getHomeRecs = function(sectionID, callback) {
     this.fetch(options, callback);
 }
 Api.getQ = function(QID, sectionID, callback) {
+    sectionID = sectionID || APP.sectionID;
     options = {
         "action": "getListV2",
         "listID": QID,
