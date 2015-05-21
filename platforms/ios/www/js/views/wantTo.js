@@ -6,6 +6,13 @@ var WantToModel = Backbone.Model.extend({
 	},
 
 
+	initialize: function () {
+		
+		console.log(this);
+
+	}
+
+
 });
 
 
@@ -30,18 +37,31 @@ var WantToListView = Backbone.View.extend({
 
 	render: function() {
 
-		this.$el.html("");
+		//Empty the content container to keep it clean
+		this.$el.empty();
 
-		this.collection.each(function (wantToItem) {
+		// Distory Scroller so we can reinit 
+		UI.scroller.destroy();
 
-			var wantTo = new WantTo({ model: wantToItem });
 
-			this.$el.append(wantTo.render().el);
+		// put the list on the page 
+		this.collection.each(this.addOne, this);
 
-			console.log(wantTo);
-		}, this);
+
+		// Reinit the scroller 
+		UI.initScroller($("#category-container")[0]);
+
+
 
 		return this;
+	},
+
+	addOne: function(wantToItem) {
+
+		var wantTo = new WantTo({ model: wantToItem });
+
+		this.$el.append(wantTo.render().el);
+
 	}
 });
 
@@ -49,16 +69,13 @@ var WantTo = Backbone.View.extend({
 	
 	className: 'check-list-wrapper',
 
-	tagName: 'div',
-
-	initialize: function () {
-
-		// body...
+	events: {
+		'touchStart .check-list-check' : 'checkBox',
 	},
+
 
 	render: function () {
 
-		console.log(this.model.toJSON());
 
 		var html = APP.load('wantToItem', this.model.toJSON());
 
@@ -66,6 +83,12 @@ var WantTo = Backbone.View.extend({
 
 		return this;
 
+	},
+
+
+	checkBox: function () {
+		console.log(this.model.moviePublishedID);
+		console.log(this.checked);
 	}
 });
 

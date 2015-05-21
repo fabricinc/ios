@@ -415,7 +415,8 @@ var RateView = Backbone.View.extend({
                 } else if(filter === "want-to-filter") {
 
                     new WantToListView(self.model.get('Q'));
-                    
+                    APP.feedFilter = filter;
+                    UI.scroller.refresh();
                 }
 
                 UI.scroller.refresh();
