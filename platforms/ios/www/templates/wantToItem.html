@@ -1,0 +1,18 @@
+	<div class="check-list-item">
+		<img class="check-list-poster" src="<%= Api.appSettings.cdn + "/posters/" + moviePublishedID + "_poster.jpg"%>" />
+		<div class="check-list-info">
+			<h2 class="check-list-title fnt">
+				<%= movieTitle %>
+				<% if(releaseYear !== '0') { %><span> (<%= releaseYear %>)</span> <% } %>
+			</h2>
+			<div class="check-list-ratings">
+				<% if( parseInt(Count) > 0 ){ %> <span class="favorites"><%= Count %></span> <% } %>
+				<% if(sectionID === "1" && criticsScore !== "") { %>
+
+					<span class="tomatos"><%= criticsScore %>%</span>
+
+				<% } %>
+			</div>
+		</div>
+		<span class="check-list-check"></span>
+	</div>
