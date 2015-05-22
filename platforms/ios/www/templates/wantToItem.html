@@ -1,3 +1,4 @@
+	<% fresh = parseInt(criticsScore) >= 60 ? " fresh" : " rotten"; %>
 	<div class="check-list-item">
 		<img class="check-list-poster" src="<%= Api.appSettings.cdn + "/posters/" + moviePublishedID + "_poster.jpg"%>" />
 		<div class="check-list-info">
@@ -9,7 +10,7 @@
 				<% if( parseInt(Count) > 0 ){ %> <span class="favorites"><%= Count %></span> <% } %>
 				<% if(sectionID === "1" && criticsScore !== "") { %>
 
-					<span class="tomatos"><%= criticsScore %>%</span>
+					<span class="tomatos<%= fresh %>"><%= criticsScore %>%</span>
 
 				<% } %>
 			</div>

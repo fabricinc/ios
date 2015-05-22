@@ -10,8 +10,10 @@
     background-size: 40px;
     height: 57px;
 }
-#home-filters img {
-    right: 42%;
+#home-filters div::after{
+    font-size: 15px;
+    background-size: 31px;
+    line-height: 500%;
 }
 #category-container { height: 550px; }
 .recommended-filter #category-container{ height: 510px; }
@@ -465,7 +467,7 @@ header nav #shopping-cart,
 #music-nav { background-image: url(../images/6p/discovery/fabricIcons/musicMenuIcon.png); }
 .check-list-wrapper { height: 125px; line-height: 125px; }
 div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; }
-© div img.check-list-poster { width: 78px; }
+#category-container div img.check-list-poster { width: 78px; }
 .check-list-check { 
     background-image: url(../images/6p/discovery/lightgrey-check.png); border: none;
     background-size: 100% 100%;
