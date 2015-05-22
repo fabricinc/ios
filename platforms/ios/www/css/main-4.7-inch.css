@@ -4,15 +4,7 @@
 #home-filters div#activity-filter {
     background-size: 30px;
 }
-#home-filters div::after {
-    width: 70px;
-}
-#category-filter::after {
-    left: 45px;
-}
-#activity-filter::after {
-    right: 45px;
-}
+
 #coach-section div,
 #home-filters div {
     background-size: 40px;
@@ -481,7 +473,7 @@ div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; 
     height: 35px;
     width: 35px;
 }
-.check-list-check.checked { background-image: url(../images/6p/discovery/redcheck.png); }
+.checked .check-list-check { background-image: url(../images/6p/discovery/redcheck.png); }
 .check-list-ratings span {
     background-position-y: 0;
     background-size: 14px;

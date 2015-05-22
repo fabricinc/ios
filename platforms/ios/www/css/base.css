@@ -1194,45 +1194,59 @@ input.slider-search-form {
     width: 100%;
 }
 
+#home-filters div::after {
+    background-position: 25px 4px;
+    background-repeat: no-repeat;
+    text-transform: capitalize;
+    background-size: 31px;
+    position: absolute;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 500%;
+    color: white;
+    width: 100%;
+    height: 93%; 
+    top: 2px;
+    right: 0;
+}
 
 #home-filters div#activity-filter::after {
-    background-image: url(../images/discovery/friends.png);
-    background-size: 25px;
-    right: 40px;
+    background-image: url(../images/discovery/feedButton.png);
+    content: "feed";
 }
 #category-filter::after {
-    background-image: url(../images/discovery/explore.png);
-    left: 40px;
-
+    background-image: url(../images/discovery/exploreButton.png);
+    content: "explore";
 }
+div#fancy-button::after {
+    background-image: url(../images/discovery/fabButton.png);
+    background-position: center;
+    background-size: 75%;
+    content: "";
+}
+#want-to-filter::after {
+    background-image: url(../images/discovery/wantToButton.png);
+    content: "want tos";
+}
+#profile-footer::after {
+    background-image: url(../images/discovery/profileButton.png);
+    content: "profile";
+}
+
 #home-filters div.filter::after {
     background-color: #8f2523;
 }
 
-#home-filters div::after {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 35px;
-    position: absolute;
-    border-radius: 4px;
-    width: 60px;
-    height: 93%; 
-    content: "";
-    top: 2px;
-}
+
 #coach-section div,
 #home-filters div {
     position: relative;
     height: 41px;
     float: left;
-    width: 33%;
+    width: 20%;
 }
-#home-filters img {
-    position: absolute;
-    margin: 3px 0;
-    height: 90%;
-    right: 43%;
-}
+
+
 
 #category-filter.filter .cat-sub-filter{
     opacity: 1;
@@ -2212,15 +2226,14 @@ div.recommendation.list-item.userChoice .title {
     left: 80px;
 }
 /* ++++++++++++++++++++ CHECK LIST Q ON FEED ++++++++++++++++++++ */
-.check-list-wrapper:first-of-type{
-    margin-top: 10px;
-}
+
 .check-list-wrapper {
     margin-bottom: 1px;
     line-height: 110px;
     height: 110px;
     -webkit-transform: translate3d(0,0,0);
 }
+.check-list-wrapper.checked { opacity: 0.5; }
 .check-list-wrapper.remove {
     transition: 500ms height ease-in-out;
     height: 0;
@@ -2314,9 +2327,8 @@ div.check-list-wrapper div.check-list-item {
     background-size: 70%;
     background-position: 4px 5px;
 }
-.check-list-check.checked {
+.checked .check-list-check {
     background-image: url(../images/discovery/redcheck.png);
-
     background-size: 100%;
     background-position: 0px 0px;
 }

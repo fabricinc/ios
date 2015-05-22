@@ -16,8 +16,10 @@ var RateModel = Backbone.Model.extend({
     recsLoaded: false,
     concierge: null,
     removedList: [],
-    Q: null,
-    people: null,
+    defaults: {
+        Q: null,
+        people: null
+    },
 
     initialize: function(options) {
         var self = this;
@@ -56,10 +58,6 @@ var RateModel = Backbone.Model.extend({
                 if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
 
 
-                console.log(response.data.activityFeed.data);
-
-                
-
                 Api.getRecommendedPeople(function(response) {
 
                     this.set("people", response.data);
@@ -68,13 +66,13 @@ var RateModel = Backbone.Model.extend({
 
                 Api.getQ(APP.gameState.watchListID, APP.sectionID, function (response) {
 
-                    this.set("Q", response)
+                    this.set("Q", response);
 
                 }.bind(self));
 
 
                 // Only run this callback (wait for activity feed data) if we are on the activity feed
-                if(self.filter == "activity-filter") { callback(response.data.categories); }
+                if(self.filter == "activity-filter" || self.filter == "want-to-filter") { callback(response.data.categories); }
 
 
             });
@@ -103,6 +101,7 @@ var RateView = Backbone.View.extend({
     catPos: 0,
     actPos: 0,
     recPos: 0,
+    wantTo: null,
 
     events: {
 
@@ -120,17 +119,16 @@ var RateView = Backbone.View.extend({
 
         self.filter = APP.feedFilter;
 
-
-        this.listenTo(this.model, 'change', this.test);
+        this.listenTo(this.model, 'change:people', this.people);
+        this.listenTo(this.model, 'change:Q', this.wantTo);
 
         callback();
         return this;
     },
 
-    test: function() {
+    people: function() {
         var people = this.model.get("people");
     
-        console.log('test');
         // Only show recommended people on activity filter
         if(this.filter !== "activity-filter") { return; }
 
@@ -138,12 +136,18 @@ var RateView = Backbone.View.extend({
         var recommendedPeople = new RecommendedPeopleView( people );
 
     },
+    wantTo: function () {
+        if (this.filter !== "want-to-filter") { return; }
+
+        this.wantTo = new WantToListView(this.model.get("Q"));
+        this.wantTo.render();
+    },
     render: function(callback, update) {
         var self = this;
         callback = callback || function() {};
 
 
-        this.model
+
         APP.refreshSettings(function() {
             User.fetchMinData(function(success) {
                 if(success) {
@@ -174,6 +178,7 @@ var RateView = Backbone.View.extend({
                             });
                             self.$el.prepend(self.header.el);
                         }
+
 
                         $("#wrapper").html(self.$el);
 
@@ -223,8 +228,7 @@ var RateView = Backbone.View.extend({
 
         if(filter === "activity-filter") {
             // show activity filter
-            // console.log(this.model);
-            // var recommendedPeople = new RecommendedPeopleView(this.model.get('people'));
+            
 
             if(!self.model.feedLoaded || self.model.feed == null) {
                 self.feedInterval = setInterval(function() {
@@ -267,51 +271,76 @@ var RateView = Backbone.View.extend({
             self.bindCategoryEvents();
             cb();
             
-        } 
+        } else if(filter == "want-to-filter") {
+
+
+            if (!self.model.get('Q')) { $("#category-container .content-scroller").html('loading...'); cb(); return; }
+            
+            self.wantTo = new WantToListView(self.model.get('Q'));
+            self.wantTo.render();
+
+
+            cb();
+        }
     },
     moreFeedPlease: function() {
         var self = this;
         setTimeout(function() {
+
             UI.scroller.on("scrollEnd", function() {
-                if(APP.feedFilter === "activity-filter" && Math.abs(this.maxScrollY) - Math.abs(this.y) < 800) {
-                    if(!APP.working && !self.model.pflf) {
-                        APP.working = true;
-                        $(".load-more-spinner").css("visibility", "visible");
-                        Api.getHomeFeed(self.model.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
-                            var moreFeed = APP.load("activityFeed", { feed: response.data.activityFeed.data });
-                            $(".load-more-spinner").hide();
-                            $("#content-container .content-scroller").append(moreFeed);
+                if(Math.abs(this.maxScrollY) - Math.abs(this.y) < 800){
 
-                            if(response.data.activityFeed.data.length < Api.appSettings.feedLimit) {
-                                self.model.pflf = true;
-                            }
-                            self.model.startF += response.data.activityFeed.data.length;
 
-                            // bind activity feed events
-                            self.bindActivityFeedEvents();
-                            setTimeout(function() { if(UI.scroller) { UI.scroller.refresh(); } APP.working = false; }, 500); // we refresh again in 0.5 seconds to give the images time to load more properly
-                        });
+                    if(APP.feedFilter === "activity-filter") {
+
+                        if(!APP.working && !self.model.pflf) {
+                            APP.working = true;
+                            $(".load-more-spinner").css("visibility", "visible");
+                            Api.getHomeFeed(self.model.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
+                                var moreFeed = APP.load("activityFeed", { feed: response.data.activityFeed.data });
+                                $(".load-more-spinner").hide();
+                                $("#content-container .content-scroller").append(moreFeed);
+
+                                if(response.data.activityFeed.data.length < Api.appSettings.feedLimit) {
+                                    self.model.pflf = true;
+                                }
+                                self.model.startF += response.data.activityFeed.data.length;
+
+                                // bind activity feed events
+                                self.bindActivityFeedEvents();
+                                setTimeout(function() { if(UI.scroller) { UI.scroller.refresh(); } APP.working = false; }, 500); // we refresh again in 0.5 seconds to give the images time to load more properly
+                            });
+                        }
+
+                    } else if(APP.feedFilter == "category-filter") {
+
+                        if(!APP.working && !self.model.pclf) {
+                            APP.working = true;
+                            $(".load-more-spinner").css("visibility", "visible");
+                            Api.getHomeCategories(1, 100, self.model.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
+                                var categoryFeed = APP.load("categoryFeed", { items: response.data.categories });
+                                $(".load-more-spinner").hide();
+                                $("#content-container .content-scroller").append(categoryFeed);
+
+                                if(response.data.categories.length < Api.appSettings.discoveryLimit) {
+                                    self.model.pclf = true;
+                                }
+                                self.model.start += response.data.categories.length;
+
+                                // bind activity feed events
+                                self.bindCategoryEvents();
+                                setTimeout(function() { if(UI.scroller) { UI.scroller.refresh(); } APP.working = false; }, 500); // we refresh again in 0.5 seconds to give the images time to load more properly
+                            });
+                        }
+
+                    } else {
+                        self.wantTo.addMore();
+                        UI.scroller.refresh();
                     }
-                } else if(APP.feedFilter == "category-filter" && Math.abs(this.maxScrollY) - Math.abs(this.y) < 800) {
-                    if(!APP.working && !self.model.pclf) {
-                        APP.working = true;
-                        $(".load-more-spinner").css("visibility", "visible");
-                        Api.getHomeCategories(1, 100, self.model.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
-                            var categoryFeed = APP.load("categoryFeed", { items: response.data.categories });
-                            $(".load-more-spinner").hide();
-                            $("#content-container .content-scroller").append(categoryFeed);
 
-                            if(response.data.categories.length < Api.appSettings.discoveryLimit) {
-                                self.model.pclf = true;
-                            }
-                            self.model.start += response.data.categories.length;
 
-                            // bind activity feed events
-                            self.bindCategoryEvents();
-                            setTimeout(function() { if(UI.scroller) { UI.scroller.refresh(); } APP.working = false; }, 500); // we refresh again in 0.5 seconds to give the images time to load more properly
-                        });
-                    }
-                } 
+                }
+
             });
         }, 500);
     },
@@ -321,25 +350,31 @@ var RateView = Backbone.View.extend({
             self = this;
 
 
-        $("#home-filters img").fastClick(function() {
+        $("#fancy-button").fastClick(function() {
             Backbone.history.navigate('searchStatusUpdate', true);
+        });
+        
+        $("#profile-footer").fastClick(function () {
+
+            Backbone.history.navigate("profile", true);
         });
 
         // Change filters from categories to feed
-        $("#home-filters div").fastClick(function() {
+        $("#home-filters div.filter-div").fastClick(function() {
             if(APP.working) { return false; }
 
-            var id = $(this)[0].id,
-                filter = id.indexOf("-x") >= 0 ? id.slice(0, -2) : id,
+            var filter = $(this)[0].id,
                 showSort = filter === "recommended-filter" ? "show" : "";
 
             $("#home-slider").attr("class", filter); // Put class on home slider for css style
+            
             self.filter = filter;
+
             if(APP.feedFilter == "category-filter") {
                 self.catPos = UI.scroller.y;
             } else if(APP.feedFilter == "activity-filter") {
                 self.actPos = UI.scroller.y;
-            } else if(APP.feedFilter == "recommended-filter") {
+            } else if(APP.feedFilter == "want-to-filter") {
                 self.recPos = UI.scroller.y;
             } else {
                 self.catPos = UI.scroller.y;
@@ -398,7 +433,7 @@ var RateView = Backbone.View.extend({
                     }
 
                     // Add people 
-                    if(self.model.get("people").length){
+                    if(self.model.get("people")){
                         new RecommendedPeopleView(self.model.get('people'));
                     }
 
@@ -413,19 +448,22 @@ var RateView = Backbone.View.extend({
                     var curPos = self.catPos;
 
                 } else if(filter === "want-to-filter") {
+                    
+                    self.wantTo = new WantToListView(self.model.get('Q'));
+                    self.wantTo.render();
 
-                    new WantToListView(self.model.get('Q'));
                     APP.feedFilter = filter;
-                    UI.scroller.refresh();
+                    curPos = self.recPos;
+                    
                 }
 
                 UI.scroller.refresh();
-                UI.scroller.scrollTo(0, curPos, 0); // go to last position when filter was changed
-                //self.feedPos = currentPos;  //set position
-                //self.checkPos(UI.scroller.y); // Check scroll position to show or hide the slider buttons
-            } else {
-                UI.scroller.scrollTo(0,0,600);
-            }
+
+                // go to last position when filter was changed
+                UI.scroller.scrollTo(0, curPos, 0); 
+
+
+            } 
 
             setTimeout(function() { UI.scroller.refresh(); }, 2000);
 

@@ -1,15 +1,24 @@
 var WantToModel = Backbone.Model.extend({
-	
 
-	defaults: {		
+	defaults: {	
 		checked: false
 	},
 
+	// Turn off sync to stop 'url' error
+	sync: function () { return false; },
 
-	initialize: function () {
-		
-		console.log(this);
 
+	toggle: function() {
+		var publishedID = this.get('moviePublishedID'),
+			check = this.get('checked');
+
+		// remove from list
+		Api.setMovieToFabricList(publishedID, APP.gameState.watchListID, check);
+
+		this.save({ checked : !check });
+	}, 
+	lobby: function () {
+		Backbone.history.navigate('movieLobby/'+ this.get('movieID'), true);
 	}
 
 
@@ -18,9 +27,7 @@ var WantToModel = Backbone.Model.extend({
 
 var WantToList = Backbone.Collection.extend({
 	model: WantToModel
-
 });
-
 
 
 var WantToListView = Backbone.View.extend({
@@ -32,28 +39,30 @@ var WantToListView = Backbone.View.extend({
 		this.collection = new WantToList(Q);
 
 
-		this.render();
+		// this.render();
 	},
 
 	render: function() {
 
-		//Empty the content container to keep it clean
+		//Empty the content container for a fresh start
 		this.$el.empty();
 
-		// Distory Scroller so we can reinit 
-		UI.scroller.destroy();
-
-
-		// put the list on the page 
-		this.collection.each(this.addOne, this);
-
-
-		// Reinit the scroller 
-		UI.initScroller($("#category-container")[0]);
+		
+		// put the list on the page (LIMITED TO 50)
+		_.each(this.collection.slice(0,49), this.addOne, this);
 
 
 
 		return this;
+	},
+
+	addMore: function() {
+		var start = this.$('.check-list-wrapper').length,
+			end = start + 50;
+
+
+		_.each(this.collection.slice(start, end), this.addOne, this);
+		
 	},
 
 	addOne: function(wantToItem) {
@@ -65,12 +74,21 @@ var WantToListView = Backbone.View.extend({
 	}
 });
 
+
 var WantTo = Backbone.View.extend({
 	
 	className: 'check-list-wrapper',
 
+
 	events: {
-		'touchStart .check-list-check' : 'checkBox',
+		'click .check-list-check' : 'checkBox',
+		'click .check-list-poster': 'lobby'
+	},
+
+
+	initialize: function() {
+
+		this.listenTo(this.model, 'change:checked', this.toggleCheck);
 	},
 
 
@@ -79,7 +97,7 @@ var WantTo = Backbone.View.extend({
 
 		var html = APP.load('wantToItem', this.model.toJSON());
 
-		this.$el.html(html);
+		this.$el.html( html );
 
 		return this;
 
@@ -87,8 +105,17 @@ var WantTo = Backbone.View.extend({
 
 
 	checkBox: function () {
-		console.log(this.model.moviePublishedID);
-		console.log(this.checked);
+
+		this.model.toggle();
+	},
+
+	toggleCheck: function() {
+
+		this.$el.toggleClass('checked');
+	},
+
+	lobby: function() {
+		this.model.lobby();
 	}
 });
 
