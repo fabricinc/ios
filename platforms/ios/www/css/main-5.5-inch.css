@@ -585,7 +585,7 @@ header nav #notifications-menu.on { background-image: url(../images/6p/discovery
 #tv-nav { background-image: url(../images/6p/discovery/fabricIcons/tvMenuIcon.png); }
 #travel-nav { background-image: url(../images/6p/discovery/fabricIcons/travelMenuIcon.png); }
 #music-nav { background-image: url(../images/6p/discovery/fabricIcons/musicMenuIcon.png); }
-.check-list-check { background-image: url(../images/6p/discovery/lightgrey-check.png); background-size: 100%; background-position: 0 0; }
+.check-list-check { background-image: url(../images/6p/discovery/lightgrey-check.png); background-size: 100%; background-position: 0 0; margin-top: 45px;}
 .check-list-check.checked { background-image: url(../images/6p/discovery/redcheck.png); }
 #rate-first.coach0 { background-image: url(../images/6p/discovery/coach/coach0.png); }
 #rate-first.coach1 { background-image: url(../images/6p/discovery/coach/coach1.png); }
