@@ -206,13 +206,7 @@ h6.like-you + .action {
     background-size: 414px 736px;
 }
 #home-filters div::after{
-    width: 80px;
-}
-#home-filters div#activity-filter::after {
-    right: 50px;
-}
-#category-filter::after {
-    left: 50px;
+    background-position: 30px;
 }
 #coach-section div,
 #home-filters div {
