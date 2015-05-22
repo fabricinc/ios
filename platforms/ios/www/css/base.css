@@ -135,7 +135,7 @@ header {
 #wrapper.welcome #chat-menu { display: none; }
 #wrapper.rate header { border-bottom: 0; }
 header nav {
-    background: -webkit-linear-gradient(#922624, #C0322F);
+    background: -webkit-linear-gradient(#a21600, #d32724);
 	position: relative;
 	text-align: center;
     height: 50px;
@@ -1188,7 +1188,8 @@ input.slider-search-form {
 #side-swipe .footer span:nth-child(2) { margin-left: 10px; height: 20px; }*/
 #side-swipe #total { margin: 0; }
 #home-filters {
-    background-color: #C0322F;
+    border-top: 1px #A6211F solid;
+    background-color: #D32724;
     position: relative;
     float: right;
     width: 100%;
