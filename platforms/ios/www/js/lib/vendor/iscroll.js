@@ -55,11 +55,12 @@ var utils = (function () {
 
 
 
-
-		deceleration = deceleration === undefined ? 0.0006 : deceleration;
+		// Changed deceleration to 0.0009 from 0.0006
+		deceleration = deceleration === undefined ? 0.0009 : deceleration;
 
 
 		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
+
 		duration = speed / deceleration;
 
 		if ( destination < lowerMargin ) {
@@ -566,7 +567,6 @@ IScroll.prototype = {
 		}
 
 		if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
-			console.log('flick');
 			this._execEvent('flick');
 			return;
 		}
@@ -796,6 +796,7 @@ IScroll.prototype = {
 	_transitionTime: function (time) {
 		time = time || 0;
 
+		
 		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
 
 

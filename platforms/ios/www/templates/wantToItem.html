@@ -1,6 +1,9 @@
-	<% fresh = parseInt(criticsScore) >= 60 ? " fresh" : " rotten"; %>
+	<% 
+		var fresh = parseInt(criticsScore) >= 60 ? " fresh" : " rotten"; 
+		var displayImage = sectionID === "1" ? imageThumbnail : Api.appSettings.cdn + "/posters/" + moviePublishedID + "_poster.jpg";
+	%>
 	<div class="check-list-item">
-		<img class="check-list-poster" src="<%= Api.appSettings.cdn + "/posters/" + moviePublishedID + "_poster.jpg"%>" />
+		<img class="check-list-poster" src="<%= displayImage %>" />
 		<div class="check-list-info">
 			<h2 class="check-list-title fnt">
 				<%= movieTitle %>

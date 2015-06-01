@@ -58,11 +58,11 @@ var RateModel = Backbone.Model.extend({
                 if(self.feed.feed.length < Api.appSettings.feedLimit) { self.pflf = true; }
 
 
-                Api.getRecommendedPeople(function(response) {
+                // Api.getRecommendedPeople(function(response) {
 
-                    this.set("people", response.data);
+                //     this.set("people", response.data);
 
-                }.bind(self));
+                // }.bind(self));
 
                 Api.getQ(APP.gameState.watchListID, APP.sectionID, function (response) {
 
@@ -101,7 +101,7 @@ var RateView = Backbone.View.extend({
     catPos: 0,
     actPos: 0,
     recPos: 0,
-    wantTo: null,
+    wantToList: null,
 
     events: {
 
@@ -137,10 +137,11 @@ var RateView = Backbone.View.extend({
 
     },
     wantTo: function () {
+        this.wantToList = new WantToListView(this.model.get("Q"));
+        
         if (this.filter !== "want-to-filter") { return; }
 
-        this.wantTo = new WantToListView(this.model.get("Q"));
-        this.wantTo.render();
+        this.wantToList.render();
     },
     render: function(callback, update) {
         var self = this;
@@ -274,10 +275,19 @@ var RateView = Backbone.View.extend({
         } else if(filter == "want-to-filter") {
 
 
-            if (!self.model.get('Q')) { $("#category-container .content-scroller").html('loading...'); cb(); return; }
+            // if (!self.model.get('Q')) { $("#category-container .content-scroller").html('loading...'); cb(); return; }
             
-            self.wantTo = new WantToListView(self.model.get('Q'));
-            self.wantTo.render();
+            // self.wantTo = new WantToListView(self.model.get('Q'));
+            
+            if(self.wantToList) { 
+
+                self.wantToList.render(); 
+            
+            } else {
+
+                $("#content-container .content-scroller").empty().addClass('loading');
+            }
+            
 
 
             cb();
@@ -334,7 +344,7 @@ var RateView = Backbone.View.extend({
                         }
 
                     } else {
-                        self.wantTo.addMore();
+                        self.wantToList.addMore();
                         UI.scroller.refresh();
                     }
 
@@ -449,8 +459,15 @@ var RateView = Backbone.View.extend({
 
                 } else if(filter === "want-to-filter") {
                     
-                    self.wantTo = new WantToListView(self.model.get('Q'));
-                    self.wantTo.render();
+                    
+                   if(self.wantToList) { 
+                        
+                        self.wantToList.render(); 
+                    
+                    } else {
+
+                        $("#content-container .content-scroller").empty().addClass('loading');
+                    }
 
                     APP.feedFilter = filter;
                     curPos = self.recPos;

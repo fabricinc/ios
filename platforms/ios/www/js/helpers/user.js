@@ -13,7 +13,6 @@
 
     User = {
         emailRegex: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
-        avatar: null,
         fbWait: false,
         isFacebook: false,
 
@@ -61,7 +60,6 @@
                             APP.models.currentUser.set(response);
                         }
 
-                        User.createUserAvatar();
 
                         if (parseInt(response.facebookID) > 0 && !User.isFacebookUser()) {
                             Facebook.promptLogin(callback);
@@ -111,6 +109,7 @@
         },
 
         register: function(callback) {
+            console.log('register');
             callback = callback || function(success) { Util.log("Registration success: " + success); };
             var firstname = $('#register-firstname').val(),
                 lastname = $('#register-lastname').val(),
@@ -120,6 +119,7 @@
                 birthday = $('#register-birthday').val(),
                 gender = $('.gender-buttons .active').attr("id"),
                 self = this;
+
 
             if (this.registrationValidation(firstname, lastname, email, password, passwordConfirm, birthday, gender)) {
                 Api.createNewRegistration(firstname + " " + lastname, email, password, null, null, birthday, gender, function(data) {
@@ -360,7 +360,7 @@
                     Api.updateUserGeoData(pos);
                 });
 
-                User.createUserAvatar();
+
                 
                 if (facebookData) {
                     if (Analytics) { Analytics.event("Facebook login"); }
@@ -577,22 +577,6 @@
 
         isFacebookUser: function() {
             return this.isFacebook;
-        },
-        createUserAvatar: function() {
-
-
-            if(this.avatar) { return this.avatar.src; }
-
-
-            var backUpAvatar = "images/discovery/avatarDark.png",
-                avatar = new Image(50);
-
-            console.log(this.isFacebook);
-
-            avatar.src = this.isFacebook ? this.getFacebookAvatar() : backUpAvatar;
-            avatar.id = 'tap-avatar';
-
-            this.avatar = avatar;
         },
         getFacebookAvatar: function(facebookID, size, rank) {
             if (!facebookID || facebookID === null) {

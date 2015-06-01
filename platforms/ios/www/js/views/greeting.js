@@ -60,7 +60,7 @@ var GreetingModel = Backbone.Model.extend({
                 Api.sendGreeting(self.userID, self.suggestion, function(response) {
                     if(response.success) {
                         APP.gameState.credits = (parseInt(APP.gameState.credits) - 1).toString();
-                        Backbone.history.navigate("matches", true);
+                        Backbone.history.navigate("back", true);
                         params = { "Greeting type": "Suggested" }
                         mixpanel.track("Greeting sent ", params);
                         if(Analytics) { Analytics.eventAndParams("Greeting Sent", params ); }

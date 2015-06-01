@@ -8,14 +8,14 @@
 #coach-section div,
 #home-filters div {
     background-size: 40px;
-    height: 57px;
+    height: 61px;
 }
 #home-filters div::after{
     font-size: 15px;
     background-size: 31px;
-    line-height: 500%;
+    line-height: 560%;
 }
-#category-container { height: 550px; }
+#category-container { height: 545px; }
 .recommended-filter #category-container{ height: 510px; }
 #welcome div .title,
 #category-container div .title { 
@@ -310,18 +310,18 @@ h6.like-you + .action {
 #dashboard header nav h1 {
     height: 40px !important;
     width: 110px;
-    font-size: 38px;
+    font-size: 36px;
     line-height: 40px;
 }
 #current-icon.all, #dashboard header nav h1.open span {
-    background-size: 17px 43px;;
+    background-size: 20px 46px;
     height: 100%;
     top: 0px; 
 }
 #coach-section h1 span,
 #dashboard header nav h1 span {
     top: 12px;
-    margin: 0 0 0 7px;
+    margin: 0 0 0 4px;
     height: 30px;
     width: 26px;
     background-size: 17px;

@@ -14,11 +14,6 @@ var RecommendedPeopleModel = Backbone.Model.extend({
 
         this.set("people", people);
 
-    },
-
-
-    test: function() {
-        console.log('hiiii');
     }
 
 
@@ -61,8 +56,9 @@ var RecommendedPeopleView = Backbone.View.extend({
 
         $(".content-scroller").prepend(template);
 
-        // this.$el.html(template);
-
+        // Revers order of people
+        people.reverse();
+        
 
         people.forEach(function(person, i, a){
 
@@ -149,8 +145,9 @@ var RecommendedPeopleView = Backbone.View.extend({
             currentPosition = Math.round(tO.curX);
 
 
-        // Only add momentum is swipe durration is > 300
+        // Only add momentum if swipe durration is > 300ms
         if(durration < 300) {
+
             // Calculate momentum
             this.momentum(currentPosition, start, durration);
         }
@@ -167,7 +164,8 @@ var RecommendedPeopleView = Backbone.View.extend({
 
     momentum: function(currentPosition, startPosition, time) {
         
-        var distance = currentPosition - startPosition,
+        var xad = document.getElementById('suggested-follow-section'),
+            distance = currentPosition - startPosition,
             direction = distance < 0 ? -1 : 1,
             speed = Math.abs(distance) / time,
             x = this.$el.position().left,
@@ -176,11 +174,14 @@ var RecommendedPeopleView = Backbone.View.extend({
             transition,
             durration;
 
+        console.log(x);
+
         console.log(currentPosition);
         // console.log();
 
 
-        destination =  x + ( speed * speed ) / ( 2 * d ) * ( direction );
+        // destination =  x + ( speed * speed ) / ( 2 * d ) * ( direction );
+        destination = x + 300 * direction;
 
         durration =  speed / d;
 
@@ -192,11 +193,10 @@ var RecommendedPeopleView = Backbone.View.extend({
         destination = destination < -1750 ? -1750 : destination;
         destination = destination > 0 ? 0 : destination;
 
+        xad.style.webkitTransitionDuration = "800ms";
 
-        this.style.transitionDuration = durration+"ms";
-        console.log(this.style.transitionDuration);
-        
-        this.setCSS(destination);
+        xad.style.webkitTransform = "translate3d("+ destination +"px, 0px, 0px)";
+        // this.setCSS(destination);
 
 
     }

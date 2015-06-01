@@ -160,7 +160,7 @@ header nav h1, #available-services h1 {
 }
 #coach-section h1, 
 #dashboard header nav h1 {
-    background: -webkit-linear-gradient(#C0322F,#a72c29);
+    background-color: #d32724;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.41);
     text-transform: uppercase;
     font-family: Knockout;
@@ -208,7 +208,7 @@ header nav h1 {
     background-repeat: no-repeat;
     background-size: 16px;
     display: inline-block;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 6px;
     height: 20px;
     width: 16px;
     position: absolute;
@@ -219,7 +219,7 @@ header nav h1 {
     background-image: url(../images/discovery/fabricIcons/arrowRed.png);
 }
 #current-icon.all, #dashboard header nav h1.open span {
-    background-size: 16px;
+    background-size: 100% 100%;
     height: 36px;
     position: absolute;
     top: 0px;
@@ -344,7 +344,7 @@ header nav #shopping-cart {
     background-image: url(../images/discovery/cart.png);
 }
 header nav #share-icon {
-    background-image: url(../images/discovery/share2.png);
+    background-image: url(../images/discovery/share.png);
     background-size: 18px 25px;
     background-position: 7px 13px;
 }
@@ -446,7 +446,7 @@ div.left.button.back,
     color: rgb(193, 51, 47);
 }
 #done-button, #more-button, #done-inter-button, #rec-filter-button {
-    color: #C0322F;
+    color: white;
     right: 10px;
     top: 18px
 }
@@ -1184,8 +1184,6 @@ input.slider-search-form {
     height: 20px;
 }
 #side-swipe .footer span { color: white; }
-/*#side-swipe .footer span:nth-child(1) { margin-left: 10px; }
-#side-swipe .footer span:nth-child(2) { margin-left: 10px; height: 20px; }*/
 #side-swipe #total { margin: 0; }
 #home-filters {
     border-top: 1px #A6211F solid;
@@ -1196,15 +1194,14 @@ input.slider-search-form {
 }
 
 #home-filters div::after {
-    background-position: 25px 2px;
+    background-position: 25px 4px;
     background-repeat: no-repeat;
-    text-transform: capitalize;
     background-size: 21px;
     position: absolute;
     text-align: center;
     border-radius: 4px;
     font-size: 14px;
-    line-height: 400%;
+    line-height: 460%;
     color: white;
     width: 100%;
     height: 93%; 
@@ -1214,25 +1211,25 @@ input.slider-search-form {
 
 #home-filters div#activity-filter::after {
     background-image: url(../images/discovery/feedButton.png);
-    content: "feed";
+    content: "Feed";
 }
 #category-filter::after {
     background-image: url(../images/discovery/exploreButton.png);
-    content: "explore";
+    content: "Explore";
 }
 div#fancy-button::after {
     background-image: url(../images/discovery/fabButton.png);
-    background-size: 75% !important;
+    background-size: 80% !important;
     background-position: center;
     content: "";
 }
 #want-to-filter::after {
     background-image: url(../images/discovery/wantToButton.png);
-    content: "want tos";
+    content: "Want tos";
 }
 #profile-footer::after {
     background-image: url(../images/discovery/profileButton.png);
-    content: "profile";
+    content: "Profile";
 }
 
 #home-filters div.filter::after {
@@ -1243,7 +1240,7 @@ div#fancy-button::after {
 #coach-section div,
 #home-filters div {
     position: relative;
-    height: 41px;
+    height: 45px;
     float: left;
     width: 20%;
 }
@@ -2153,7 +2150,7 @@ div.recommendation.list-item.userChoice .title {
 #play:before,
 #list-items .play-button:before,
 #recommendations-feed .poster:before {
-    content: "\25B6";
+    content: "\25BA";
     color: rgba(255, 255, 255, 0.9);
     position: absolute;
     font-size: 50px;
@@ -2228,6 +2225,25 @@ div.recommendation.list-item.userChoice .title {
     left: 80px;
 }
 /* ++++++++++++++++++++ CHECK LIST Q ON FEED ++++++++++++++++++++ */
+
+@-webkit-keyframes pulseLoading {
+    0% { opacity: 0; -webkit-transform: scale(.7); }
+    100% { opacity: 1; -webkit-transform: scale(1); }
+}
+
+#category-container .content-scroller.loading::after {
+    -webkit-animation: pulseLoading 800ms infinite ease-in-out alternate;
+    content: "Loading...";
+    position: relative;
+    text-align: center;
+    margin: 150px auto;
+    font-weight: bold; 
+    font-size: 20px; 
+    display: block;
+    color: white;
+    height: 40px;
+
+}
 
 .check-list-wrapper {
     margin-bottom: 1px;
@@ -4040,7 +4056,7 @@ h2#see-more-matches {
     transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
     transition-delay: 0;
     background-color: white;
-    padding-bottom: 8px;
+    /*padding-bottom: 8px;*/
     position: relative;
     width: 2200px;
 }
@@ -5538,13 +5554,15 @@ button#done {
     color: gray;
 }
 #status-update-search {
-    background-color: lightgray;
     padding: 5px;
 }
 #status-update-input {
+    border-radius: 0;
     font-size: 17px;
     width: 348px;
     border: none;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
 }
 #video-player:-webkit-full-screen {
     width: 100%;

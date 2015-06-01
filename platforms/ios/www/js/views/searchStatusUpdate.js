@@ -116,7 +116,7 @@ var SearchStatusUpdateView = Backbone.View.extend({
 
 
         var header = new HeaderView({
-            title: "Pick Topic",
+            title: "Post to Fabric",
             home: false,
         });
 

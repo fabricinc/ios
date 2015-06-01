@@ -17,6 +17,7 @@ var UI = {
             var el = document.getElementById("mask"),
                 self = this;
             callback = callback || function() { };
+            spinner = spinner || function () { };
 
             if (el.className == "off" && spinner) {
                 el.className = "on";

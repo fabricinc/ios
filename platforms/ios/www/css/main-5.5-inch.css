@@ -1,10 +1,10 @@
 /* iPhone 6+ */
 #wrapper { width: 414px; height: 736px; position: relative; }
 #home-filters div, #coach-section div { height: 52px; background-size: 46px; }
-#home-filters { width: 414px; height: 52px; }
+#home-filters { width: 414px; }
 #home-filters div#recommended-filter, #coach-section.want-to div { width: 138px; }
 
-#category-container { height: 618px; }
+#category-container { height: 613px; }
 #welcome-categories div .title, 
 #category-container div .title { width: 380px; font-size: 19px; }
 #welcome-categories .catItem { max-height: 155px; }
@@ -210,12 +210,12 @@ h6.like-you + .action {
 }
 div#fancy-button::after {
     background-position: center;
-    background-size: 60% !important;
+    background-size: 70% !important;
 }
 #coach-section div,
 #home-filters div {
-    height: 52px;
-    line-height: 52px;
+    height: 57px;
+    line-height: 57px;
     font-size: 16px;
 }
 #home-filters img { right: 44%; }
@@ -237,9 +237,9 @@ header nav { height: 65px; }
 #current-icon.all,
 #dashboard header nav h1.open span {
     top: 0px;
-    right: 0px;
+    right: 7px;
     height: 50px;
-    background-size: 21px;
+    background-size: 24px;
 }
 header nav #tap-menu,
 header nav #share-icon,
