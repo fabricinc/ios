@@ -106,8 +106,7 @@ var MatchesView = Backbone.View.extend({
 
             if (!self.header) {
                 self.header = new HeaderView({
-                    title: "People Like You",
-                    leftButton: {class: "slide"}
+                    title: "People Like You"
                 });
                 self.$el.prepend(self.header.el);
             }

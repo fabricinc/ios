@@ -274,18 +274,15 @@ var RateView = Backbone.View.extend({
             
         } else if(filter == "want-to-filter") {
 
-
-            // if (!self.model.get('Q')) { $("#category-container .content-scroller").html('loading...'); cb(); return; }
-            
-            // self.wantTo = new WantToListView(self.model.get('Q'));
             
             if(self.wantToList) { 
 
                 self.wantToList.render(); 
             
             } else {
-
+                console.log('add class loading');
                 $("#content-container .content-scroller").empty().addClass('loading');
+
             }
             
 

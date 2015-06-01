@@ -319,9 +319,8 @@ header nav #tap-avatar {
 header nav .slide,
 header nav #tap-menu {
     left: 5px;
-    border-radius: 25px;
-    background-size: 25px 16px;
-    background-position: 10px 16px;
+    border-radius: 0px;
+    background: none;
 }
 header nav #chat-menu {
     top: 0px;
@@ -377,11 +376,11 @@ header nav #notifications-menu #notifications-num {
     right: 70px;
 }
 .messages #chat-num { display: none !important; }
-header nav #tap-menu,
-#dashboard header nav #message-menu {
-    border-radius: 20px;
-    height: 40px;
+header nav #tap-menu {
+    border-radius: 0px;
+    height: 31px;
     width: 40px;
+    left: 10px;
     top: 5px;
 }
 #friends,

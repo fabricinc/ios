@@ -144,7 +144,6 @@
             $(".left.button.back").fastClick(function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('hi');
                 Backbone.history.navigate("back", true);
             });
             $("#done-button").fastClick(function(e){
@@ -266,7 +265,7 @@
 
             $("#tap-menu, .left.button.slide").fastClick(function(e) {
                 e.preventDefault();
-                Backbone.history.navigate("profile", true);
+                Backbone.history.navigate("matches", true);
             });
 
             $("#scroll-top").fastClick(function() {

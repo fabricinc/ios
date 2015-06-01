@@ -43,23 +43,27 @@ var WantToListView = Backbone.View.extend({
 
 	render: function() {
 
+		var list = this.collection.toJSON()[0];
+
+
 		//Empty the content container for a fresh start
 		this.$el.empty();
-
-		// If the Q isn't loaded show the loading screen
-		if (!this.collection.models.length) {
-
-			this.$el
-				.addClass('loading');
-			
-			return this;
-		}
 
 		this.$el
 			.removeClass('loading');
 
+		// If the Q isn't loaded show the loading screen
+		if (list.emptyList) {
 
-		console.log(this.collection);
+			this.$el.html(
+				'<p class="blank-message">Nothing here yet!</p><p class="blank-instructions">Tap the explore tab and check out some packs to start building your want-to list</p>'
+			);
+			
+
+			return this;
+		}
+
+
 		// put the list on the page (LIMITED TO 50)
 		_.each(this.collection.slice(0,49), this.addOne, this);
 
