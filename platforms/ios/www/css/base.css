@@ -1198,13 +1198,11 @@ input.slider-search-form {
     background-size: 21px;
     position: absolute;
     text-align: center;
-    border-radius: 4px;
     font-size: 14px;
     line-height: 460%;
     color: white;
     width: 100%;
-    height: 93%; 
-    top: 2px;
+    height: 100%; 
     right: 0;
 }
 
@@ -3975,12 +3973,11 @@ h2#see-more-matches {
     line-height: 32px;
     border-radius: 5px;
 }
+.feed-item .activity-feed-buttons .follow.following,
 .follow-button.following {
-    color: #C0322F;
-    background-color: white;
     border: 2px solid #C0322F;
-    height: 31px;
-    width: 48%;
+    background-color: white;
+    color: #C0322F;
 }
 .follow-button,
 .say-hi { width: 49%; }
@@ -3999,6 +3996,7 @@ h2#see-more-matches {
     margin: 10px 0 10px 10px;
     border: 2px solid #C0322F;
 }
+.feed-item .button.greeting,
 #profile .action-buttons .button.greeting {
     background-image: url(../images/discovery/icon_greeting.png);
     background-size: 20px 19px;
@@ -4640,12 +4638,46 @@ h6.like-you + .action {
     font-size: 18px;
     color: black;
 }
-.feed-item .action .action-content {
-
+.feed-item .suggested-tastemate {
+    background-image: url(../images/discovery/tastemate.png);
+    background-repeat: no-repeat;
+    background-position: 55px 0;
+    background-size: 24px;
+    text-align: center;
+    padding-left: 30px;
+    line-height: 24px;
+    font-size: 20px;
+    color: #C0322F;
+}
+.feed-item.suggested .compatibility {
+    border-radius: 30px;
+    line-height: 50px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    left: 15px;
+    top: 50px;
+}
+.feed-item .action .action-content span {
+    color: gray;
+    font-weight: normal;
 }
 
 .feed-item .content {
     margin-top: 10px;
+}
+.feed-item .activity-feed-buttons {
+    margin: 10px auto;
+    width: 95%;
+}
+
+.feed-item .activity-feed-buttons .button {
+    border: 2px solid #C0322F;
+    display: inline-block;
+    width: 48%;
+}
+.feed-item .activity-feed-buttons .button.following {
+
 }
 .feed-item .action .follow-button {
     width: 80px;
@@ -4686,11 +4718,20 @@ h6.like-you + .action {
     color: rgb(117,117,117);
 }
 .feed-footer {
-    width: 100%;
     overflow: hidden;
     padding: 5px 0;
     background: rgb(245, 245, 245);
     border-top: 1px solid rgb(228, 226, 225)
+}
+.feed-footer.suggested {
+    background-image: url(../images/discovery/carrot.png);
+    background-repeat: no-repeat;
+    background-position: 96%;
+    background-color: white;
+    background-size: 10px;
+    padding: 5px 10px;
+    line-height: 25px;
+    font-weight: 500;
 }
 .feed-footer span {
     width: 33%;

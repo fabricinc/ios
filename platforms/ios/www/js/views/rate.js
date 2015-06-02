@@ -548,7 +548,7 @@ var RateView = Backbone.View.extend({
         });
 
         // both comment buttons in social and footer go to comment page
-        $(".follow-button").click(function(e) {
+        $(".follow").click(function(e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -579,9 +579,11 @@ var RateView = Backbone.View.extend({
             return false;
         });
 
-        $(".say-hi").click(function(e) {
+        $(".greeting").click(function(e) {
             var userID = $(this).parent().data("userid");
 
+            APP.feedPos = UI.scroller.y;
+            
             Backbone.history.navigate("greeting/" + userID, true);
 
             return false;
@@ -636,7 +638,7 @@ var RateView = Backbone.View.extend({
             if(Analytics) { Analytics.event("Share Selected"); }
         });
 
-        $(".feed-footer .suggested-friends").unbind().click(function(){
+        $(".feed-footer.suggested").unbind().click(function(){
             Backbone.history.navigate("matches", true);
         });
 

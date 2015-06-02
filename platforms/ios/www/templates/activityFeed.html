@@ -123,70 +123,93 @@
 
             var msPop = item.userID == '252990' ? true : false,
             likeYou = "",
-            suggestedFriend = parseInt(item.suggested) > 0 ? (likeYou = "av-like-you" , "<h6 class='like-you'>Like You</h6>") : "",
-            compatibilityPercent = item.compatibility && parseInt(item.compatibility) > 0 && !msPop ? '<div class="compatibility">'+ item.compatibility +' %</div>' : "";
+            suggestedFriend = parseInt(item.suggested) > 0 ? true : false,
+            compatibilityPercent = item.compatibility && parseInt(item.compatibility) > 0 && !msPop ? '<div class="compatibility">'+ item.compatibility +'%</div>' : "";
 
-            %> 
-            <div class="feed-item-card">
-                <div id="feed<%= item.feedID %>" class="feed-item" data-type="<%= item.feed_type %>">
-                    <div class="cf">
-                        <div class="avatar<% if(msPop) { %> msPop<% } %> <%= likeYou %>" data-actorid="<%= item.userID %>"<% if(item.data.actorFbID) { %> style="background-image: url(https://graph.facebook.com/<%= item.data.actorFbID %>/picture?height=200&width=200)"<% } %>></div>
-                        
-                        <%= compatibilityPercent + suggestedFriend %>
+            if(suggestedFriend) { %>
 
+                <div class="feed-item-card ">
+                    <div id="feed<%= item.feedID %>" class="feed-item suggested" data-type="<%= item.feed_type %>">
+                        <div class="cf suggested-tastemate">Suggested Tastemate</div>
+                        <div class="content">
+                            <div class="poster">
+                                <img data-userid="<%= item.userID %>" src="https://graph.facebook.com/<%= item.data.actorFbID %>/picture?height=335&width=335" />
+                                <%= compatibilityPercent %> 
+                            </div>
+                        </div>
                         <div class="action" data-actorid="<%= item.userID %>">
-                            <p class="action-content"><%= item.data.actorName %></p>
-                            <p class="timeago"><%= Util.timeAgo(item.modified) %></p> 
+                            <p class="action-content">
+                                <%= item.data.actorName %> 
+                                <span>also <%= item.data.verb %></span>
+                                <%= item.data.objectName %>
+                            </p>
                         </div>
-
-                        <div class="action-info">
-                            <% if(item.data.comment) { %>
-
-                                <p class="comment"><%= item.data.comment %></p>
-
-                            <% } else { %>
-
-                                <span class="verb"><%= item.data.verb %></span>
-
-                                <% if(item.data.ratio) { %> <%= item.data.ratio %>% of<% } %> 
-
-                            <% } %>
-
-                            <b class="object"><%= item.data.objectName %></b>
-                        </div>
-
-                            
-                        
-                    </div>
-                    <div class="content">
-                        <div class="poster">
-                            <% if(item.feed_type == "favorite" || item.feed_type == "queue" || item.feed_type == "watchstatus") { %>
-                                <img class="movie-img<% if(parseInt(item.section_id) == 4) { %> music<% } %>" src="<%= Api.appSettings.cdn %>/posters/<%= item.data.publishedID %>_poster.jpg" data-movieid="<%= item.data.objectID %>" width="260" onerror="this.src='http://api-admin.trailerpop.com/files/posters/<%= item.data.publishedID %>_poster.jpg'"/>
-                            <% } else if(item.feed_type == "ratecompletecategory" || item.feed_type == "ratecompletelist") { %>
-                                <% item.data.objectAsset = item.data.objectAsset.replace('http://api-admin.trailerpop.com','').replace(Api.appSettings.cdn, '').replace('/files', '') %>
-                                <img class="category-img" src="<%= Api.appSettings.cdn %><%= item.data.objectAsset %>" data-catid="<%= item.data.objectID %>" width="260" onerror="this.src='http://api-admin.trailerpop.com/files<%= item.data.objectAsset %>'"/>
-                            <% } %>
+                        <div class="activity-feed-buttons" data-userid="<%= item.userID %>">
+                            <div class="button follow">Follow</div>
+                            <div class="button greeting">Say Hi</div>
                         </div>
                     </div>
-                    <div class="feed-social" data-feedid="<%= item.feedID %>">
-                        <span id="like_<%= item.feedID %>" class="likes"<% if(item.totalLikes <= 0) { %> style="display:none;"<% } %>>
-                            <span class="totalLikes"><%= item.totalLikes %></span> Like<% if(item.totalLikes > 1) { %>s<% } %>
-                        </span>
-                        <% if(item.totalComments > 0) { %>
-                            <span class="comment"><%= item.totalComments %> Comments</span>
-                        <% } %>
+                    <div class="feed-footer suggested">
+                        <p class="more-followers">More Suggested Tastemates</p>
                     </div>
                 </div>
-                <div class="feed-footer" data-feedid="<%= item.feedID %>" data-actorid="<%= item.userID %>" data-type="<%= item.feed_type %>">
-                    <% if(suggestedFriend && suggestedFriend > 0) { %>
-                        <span class="suggested-friends">More Suggested Friends</span>
-                    <% } else { %>
+
+            <% } else { %>
+
+                <div class="feed-item-card">
+                    <div id="feed<%= item.feedID %>" class="feed-item" data-type="<%= item.feed_type %>">
+                        <div class="cf">
+                            <div class="avatar<% if(msPop) { %> msPop<% } %> <%= likeYou %>" data-actorid="<%= item.userID %>"<% if(item.data.actorFbID) { %> style="background-image: url(https://graph.facebook.com/<%= item.data.actorFbID %>/picture?height=200&width=200)"<% } %>></div>
+                            
+                            <%= compatibilityPercent %>
+
+                            <div class="action" data-actorid="<%= item.userID %>">
+                                <p class="action-content"><%= item.data.actorName %></p>
+                                <p class="timeago"><%= Util.timeAgo(item.modified) %></p> 
+                            </div>
+
+                            <div class="action-info">
+                                <% if(item.data.comment) { %>
+
+                                    <p class="comment"><%= item.data.comment %></p>
+
+                                <% } else { %>
+
+                                    <span class="verb"><%= item.data.verb %></span>
+
+                                    <% if(item.data.ratio) { %> <%= item.data.ratio %>% of<% } %> 
+
+                                <% } %>
+
+                                <b class="object"><%= item.data.objectName %></b>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="poster">
+                                <% if(item.feed_type == "favorite" || item.feed_type == "queue" || item.feed_type == "watchstatus") { %>
+                                    <img class="movie-img<% if(parseInt(item.section_id) == 4) { %> music<% } %>" src="<%= Api.appSettings.cdn %>/posters/<%= item.data.publishedID %>_poster.jpg" data-movieid="<%= item.data.objectID %>" width="260" onerror="this.src='http://api-admin.trailerpop.com/files/posters/<%= item.data.publishedID %>_poster.jpg'"/>
+                                <% } else if(item.feed_type == "ratecompletecategory" || item.feed_type == "ratecompletelist") { %>
+                                    <% item.data.objectAsset = item.data.objectAsset.replace('http://api-admin.trailerpop.com','').replace(Api.appSettings.cdn, '').replace('/files', '') %>
+                                    <img class="category-img" src="<%= Api.appSettings.cdn %><%= item.data.objectAsset %>" data-catid="<%= item.data.objectID %>" width="260" onerror="this.src='http://api-admin.trailerpop.com/files<%= item.data.objectAsset %>'"/>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="feed-social" data-feedid="<%= item.feedID %>">
+                            <span id="like_<%= item.feedID %>" class="likes"<% if(item.totalLikes <= 0) { %> style="display:none;"<% } %>>
+                                <span class="totalLikes"><%= item.totalLikes %></span> Like<% if(item.totalLikes > 1) { %>s<% } %>
+                            </span>
+                            <% if(item.totalComments > 0) { %>
+                                <span class="comment"><%= item.totalComments %> Comments</span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="feed-footer" data-feedid="<%= item.feedID %>" data-actorid="<%= item.userID %>" data-type="<%= item.feed_type %>">
                         <span class="like<% if(item.liked > 0) { %> liked<% } %>">Like</span>
                         <span class="comment">Comment</span>
                         <span class="share">Share</span>
-                    <% } %>
+                    </div>
                 </div>
-            </div>
+            <% } %>
         <% } %>
     <% } %>
 <% } %>

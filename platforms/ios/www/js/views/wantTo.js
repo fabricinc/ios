@@ -46,11 +46,11 @@ var WantToListView = Backbone.View.extend({
 		var list = this.collection.toJSON()[0];
 
 
-		//Empty the content container for a fresh start
-		this.$el.empty();
-
+		//Empty the content container for a fresh start and remove the laoding sequence 
 		this.$el
+			.empty()
 			.removeClass('loading');
+			
 
 		// If the Q isn't loaded show the loading screen
 		if (list.emptyList) {

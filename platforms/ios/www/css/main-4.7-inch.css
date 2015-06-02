@@ -279,7 +279,6 @@ h6.like-you + .action {
 #favorite-delta .delta-poster img { width: 314px; }
 #favorite-delta .feed-item { width: 345px; padding-bottom: 0;}
 #favorite-delta .feed-footer { border-top: none; }
-.feed-footer { width: 100%; }
 #favorite-delta .feed-footer { width: 345px; margin: 0 auto; }
 #facebook { top: 327px; }
 #sign-up { top: 411px; }

@@ -150,6 +150,6 @@ var GreetingView = Backbone.View.extend({
     },
 
     dealloc: function() {
-
+        this.$('#greeting-content').empty();
     }
 });
