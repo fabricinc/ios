@@ -19,7 +19,13 @@ var WantToModel = Backbone.Model.extend({
 
 	}, 
 	lobby: function () {
+
+		// Set filter on APP
+		APP.wantToSortFilter = this.collection.sortOrder;
+
+		// Go to the lobby
 		Backbone.history.navigate('movieLobby/'+ this.get('movieID'), true);
+
 	}
 
 
@@ -27,7 +33,54 @@ var WantToModel = Backbone.Model.extend({
 
 
 var WantToList = Backbone.Collection.extend({
-	model: WantToModel
+	
+	sortOrder: 'Count',
+
+	model: WantToModel,
+
+	initialize: function () {
+
+		this.sortOrder = APP.wantToSortFilter || 'Count';
+
+	},
+	
+	comparator: function (wantTo) {
+
+		return - wantTo.get(this.sortOrder);
+		
+	}
+
+
+});
+
+var SortModel = Backbone.Model.extend({
+	defaults: {
+		sortOrder: 'Count'
+	}
+});
+
+var SortView = Backbone.View.extend({
+	id: "#want-to-sort",
+
+	events: {
+		'click' : 'filter'
+	},
+
+	render: function() {
+
+		this.$el.html("<p>sort</p>");
+		
+		return this;
+	},
+
+
+	filter: function() {
+		this.collection.sortOrder = 'criticsScore';
+
+		this.collection.sort();
+
+	}
+
 });
 
 
@@ -39,11 +92,14 @@ var WantToListView = Backbone.View.extend({
 
 		this.collection = new WantToList(Q);
 
+		this.listenTo(this.collection, 'sort', this.sortList);
+
 	},
 
 	render: function() {
 
 		var list = this.collection.toJSON()[0];
+		this.sort = new SortView({ collection: this.collection });
 
 
 		//Empty the content container for a fresh start and remove the laoding sequence 
@@ -62,6 +118,9 @@ var WantToListView = Backbone.View.extend({
 
 			return this;
 		}
+
+		// Add Sort filter view
+		this.$el.prepend(this.sort.render().el);
 
 
 		// put the list on the page (LIMITED TO 50)
@@ -87,7 +146,14 @@ var WantToListView = Backbone.View.extend({
 
 		this.$el.append(wantTo.render().el);
 
+	},
+
+	// Function to handle rerendering of list after sort
+	sortList: function () {
+
+		this.render();
 	}
+
 });
 
 

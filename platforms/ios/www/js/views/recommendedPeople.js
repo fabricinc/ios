@@ -36,7 +36,7 @@ var RecommendedPeopleView = Backbone.View.extend({
 
         this.$el.on('transitionend', function(event) {
             
-            event.currentTarget.style.transitionDuration = 0;
+            event.currentTarget.style['webkitTransitionDuration'] =  0;
         });
 
     },
@@ -145,6 +145,8 @@ var RecommendedPeopleView = Backbone.View.extend({
             currentPosition = Math.round(tO.curX);
 
 
+        this.$el.removeClass('dragging');
+
         // Only add momentum if swipe durration is > 300ms
         if(durration < 300) {
 
@@ -158,7 +160,7 @@ var RecommendedPeopleView = Backbone.View.extend({
 
 
 
-        this.style.webkitTransform = "translate3d("+ swipeLength +"px, 0px, 0px)";
+        this.style['webkitTransform'] = "translate3d("+ swipeLength +"px, 0px, 0px)";
     },
 
 
@@ -193,9 +195,10 @@ var RecommendedPeopleView = Backbone.View.extend({
         destination = destination < -1750 ? -1750 : destination;
         destination = destination > 0 ? 0 : destination;
 
-        xad.style.webkitTransitionDuration = "800ms";
+        xad.style['webkitTransitionDuration'] = "800ms";
 
-        xad.style.webkitTransform = "translate3d("+ destination +"px, 0px, 0px)";
+        this.$el.css({"transform" : "translate3d("+ destination +"px, 0px, 0px)"});
+        // xad.style["webkitTransform"] = "translate3d("+ destination +"px, 0px, 0px)";
         // this.setCSS(destination);
 
 

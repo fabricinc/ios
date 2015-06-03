@@ -14,7 +14,6 @@
 .poster img.movie-img { height: auto; }
 #side-nav { width: 346px; }
 #profile,
-.greeting,
 #fabric-menu,
 #user-matches,
 #list-row-wrapper,
@@ -167,7 +166,6 @@ div#friends-queued.bottom-info span {
 #favorite-delta .delta-poster { height: 540px; }
 #favorite-delta .delta-poster img { width: 360px; }
 #favorite-delta .feed-item { width: 385px; }
-.feed-footer { width: 100%; }
 #favorite-delta .feed-footer { width: 385px; margin: 0 auto; }
 #facebook { top: 327px; }
 #sign-up { top: 411px; }
