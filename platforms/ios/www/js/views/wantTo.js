@@ -47,43 +47,144 @@ var WantToList = Backbone.Collection.extend({
 	comparator: function (wantTo) {
 
 		return - wantTo.get(this.sortOrder);
-		
+
 	}
 
 
 });
 
 var SortModel = Backbone.Model.extend({
+	
 	defaults: {
-		sortOrder: 'Count'
+		selected: false
+	},
+
+	sync: function () { return false; }
+});
+
+var SortFilters = Backbone.Collection.extend({
+	model: SortModel
+});
+
+var SortController = Backbone.View.extend({
+	el: '#category-container',
+
+	events: {
+		"click" : 'toggleSortView'
+	},
+
+	initialize: function (options) {
+		
+		this.vent = options.vent;
+
+		this.sort = new SortView({ vent: this.vent });
+
+	},
+
+
+	render: function () {
+		this.$el.prepend( "<h1 id='want-to-sort'>Sort <span>Filter</span></h1>" );
+
+		return this;
+	},
+
+	toggleSortView: function () {
+
+		this.vent.trigger( 'toggleSortView' );
+		this.$el.append( this.sort.render().el );
 	}
 });
 
+// collection view for filters and sort
 var SortView = Backbone.View.extend({
-	id: "#want-to-sort",
+
+	id: "want-to-filters",
+
+	tagName: "ul",
 
 	events: {
 		'click' : 'filter'
 	},
 
+	initialize: function (options) {
+
+		this.collection = new SortFilters([
+			{
+				name: 'Count',
+				filter: 'Count',
+			},{
+				name: 'critics Score',
+				filter: 'criticsScore',
+			},{
+				name: 'Popular with Everyone',
+				filter: 'totalCount',
+			},{
+				name: 'Recently Added',
+				filter: 'modified',
+			}
+		]);
+
+		this.vent = options.vent;
+
+		// this.vent.on('toggleSortView', this.showHide, this);
+
+	},
+
 	render: function() {
 
-		this.$el.html("<p>sort</p>");
+
+		this.collection.each( this.addFilter, this );
 		
 		return this;
 	},
 
 
 	filter: function() {
-		this.collection.sortOrder = 'criticsScore';
+		// this.collection.sortOrder = 'criticsScore';
 
-		this.collection.sort();
+		// this.collection.sort();
 
+		this.vent.trigger( 'hello' );
+
+	},
+
+	addFilter: function(filter) {
+		
+		var filter = new FilterView({ model: filter });
+
+		this.$el.append( filter.render().el );
+	},
+
+	showHide: function () {
+		console.log('showHide');
+		
 	}
 
 });
 
+var FilterView = Backbone.View.extend({
 
+	className: "want-to-filter",
+
+	tagName: 'li',
+
+	initialize: function () {
+		
+	},
+
+	render: function () {
+		var filter = this.model.toJSON();
+
+		var html = APP.load( 'wantToSort', filter );
+
+		this.$el.html( html );
+
+
+		return this;
+	}
+});
+
+// collection view for want-to items
 var WantToListView = Backbone.View.extend({
 
 	el: "#content-container .content-scroller",
@@ -92,6 +193,17 @@ var WantToListView = Backbone.View.extend({
 
 		this.collection = new WantToList(Q);
 
+		// Set up a little pub/sub
+		this.vent = _.extend({}, Backbone.Events);
+
+		// this.sortController = new SortController({ vent: this.vent })
+		// this.sort = new SortView({ vent: this.vent });
+
+		this.vent.on('hello', function () {
+			console.log('ehllo');
+		});
+
+		this.vent.on('toggleSortView', this.toggleSortView);
 		this.listenTo(this.collection, 'sort', this.sortList);
 
 	},
@@ -99,7 +211,6 @@ var WantToListView = Backbone.View.extend({
 	render: function() {
 
 		var list = this.collection.toJSON()[0];
-		this.sort = new SortView({ collection: this.collection });
 
 
 		//Empty the content container for a fresh start and remove the laoding sequence 
@@ -119,9 +230,15 @@ var WantToListView = Backbone.View.extend({
 			return this;
 		}
 
+		
 		// Add Sort filter view
-		this.$el.prepend(this.sort.render().el);
 
+		// this.sort.render();
+		// this.sortController.render();
+
+
+
+		// console.log(this.collection);
 
 		// put the list on the page (LIMITED TO 50)
 		_.each(this.collection.slice(0,49), this.addOne, this);
@@ -144,7 +261,7 @@ var WantToListView = Backbone.View.extend({
 
 		var wantTo = new WantTo({ model: wantToItem });
 
-		this.$el.append(wantTo.render().el);
+		this.$el.append( wantTo.render().el );
 
 	},
 
@@ -152,6 +269,10 @@ var WantToListView = Backbone.View.extend({
 	sortList: function () {
 
 		this.render();
+	},
+
+	toggleSortView: function () {
+		console.log('toggleSortView');
 	}
 
 });

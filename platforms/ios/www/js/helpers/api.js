@@ -217,7 +217,7 @@ Api.createNewRegistration = function(name, email, password, facebookID, friendli
     });
 }
 Api.checkLogin = function(username, password, facebookData, callback) {
-    console.log('check login');
+
     var age = null;
     if(facebookData && facebookData.birthday) {
         var age = Math.abs(new Date(Date.now() - new Date(facebookData.birthday.toString()).getTime()).getUTCFullYear() - 1970);

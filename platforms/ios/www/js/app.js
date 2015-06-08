@@ -162,6 +162,7 @@ var APP = {
             "header",
             "homeQ",
             "wantToItem",
+            "wantToSort",
             "welcomeCategories", 
             "concierge",
             "statusUpdateMovie",

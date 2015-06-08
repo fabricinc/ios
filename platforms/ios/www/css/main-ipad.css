@@ -76,7 +76,7 @@
 	*/
 
     #category-container {
-        height: 932px;
+        height: 917px;
         padding: 0;
     }
     .recommended-filter #category-container { height: 882px; }
@@ -101,6 +101,40 @@
     	position: absolute;
     	bottom: 48px;
     	right: 20px;
+    }
+    #status-update-input {
+        width: 98%;
+    }
+    #search-wrapper {
+        height: 920px;
+    }
+    #search-results .result {
+        height: initial; 
+    }
+    #search-results .result .poster {
+        height: 120px;
+        width: 80px;
+    }
+    #search-results .result .info {
+        font-size: 20px;
+    }
+    #status-poster.poster {
+        height: 220px;
+        width: 147px;
+    }
+    #statusUpdates .text-box textarea {
+        font-size: 26px;
+        width: 500px;
+    }
+    .share-icons {
+        height: 54px; 
+    }
+    .share-icons div {
+        background-size: 35px;
+        padding-right: 60px;
+        line-height: 55px; 
+        font-size: 25px;
+        width: 43%;
     }
 
     input.slider-status-update {
@@ -131,26 +165,24 @@
     }
 
     #home-filters {
-        top: 0;
-        width: 780px;
-    }
-    #coach-section div,
-    #home-filters #category-filter,
-    #home-filters #activity-filter, 
-    #home-filters #recommended-filter {
-        float: none;
-        width: 260px;
-        font-size: 1.2em;
+        padding: 0 115px;
+        width: 538px;    
     }
 
-    #home-filters #category-filter {
-        left: 0;
+    #home-filters div {
+        margin: 0 20px;
+        height: 55px;
+        width: 11%;
+    }
+    #home-filters div::after {
+        background-position: 19px 4px;
+        background-size: 27px;
+        line-height: 560%;
+    }
+    div#fancy-button::after {
+        background-position: center;
     }
 
-    #coach-section.feed div,
-    #home-filters #activity-filter {
-        left: 260px;
-    }
     #coach-section.want-to div,
     #home-filters #recommended-filter {
         left: 520px;
@@ -769,18 +801,20 @@
     .feed-item {
         width: 340px;
         margin: 0;
-        padding-bottom: 0;
     }
 
     .feed-item:first-child {
         margin-top: 10px; 
     }
 
-    .feed-item .action { width: 75%; font-size: 22px; line-height: 26px; }
+    .feed-item .action { font-size: 22px; line-height: 26px; }
     .feed-item .action .timeago { font-size: 20px; line-height: 24px; }
     .feed-footer {
         width: 360px;
         margin: 0 auto;
+    }
+    .feed-footer.suggested {
+        width: initial;
     }
     .feed-footer span { font-size: 22px; }
     .feed-social span { font-size: 18px; line-height: 22px; }

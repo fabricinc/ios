@@ -139,6 +139,7 @@ input.slider-search-form {
 #side-swipe .watching-next.contain input { margin-left: 22px; width: 300px; top: 125px; height: 30px; }
 #side-swipe .watching-next.contain h1 { font-size: 20px; }
 #slide-status-update::-webkit-input-placeholder{ text-align: center; }
+#status-update-input { width: 348px; }
 #profile .sub-header div { width: 187px; }
 .passion-poster-container { height: 154px; }
 #profile .poster:first-child { left: 2px; z-index: 4; }
@@ -328,7 +329,11 @@ h6.like-you + .action {
 header nav { height: 59px; }
 
 header nav #tap-menu {
-    top: 13px;
+    border-radius: 0px;
+    height: 22px;
+    width: 27px;
+    top: 22px;
+    left: 10px;
 }
 header nav #share-icon,
 header nav #shopping-cart,
@@ -445,8 +450,11 @@ header nav #share-icon {
 }
 header nav #chat-menu {
     background-image: url(../images/6p/discovery/chat.png);
-    background-size: 24px 24px;
+    background-size: 22px;
     right: 3px;
+}
+header nav #notifications-menu {
+    background-size: 18px;
 }
 #current-icon.all { background-image: url(../images/6p/discovery/fabricIcons/arrowBlack.png); }
 .list header nav h1.open span,

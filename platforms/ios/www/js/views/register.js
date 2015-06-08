@@ -15,18 +15,18 @@ RegisterView = Backbone.View.extend({
         console.log('register');
 
         $("#registration").submit(function(e) {
-            console.log('click');
             e.preventDefault();
             if(!self.click) {
                 self.click = true;
+
                 UI.mask(true, function() {
-                    console.log('mask');
+
                     User.register(function(success) {
-                        console.log(success);
                         Util.log("User.register success: " + success);
                         UI.unmask();
                         self.click = false;
                     });
+                    
                 });
             }
 

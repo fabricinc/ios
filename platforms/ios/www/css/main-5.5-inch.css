@@ -243,7 +243,7 @@ header nav #tap-menu,
 header nav #share-icon,
 header nav #shopping-cart,
 header nav #notifications-menu,
-header nav #chat-menu { top: 5px; }
+header nav #chat-menu { top: 7px; }
 #friends #list-row-wrapper.no-friends { height: 586px; }
 #category-container .concierge-poster { height: 185px; width: 123px; }
 .concierge-text { height: 152px; width: 240px; }
@@ -289,7 +289,7 @@ img.category-img { width: 350px; }
     background-size: 39px 39px;
 }
 #profile #side-swipe .slick-list, #profile #side-swipe .contain { height: 300px; }
-header nav #chat-menu { background-size: 28px 28px; right: 8px; }
+header nav #chat-menu { background-size: 25px; right: 8px; }
 header nav #share-icon {
     background-size: 24px 28px;
     top: 5px;
@@ -297,9 +297,9 @@ header nav #share-icon {
 }
 header nav #tap-menu {
     border-radius: 0px;
-    height: 43px;
-    width: 54px;
-    top: 10px;
+    height: 22px;
+    width: 27px;
+    top: 22px;
     left: 10px;
 }
 header nav .slide,
@@ -413,7 +413,7 @@ div#search-for-friends { background-size: 30px; }
     margin-top: 20px;
 }
 #status-poster.poster { width: 100px; height: 150px; background-size: 100px 150px; }
-header nav #notifications-menu { background-size: 28px 28px; right: 50px; }
+header nav #notifications-menu { background-size: 20px; right: 50px; }
 #menu-search-form { margin: 20px auto; }
 .feed-item .avatar {
     border-radius: 33px;
