@@ -2167,20 +2167,47 @@ div.recommendation.list-item.userChoice .title {
 /* ++++++++++++++++++++ SORT ON CHECKIST Q ++++++++++++++++++++ */
 
 #want-to-filters {
-
+    transition: 500ms height ease-in-out;
+    position: absolute;
+    overflow: hidden;
+    margin-top: 41px;
+    width: 100%;
+    z-index: 2;
+    height: 0;
+    left: 0;
+}
+#want-to-filters.show-filters {
+    height: 246px;
 }
 #want-to-filters .want-to-filter {
-
-}
-#dashboard #want-to-sort {
+    border-bottom: 1px solid lightgray;
     background-color: white;
-    position: relative;
-    z-index: 2;
+    line-height: 40px;
+    padding: 0 5px;
+}
+#want-to-filters .want-to-filter.selected {
+    background-color: lightgray;
+}
 
+
+#dashboard #want-to-sort {
+    background-image: url(../images/discovery/sort.png);
+    border-bottom: 1px solid lightgray;
+    background-repeat: no-repeat;
+    background-position: 10px;
+    background-color: white;
+    padding: 0 15px 0 32px; 
+    background-size: 12px;
+    position: relative;
+    line-height: 40px;
+    z-index: 2;
 }
-#dashboard #want-to-sort.show {
-    bottom: 50px;
+#dashboard #want-to-sort span {
+    color: lightgray;
+    font-size: 12px;
+    float: right;
 }
+
 #sort-button:before {
     position: relative;
     content: "\25BC";

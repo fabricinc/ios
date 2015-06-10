@@ -387,6 +387,9 @@ var RateView = Backbone.View.extend({
                 self.catPos = UI.scroller.y;
             }
 
+            // This sucks  -- remove sort if not on want-to filter
+            if(filter !== 'want-to-filter') { $("#want-to-sort").remove() }
+
             if(filter !== "recommended-filter") { self.model.startR = 0; }
 
             if(!$(this).hasClass("filter")) {

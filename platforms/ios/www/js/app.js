@@ -27,6 +27,7 @@ var APP = {
     welcomeEnd: null,
     tapPosters: null,
     movieCatWelcome: true,
+    wantToSortFilter: "Count",
     listWelcome: true,
     feedPos: 0,
     sectionID: 0,

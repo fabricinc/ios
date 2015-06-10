@@ -1,3 +1,4 @@
+
 var WantToModel = Backbone.Model.extend({
 
 	defaults: {	
@@ -20,15 +21,11 @@ var WantToModel = Backbone.Model.extend({
 	}, 
 	lobby: function () {
 
-		// Set filter on APP
-		APP.wantToSortFilter = this.collection.sortOrder;
 
 		// Go to the lobby
 		Backbone.history.navigate('movieLobby/'+ this.get('movieID'), true);
 
 	}
-
-
 });
 
 
@@ -46,118 +43,217 @@ var WantToList = Backbone.Collection.extend({
 	
 	comparator: function (wantTo) {
 
-		return - wantTo.get(this.sortOrder);
+		var sortValue = wantTo.get(this.sortOrder),
+			sO = this.sortOrder;
+
+		// if value is a flasey return -1
+		if(!sortValue) { return -1; }
+
+		if(sO === 'movieTitle'){
+
+			return sortValue;
+
+		} else if(sO === 'releaseDate' || sO === 'modified') {
+			
+			// validate date
+			var date = Util.defined( sortValue ) && sortValue !== "0000-00-00" ? sortValue.slice(0,10) : "1920-02-03";
+
+			return - new Date( date );
+
+		} else {
+
+			return - parseInt( sortValue );
+
+		}
+
+	},
+
+	sortColletion: function (filter) {
+
+		if(filter == this.sortOrder) { return; }
+
+		APP.wantToSortFilter = filter.filter;
+
+		this.sortOrder = filter.filter;
+		this.sort();
 
 	}
 
 
 });
 
-var SortModel = Backbone.Model.extend({
-	
+
+var SortControllerModel = Backbone.Model.extend({
+
+	// Turn off sync to stop 'url' error
+	sync: function () { return false; },
+
 	defaults: {
-		selected: false
+		show: false,
+		filter: 'Count'
 	},
 
-	sync: function () { return false; }
-});
 
-var SortFilters = Backbone.Collection.extend({
-	model: SortModel
+	toggleSort: function() {
+		var show = this.get("show") ? "hide" : "show";
+
+		this.trigger(show);
+		this.save({ show: !this.get("show") });
+
+	},
+	setFilter: function(filter){
+
+		this.set('filter', filter);
+
+	}
 });
 
 var SortController = Backbone.View.extend({
 	el: '#category-container',
 
 	events: {
-		"click" : 'toggleSortView'
+		"click #want-to-sort" : 'toggleSortView'
+	},
+	formatFilter: {
+		totalCount: 'Popularity with Everyone',
+		Count: 'Popularity with Friends',
+		criticsScore: 'Critics Score',
+		releaseDate: 'Release Date',
+		modified: 'When Added',
+		movieTitle: 'A to Z',
 	},
 
 	initialize: function (options) {
 		
 		this.vent = options.vent;
-
+		
+		this.model = new SortControllerModel({ filter: this.formatFilter[options.filter] });
 		this.sort = new SortView({ vent: this.vent });
+
+
+
+		this.listenTo(this.model, 'change:filter', this.updateFilter, this);
+
+		this.vent.on('filter', this.setFilter, this);
 
 	},
 
 
 	render: function () {
-		this.$el.prepend( "<h1 id='want-to-sort'>Sort <span>Filter</span></h1>" );
+
+		this.$el.prepend( "<div id='want-to-sort'>Sort <span id='active-filter'>"+ this.model.get("filter") +"</span></div>" )
+				.prepend( this.sort.render().el );
 
 		return this;
+
 	},
 
 	toggleSortView: function () {
-
+	
 		this.vent.trigger( 'toggleSortView' );
-		this.$el.append( this.sort.render().el );
+
+		this.model.toggleSort();
+
+	},
+
+	setFilter: function (filter) {
+
+		this.model.setFilter(filter.name);
+
+	},
+
+	updateFilter: function (filter) {
+
+		this.$("#active-filter").text(filter.get('filter'));
+
 	}
 });
 
-// collection view for filters and sort
+
+var SortModel = Backbone.Model.extend({
+	sync: function () { return false; },
+	
+	defaults: {
+		selected: false
+	},
+
+	toggleCheck: function() {
+
+		this.save({ selected: !this.get('selected') });
+
+	}
+
+});
+
+var SortFilters = Backbone.Collection.extend({
+	model: SortModel,
+	
+});
+
+
+
+// consoleollection view for filters and sort
 var SortView = Backbone.View.extend({
 
 	id: "want-to-filters",
 
 	tagName: "ul",
 
-	events: {
-		'click' : 'filter'
-	},
-
 	initialize: function (options) {
 
 		this.collection = new SortFilters([
 			{
-				name: 'Count',
+				name: 'Popularity with Friends',
 				filter: 'Count',
 			},{
-				name: 'critics Score',
+				name: 'Popularity with Everyone',
+				filter: 'totalCount', 
+			},{
+				name: 'Critics Score',
 				filter: 'criticsScore',
 			},{
-				name: 'Popular with Everyone',
-				filter: 'totalCount',
+				name: 'A to Z',
+				filter: 'movieTitle',
 			},{
-				name: 'Recently Added',
+				name: 'Release Date',
+				filter: 'releaseDate',
+			},{
+				name: 'When Added',
 				filter: 'modified',
 			}
 		]);
 
 		this.vent = options.vent;
 
-		// this.vent.on('toggleSortView', this.showHide, this);
+		// Show and hide the filter view on toggle event and filter
+		this.vent.on('toggleSortView filter', this.showHide, this);
 
 	},
 
 	render: function() {
 
-
 		this.collection.each( this.addFilter, this );
 		
 		return this;
-	},
-
-
-	filter: function() {
-		// this.collection.sortOrder = 'criticsScore';
-
-		// this.collection.sort();
-
-		this.vent.trigger( 'hello' );
 
 	},
+
 
 	addFilter: function(filter) {
 		
-		var filter = new FilterView({ model: filter });
+		var filterView = new FilterView({ model: filter, vent: this.vent });
 
-		this.$el.append( filter.render().el );
-	},
+		this.$el.append( filterView.render().el );
+
+	}, 
 
 	showHide: function () {
-		console.log('showHide');
-		
+		var height = this.$el.height() ? 0 : 246;
+
+		this.$el.height(height);
+
+		$("#screen").toggleClass('show');
+
 	}
 
 });
@@ -168,11 +264,19 @@ var FilterView = Backbone.View.extend({
 
 	tagName: 'li',
 
-	initialize: function () {
-		
+	events: {
+		'click' : 'filter'
+	},
+
+	initialize: function (options) {
+
+		this.vent = options.vent;
+		this.listenTo(this.model, 'change:selected', this.check, this);
+
 	},
 
 	render: function () {
+
 		var filter = this.model.toJSON();
 
 		var html = APP.load( 'wantToSort', filter );
@@ -180,9 +284,33 @@ var FilterView = Backbone.View.extend({
 		this.$el.html( html );
 
 
+		if(APP.wantToSortFilter === filter.filter){
+			this.$el.addClass('selected');
+		}
+
+
 		return this;
+	},
+
+	filter: function () {
+		this.vent.trigger();
+		this.model.toggleCheck();
+
+	},
+
+	check: function () {
+
+		$(".selected").removeClass('selected');
+
+		this.$el.addClass('selected');
+
+
+		this.vent.trigger('filter', { filter: this.model.get('filter'), name: this.model.get('name') });
+
 	}
 });
+
+
 
 // collection view for want-to items
 var WantToListView = Backbone.View.extend({
@@ -193,18 +321,15 @@ var WantToListView = Backbone.View.extend({
 
 		this.collection = new WantToList(Q);
 
+
 		// Set up a little pub/sub
 		this.vent = _.extend({}, Backbone.Events);
 
-		// this.sortController = new SortController({ vent: this.vent })
-		// this.sort = new SortView({ vent: this.vent });
+		this.sortController = new SortController({ vent: this.vent, filter: this.collection.sortOrder });
 
-		this.vent.on('hello', function () {
-			console.log('ehllo');
-		});
 
-		this.vent.on('toggleSortView', this.toggleSortView);
 		this.listenTo(this.collection, 'sort', this.sortList);
+		this.vent.on('filter', this.triggerSort, this);
 
 	},
 
@@ -230,15 +355,13 @@ var WantToListView = Backbone.View.extend({
 			return this;
 		}
 
-		
-		// Add Sort filter view
 
-		// this.sort.render();
-		// this.sortController.render();
+		// Only render sort if not on page
+		if(!$("#want-to-sort").length){
 
+			this.sortController.render();
 
-
-		// console.log(this.collection);
+		}
 
 		// put the list on the page (LIMITED TO 50)
 		_.each(this.collection.slice(0,49), this.addOne, this);
@@ -269,10 +392,13 @@ var WantToListView = Backbone.View.extend({
 	sortList: function () {
 
 		this.render();
+
 	},
 
-	toggleSortView: function () {
-		console.log('toggleSortView');
+	triggerSort: function (filter) {
+
+		this.collection.sortColletion(filter);
+		UI.scroller.refresh();
 	}
 
 });
