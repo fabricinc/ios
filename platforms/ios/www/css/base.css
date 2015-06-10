@@ -2382,6 +2382,34 @@ div.check-list-wrapper div.check-list-item {
 
 /* ++++++++++++++++++++ NEW REC FEED ++++++++++++++++++++ */
 
+#recommendation-filters {
+    position: absolute;
+    transition: 200ms top ease-in;
+    background-color: whitesmoke;
+    width: 100%;
+    top: -234px;
+    z-index: 2;
+}
+
+#recommendation-filters.show {
+    top: 50px;
+}
+
+#recommendation-filters div {
+    padding: 15px 35px;
+    border-bottom: 1px solid rgb(217, 217, 217);
+    position: relative;
+}
+.filter.check:after {
+    content: "\2713";
+    position: absolute;
+    font-size: 20px;
+    width: 10px;
+    height: 10px;
+    top: 10px;
+    left: 10px;
+}
+
 
 #recommendation-filters.show {
     top: 50px;
