@@ -104,10 +104,11 @@ div#mask .wheel {
 .swipe-icon.not-seen { top: 350px; }
 #progress { width: 360px; left: 20px; top: 71px; }
 #progress .outer-bar { width: 300px; }
-#profile .action-buttons .button.follow { margin-left: 2px; }
-#profile .action-buttons .button.follow,
-#profile .action-buttons .button.greeting {
-    width: 160px;
+#profile #action-buttons .button.follow { margin-left: 2px; }
+#profile-picture-block { height: 85px; width: 85px; }
+#profile #action-buttons .button.follow,
+#profile #action-buttons .button.greeting {
+    width: 187px;
     height: 40px;
     line-height: 40px;
 }
@@ -161,7 +162,7 @@ div#friends-queued.bottom-info span {
 #list-items .item .movie-info .watch-icon { background-position-y: 10px; }
 #list-items .item .movie-info .seen-icon { background-position-y: 10px; }
 #list-items .share-buttons #fb.btn { margin-left: 7px; }
-#profile .action-buttons .button.greeting { margin: 10px 0 10px 30px; }
+
 .feed-item .recommendation-action { width: 384px; line-height: 26px; font-size: 18px; }
 #favorite-delta .delta-poster { height: 540px; }
 #favorite-delta .delta-poster img { width: 360px; }

@@ -13,30 +13,23 @@ var ProfileModel = Backbone.Model.extend({
     getProfileData: function(callback) {
         var self = this;
         callback = callback || function() { };
-        Api.getPassion(null, function(response) {
-            if(response.success) {
-                APP.userPassion = response.data;
-            }
-            Api.getFabricProfile(self.userID, function(response) {
-                self.isFollowing = response.following;
-                self.isFriend = response.isFriend;
-                self.set(response);
+
+        Api.getFabricProfile(self.userID, function(response) {
+            self.isFollowing = response.following;
+            self.isFriend = response.isFriend;
+            self.set(response);
 
 
-
-                // fetch new FBImages if own profile
-                if(response.self) {
-                    Facebook.updateFBImages();
-                }
-
-                callback();
-            });
+            callback();
         });
+
 
     },
 
     bindEvents: function() {
         var self = this;
+
+
         // global public events
         $("#match-message-form").submit(function(e) {
             e.preventDefault();
@@ -97,9 +90,18 @@ var ProfileModel = Backbone.Model.extend({
             return false;
         });
 
-        $("#follow-data .fl h4").click(function() {
-            var following = $(this).hasClass("following") ? true : false;
-            Backbone.history.navigate("userLists?userID=" + self.userID + "&following=" + following, true);
+        $("#follow-info li").fastClick(function (e) {
+
+            var id = e.currentTarget.id;
+
+            var routes = {
+                followers:  "userLists?userID=" + self.userID + "&following=false",
+                following:  "userLists?userID=" + self.userID + "&following=true",
+                friends:    "friends"
+            };
+
+            Backbone.history.navigate(routes[id], true);
+
             return false;
         });
 
@@ -181,14 +183,6 @@ var ProfileModel = Backbone.Model.extend({
             );
         });
 
-        // initialize the FBImage slider
-        $("#side-swipe").slick({
-            autoplaySpeed: 4000,
-            autoplay: false,
-            arrows: false,
-            dots: true,
-            infinite: false
-        });
 
         setTimeout(function() { UI.initScroller($("#profile")[0]); }, 100);
     },
@@ -229,6 +223,8 @@ var ProfileView = Backbone.View.extend({
 
         self.model.getProfileData(function() {
             var data = self.model.toJSON();
+            
+
             self.$el.html(APP.load("profile", data));
 
             if (!self.header) {

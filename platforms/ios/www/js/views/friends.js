@@ -65,8 +65,6 @@ var FriendView = Backbone.View.extend({
             
             if (!self.header) { 
                 self.header = new HeaderView({ 
-                    slider: true,
-                    leftButton: { class: "slide" },
                     title: "Friends" 
                 }); 
                 self.$el.prepend(self.header.el);

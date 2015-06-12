@@ -766,13 +766,19 @@ var UI = {
             });
         },
         toggleNotifications: function() {
+
             var self = this;
             if($("#notifications-container").length) {
+
                 $("#notifications-container").toggleClass("open");
+
                 $("#notifications-menu").toggleClass("on");
+
+
                 if($("#notifications-container").hasClass("open")) {
-                    self.oldScrollPos = parseInt(UI.scroller.y);
+                    // self.oldScrollPos = parseInt(UI.scroller.y);
                     self.oldTitle = $("header nav h1").html();
+                    
                     $("header nav h1").html("Notifications");
                     Api.getNotifications(function(response) {
                         self.bindNotificationEvents(response.notifications);
@@ -783,25 +789,25 @@ var UI = {
                     self.oldTitle = null;
                     if(self.oldScrollID) {
                         if(self.oldScrollPos != 0) {
-                            UI.initScrollerOpts($("#"+self.oldScrollID)[0], {
-                                vScrollbar: false,
-                                hScroll: false,
-                                bounce: true,
-                                click: true,
-                                startY: self.oldScrollPos
-                            });
-                            self.oldScrollPos = 0;
+                            // UI.initScrollerOpts($("#"+self.oldScrollID)[0], {
+                            //     vScrollbar: false,
+                            //     hScroll: false,
+                            //     bounce: true,
+                            //     click: true,
+                            //     startY: self.oldScrollPos
+                            // });
+                            // self.oldScrollPos = 0;
                         } else {
-                            UI.initScroller($("#"+self.oldScrollID)[0]);
+                            // UI.initScroller($("#"+self.oldScrollID)[0]);
                         }
                     }
                     APP.click = false;
                 }
             } else {
-                if(UI.scroller) {
-                    self.oldScrollID = UI.scroller.scroller.parentElement.id;
-                    self.oldScrollPos = parseInt(UI.scroller.y);
-                }
+                // if(UI.scroller) {
+                //     self.oldScrollID = UI.scroller.scroller.parentElement.id;
+                //     self.oldScrollPos = parseInt(UI.scroller.y);
+                // }
                 $("#wrapper").append("<div id=\"notifications-container\" class=\"open\"></div>");
                 $("#notifications-menu").addClass("on");
                 Api.getNotifications(function(response) {
@@ -817,7 +823,7 @@ var UI = {
             $("#notifications-container").html(html);
             $("#notifications-num").html("").hide();
             Api.notificationsSeen();
-            setTimeout(function() { UI.initScroller($("#notifications-container")[0]) }, 10);
+            // setTimeout(function() { UI.initScroller($("#notifications-container")[0]) }, 10);
 
             $(".notification .content").click(function(e) {
                 var objectID = $(this).parent().data("objectid");

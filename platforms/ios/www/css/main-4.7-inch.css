@@ -175,11 +175,17 @@ div#mask .wheel {
 #progress .outer-bar { width: 300px; height: 12px; }
 #progress .outer-bar #inner-bar { height: 12px; }
 #progress .numbers { line-height: 12px; }
-.action-buttons { margin: 0 15px;}
-#profile .action-buttons .button.follow { margin-left: 2px; background-position-x: 20px; }
+
+#follow-info { width: 250px;}
+#follow-info li b { font-size: 25px; }
+#follow-info li p { font-size: 17px; }
+#profile-picture-block { height: 80px; width: 80px; }
+#profile-info-bottom {font-size: 18px;}
+#profile #action-buttons .button.follow {  background-position-x: 20px; }
 #profile .button, .follow-button, .say-hi { font-size: 20px; }
-#profile .action-buttons .button.follow, 
-#profile .action-buttons .button.greeting {  
+
+#profile #action-buttons .button.follow, 
+#profile #action-buttons .button.greeting {  
     background-position-x: 20px; 
     line-height: 37px; 
     height: 37px;
@@ -189,9 +195,7 @@ div#mask .wheel {
     height: 143px;
     width: 95px;
 }
-#profile .action-buttons .button.greeting {  
-    margin: 10px 0 10px 15px;
-}
+
 #profile .sub-header h4 { font-size: 19px; }
 #profile #top-genres .category {height: 40px; }
 #profile #top-genres .category .passion { height: 40px; background-position-y: 3px;}
@@ -215,7 +219,7 @@ div#mask .wheel {
     clip: rect(0px, 375px, 210px, 0px);
 }
 #conversation-slider {
-    height: 550px;
+    height: 555px;
 }
 #play::before { top: 50%; left: 10%; font-size: 60px; }
 #gravity { background-position: center 490px; }

@@ -7,7 +7,7 @@
                 var userID = follower.userID || null,
                     compatibility = parseInt(follower.compatibility),
                     profilePic = UI.avatar(follower.facebookID, follower.userID), 
-                    opacity = compatibility > 20 ? (compatibility / 100) : .2; console.log(profilePic); %>
+                    opacity = compatibility > 20 ? (compatibility / 100) : .2; %>
                 <div class="lists-row" data-followid="<%= follower[action] %>" data-userID="<%= userID %>">
                 	<%= profilePic %> 
                 	<div class="follow-info">
