@@ -280,7 +280,7 @@ var RateView = Backbone.View.extend({
                 self.wantToList.render(); 
             
             } else {
-                console.log('add class loading');
+                
                 $("#content-container .content-scroller").empty().addClass('loading');
 
             }
@@ -370,7 +370,7 @@ var RateView = Backbone.View.extend({
         $("#home-filters div.filter-div").fastClick(function() {
             if(APP.working) { return false; }
 
-            var filter = $(this)[0].id,
+            var filter = this.id,
                 showSort = filter === "recommended-filter" ? "show" : "";
 
             $("#home-slider").attr("class", filter); // Put class on home slider for css style
@@ -401,18 +401,37 @@ var RateView = Backbone.View.extend({
 
 
                     // ONBOARD THE FEED
-                    if(APP.gameState.feed === "0"){
-
+                    if(APP.gameState.feed === "1"){
 
                         var coach = APP.load("coach", { section : 'feed' }),
-                            _  = this.cloneNode(true),
-                            clone;
+                            icon = document.getElementById('tap-menu'),
+                            button = document.getElementById(filter),
+                            buttonClone = button.cloneNode(true),
+                            clone = icon.cloneNode(true),
+                            iconStyle, buttonStyle, content;
+
+
+                        // GET THE STYLE OF THE ORIGINAL NODE
+                        iconStyle = window.getComputedStyle(icon, null);
+
+
+                        // APPLY THE ORIGINAL NODES STYLE TO THE CLONE
+                        clone.style.cssText = iconStyle.cssText;
+
 
                         // SET ID OF DIV TO '' (can't have two divs with the same id)
-                        _.id = '';
+                        clone.style.backgroundColor = "#d32724";
+                        clone.id += '-clone';
+                        buttonClone.id = 'filter-clone';
+
+                        // Set clond button position to original button
+                        $(buttonClone).css({ left : $(button).position().left }); 
+
 
                         $('#coach-overlay').html(coach);
-                        $("#coach-section").prepend( $(_) );
+
+                        $("#coach-section")
+                            .prepend( $(clone) );
 
                         UI.bindCoachEvents('feed');
 
@@ -450,6 +469,8 @@ var RateView = Backbone.View.extend({
                 } else if(filter === "category-filter") {
 
                     // !!!!!!!!!!!!!!!!!!! CATEGORY FEED !!!!!!!!!!!!!!!!!!!
+
+
                     self.model.lastFeed = $("#content-container .content-scroller").html(); // Update feed html to show current likes and comments
                     $("#content-container .content-scroller").html(APP.load("categoryFeed", { items: self.model.categories }));
 
@@ -459,6 +480,43 @@ var RateView = Backbone.View.extend({
 
                 } else if(filter === "want-to-filter") {
                     
+                    // ONBOARD WANT-TO
+                    if(APP.gameState.wantTo === "1"){
+
+                        var coach = APP.load("coach", { section : 'wantTo' }),
+                            button = document.getElementById(filter),
+                            buttonClone = button.cloneNode(true),
+                            position = $(button).position().left,
+                            iconStyle, buttonStyle, content;
+
+
+                        // GET THE STYLE OF THE ORIGINAL NODE
+                        iconStyle = window.getComputedStyle(icon, null);
+
+
+                        // SET ID OF DIV TO '' (can't have two divs with the same id)
+                        buttonClone.className += ' clone';
+                        buttonClone.id += '-clone';
+
+                        // Set clond button position to original button
+                        $(buttonClone).css({ left : position }); 
+
+
+                        $('#coach-overlay').html(coach);
+
+                        $("#coach-section")
+                            .append( $(buttonClone) );
+
+                        // Center arrow on button
+                        $("#coach-arrow").css({ 
+                            bottom : $(button).height() + 20,
+                            width : $(button).width(),
+                            left : position
+                        });
+
+                        UI.bindCoachEvents('feed');
+
+                    }
                     
                    if(self.wantToList) { 
                         

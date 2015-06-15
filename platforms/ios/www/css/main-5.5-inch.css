@@ -554,6 +554,7 @@ div.right.button, div.left.button { font-size: 18px !important; }
 #slider-container #slide3 { background-image: url(../images/6p/login/03_slide.png); }
 #slider-container #slide4 { background-image: url(../images/6p/login/04_slide.png); }
 div#mask .wheel { background-image: url(../images/6p/discovery/loader.png); }
+#category-container .content-scroller.loading { left: 175px; }
 
 #welcome-categories div .title .icon.icon4,
 #category-container div .title .icon.icon4,

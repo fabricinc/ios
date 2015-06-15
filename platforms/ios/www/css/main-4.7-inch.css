@@ -433,6 +433,7 @@ div.left.button { top: 6px; }
 #slider-container #slide3 { background-image: url(../images/6p/login/03_slide.png); }
 #slider-container #slide4 { background-image: url(../images/6p/login/04_slide.png); }
 div#mask .wheel { background-image: url(../images/6p/discovery/loader.png); }
+#category-container .content-scroller.loading { left: 155px; }
 #welcome div .title .icon.icon4,
 #category-container div .title .icon.icon4,
 #up-next-wrapper div .title .icon.icon4 { background-image: url(../images/6p/discovery/music.png); }

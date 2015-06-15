@@ -99,6 +99,7 @@ div#mask .can {
     left: 90px;
     z-index: 3002;
 }
+#category-container .content-scroller.loading,
 div#mask .wheel {
     position: absolute;
     width: 60px;
@@ -110,6 +111,10 @@ div#mask .wheel {
     left: 130px;
     z-index: 3001;
     -webkit-animation: spin 1s infinite linear;
+}
+#category-container .content-scroller.loading {
+    left: 130px;
+    top: 200px;
 }
 header {
     position: relative;
@@ -378,11 +383,15 @@ header nav #notifications-menu #notifications-num {
 }
 .messages #chat-num { display: none !important; }
 header nav #tap-menu {
-    border-radius: 0px;
-    height: 22px;
-    width: 27px;
-    top: 15px;
-    left: 10px;
+    background-image: url(../images/discovery/addIcon.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    border-radius: 50%;
+    height: 93%;
+    width: 47px;
+    left: 2px;
+    top: 2px;
 }
 #friends,
 #dashboard {
@@ -1192,8 +1201,8 @@ input.slider-search-form {
     float: right;
     width: 100%;
 }
-
-#home-filters div::after {
+#coach-section .filter.clone:after,
+#home-filters div:after {
     background-position: 25px 4px;
     background-repeat: no-repeat;
     background-size: 21px;
@@ -1207,33 +1216,34 @@ input.slider-search-form {
     right: 0;
 }
 
-#home-filters div#activity-filter::after {
+#home-filters div#activity-filter:after {
     background-image: url(../images/discovery/feedButton.png);
     content: "Feed";
 }
-#category-filter::after {
+#category-filter:after {
     background-image: url(../images/discovery/exploreButton.png);
     content: "Explore";
 }
-div#fancy-button::after {
+div#fancy-button:after {
     background-image: url(../images/discovery/fabButton.png);
     background-size: 80% !important;
     background-position: center;
     content: "";
 }
-#want-to-filter::after {
+#want-to-filter-clone:after,
+#want-to-filter:after {
     background-image: url(../images/discovery/wantToButton.png);
     content: "Want tos";
 }
-#profile-footer::after {
+#profile-footer:after {
     background-image: url(../images/discovery/profileButton.png);
     content: "Profile";
 }
 
-#home-filters div.filter::after {
+#coach-section .filter.clone,
+#home-filters div.filter:after {
     background-color: #8f2523;
 }
-
 
 #coach-section div,
 #home-filters div {
@@ -1241,6 +1251,11 @@ div#fancy-button::after {
     height: 45px;
     float: left;
     width: 20%;
+}
+
+#coach-section div {
+    position: absolute;
+    bottom: 0;
 }
 
 
@@ -2261,9 +2276,9 @@ div.recommendation.list-item.userChoice .title {
     100% { opacity: 1; -webkit-transform: scale(1); }
 }
 
-#category-container .content-scroller.loading::after {
-    -webkit-animation: pulseLoading 800ms infinite ease-in-out alternate;
-    content: "Loading...";
+#category-container .content-scroller.loading:after {
+    /*-webkit-animation: pulseLoading 800ms infinite ease-in-out alternate;*/
+    /*content: "Loading...";*/
     position: relative;
     text-align: center;
     margin: 150px auto;
@@ -6226,15 +6241,15 @@ div#critic-rating.bottom-info { left: 80px;  }
     opacity: 1; 
     top: 0;
 }
-#coach-section.want-to div { right: 0; }
+#coach-section.feed #coach-arrow { top: 10px; left: 50px;}
+
 #coach-arrow {
-    margin-bottom: 20px; 
-    font-size: 50px;
+    position: absolute;
+    font-size: 70px;
     display: block;
-    font-family: 'Symbola';
 }
 .want-to #coach-arrow {
-    -webkit-transform: rotate(220deg);
+    
     font-size: 90px;
 }
 #coach-text {
