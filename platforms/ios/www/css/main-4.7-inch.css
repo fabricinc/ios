@@ -1,15 +1,15 @@
 /* iPhone 6 */
 #wrapper { width: 375px; height: 667px; position: relative; }
-#home-filters div#recommended-filter, #coach-section.want-to div { width: 125px; }
+
 #home-filters div#activity-filter {
     background-size: 30px;
 }
-
-#coach-section div,
+#coach-section div.filter.clone,
 #home-filters div {
     background-size: 40px;
     height: 61px;
 }
+#coach-section .filter.clone::after,
 #home-filters div::after{
     font-size: 15px;
     background-size: 31px;
@@ -36,6 +36,13 @@
 #category-container .catItem { max-height: 200px; }
 #category-container #side-swipe { width: 355px; }
 .feed-item { width: 335px; }
+.feed-item .suggested-tastemate {
+    background-position: 45px 0;
+    padding-left: 20px;
+}
+.feed-item .activity-feed-buttons .button {
+    width: 48%;
+}
 .poster img.movie-img { height: auto; }
 #notifications-container { height: 606px; }
 #side-nav { width: 306px; }
@@ -332,17 +339,11 @@ h6.like-you + .action {
 }
 header nav { height: 59px; }
 
-header nav #tap-menu {
-    border-radius: 0px;
-    height: 22px;
-    width: 27px;
-    top: 22px;
-    left: 10px;
-}
 header nav #share-icon,
 header nav #shopping-cart,
 header nav #notifications-menu,
 header nav #chat-menu { top: 5px; }
+header nav #tap-menu { width: 55px; }
 #friends #list-row-wrapper.no-friends { height: 586px; }
 #category-container .concierge-poster { height: 185px; width: 123px; }
 .concierge-text { height: 140px; width: 202px; }
@@ -496,7 +497,7 @@ div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; 
 #sort-button-text.cancel { left: 100px; }
 
 /*  COACH MARK STYLE  */
-#coach-section div { margin-top: 60px; }
+
 #coach-section.feed #coach-text { margin-top: 140px; }
 #coach-section.swipe {
     background-image: url(../images/6/discovery/coach/directional.png);
@@ -579,7 +580,7 @@ div#search-for-friends { background-size: 24px; }
 }
 #messages-slider {
     overflow: hidden;
-    height: 556px;
+    height: 607px;
 }
 .suggested-message {
     line-height: 19px;

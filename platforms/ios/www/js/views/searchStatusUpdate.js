@@ -122,8 +122,25 @@ var SearchStatusUpdateView = Backbone.View.extend({
 
 
         this.$el
-            .html(header.el)
-            .append(template);
+            .html( header.el )
+            .append( template );
+
+        if(APP.gameState.post === "0") {
+
+            var coach = APP.load("coach", { section : 'post' });
+
+            $('#coach-overlay').html(coach);
+
+            UI.bindCoachEvents('post');
+        } else {
+
+            // Autofocus the search box
+            setTimeout(function() {
+
+                $("#status-update-input").focus();
+
+            },200);
+        }
 
 
         UI.initScroller($("#search-wrapper")[0]);  

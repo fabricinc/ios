@@ -1,8 +1,8 @@
 /* iPhone 6+ */
 #wrapper { width: 414px; height: 736px; position: relative; }
-#home-filters div, #coach-section div { height: 52px; background-size: 46px; }
+#home-filters div, #coach-section div.filter.clone { height: 52px; background-size: 46px; }
 #home-filters { width: 414px; }
-#home-filters div#recommended-filter, #coach-section.want-to div { width: 138px; }
+
 
 #category-container { height: 613px; }
 #welcome-categories div .title, 
@@ -96,8 +96,8 @@ div#mask .wheel {
     left: 67px;
 }
 /* COACH */
-#coach-section div { margin-top: 66px; }
-#coach-section.feed div { right: ;}
+
+
 .swipe-icon.favorite { top: 100px; left: 193px; }
 .swipe-icon.queue { bottom: 90px; left: 193px; }
 .swipe-icon.seen,
@@ -204,14 +204,15 @@ h6.like-you + .action {
     height: 736px;
     background-size: 414px 736px;
 }
+#coach-section div.filter.clone:after,
 #home-filters div::after{
-    background-position-x: 30px;
+    background-position-x: 29px;
 }
 div#fancy-button::after {
     background-position: center;
     background-size: 70% !important;
 }
-#coach-section div,
+#coach-section div.filter.clone,
 #home-filters div {
     height: 57px;
     line-height: 57px;
@@ -240,11 +241,9 @@ header nav { height: 65px; }
     height: 50px;
     background-size: 24px;
 }
-header nav #tap-menu,
-header nav #share-icon,
-header nav #shopping-cart,
-header nav #notifications-menu,
-header nav #chat-menu { top: 7px; }
+header nav #tap-menu {
+    width: 60px;
+}
 #friends #list-row-wrapper.no-friends { height: 586px; }
 #category-container .concierge-poster { height: 185px; width: 123px; }
 .concierge-text { height: 152px; width: 240px; }
@@ -296,13 +295,7 @@ header nav #share-icon {
     top: 5px;
     right: 10px;
 }
-header nav #tap-menu {
-    border-radius: 0px;
-    height: 22px;
-    width: 27px;
-    top: 22px;
-    left: 10px;
-}
+
 header nav .slide,
 div.left.button {
     background-position: 17px 22px !important;
@@ -433,6 +426,9 @@ header nav #notifications-menu { background-size: 20px; right: 50px; }
     line-height: 35px;
     font-size: 14px;
     left: 50px;
+}
+.feed-item .suggested-tastemate {
+    background-position: 55px 0;
 }
 #category-container .concierge-info h1 span { margin-top: 10px; }
 .check-list-title { width: 252px; line-height: 22px; }

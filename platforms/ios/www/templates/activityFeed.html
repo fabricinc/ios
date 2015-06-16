@@ -34,7 +34,11 @@
                             </div>
                             <div class="activity-feed-buttons" data-userid="<%= item.userID %>">
                                 <div class="button follow">Follow</div>
-                                <div class="button greeting">Say Hi</div>
+                                <% if(item.messaged === "0") { %>
+                                    <div class="button greeting">Say Hi</div>
+                                <% } else { %>
+                                    <div class="button message">Message</div>
+                                <% } %>
                             </div>
                         </div>
                         <div class="feed-footer suggested">
@@ -133,7 +137,11 @@
                             </div>
                             <div class="activity-feed-buttons" data-userid="<%= item.userID %>">
                                 <div class="button follow">Follow</div>
-                                <div class="button greeting">Say Hi</div>
+                                <% if(item.messaged === "0") { %>
+                                    <div class="button greeting">Say Hi</div>
+                                <% } else { %>
+                                    <div class="button message">Message</div>
+                                <% } %>
                             </div>
                         </div>
                         <div class="feed-footer suggested">
@@ -234,7 +242,11 @@
                         </div>
                         <div class="activity-feed-buttons" data-userid="<%= item.userID %>">
                             <div class="button follow">Follow</div>
-                            <div class="button greeting">Say Hi</div>
+                            <% if(item.messaged === "0") { %>
+                                <div class="button greeting">Say Hi</div>
+                            <% } else { %>
+                                <div class="button message">Message</div>
+                            <% } %>
                         </div>
                     </div>
                     <div class="feed-footer suggested">

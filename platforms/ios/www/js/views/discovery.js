@@ -686,6 +686,7 @@ var DiscoveryModel = Backbone.Model.extend({
                 var objID = self.categoryID ? self.categoryID : self.listID;
                 var catApp = self.categoryID ? "&category=true" : "";
 
+
                 window.plugins.socialsharing.shareVia(shareSelected, message, category, image, (Api.appSettings.shareLocation + "/list.php?listID=" + objID + catApp), function(r) {
                     Util.log("success");
                     Util.log(r);

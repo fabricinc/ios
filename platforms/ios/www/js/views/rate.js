@@ -51,7 +51,7 @@ var RateModel = Backbone.Model.extend({
 
             Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function (response) {
 
-
+                console.log(response);
                 self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
                 self.feed = { feed: response.data.activityFeed.data };
                 self.feedLoaded = true;
@@ -263,6 +263,42 @@ var RateView = Backbone.View.extend({
             }
         } else if(filter == "category-filter") {
 
+
+            // ONBOARD EXPORE
+            if(APP.gameState.explore === "0"){
+
+                var coach = APP.load("coach", { section : 'explore' }),
+                    button = document.getElementById(filter),
+                    buttonClone = button.cloneNode(true),
+                    position = $(button).position().left,
+                    iconStyle, buttonStyle, content;
+
+
+
+                // SET ID OF DIV TO '' (can't have two divs with the same id)
+                buttonClone.className += ' clone';
+                buttonClone.id += '-clone';
+
+                // Set clond button position to original button
+                $(buttonClone).css({ left : position }); 
+
+
+                $('#coach-overlay').html(coach);
+
+                $("#coach-section")
+                    .append( $(buttonClone) );
+
+                // Center arrow on button
+                $("#coach-arrow").css({ 
+                    bottom : $(button).height() + 20,
+                    width : $(button).width(),
+                    left : position
+                });
+
+                UI.bindCoachEvents('explore');
+
+            }
+
             // show category filter
             var categoryFeed = APP.load("categoryFeed", { items: self.model.categories });
             $("#content-container .content-scroller").html(categoryFeed);
@@ -401,37 +437,42 @@ var RateView = Backbone.View.extend({
 
 
                     // ONBOARD THE FEED
-                    if(APP.gameState.feed === "1"){
+                    if(APP.gameState.feed === "0"){
 
                         var coach = APP.load("coach", { section : 'feed' }),
                             icon = document.getElementById('tap-menu'),
                             button = document.getElementById(filter),
                             buttonClone = button.cloneNode(true),
+                            position = $(icon).position(),
                             clone = icon.cloneNode(true),
                             iconStyle, buttonStyle, content;
 
 
-                        // GET THE STYLE OF THE ORIGINAL NODE
-                        iconStyle = window.getComputedStyle(icon, null);
-
-
-                        // APPLY THE ORIGINAL NODES STYLE TO THE CLONE
-                        clone.style.cssText = iconStyle.cssText;
-
-
                         // SET ID OF DIV TO '' (can't have two divs with the same id)
-                        clone.style.backgroundColor = "#d32724";
-                        clone.id += '-clone';
                         buttonClone.id = 'filter-clone';
+                        clone.id += '-clone';
 
-                        // Set clond button position to original button
-                        $(buttonClone).css({ left : $(button).position().left }); 
+                        // Set clone  position to original item position
+                        $(clone).css({ 
+                            backgroundColor : "#d32724",
+                            height : $(icon).height(),
+                            width : $(icon).width(),
+                            left :  position.left,
+                            top : position.top
+                        }); 
 
 
-                        $('#coach-overlay').html(coach);
+                        $('#coach-overlay').html( coach );
+
 
                         $("#coach-section")
                             .prepend( $(clone) );
+
+                        // position arrow
+                        $("#coach-arrow").css({
+                            top : ( $(icon).height() / 2 ) - 10,
+                            left : $(icon).width() + 22,
+                        });
 
                         UI.bindCoachEvents('feed');
 
@@ -471,6 +512,7 @@ var RateView = Backbone.View.extend({
                     // !!!!!!!!!!!!!!!!!!! CATEGORY FEED !!!!!!!!!!!!!!!!!!!
 
 
+
                     self.model.lastFeed = $("#content-container .content-scroller").html(); // Update feed html to show current likes and comments
                     $("#content-container .content-scroller").html(APP.load("categoryFeed", { items: self.model.categories }));
 
@@ -481,7 +523,7 @@ var RateView = Backbone.View.extend({
                 } else if(filter === "want-to-filter") {
                     
                     // ONBOARD WANT-TO
-                    if(APP.gameState.wantTo === "1"){
+                    if(APP.gameState.wantTo === "0"){
 
                         var coach = APP.load("coach", { section : 'wantTo' }),
                             button = document.getElementById(filter),
@@ -514,7 +556,7 @@ var RateView = Backbone.View.extend({
                             left : position
                         });
 
-                        UI.bindCoachEvents('feed');
+                        UI.bindCoachEvents('wantTo');
 
                     }
                     
@@ -648,6 +690,18 @@ var RateView = Backbone.View.extend({
             Backbone.history.navigate("greeting/" + userID, true);
 
             return false;
+        });
+
+        $(".message").click(function (e){
+            var userID = $(this).parent().data("userid");
+
+            APP.feedPos = UI.scroller.y;
+            
+            console.log('message');
+            Backbone.history.navigate("messages/" + userID, true);
+
+            return false;
+
         });
 
         // feed footer comment button

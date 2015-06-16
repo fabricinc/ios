@@ -175,6 +175,11 @@
                     $('#coach-overlay').html(coach);
                     $("#coach-section").prepend(clone);
 
+                    $("#coach-arrow").css({
+                        left : ( window.innerWidth / 2 ) - ( $("#coach-arrow").width() / 2 ),
+
+                    })
+
                     UI.bindCoachEvents('fabricMenu');
 
                 }

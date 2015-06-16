@@ -3,6 +3,7 @@
 <div id="profile" class="bgwhite<% if(!userID) { %> owner<% } %>">
     <div class="profile-scroll-content cf">
         <div id="profile-info">
+            <img id="settings-gear" src="images/discovery/settings.png" />
             <div id="profile-info-top">
                 <div id="profile-picture-block" class="inlineb">
                     <div id="profile-picture" class="<% if(msPop) { %>msPop<% } %>" <% if(profileData.facebookID) { %>style="background-image: url(https://graph.facebook.com/<%= profileData.facebookID %>/picture?height=80&width=80);"<% } %>></div>

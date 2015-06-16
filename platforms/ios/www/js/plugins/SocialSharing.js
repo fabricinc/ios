@@ -64,7 +64,7 @@ SocialSharing.prototype.canShareViaEmail = function (successCallback, errorCallb
 SocialSharing.prototype.shareVia = function (via, message, subject, fileOrFileArray, url, successCallback, errorCallback) {
     //cordova.exec(successCallback, this._getErrorCallback(errorCallback, "shareVia"), "SocialSharing", "shareVia", [message, subject, this._asArray(fileOrFileArray), url, via]);
     if(via == "Facebook") {
-        this.shareViaFacebook(message, null, url, successCallback, errorCallback);
+        this.shareViaFacebookWithPasteMessageHint(message, null, url, successCallback, errorCallback);
     } else if(via == "Twitter") {
         this.shareViaTwitter(message, fileOrFileArray, url, successCallback, errorCallback);
     } else if(via == "Email") {

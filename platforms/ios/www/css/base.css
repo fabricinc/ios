@@ -133,7 +133,7 @@ header {
 #wrapper {
     left: 0%;
     right: 0%;
-    transition: left 250ms ease;
+    overflow: hidden;
 }
 #wrapper.leftMenu { left: 87% !important; }
 #wrapper.rate div.left.button.back,
@@ -210,7 +210,7 @@ header nav h1 {
 #coach-section h1 span,
 .list header nav h1 span,
 #dashboard header nav h1 span {
-    background-image: url(../images/discovery/fabricIcons/movieTabIcon.png);
+    background-image: url(../images/discovery/movies.png);
     background-repeat: no-repeat;
     background-size: 16px;
     display: inline-block;
@@ -231,9 +231,9 @@ header nav h1 {
     top: 0px;
 }
 #current-icon.all { background-image: url(../images/discovery/fabricIcons/arrowBlack.png); }
-#current-icon.travel { background-image: url(../images/discovery/fabricIcons/travelTabIcon.png); }
-#current-icon.music { background-image: url(../images/discovery/fabricIcons/musicTabIcon.png); }
-#current-icon.tv { background-image: url(../images/discovery/fabricIcons/tvTabIcon.png); }
+#current-icon.travel { background-image: url(../images/discovery/travel.png); }
+#current-icon.music { background-image: url(../images/discovery/music.png); }
+#current-icon.tv { background-image: url(../images/discovery/tv.png); }
 
 #fabric-menu {
     background-color: rgba(0, 0, 0, 0.82);
@@ -382,6 +382,7 @@ header nav #notifications-menu #notifications-num {
     right: 70px;
 }
 .messages #chat-num { display: none !important; }
+#tap-menu-clone,
 header nav #tap-menu {
     background-image: url(../images/discovery/addIcon.png);
     background-position: center center;
@@ -1220,6 +1221,7 @@ input.slider-search-form {
     background-image: url(../images/discovery/feedButton.png);
     content: "Feed";
 }
+#category-filter-clone:after,
 #category-filter:after {
     background-image: url(../images/discovery/exploreButton.png);
     content: "Explore";
@@ -4127,8 +4129,8 @@ h2#see-more-matches {
 .feed-item .button.greeting,
 #profile #action-buttons .button.greeting {
     background-image: url(../images/discovery/icon_greeting.png);
+    background-position: 15px 7px;
     background-size: 20px 19px;
-    background-position: 24px 7px;
     background-repeat: no-repeat;
 }
 #profile #action-buttons .button.greeting.greeted { background-image: none !important; }
@@ -4769,7 +4771,7 @@ h6.like-you + .action {
 .feed-item .suggested-tastemate {
     background-image: url(../images/discovery/tastemate.png);
     background-repeat: no-repeat;
-    background-position: 55px 0;
+    background-position: 25px 0;
     background-size: 24px;
     text-align: center;
     padding-left: 30px;
@@ -4802,7 +4804,7 @@ h6.like-you + .action {
 .feed-item .activity-feed-buttons .button {
     border: 2px solid #C0322F;
     display: inline-block;
-    width: 48%;
+    width: 47%;
 }
 .feed-item .activity-feed-buttons .button.following {
 
@@ -5725,16 +5727,26 @@ button#done {
     padding: 15px;
     color: gray;
 }
+#mcdonalds {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+}
 #status-update-search {
     padding: 5px;
 }
 #status-update-input {
+    background-image: url(../images/discovery/search.png);
+    border-bottom: 1px solid lightgray;
+    background-repeat: no-repeat;
+    background-position: 7px 8px;
+    background-size: 13px;
+    padding-bottom: 10px;
+    padding-left: 25px;
     border-radius: 0;
     font-size: 17px;
     width: 295px;
     border: none;
-    padding-bottom: 10px;
-    border-bottom: 1px solid lightgray;
 }
 #video-player:-webkit-full-screen {
     width: 100%;
@@ -6253,7 +6265,7 @@ div#critic-rating.bottom-info { left: 80px;  }
     font-size: 90px;
 }
 #coach-text {
-    margin: 90px 10px; 
+    margin: 150px 10px 90px; 
     font-size: .8em;
 }
 #coach-button {

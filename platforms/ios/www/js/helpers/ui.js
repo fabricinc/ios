@@ -87,7 +87,7 @@ var UI = {
                 $("#coach-section").css({ opacity : 0 });
                 
                 //Update the gameState and database
-                return;
+
                 Api.updateOnboard(section);
 
             });
