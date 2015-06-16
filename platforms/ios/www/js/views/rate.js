@@ -51,7 +51,7 @@ var RateModel = Backbone.Model.extend({
 
             Api.getHomeFeed(self.startF, Api.appSettings.feedLimit, APP.sectionID, function (response) {
 
-                console.log(response);
+
                 self.startF = Api.appSettings.feedLimit; // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
                 self.feed = { feed: response.data.activityFeed.data };
                 self.feedLoaded = true;
@@ -697,7 +697,7 @@ var RateView = Backbone.View.extend({
 
             APP.feedPos = UI.scroller.y;
             
-            console.log('message');
+            
             Backbone.history.navigate("messages/" + userID, true);
 
             return false;

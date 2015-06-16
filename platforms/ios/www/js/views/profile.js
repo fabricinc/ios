@@ -19,6 +19,7 @@ var ProfileModel = Backbone.Model.extend({
             self.isFriend = response.isFriend;
             self.set(response);
 
+            console.log(response);
 
             callback();
         });

@@ -620,11 +620,21 @@
     #profile {
         height: 976px;
     }
+    #profile-info {
+        width: 50%;
+        margin: 0 auto;
+    }
+    #profile-info-top {
+        padding-right: 20px;
+    }
 
     #profile .info {
         background-position-x: center;
         background-size: 80%;
         background-position-y: -40px;
+    }
+    #profile #action-buttons .button.follow, #profile #action-buttons .button.greeting {
+        width: 48%;
     }
 
     #profile div#lists.lists-nav {
