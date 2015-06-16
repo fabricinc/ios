@@ -272,7 +272,9 @@ header nav #tap-menu {
 #fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 27px 11px; }
 #fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 18px 11px; }
 #statusUpdates .text-box textarea { width: 310px; height: 120px; }
-#status-update-input { width: 387px; }
+#status-update-input { width: 369px; }
+#search-wrapper { height: 594px; }
+#mcdonalds { font-size: 19px; }
 #category-container #status-drop { width: 100%; top: 196px; }
 #status-drop, #menu-drop { max-height: 501px; }
 #user-matches h1.credits { background-position: 20px 2px; }

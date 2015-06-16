@@ -146,7 +146,7 @@ input.slider-search-form {
 #side-swipe .watching-next.contain input { margin-left: 22px; width: 300px; top: 125px; height: 30px; }
 #side-swipe .watching-next.contain h1 { font-size: 20px; }
 #slide-status-update::-webkit-input-placeholder{ text-align: center; }
-#status-update-input { width: 348px; }
+#status-update-input { width: 332px; }
 #profile .sub-header div { width: 187px; }
 .passion-poster-container { height: 154px; }
 #profile .poster:first-child { left: 2px; z-index: 4; }

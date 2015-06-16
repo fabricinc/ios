@@ -3807,7 +3807,7 @@ h2#see-more-matches {
     margin: 12px;
 }
 #profile-picture {
-    background-image: url(../images/discovery/noPhotoAvailable.png);
+    background-image: url(../images/discovery/avatar.png);
     background-color: rgb(239, 239, 239);
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -5731,13 +5731,13 @@ button#done {
     text-align: center;
     font-weight: bold;
     padding-top: 10px;
+    font-size: 17px; 
 }
 #status-update-search {
     padding: 5px;
 }
 #status-update-input {
     background-image: url(../images/discovery/search.png);
-    border-bottom: 1px solid lightgray;
     background-repeat: no-repeat;
     background-position: 7px 8px;
     background-size: 13px;
@@ -5747,6 +5747,7 @@ button#done {
     font-size: 17px;
     width: 295px;
     border: none;
+    border-bottom: 1px solid lightgray;
 }
 #video-player:-webkit-full-screen {
     width: 100%;
