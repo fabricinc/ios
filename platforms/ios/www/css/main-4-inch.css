@@ -35,14 +35,7 @@
         top: 140px;
     }
     /* MUSIC */
-    #wrapper.music-section .div-swiper {
-        height: 200px !important;
-        background-size: 200px 200px;
-        top: 170px; 
-    }
-    #wrapper.music-section #gravity {
-        background-position-y: 332px; 
-    }
+
     
     /* END MUSIC */
     #messages-slider,
