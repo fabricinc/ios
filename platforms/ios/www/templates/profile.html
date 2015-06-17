@@ -7,7 +7,7 @@
             <div id="profile-info-top">
                 <div id="profile-picture-block" class="inlineb">
                     <div id="profile-picture" class="<% if(msPop) { %>msPop<% } %>" <% if(profileData.facebookID) { %>style="background-image: url(https://graph.facebook.com/<%= profileData.facebookID %>/picture?height=170&width=170);"<% } %>></div>
-                    <% if(!msPop) { %>
+                    <% if(!msPop && !self) { %>
                         <% if(moviesInCommon[0].compatibility && moviesInCommon[0].compatibility != "0") { %>
 
                             <div class="circle">

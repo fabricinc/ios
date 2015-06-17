@@ -174,12 +174,19 @@
         padding: 0 115px;
         width: 538px;    
     }
-
+    #coach-section div, 
     #home-filters div {
         margin: 0 20px;
         height: 55px;
         width: 11%;
     }
+    #coach-section div.filter.clone {
+        width: 60px;
+    }
+    #coach-arrow {
+        margin: 0 20px;
+    }
+    #coach-section .filter.clone::after,
     #home-filters div::after {
         background-position: 19px 4px;
         background-size: 27px;
@@ -188,7 +195,12 @@
     div#fancy-button::after {
         background-position: center;
     }
-
+    .feed #coach-arrow {
+        margin: 0;
+    }
+    #coach-section #tap-menu-clone {
+        margin: 0;
+    }
     #coach-section.want-to div,
     #home-filters #recommended-filter {
         left: 520px;
@@ -659,10 +671,6 @@
         width: 384px;
     }
 
-
-    #profile .button.following {
-        width: 33% !important;
-    }
 
     #profile .action-buttons .button.follow,
     #profile .action-buttons .button.greeting {
@@ -1184,10 +1192,7 @@
         Coach
     ============================================================== 
     */
-    #coach-section div {
-        margin-top: 50px;
-        font-size: 30px;
-    }
+
     #coach-section.want-to div {
         font-size: 23px; 
     }
