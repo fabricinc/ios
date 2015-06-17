@@ -408,12 +408,7 @@
         left: 196px;
         top: 215px;
     }
-    .music-section .div-swiper {
-        width: 375px !important;
-        height: 375px !important;
-        background-size: 375px 375px;
-        top: 150px;
-    }
+
     .music-section #swiper-content, .music-section #swiper-mask { top: 200px; }
     .music-section #swiper-content-two { top: 230px; }
     .music-section #swiper-content-three { top: 245px; }
