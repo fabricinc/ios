@@ -112,6 +112,16 @@ div#mask .wheel {
     height: 40px;
     line-height: 40px;
 }
+.profile-tile {
+    height: 192px;
+    width: 192px;
+}
+#profile-content .content-info {
+    font-size: 20px; 
+}
+#settings-gear {
+    height: 25px;
+}
 #player,
 #video-src { height: 233px; }
 #fake-lobby-scroller { height: 452px; }

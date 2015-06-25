@@ -1,0 +1,53 @@
+<% var msPop = userID === '252990' ? true : false; 
+
+    if(self) { %> <img id="settings-gear" src="images/discovery/settings.png" /> <% } %>
+            <div id="profile-info-top">
+                <div id="profile-picture-block" class="inlineb">
+                    <div id="profile-picture" class="<% if(msPop) { %>msPop<% } %>" <% if(profileData.facebookID) { %>style="background-image: url(https://graph.facebook.com/<%= profileData.facebookID %>/picture?height=170&width=170);"<% } %>></div>
+                    <% if(!msPop && !self) { %>
+                        <% if(compatibility) { %>
+
+                            <div class="circle">
+                                <div class="percent"><%= compatibility %>%</div>
+                            </div>
+
+                        <% } %>
+                    <% } %>
+                </div>
+                <ul id="follow-info" class="inlineb">
+                    <li id="friends">
+                        <b><%= followData.friends.count %></b>
+                        <p>Friends</p>
+                    </li>
+                    <li id="followers">
+                        <b><%= followData.followers.count %></b>
+                        <p>Followers</p>
+                    </li>
+                    <li id="following">
+                        <b><%= followData.following.count %></b>
+                        <p>Following</p>
+                    </li>
+                </ul>
+            </div>
+            <div id="profile-info-bottom">
+                <div id="name"><%= profileData.uName %>
+                    <% if(profileData.age && parseInt(profileData.age) > 18 && !self) { %>, <%= profileData.age %><% } %>
+                </div>
+                <% if(profileData.city) { %> 
+
+                    <div id="location"><%= profileData.city %></div> 
+
+                <% } %>
+                <% if(!self && !msPop) { %>
+                    <ul id="action-buttons">
+                        <li id="follow-button" class="button follow<% if(isFollowing) { %> following <% } %>">Follow<% if(isFollowing) { %>ing<% } %></li>
+                        <li id="send-greeting" class="button greeting<% if(isFriend || messageCount) { %> greeted<% } %>" data-messagecount="<%= messageCount %>">
+                            <% if(isFriend || messageCount) { %>
+                                Message
+                            <% } else { %>
+                                Say Hi
+                            <% } %>
+                        </li>
+                    </ul>
+                <% } %>
+            </div>

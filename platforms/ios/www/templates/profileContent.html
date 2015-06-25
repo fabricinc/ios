@@ -1,0 +1,16 @@
+<%
+	
+	var sectionType = ['all', 'movies', 'TV', 'travel', 'music'];
+	var listTypes = ['', 'seen', 'favorite', 'queue'];
+	var verb = ['see', 'see', 'see', 'see', 'hear'];
+	var section = sectionType[parseInt(section_id)];
+%>
+
+	<div class='gradiant'>
+		<div class='content-info'>
+			<b class='profile-<%= listTypes[parseInt(typeID)] %>-content'><%= section %><% if(typeID === "3"){ %> to <%= verb[parseInt(section_id)] %> <% } %></b>
+			<% if(parseInt(incommon)) { %>
+				<p class='profile-in-common'><%= incommon %> in common</p>
+			<% } %>
+		</div>
+	</div>

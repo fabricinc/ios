@@ -190,7 +190,13 @@ div#mask .wheel {
 #profile-info-bottom {font-size: 18px;}
 #profile #action-buttons .button.follow {  background-position-x: 20px; }
 #profile .button, .follow-button, .say-hi { font-size: 20px; }
-
+.profile-tile {
+    height: 172px;
+    width: 172px;
+}
+#profile-content .content-info {
+    font-size: 15px; 
+}
 #profile #action-buttons .button.follow, 
 #profile #action-buttons .button.greeting {  
     background-position-x: 20px; 
