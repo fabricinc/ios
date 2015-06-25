@@ -1,29 +1,119 @@
 var ProfileModel = Backbone.Model.extend({
-    userID: null,
-    favoriteMovies: null,
-    profileData: null,
     followerData: null,
-    isFollowing: false,
-    isFriend: false,
+    defaults: {
+        profileData: null,
+        compatibility: null,
+        isFollowing: false,
+        profileData: null,
+        followData: null,
+        messageCount: 0,
+        isFriend: false,
+        content: null,
+        userID: null,
+        self: false, 
+
+    },
 
     initialize: function(options) {
         this.userID = options.userID || null;
+
     },
 
-    getProfileData: function(callback) {
+    getProfileData: function() {
         var self = this;
-        callback = callback || function() { };
 
-        Api.getFabricProfile(self.userID, function(response) {
-            self.isFollowing = response.following;
-            self.isFriend = response.isFriend;
-            self.set(response);
 
-            console.log(response);
+        Api.getFabricProfile(this.userID, function (response) {
+            
+            
+            this.set('compatibility', parseInt(response.compatibility));
+            this.set('messageCount', parseInt(response.messageCount));
+            this.set('isFollowing', response.following);
+            this.set('followData', response.followData);
+            this.set('isFriend', response.isFriend);
+            this.set('userID', response.userID);
+            this.set('self', response.self);
+            this.set('profileData', response.profileData);
 
-            callback();
-        });
 
+        }.bind(this));
+
+        Api.getProfileContent(this.userID, function (response){
+
+
+            this.set('content', response.content);
+
+
+        }.bind(this));
+
+
+    },
+
+    viewFollowFollowers: function (routeType) {
+        var userID = this.get('userID');
+
+        var routes = {
+            followers:  "userLists?userID=" + userID + "&following=false",
+            following:  "userLists?userID=" + userID + "&following=true",
+            friends:    "friends"
+        };
+
+        Backbone.history.navigate(routes[routeType], true);
+
+    },
+
+    toggleFollow: function() {
+
+        var following = this.get('isFollowing');
+
+
+        if(following) {
+            var message = "Are you sure you want to unfollow " + this.get('profileData').uName;
+
+            navigator.notification.confirm(message, function(button){
+               if(button === 2) {
+
+                    Api.unFollowUser(this.userID, function(response) {
+                        if(response.success) {
+
+                            // self.isFollowing = false;
+                            this.set('isFollowing', false);
+
+                        }
+                    }.bind(this));
+
+                }
+            }.bind(this), null, ["Cancel", "Unfollow"]);
+
+        } else {
+            Api.followUser(this.userID, function(response) {
+                if(response.success) {
+
+                    this.set('isFollowing', true);
+
+                }
+            }.bind(this));
+        }
+
+    },
+
+    greet: function() {
+
+        if(this.get('isFriend') || parseInt(this.get('messageCount'))) {
+
+            Backbone.history.navigate("messages/" + this.get('userID'), true);
+
+        } else {
+
+            Backbone.history.navigate("greeting/" + this.get('userID'), true);
+
+        }
+
+    },
+
+    settings: function() {
+
+        Backbone.history.navigate('settings', true);
 
     },
 
@@ -47,14 +137,6 @@ var ProfileModel = Backbone.Model.extend({
             return true;
         });
 
-        $("#lists").click(function() {
-            if(self.toJSON().self) {
-                Backbone.history.navigate("lists", true);
-            } else {
-                Backbone.history.navigate("otherLists/" + self.userID, true);
-            }
-            return false;
-        });
 
         $("#feed").click(function() {
             Backbone.history.navigate("userFeed/" + self.userID, true);
@@ -67,7 +149,9 @@ var ProfileModel = Backbone.Model.extend({
 
         $("#follow-button").click(function() {
             if(self.isFollowing) {
+
                 var message = "Are you sure you want to unfollow " + self.toJSON().profileData.uName;
+
                 navigator.notification.confirm(message, function(button){
                    if(button === 2) {
                         Api.unFollowUser(self.userID, function(response) {
@@ -91,25 +175,6 @@ var ProfileModel = Backbone.Model.extend({
             return false;
         });
 
-        $("#follow-info li").fastClick(function (e) {
-
-            var id = e.currentTarget.id;
-
-            var routes = {
-                followers:  "userLists?userID=" + self.userID + "&following=false",
-                following:  "userLists?userID=" + self.userID + "&following=true",
-                friends:    "friends"
-            };
-
-            Backbone.history.navigate(routes[id], true);
-
-            return false;
-        });
-
-        $("#movies-seen").click(function() {
-            Backbone.history.navigate("lists/" + self.attributes.profileData.seenListID, true);
-            return false;
-        });
 
         $("#send-greeting").click(function() {
             if(self.isFriend || parseInt($(this).data("messagecount")) > 0) {
@@ -120,10 +185,6 @@ var ProfileModel = Backbone.Model.extend({
             return false;
         });
 
-        $(".info .circle").click(function() {
-            UI.scroller.scrollTo(0, -500, 500);
-            return false;
-        });
 
         $(".right.button.more").fastClick(function() {
             UI.launchPopUpTwo(APP.load("reportUserPopup"), function() {
@@ -146,60 +207,6 @@ var ProfileModel = Backbone.Model.extend({
             return false;
         });
 
-        // passion events
-        if($(".fav.common").length) {
-            $(".fav.common").click(function() {
-                Backbone.history.navigate("getFavsInCommon/" + self.userID, true);
-            });
-        }
-
-        if($(".queue.common").length) {
-            $(".queue.common").click(function() {
-                Backbone.history.navigate("getQueueInCommon/" + self.userID, true);
-            });
-        }
-
-        // favorite delta events
-        $("#favorite-delta .delta-poster").click(function(){
-            var movieID = $(this).closest(".feed-item").data("movie-id");
-            Backbone.history.navigate("movieLobby/" + movieID, true);
-        });
-
-        $("#favorite-delta .movie-info").click(function() {
-            var movieID = $(this).parent().data("movie-id");
-            Backbone.history.navigate("movieLobby/"+ movieID, true);
-        });
-
-        $(".add-queue").click(function() {
-            var publishedID = $(this).parent().data("movie-published-id"),
-                set = $(this).hasClass("active") ? false : true,
-                params = { publishedID: publishedID };
-
-            $(this).toggleClass("active");
-
-            Api.setMovieToFabricList(
-                publishedID,
-                APP.gameState.watchListID,
-                set
-            );
-        });
-
-
-        setTimeout(function() { UI.initScroller($("#profile")[0]); }, 100);
-    },
-
-    loadPassion: function() {
-        if(!this.toJSON().self) {
-            return APP.load("dualPassion", {
-                user: APP.userPassion,
-                other: this.toJSON().passion,
-                profile: this.toJSON().profileData,
-                favCommon: this.toJSON().favCommon,
-                queueCommon: this.toJSON().queueCommon,
-                userID: this.userID
-            });
-
-        } 
     }
 });
 
@@ -208,55 +215,221 @@ var ProfileView = Backbone.View.extend({
     header: null,
     id: "profile-view",
 
-    initialize: function(options, callback) {
+
+    initialize: function(options) {
         options = options || { };
-        callback = callback || function() { };
+
 
         this.model = new ProfileModel(options);
 
-        callback();
-        return this;
+        this.listenTo(this.model, 'change:content', this.fillContent);
+        this.listenTo(this.model, 'change:profileData', this.fill);
+
+    },
+
+
+    // Fill the profile with the user info
+    fill: function() {
+
+        this.profileInfo = new ProfileInfoView({ model : this.model });
+
+        this.profileInfo.render();
+
+    },
+
+    fillContent: function() {
+
+        this.profileContent = new ProfileContentView({ content:  this.model.get('content') });
+
+        this.profileContent.render();
+
     },
 
     render: function(callback) {
-        var self = this;
         callback = callback || function() { };
 
-        self.model.getProfileData(function() {
-            var data = self.model.toJSON();
-            
 
-            self.$el.html(APP.load("profile", data));
+        var data = this.model.toJSON();
+        
 
-            if (!self.header) {
-                self.header = new HeaderView({
-                    title: "Profile",
-                    moreButton: (!data.self && self.model.userID !== "252990"),
-                    home: false
-                });
-                self.$el.prepend(self.header.el);
-            }
-
-            $("#wrapper").html(self.$el);
-            $("#top-genres").html(self.model.loadPassion());
-
-            if(!data.self && data.favDelta && data.favDelta.length > 0) {
-                $("#favorite-delta").html(
-                    APP.load("favoriteDelta", {
-                        recs: data.favDelta,
-                        uName: data.profileData.uName.split(" ")[0]
-                    })
-                );
-            }
-
-            self.model.bindEvents();
-            callback();
+        this.header = new HeaderView({
+            moreButton: (!data.self && this.model.userID !== "252990"),
+            title: "Profile",
+            home: false
         });
 
-        return this;
+
+        this.$el
+            .prepend(this.header.el)
+            .append(APP.load("profile"));
+
+
+        $("#wrapper").html(this.$el);
+
+        this.model.getProfileData();
+        // Keep this to unmask the view
+        callback();
+
     },
 
     dealloc: function() {
         return this;
     }
+
 });
+
+var ProfileInfoView = Backbone.View.extend({
+    el: "#profile-info",
+
+    initialize: function(options){
+
+        this.listenTo(this.model, "change:isFollowing", this.toggleFollowState);
+
+    }, 
+
+    events: {
+        "touchstart #follow-info li" : "viewFollowFollowers",
+        "click #settings-gear" : "settings",
+        "click #follow-button" : "follow",
+        "click #send-greeting" : "greet",
+    },
+
+    viewFollowFollowers: function (e) {
+
+        
+        this.model.viewFollowFollowers(e.currentTarget.id);
+
+    },
+
+    follow: function() {
+
+        this.model.toggleFollow();
+
+    },
+
+    greet: function() {
+
+        this.model.greet();
+
+    },
+
+    toggleFollowState: function() {
+
+        var following = this.model.get('isFollowing') ? "Following" : "Follow";
+
+        this.$el.find( "#follow-button" )
+            .toggleClass( 'following' )
+            .html( following );
+
+    },
+
+    settings: function() {
+
+        this.model.settings();
+
+    },
+
+    render: function(){
+        
+        var info = APP.load("profileInfo", this.model.toJSON());
+
+        this.$el.html(info);
+
+
+        return this;
+    }
+});
+
+var ProfileContentView = Backbone.View.extend({
+    
+    el: "#profile-content",
+
+    initialize: function(options) {
+        content = options.content; 
+
+        this.collection = new ProfileContentCollection(content);
+
+    },
+
+    render: function () {
+
+        this.collection.each(this.addContent, this);
+
+        return this;
+    },
+
+    addContent: function(contentBlock){
+        
+        var block = new ContentBlock({ model : contentBlock });
+
+
+        this.$el.append( block.render().el ); 
+
+    },
+
+});
+
+var ProfileContentModel = Backbone.Model.extend({
+
+    sync: function () { return false; },
+
+    defaults: {
+        shown: false
+    },
+
+    viewList: function() {
+        
+        var listID = this.get('typeID') === "3" ? APP.gameState.watchListID : APP.gameState.favoriteListID;
+
+        Backbone.history.navigate("lists/"+ listID +"/"+ this.get('section_id'), true);
+
+    }
+
+});
+
+var ProfileContentCollection = Backbone.Collection.extend({
+
+    model: ProfileContentModel,
+
+    defaults: {
+        hello: 'test'
+    },
+
+    initialize: function(options) {
+
+
+    }
+
+});
+
+var ContentBlock = Backbone.View.extend({
+
+    className: 'profile-tile',
+
+    events: {
+        'click' : 'viewList',
+    },
+
+
+    render: function() {
+
+        var _D = this.model.toJSON(),
+            block = APP.load( 'profileContent', _D );
+
+        console.log(_D);
+        this.$el
+            .css({ backgroundImage : "url("+ _D.poster +")" })
+            .append( block );
+
+
+        return this;
+
+    },
+
+    viewList: function() {
+
+        this.model.viewList();
+
+    }
+});
+

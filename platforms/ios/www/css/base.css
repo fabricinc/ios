@@ -3790,9 +3790,10 @@ h2#see-more-matches {
 .right-text { float: right; }
 #profile {
     height: 460px;
-    overflow: hidden;
+
 }
 #profile-info {
+    position: relative;
     padding: 10px;
 }
 #profile-info-top {
@@ -3806,6 +3807,7 @@ h2#see-more-matches {
     width: 73px;
     margin: 12px;
 }
+
 #profile-picture {
     background-image: url(../images/discovery/avatar.png);
     background-color: rgb(239, 239, 239);
@@ -3865,11 +3867,12 @@ h2#see-more-matches {
 }
 #settings-gear {
     position: absolute;
-    height: 25px;
+    height: 18px;
     z-index: 3;
     right: 3px;
     top: 3px;
 }
+
 #profile-picture.msPop { background-image: url(https://s3.amazonaws.com/trailerpop/images/MsPop/fakeMsPop_large.png) !important; }
 .avatar.msPop { background-image: url(https://s3.amazonaws.com/trailerpop/images/MsPop/fakeMsPop.png) !important; }
 #profile .info .location {
@@ -3901,11 +3904,47 @@ h2#see-more-matches {
     background-repeat: no-repeat;
     background-image: url(../images/discovery/no-favorites.png);
 }
-
-#profile .poster:first-child { left: 2px; z-index: 4; }
-#profile .poster:nth-child(2) { left: 67px; z-index: 3; }
-#profile .poster:nth-child(3) { left: 137px; z-index: 2; }
-#profile .poster:nth-child(4) { left: 197px; z-index: 1; }
+#profile::-webkit-scrollbar {
+    display: none;
+}
+#profile {
+    -webkit-overflow-scrolling: touch;
+    overflow: scroll;
+    height: 517px;
+}
+#profile-content .content-info {
+    position: absolute;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    font-size: 13px;
+    width: 95%;
+    bottom: 0;
+}
+.profile-favorite-content,
+.profile-queue-content {
+    background-repeat: no-repeat;
+    background-position: 0px;
+    background-size: 15px;
+    padding-left: 20px;
+}
+.profile-favorite-content {
+    background-image: url(../images/discovery/icon_favorite_movie2.png);
+}
+.profile-queue-content {
+    background-image: url(../images/discovery/fabricIcons/white_queue.png);
+}
+.content-info b {
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.profile-tile {
+    background-size: 100%;
+    margin: 10px 0 0 10px;
+    display: inline-block;
+    position: relative;
+    height: 145px;
+    width: 145px;
+}
 
 #profile .sub-header {
     width: 100%;
@@ -3961,13 +4000,13 @@ h2#see-more-matches {
 #profile .sub-header .follow.following {
     background-color: rgb(196, 50 ,48);
     color: #EDEDEE;
+} 
+#profile-content .gradiant {
+    background: -webkit-linear-gradient(rgba(183, 0, 0, 0.23), rgba(72, 2, 3, 0.65));
+    height: 100%;
+    color: white;
 }
-#profile #profile-content {}
-#profile #profile-content p {
-    color: rgb(150, 150, 150);
-    font-size: 12px;
-    padding: 10px 0 0 10px;
-}
+
 #profile .match-compatibility {
     width: 70px;
     height: 70px;
@@ -4124,7 +4163,7 @@ h2#see-more-matches {
     border: 2px solid #C0322F;
     display: inline-block;
     line-height: 36px;
-    width: 140px;
+    width: 144px;
 }
 .feed-item .button.greeting,
 #profile #action-buttons .button.greeting {

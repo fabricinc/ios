@@ -41,7 +41,7 @@
             "player?movieID=:movieID&listID=:listID": "movieListPlayer",
             "player?movieID=:movieID&contestID=:contestID": "contestPlayer",
 			"lists": "lists",
-			"lists/:id": "editList",
+			"lists/:id(/:sectionID)": "editList",
             "otherLists/:id": "otherLists",
             "otherList/:id": "otherList",
             "userLists?userID=:userID&following=:following": "userLists",
@@ -580,8 +580,8 @@
 					loadPageHtml: false
                 }, "lists");
 			});
-			this.on("route:editList", function(listID) {
-				self.loadView(new MovieListView({ view: "list", listID: listID }), function() {
+			this.on("route:editList", function(listID, sectionID) {
+				self.loadView(new MovieListView({ view: "list", listID: listID, sectionID: sectionID }), function() {
                     // Stub for callback
                 }, {
                     scroller: false,

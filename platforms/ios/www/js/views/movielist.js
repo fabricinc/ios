@@ -39,6 +39,7 @@
 	            this.listID = options.listID;
 	            this.movieID = options.movieID;
 	            this.userID = options.userID;
+                this.sectionID = options.sectionID || APP.sectionID;
 	        }
 		},
 	    getLists: function(callback) {
@@ -52,7 +53,7 @@
 					"listID": self.listID,
 					"offset": self.offset,
 					"limit": self.limit,
-					"sectionID": APP.sectionID
+					"sectionID": self.sectionID
 				};
 
 			self.offset += self.limit;
@@ -68,6 +69,7 @@
 					"offset": self.offset,
 					"limit": self.limit
 				};
+
 
 			Api.dispatcher(options, function(listPart) { callback(listPart); });
 
@@ -100,9 +102,10 @@
 			this.categoryID = options.categoryID || null;
 			this.userID = options.userID || null;
             this.other = options.other || false;
+            this.sectionID = options.sectionID || null;
             this.ownQueue = options.listID == APP.gameState.watchListID ? true : false;
 			
-			this.model = new MovieListModel(this.view, { listID: this.listID, userID: this.userID });
+			this.model = new MovieListModel(this.view, { listID: this.listID, userID: this.userID, sectionID: this.sectionID });
 
             return this;
         },

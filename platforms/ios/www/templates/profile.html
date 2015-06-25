@@ -1,62 +1,9 @@
-<% var msPop = userID === '252990' ? true : false; %>
 
-<div id="profile" class="bgwhite<% if(!userID) { %> owner<% } %>">
+
+<div id="profile" class="bgwhite">
     <div class="profile-scroll-content cf">
-        <div id="profile-info">
-            <% if(self) { %> <img id="settings-gear" src="images/discovery/settings.png" /> <% } %>
-            <div id="profile-info-top">
-                <div id="profile-picture-block" class="inlineb">
-                    <div id="profile-picture" class="<% if(msPop) { %>msPop<% } %>" <% if(profileData.facebookID) { %>style="background-image: url(https://graph.facebook.com/<%= profileData.facebookID %>/picture?height=170&width=170);"<% } %>></div>
-                    <% if(!msPop && !self) { %>
-                        <% if(moviesInCommon[0].compatibility && moviesInCommon[0].compatibility != "0") { %>
-
-                            <div class="circle">
-                                <div class="percent"><%= moviesInCommon[0].compatibility %>%</div>
-                            </div>
-                        <% } %>
-                    <% } %>
-                </div>
-                <ul id="follow-info" class="inlineb">
-                    <li id="friends">
-                        <b><%= followData.friends.count %></b>
-                        <p>Friends</p>
-                    </li>
-                    <li id="followers">
-                        <b><%= followData.followers.count %></b>
-                        <p>Followers</p>
-                    </li>
-                    <li id="following">
-                        <b><%= followData.following.count %></b>
-                        <p>Following</p>
-                    </li>
-                </ul>
-            </div>
-            <div id="profile-info-bottom">
-                <div id="name"><%= profileData.uName %>
-                    <% if(profileData.age && parseInt(profileData.age) > 18 && !self) { %>, <%= profileData.age %><% } %>
-                </div>
-                <% if(profileData.city) { %> 
-
-                    <div id="location"><%= profileData.city %></div> 
-
-                <% } %>
-                <% if(!self && !msPop) { %>
-                    <ul id="action-buttons">
-                        <li id="follow-button" class="button follow<% if(following) { %> following <% } %>">Follow<% if(following) { %>ing<% } %></li>
-                        <li id="send-greeting" class="button greeting<% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %> greeted<% } %>" data-messagecount="<%= messageCount[0].messageCount %>">
-                            <% if(isFriend || parseInt(messageCount[0].messageCount) > 0) { %>
-                                Message
-                            <% } else { %>
-                                Say Hi
-                            <% } %>
-                        </li>
-                    </ul>
-                <% } %>
-            </div>
-        </div>
-
-        <div id="top-genres"></div>
-        <div id="favorite-delta"></div>
+        <div id="profile-info"></div>
+        <div id="profile-content"></div>
     </div>
 </div>
 

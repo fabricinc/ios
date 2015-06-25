@@ -196,7 +196,7 @@ var RateView = Backbone.View.extend({
                                 startY: feedPos
                             });
 
-                            setTimeout(function() { UI.scroller.refresh(); }, 1000);
+                            // setTimeout(function() { UI.scroller.refresh(); }, 1000);
 
                             APP.feedPos = 0;
 

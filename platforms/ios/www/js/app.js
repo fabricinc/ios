@@ -135,6 +135,8 @@ var APP = {
             "discussion",
             "discussionMessage",
             "passwordRecovery",
+            "profileContent", 
+            "profileInfo",
             "rightMenu",
             "feedItem",
             "notifications",

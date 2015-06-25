@@ -1386,10 +1386,23 @@ Api.getFabricProfile = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
     var options = {
-        "action": "getFabricProfile"
+        "action": "getRedFabricProfile"
     };
     if(userID == "") { userID = null; }
     if(userID) { options.userID = userID; }
+    this.fetch(options, callback);
+}
+Api.getProfileContent = function(userID, callback) {
+    callback = callback || function() {};
+    userID = userID || null;
+
+    var options = {
+        "action" : "getProfileContent"
+    }
+    
+    if(userID == "") { userID = null; }
+    if(userID) { options.userID = userID; }
+
     this.fetch(options, callback);
 }
 Api.getPassion = function(userID, callback) {
