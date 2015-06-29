@@ -3845,9 +3845,9 @@ h2#see-more-matches {
     font-size: 20px;
 }
 #follow-info li p {
-    font-size: 13px;
-    color: lightgray;
+    color: rgb(124, 124, 124);
     font-weight: 100;
+    font-size: 13px;
 }
 #profile-info-bottom {
     font-size: 14px;

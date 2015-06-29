@@ -55,7 +55,7 @@ var ProfileModel = Backbone.Model.extend({
         var routes = {
             followers:  "userLists?userID=" + userID + "&following=false",
             following:  "userLists?userID=" + userID + "&following=true",
-            friends:    "friends"
+            friends:    "friends/" +userID
         };
 
         Backbone.history.navigate(routes[routeType], true);

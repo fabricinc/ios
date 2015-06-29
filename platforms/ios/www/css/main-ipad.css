@@ -627,14 +627,51 @@
     #profile {
         height: 976px;
     }
-    #profile-info {
-        width: 50%;
+    .profile-scroll-content {
         margin: 0 auto;
+        width: 85%;
+    }
+    #profile-info {
+        position: relative;
+        padding: 10px;
+        float: right;
+        height: 300px;
+        width: 100%;
     }
     #profile-info-top {
-        padding-right: 20px;
+        padding-bottom: 10px;
+        float: left;
     }
 
+    #profile-picture-block {
+        margin: 0;
+        margin-left: 20px;
+        height: 310px;
+        width: 310px;
+    }
+    #profile-picture-block .circle {
+        left: 5px;
+        top: 5px;
+    }
+    #follow-info {
+        position: absolute;
+        right: 63px;
+        top: 140px;
+    }
+    #profile-info-bottom {
+        float: right;
+        width: 47%;
+    }
+    .profile-tile {
+        height: 150px;
+        width: 150px;
+    }
+    #action-buttons {
+        margin: 175px 0 0;
+    }
+    #profile-picture {
+        border-radius: 0;
+    }
     #profile .info {
         background-position-x: center;
         background-size: 80%;
