@@ -23,12 +23,11 @@
         tagName: "header",
         model: null,
 
-        initialize: function(options) { // Pass options value to the Model
-            
+        initialize: function(options, callback) { // Pass options value to the Model
             this.model = new HeaderModel(options);
 
             this.render(options, callback);
-
+            return this;
         },
 
         render: function(options, callback) {

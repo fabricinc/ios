@@ -10,7 +10,7 @@
             "start/:slid": "startSlid",
             "login": "login",
             "register": "register",
-            "friends": "friends",
+            "friends(/:userID)": "friends",
             "inviteFriends": "inviteFriends",
             "logout": "logout",
             "profile": "profile",
@@ -114,20 +114,14 @@
                 
                 // Render the view.
                 view.render(function() {
+
                     if (load) { APP.$wrapper.html(view.$el.html()); }
                     if (fade) { $(".image").loadFadeImage(); }
                     //if (scroller) { UI.initScroller(); }
 
                     UI.unmask();
 
-                    if(Util.isMobile()) {
-                        $(".external").fastClick(function(e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            Util.handleExternalUrl(this);
-                        });
-                    }
+                
                     self.bindHeaderEvents(className);
                     self.bindGlobalEvents();
 
@@ -612,8 +606,8 @@
                     loadPageHtml: false
                 }, "follow-list");
             });
-            this.on("route:friends", function() {
-                self.loadView(new FriendView(), function() {
+            this.on("route:friends", function(userID) {
+                self.loadView(new FriendView({userID: userID}), function() {
                     // Stub for callback
                 }, {
                     scroller: false,

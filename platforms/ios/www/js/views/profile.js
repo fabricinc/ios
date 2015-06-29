@@ -378,10 +378,8 @@ var ProfileContentModel = Backbone.Model.extend({
     },
 
     viewList: function() {
-        
-        var listID = this.get('typeID') === "3" ? APP.gameState.watchListID : APP.gameState.favoriteListID;
 
-        Backbone.history.navigate("lists/"+ listID +"/"+ this.get('section_id'), true);
+        Backbone.history.navigate("lists/"+ this.get('ListID') +"/"+ this.get('section_id'), true);
 
     }
 
@@ -416,7 +414,6 @@ var ContentBlock = Backbone.View.extend({
         var _D = this.model.toJSON(),
             block = APP.load( 'profileContent', _D );
 
-        console.log(_D);
         this.$el
             .css({ backgroundImage : "url("+ _D.poster +")" })
             .append( block );

@@ -2380,20 +2380,17 @@ div.check-list-wrapper div.check-list-item {
 }
 .check-list-check {
     background-repeat: no-repeat;
-    border: 1px solid lightgray;
     background-size: 30px;
     margin: 35px 5px;
     float: right;
     height: 30px;
     width: 30px;
     opacity: 1;
-    background-image: url(../images/discovery/fabricIcons/lightgrey-check.png);
-
-    background-size: 70%;
-    background-position: 4px 5px;
+    background-image: url(../images/discovery/checkmarkOff.png);
+    background-size: 100% 100%;
 }
 .checked .check-list-check {
-    background-image: url(../images/discovery/redcheck.png);
+    background-image: url(../images/discovery/checkmarkOn.png);
     background-size: 100%;
     background-position: 0px 0px;
 }
@@ -4134,13 +4131,13 @@ h2#see-more-matches {
 #profile .button,
 .follow-button,
 .say-hi {
-    height: 35px;
-    color: white;
     background-color: #C0322F;
     text-align: center;
-    font-size: 16px;
-    line-height: 32px;
     border-radius: 2px;
+    line-height: 32px;
+    font-size: 14px;
+    height: 35px;
+    color: white;
 }
 .feed-item .activity-feed-buttons .follow.following,
 .follow-button.following {

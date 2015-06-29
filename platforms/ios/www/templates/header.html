@@ -11,26 +11,22 @@
 %>
 
 <nav>
+    <div id="back-button" class="left button <%= leftButton.class %>"></div>
     <div id="scroll-top"></div>
     <h1><%= title %></h1>
-    <div class="left button <%= leftButton.class %>" rel="main"></div>
-    <% if(editButton) { %>
+    <% if(editButton) { %> 
         <span id="header-edit-button">Edit</span>
-    <% } else if(welcome) { %>
-        <!-- 
-            ########## NO BUTTONS FOR THIS SECTION ##########
-         -->
-    <% } else if(lobbyButtons) { %>
+    <% } else if(lobbyButtons) { %> 
         <div id="share-icon"></div>
-    <% } else if(doneButton) { %>
+    <% } else if(doneButton) { %> 
         <div class="right button done" id="done-button">Done</div>
-    <% } else if(moreButton) { %>
+    <% } else if(moreButton) { %> 
         <div class="right button more" id="more-button">...</div>
-    <% } else if(postButton) { %>
+    <% } else if(postButton) { %> 
         <div class="right button post" id="post-button">Post</div>
-    <% } else if(doneInter) { %>
+    <% } else if(doneInter) { %> 
         <div class="right button post" id="done-inter-button">Next</div>
-    <% } else if(filterButton) { %>
+    <% } else if(filterButton) { %> 
         <div class="right button done" id="rec-filter-button">Sort</div>
     <% } else { %>
         <div id="notifications-menu">

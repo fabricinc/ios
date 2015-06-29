@@ -599,17 +599,6 @@ var RateView = Backbone.View.extend({
             Backbone.history.navigate("lists/" + APP.gameState.watchListID, true);
         });
 
-        // I don't like this. it calls the function 2 times BUT it works
-        // Reinit the progressive load and feed filter on notification tap
-        $("#wrapper").on('notify', function(e) {
-            e.stopPropagation();
-            if( !$("#notifications-menu").hasClass("on") ) {
-                //self.filterFunction();
-                self.moreFeedPlease();
-            }
-            return false;
-        });
-
     },
     bindActivityFeedEvents: function() {
         var sUpdate = $("#slide-status-update"),

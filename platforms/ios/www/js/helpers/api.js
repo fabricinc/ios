@@ -1600,9 +1600,15 @@ Api.getListMovies = function(listID, recommendation, callback) {
     if(recommendation) { options.recommendation = recommendation; }
     this.fetch(options, callback);
 }
-Api.getMutualFollowers = function(callback) {
+Api.getMutualFollowers = function(userID, callback) {
     callback = callback || function() {};
+    userID = userID || null;
+
+    console.log(userID);
+
     var options = { "action": "getMutualFollowers" };
+    if(userID && userID !== "") { options.userID = userID; }
+
     this.fetch(options, callback);
 }
 Api.getAppSettings = function(callback) {

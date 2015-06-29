@@ -161,6 +161,7 @@ var MessageView = Backbone.View.extend({
         self.model.init(function(result) {
             if(self.model.otherID) {
                 
+                console.log('otherID');
 
                 var html = APP.load("conversation", { 
                     messages: result.reverse(), 
@@ -194,14 +195,22 @@ var MessageView = Backbone.View.extend({
                 mixpanel.track("Messages accessed", params);
 
                 self.model.bindConversationEvents();
-            } else {
-                var html = APP.load("messages", { conversations: result.reverse(), userData: self.model.conversationsUserData.reverse(), userID: self.model.userID });
-                self.$el.html(html);
 
-                if (!self.header) {
-                    self.header = new HeaderView({ title: "Messages" });
-                    self.$el.prepend(self.header.el);
-                }
+            } else {
+
+
+                self.header = new HeaderView({ title: "Messages", home: false, leftButton: { class: "back" } });
+                
+                var html = APP.load("messages", { 
+                    conversations: result.reverse(),
+                    userData: self.model.conversationsUserData.reverse(),
+                    userID: self.model.userID 
+                });
+
+                self.$el
+                    .prepend(self.header.el)
+                    .append(html);
+                
 
                 $("#wrapper").html(self.$el.html());
                 $("#chat-menu").hide();

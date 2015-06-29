@@ -1,7 +1,9 @@
 var FriendModel = Backbone.Model.extend({
-
+    defaults: {
+        userID: null,
+    },
     initialize: function(options) {
-
+        this.set('userID', options.userID);
     },
 
     bindFriendEvents: function() {
@@ -50,6 +52,8 @@ var FriendView = Backbone.View.extend({
         callback = callback || function() { };
         options = options || { };
 
+        console.log(options);
+
         this.model = new FriendModel(options);
         return this;
     },
@@ -57,7 +61,7 @@ var FriendView = Backbone.View.extend({
     render: function(callback) {
         var self = this;
 
-        Api.getMutualFollowers(function(response) {
+        Api.getMutualFollowers(self.model.get('userID'), function(response) {
             var friendHead = APP.load("inviteUserList"),
                 html = APP.load("userLists", { followers: response.friends, followAction: "following" });
 
