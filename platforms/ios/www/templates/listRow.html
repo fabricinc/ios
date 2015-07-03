@@ -1,25 +1,21 @@
-<% var start = start || 0; %>
-<% var owner = (items[0].isUser && parseInt(items[0].isUser) == 1 ) ? true : false; %>
-<% var thumbnail = typeof thumbnail != 'undefined' ? thumbnail : null; %>
-<% var apiPath = thumbnail === false ? Api.appSettings.cdn : ""; %>
 
-<%= APP.load("fabricMenu") %>
+<% var owner = (items[0].isUser && parseInt(items[0].isUser) == 1 ) ? true : false; %>
 
 <div id="recommendation-filters">
     <% if(ownQueue) { %>
-        <div class="filter check" id="modified" data-filter="modified">When Added</div> 
+        <div class="filter check" id="modified" data-filter="modified">When Added</div>
     <% } %>
-    <div class="filter" id="Count" data-filter="Count">Popularity with Friends</div>
-    <div class="filter" id="totalCount" data-filter="totalCount">Popularity with Everyone</div>
+    <div class="filter" id="Count" data-filter="Count">Popdivarity with Friends</div>
+    <div class="filter" id="totalCount" data-filter="totalCount">Popdivarity with Everyone</div>
     <div class="filter" id="movieTitle" data-filter="movieTitle">A to Z</div>
     <div class="filter" id="releaseDate" data-filter="releaseDate">Release Date</div>
     <div class="filter" id="criticsScore" data-filter="criticsScore">Rotten Tomatoes Score</div>
 </div>
 
 <div id="list-row-wrapper">
-    <div>
+    <div style="float: left;">
         <% if(owner) { %>
-            <div class="rel" style="height: 42px;background-color: rgb(241, 241, 241);">
+            <!-- <div class="rel" style="height: 42px;background-color: rgb(241, 241, 241);">
                 <form id="list-search-form" action="javascript:void(0);">
                     <input id="slide-search-form" class="slider-search-form" type="text" placeholder="Add to list...">
                     <div id="status-drop">
@@ -27,45 +23,17 @@
                     </div>
                 </form>
                 <div id="close-search-drop"></div>
-            </div>
+            </div> -->
             <% if(items.length > 0 && items[0].movieID) { %>
-            <div id="fabric-player-button">Play all trailers</div>
+                <div id="fabric-player-button">Play all trailers</div>
             <% } %>
         <% } %>
-        <ul id="list-movies" <% if(items.length > 0) { %>
-            <% var listID = $.isEmptyObject(items[0].listID) && items[0].isUser ? APP.gameState.watchListID : items[0].listID %>
-            data-listid="<%= listID  %>"
-            <% } %>>
-        <% if(items.length > 0 && items[0].movieID) { %>
-            <% _.each(items, function(item) { %>
-                <% if(item.movieID) { %>
-                    <% var rottenFresh = item.criticsScore >= 60 ? "fresh" : "rotten"; %>
-                    <li class="list-row" data-moviepublishedid="<%= item.moviePublishedID %>" data-movieid="<%= item.movieID %>"<% if(item.listMoviesID) { %> id="sortOrder_<%= item.listMoviesID %>"<% } %>>
-                        <img class="list-movie-image" src="<%= Api.appSettings.cdn %>/posters/thumbnails/<%= item.moviePublishedID %>_144-poster.jpg" />
-                        <div class="list-movie-info">
-                            <span class="list-title fnt"><%= item.movieTitle %> <span class="year-actor">(<%= item.releaseYear %>)</span></span>
-                            <% if(item.criticsScore) { %>
-                                <span class="<%= rottenFresh %>"><%= item.criticsScore %>%</span>
-                            <% } %>
-                            <% if(item.Count && item.Count > 0) { %>
-                                <% var recommend = item.Count === "1" ? "Recommended by "+ item.Count +" Friend" : "Recommended by "+ item.Count +" Friends"; %>
-                                <div class="recommended-by"><%= recommend %><p>View All</p></div>
-                            <% } %>
-                            <div class="list-buttons">
-                                <span class="list-button queue-button<% if (item.queued == "0") { %> off <% } %>" data-listid="<%= userLists.watchListID %>">Want-to-do</span>
-                                <span class="list-button favorite-button<% if (item.favorite == "0") { %> off <% } %>" data-listid="<%= userLists.favoriteListID %>">Favorite</span>
-                                <span class="list-button seen-button<% if (item.movieSeen == "0") { %> off <% } %>" data-listid="<%= userLists.seenListID %>">Done</span>
-                            </div>
-                        </div>
-                    </li>
-                <% } %>
-            <% }); %>
-            <div class="load-more-spinner"></div>
-        <% } else { %>
-            <p class="blank-message">Nothing here!</p>
-            <p class="blank-instructions">This list is in dire need of some movies & shows</p>
-        <% }%>
-        </ul>
+        <div id="list-movies">
+            <% if(!items.length) { %>
+                <p class="blank-message">Nothing here!</p>
+                <p class="blank-instructions">This list is in dire need of some movies & shows</p>
+            <% }%>
+        </div>
     </div>
     <div id="screen"></div>
 </div>

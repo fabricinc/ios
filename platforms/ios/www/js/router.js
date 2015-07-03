@@ -10,7 +10,7 @@
             "start/:slid": "startSlid",
             "login": "login",
             "register": "register",
-            "friends(/:userID)": "friends",
+            "friends(/:userID)(/:isSelf)": "friends",
             "inviteFriends": "inviteFriends",
             "logout": "logout",
             "profile": "profile",
@@ -606,8 +606,8 @@
                     loadPageHtml: false
                 }, "follow-list");
             });
-            this.on("route:friends", function(userID) {
-                self.loadView(new FriendView({userID: userID}), function() {
+            this.on("route:friends", function(userID, isSelf) {
+                self.loadView(new FriendView({userID: userID, isSelf: isSelf}), function() {
                     // Stub for callback
                 }, {
                     scroller: false,

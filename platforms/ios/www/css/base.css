@@ -128,7 +128,7 @@ header {
     top: initial;
 }
 .scroll-container {
-    overflow: hidden;   
+    overflow: hidden;
 }
 #wrapper {
     left: 0%;
@@ -160,11 +160,11 @@ header nav h1, #available-services h1 {
     text-align:center;
     margin: 0 auto;
     text-transform: capitalize;
-    width: 170px; 
+    width: 170px;
     border: none;
     font-weight: bold;
 }
-#coach-section h1, 
+#coach-section h1,
 #dashboard header nav h1 {
     background-color: #d32724;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.41);
@@ -282,7 +282,7 @@ header nav h1 {
 #tv-nav { background-color: rgb(82, 196, 217); background-image: url(../images/discovery/fabricIcons/tvMenuIcon.png); }
 #music-nav { background-color: rgb(255, 179, 40); background-image: url(../images/discovery/fabricIcons/musicMenuIcon.png); }
 #travel-nav { background-color: rgb(3, 94, 255); background-image: url(../images/discovery/fabricIcons/travelMenuIcon.png); }
- 
+
 header nav .slide,
 header nav #tap-menu,
 header nav #chat-menu,
@@ -353,8 +353,8 @@ header nav #share-icon {
     background-size: 18px 25px;
     background-position: 7px 13px;
 }
-header nav #notifications-menu.on { 
-    background-image: url(../images/discovery/ON.png); 
+header nav #notifications-menu.on {
+    background-image: url(../images/discovery/ON.png);
     background-size: 30px;
     background-position: 4px 12px;
 }
@@ -398,7 +398,7 @@ header nav #tap-menu {
 #dashboard {
     transition: left 500ms ease;
     position: relative;
-    height: 100%; 
+    height: 100%;
     left: 0;
 }
 #messages {
@@ -516,7 +516,7 @@ div.left.button.back:active { opacity: 0.5; }
     display: none;
     height: 100%;
     position: fixed;
-    width: 276px; 
+    width: 276px;
     border-right: 2px solid whitesmoke;
     top: 0;
     background-color: whitesmoke;
@@ -613,7 +613,7 @@ div.left.button.back:active { opacity: 0.5; }
 #recently-queued-wrapper h6 {
     color: darkgray;
     margin: 4px 0;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     font-size: 10px;
     font-weight: lighter;
 }
@@ -806,7 +806,7 @@ div.left.button.back:active { opacity: 0.5; }
 #forgot-password {
     text-align: center;
     color: #C0322F;
-    font-size: 16px; 
+    font-size: 16px;
     text-decoration: none;
 }
 #create-account {
@@ -822,7 +822,7 @@ div.left.button.back:active { opacity: 0.5; }
     bottom: 10px;
     right: 0;
     left: 0;
-    margin: 0 auto; 
+    margin: 0 auto;
     font-size: 15px;
     text-align: left;
     width: 94%;
@@ -956,12 +956,12 @@ div.left.button.back:active { opacity: 0.5; }
     display: inline-block;
     position: relative;
     height: 143px;
-    width: 102px; 
+    width: 102px;
     top: 0;
 }
 .concierge-info {
     background-repeat: no-repeat;
-    background-size: auto 100%;  
+    background-size: auto 100%;
     display: inline-block;
     position: absolute;
     font-family: arial;
@@ -971,21 +971,21 @@ div.left.button.back:active { opacity: 0.5; }
     background-color: rgba(0, 0, 0, 0.3);
 }
 .concierge-info h6 {
-    font-size: 12px; 
+    font-size: 12px;
 }
 #category-container .concierge-info h1 {
     color: white;
     font-weight: bold;
-    line-height: 14px; 
+    line-height: 14px;
 }
 #category-container .concierge-info h1 i {
     font-style: italic;
 }
 #category-container .concierge-info h1 span {
-    margin-top: 5px; 
+    margin-top: 5px;
     font-weight: normal;
     display: inline-block;
-    font-size: 12px; 
+    font-size: 12px;
 }
 .concierge-info h2, .concierge-button {
     width: 84px;
@@ -1006,13 +1006,13 @@ div.left.button.back:active { opacity: 0.5; }
     font-weight: bold;
 }
 .empty-concierge h6 {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 #category-container div h1.empty-status {
     padding-top: 40px;
 }
-#side-swipe .contain, 
-#side-swipe #total-queue.contain, 
+#side-swipe .contain,
+#side-swipe #total-queue.contain,
 .empty-concierge { background-image: url(../images/discovery/bgfull.png); }
 
 #side-swipe #total-queue.contain .banner-content {
@@ -1213,7 +1213,7 @@ input.slider-search-form {
     line-height: 460%;
     color: white;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     right: 0;
 }
 
@@ -1344,14 +1344,14 @@ div#fancy-button:after {
 #welcome-categories {
     overflow: hidden;
     margin: 0 10px;
-    height: 517px; 
+    height: 517px;
 }
 #welcome {
     background-color: rgb(223, 223, 223);
 }
 #welcome div img,
 #feed-container div img,
-#up-next-wrapper div img, 
+#up-next-wrapper div img,
 #category-container div img,
 #recommended-categories .category img { width: 100%; }
 #category-container div.title img {
@@ -1381,7 +1381,7 @@ div#fancy-button:after {
     background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 0;
 }
-#welcome div .title, 
+#welcome div .title,
 #recommended-list div .title,
 #up-next-wrapper div .title,
 #category-container div .title,
@@ -1954,8 +1954,8 @@ div.recommendation.list-item.userChoice .title {
     width: 40px;
     float: left;
 }
-.list-item img { 
-    width: 100%; 
+.list-item img {
+    width: 100%;
     height: 100%;
 }
 .list-item .compatibility.fl {
@@ -2000,7 +2000,7 @@ div.recommendation.list-item.userChoice .title {
 
 #recommendations-feed { position: relative; }
 #recommendations-feed #settings-mask {
-    top: 60px; 
+    top: 60px;
     display: none;
 }
 #recommendations-feed #settings-mask.show{
@@ -2017,14 +2017,14 @@ div.recommendation.list-item.userChoice .title {
     height: 100px;
     border-radius: 4px;
     display: none;
-    z-index: 3; 
+    z-index: 3;
 }
 #trailer-loader:before{
-    content: "Loading...";  
+    content: "Loading...";
     color: white;
     line-height: 80px;
     margin: 0 15px;
-    
+
 }
 #recommendations-feed #trailer-mask {
     position: absolute;
@@ -2054,12 +2054,12 @@ div.recommendation.list-item.userChoice .title {
 #recommendations-feed #feed-container {
     height: 472px;
     padding: 10px 10px 0 10px;
-    margin-top: 45px; 
+    margin-top: 45px;
 }
 #recommendations-feed .player {
     position: absolute;
     width: 85%;
-    margin: 23px 3px; 
+    margin: 23px 3px;
     visibility: hidden;
 }
 .feed-footer .active { color: #C0322F; }
@@ -2075,7 +2075,7 @@ div.recommendation.list-item.userChoice .title {
     width: 94%;
     transition: height 250ms ease-in-out;
     border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px; 
+    border-bottom-left-radius: 3px;
 }
 .check.mark:after{
     width: 26px;
@@ -2147,10 +2147,10 @@ div.recommendation.list-item.userChoice .title {
     font-weight: normal;
 }
 .recommendation-action .view-all-seen { margin-left: 5px; }
-.feed-footer.recommendations-footer span { 
+.feed-footer.recommendations-footer span {
     width: 33%;
     font-weight: bold;
-    font-size: 15px; 
+    font-size: 15px;
 }
 #recommendations-feed .poster {
     position: relative;
@@ -2214,7 +2214,7 @@ div.recommendation.list-item.userChoice .title {
     background-repeat: no-repeat;
     background-position: 10px;
     background-color: white;
-    padding: 0 15px 0 32px; 
+    padding: 0 15px 0 32px;
     background-size: 12px;
     position: relative;
     line-height: 40px;
@@ -2284,8 +2284,8 @@ div.recommendation.list-item.userChoice .title {
     position: relative;
     text-align: center;
     margin: 150px auto;
-    font-weight: bold; 
-    font-size: 20px; 
+    font-weight: bold;
+    font-size: 20px;
     display: block;
     color: white;
     height: 40px;
@@ -2371,7 +2371,7 @@ div.check-list-wrapper div.check-list-item {
     background-repeat: no-repeat;
     display: inline-block;
     background-size: 12px;
-    padding-left: 20px; 
+    padding-left: 20px;
     line-height: 15px;
     font-size: 14px;
 }
@@ -2467,7 +2467,7 @@ div.check-list-wrapper div.check-list-item {
     background-color: #C0322F;
     color: white;
     text-align: right;
-    padding: 5px; 
+    padding: 5px;
 }
 .summary-movie-title {
     font-weight: bold;
@@ -2499,9 +2499,9 @@ div.check-list-wrapper div.check-list-item {
 #list-items .poster {
     position: relative;
 }
-#list-items .feed-item .content { 
-    padding: 0; 
-    margin: 10px 0 5px; 
+#list-items .feed-item .content {
+    padding: 0;
+    margin: 10px 0 5px;
     border: none;
 }
 .music-section #list-items .poster .movie-poster {
@@ -2515,12 +2515,12 @@ div.check-list-wrapper div.check-list-item {
 #content-container .feed-item-wrapper { margin: 0 0 12px 0; }
 #content-container .feed-item-wrapper .feed-item .content {
     margin: 0;
-    padding: 0; 
+    padding: 0;
     border: none;
 }
 #category-container .feed-item .poster .movie-poster,
 #list-items .poster .movie-poster {
-    height: 150px; 
+    height: 150px;
     width: 100px;
 }
 
@@ -2564,7 +2564,7 @@ div.check-list-wrapper div.check-list-item {
     right: 0;
     width: 9px;
     height: 23px;
-    margin-top: 3px; 
+    margin-top: 3px;
     background-image: url(../images/discovery/chevron.png);
     background-size: 9px 13px;
     background-repeat: no-repeat;
@@ -2583,7 +2583,7 @@ div.check-list-wrapper div.check-list-item {
     box-shadow: 0 2px 2px rgb(188, 188, 188);
     margin-bottom: 2px;
 }
-.list-summary #image { 
+.list-summary #image {
     position: absolute;
     top: 0;
     right: 0;
@@ -2599,7 +2599,7 @@ div.check-list-wrapper div.check-list-item {
     background-color: rgba(0, 0, 0, 0.45);
     text-align: center;
     font-size: 20px;
-    height: 150px; 
+    height: 150px;
     width: 308px;
     padding: 6px;
 }
@@ -2664,7 +2664,7 @@ div.check-list-wrapper div.check-list-item {
     color: whitesmoke;
     line-height: 23px;
     margin-left: 5px;
-    width: 175px;   
+    width: 175px;
     bottom: 12px;
 }
 #content-container .feed-buttons span {
@@ -2730,7 +2730,7 @@ div.check-list-wrapper div.check-list-item {
     text-align: center;
     text-transform: capitalize;
 }
-#list-items h2 span { 
+#list-items h2 span {
     background-color: rgb(244, 244, 244);
 }
 #list-items h3 {
@@ -2750,7 +2750,7 @@ div.check-list-wrapper div.check-list-item {
     overflow: hidden;
     border-bottom: 1px solid #DADADA;
     padding: 10px;
-    background-color: white; 
+    background-color: white;
     min-height: 76px;
     padding-bottom: 10px;
 }
@@ -2918,11 +2918,11 @@ div.right.button, div.left.button {
     color: gray;
 }
 #message-context img {
-    height: 75px; 
-    margin-right: 10px; 
+    height: 75px;
+    margin-right: 10px;
 }
 #message-context div.profile-image {
-    margin: 10px 10px 10px 0; 
+    margin: 10px 10px 10px 0;
 }
 #message-context h1 {
     background-size: 20px 20px;
@@ -2962,7 +2962,7 @@ div.right.button, div.left.button {
     width:90px;
 }
 .context-info .i {
-    
+
 }
 .context-info .bold {
     color: black;
@@ -3653,8 +3653,8 @@ h2#see-more-matches {
     width: 11px;
     margin: 0 4px 0 0;
 }
-.lobby-bg { 
-    background-color: rgb(242, 242, 245); 
+.lobby-bg {
+    background-color: rgb(242, 242, 245);
     padding-top: 10px;
 }
 #fake-lobby-scroller {
@@ -3696,7 +3696,7 @@ h2#see-more-matches {
 }
 #movie-info {
     height: auto;
-    min-height: 70px;  
+    min-height: 70px;
 }
 #synopsis-wrapper {
     height: 53px;
@@ -3705,7 +3705,7 @@ h2#see-more-matches {
 }
 #synopsis-wrapper, #movie-info { transition: height 1s; }
 #synopsis {
-    font-size: 11px; 
+    font-size: 11px;
     margin: 0;
     color: darkgray;
     line-height: 17px;
@@ -3732,7 +3732,7 @@ h2#see-more-matches {
 }
 #movie-poster { width: 45px; }
 #title-synopsis-block h3 {
-    font-size: 12px; 
+    font-size: 12px;
     margin-bottom: 7px;
 }
 #title-synopsis-block h3 .title {
@@ -3750,7 +3750,7 @@ h2#see-more-matches {
 }
 #seen-data {
     display: none;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     padding-bottom: 0;
 }
 #seen-avatars .avatar {
@@ -3766,7 +3766,7 @@ h2#see-more-matches {
 #seen-by { color: darkgray; }
 #seen-by-container {
     color: darkgray;
-    padding: 5px; 
+    padding: 5px;
     text-align: right;
     font-size: 13px;
 }
@@ -3997,7 +3997,7 @@ h2#see-more-matches {
 #profile .sub-header .follow.following {
     background-color: rgb(196, 50 ,48);
     color: #EDEDEE;
-} 
+}
 #profile-content .gradiant {
     background: -webkit-linear-gradient(rgba(183, 0, 0, 0.23), rgba(72, 2, 3, 0.65));
     height: 100%;
@@ -4257,7 +4257,7 @@ h2#see-more-matches {
     font-size: 13px;
     padding: 5px;
 }
-.recommended-info .first-name, 
+.recommended-info .first-name,
 .recommended-info .city {
     width: 110px;
 }
@@ -4269,7 +4269,7 @@ h2#see-more-matches {
 }
 .person-info {
     border-bottom: 1px solid lightgray;
-    padding-bottom: 5px; 
+    padding-bottom: 5px;
     position: relative;
 
 }
@@ -4293,7 +4293,7 @@ h2#see-more-matches {
 }
 .incommon-info {
     overflow: hidden;
-    padding-top: 5px; 
+    padding-top: 5px;
 }
 .incommon-info .poster {
     background-size: 100% 150%;
@@ -4382,7 +4382,7 @@ h2#see-more-matches {
     padding: 0 7px;
     text-transform: uppercase;
 }
-.match .match-compatibility { 
+.match .match-compatibility {
     height: 45px;
     width: 55px;
     padding-top: 10px;
@@ -4439,7 +4439,7 @@ h2#see-more-matches {
     max-width: 100%;
     background-color: white;
 }
-#services .commerce, 
+#services .commerce,
 #available-services .commerce {
     float: initial;
     background-size: 28px;
@@ -4476,13 +4476,15 @@ h2#see-more-matches {
     left: 0;
     top: 0;
 }
-#friends #list-row-wrapper { height: 435px; }
+#friends.self #list-row-wrapper { height: 435px; }
+#friends #list-row-wrapper { height: 517px; }
+
 #friends #list-row-wrapper.no-friends { height: 439px; }
 #invite-facebook { background-image: url(../images/lists/fb.jpeg); }
-div#search-for-friends { 
+div#search-for-friends {
     background-image: url(../images/discovery/search.png);
     background-size: 20px;
-    border-bottom-width: 3px; 
+    border-bottom-width: 3px;
 }
 #search-for-friends,
 #invite-facebook {
@@ -4525,7 +4527,7 @@ div#search-for-friends {
     height: 475px;
     overflow: hidden;
 }
-#list-movies { position: relative; }
+#list-movies { float: left; position: relative; }
 #list-movies .list-row, .lists-row {
     border-bottom: 5px solid rgb(241, 241, 241);
     padding: 10px 0 7px 10px;
@@ -4537,10 +4539,33 @@ div#search-for-friends {
 .lists-row{
     position: relative;
     border-width: 1px;
-    padding: 13px; 
-    height: 60px; 
+    padding: 13px;
+    height: 60px;
 }
-
+.line {
+    border-bottom: 1px solid;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 10px 3% 14px;
+    color: #a21600;
+    float: left;
+    height: 7px;
+    width: 94%;
+}
+.list-grid-heading {
+    background-color: rgb(241, 241, 241);
+    text-align: center;
+    margin: 0 auto;
+    max-width: 45%;
+    height: 20px;
+}
+.list-grid-item {
+    background-size: 100% 100%;
+    height: 150px;
+    width: 100px;
+    margin: 3px;
+    float: left;
+}
 #list-movies .list-row-left { left: -22%; }
 .info {
     display: inline-block;
@@ -4561,7 +4586,7 @@ div#search-for-friends {
 .recommended-by p {
     color: #C0322F;
     font-weight: bold;
-    margin-top: 3px; 
+    margin-top: 3px;
 }
 .list-title {
     display: inline-block;
@@ -4576,7 +4601,7 @@ div#search-for-friends {
 .list-image{
     height: 60px;
     position: absolute;
-    right: 13px; 
+    right: 13px;
 }
 #new-list {
     position: fixed;
@@ -4662,7 +4687,7 @@ div#search-for-friends {
     font-size: 12px;
     margin: 0px;
     padding: 3px 10px 3px 16px;
-    border: 1px solid rgb(236, 236, 236); 
+    border: 1px solid rgb(236, 236, 236);
     text-align: right;
     background-repeat: no-repeat;
     background-size: 11px;
@@ -4674,7 +4699,7 @@ div#search-for-friends {
 .list-button.off { color: gray; }
 .seen-button {
     border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px; 
+    border-bottom-right-radius: 3px;
     border-left: none;
     background-image: url(../images/lists/icon_seen.png);
 }
@@ -4726,7 +4751,7 @@ div#search-for-friends {
     width: 280px;
     position: relative;
 }
-.list-item .compatibility, 
+.list-item .compatibility,
 .feed-item .compatibility {
     position: absolute;
     top: 0;
@@ -4745,9 +4770,9 @@ div#search-for-friends {
     text-shadow: none !important;
 }
 .feed-item .like-you {
-    background-color: darkgray; 
+    background-color: darkgray;
     text-transform: uppercase;
-    border-radius: 1px; 
+    border-radius: 1px;
     position: absolute;
     line-height: 10px;
     font-size: 10px;
@@ -4975,8 +5000,8 @@ h6.like-you + .action {
     width: 55px;
     text-align: right;
 }
-.follow-location { 
-    font-size: 12px; 
+.follow-location {
+    font-size: 12px;
     height: 19px;
 }
 
@@ -4995,10 +5020,10 @@ h6.like-you + .action {
     background-color: rgb(225,225,225);
 }
 #notifications-container.open::-webkit-scrollbar { display: none; }
-#notifications-container.open { 
+#notifications-container.open {
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
-    display: block; 
+    display: block;
 }
 #notifications-container .notification {
     overflow: hidden;
@@ -5046,10 +5071,10 @@ h6.like-you + .action {
     height: 471px;
 }
 #nearby-attending .lists-row {
-    height: 50px; 
+    height: 50px;
 }
 #whos-going-heading {
-    padding: 15px; 
+    padding: 15px;
 }
 .send-invite {
     background-color: #C0322F;
@@ -5078,8 +5103,8 @@ h6.like-you + .action {
     color: darkgray;
     font-size: 13px;
 }
-div.gender-settings { 
-    text-align: center; 
+div.gender-settings {
+    text-align: center;
     font-size: 17px;
     height: 185px;
     padding-left: 0 !important;
@@ -5243,7 +5268,7 @@ h4.settings-button:after{
 #gender-options button.active:after {
     content: "\2713";
     position: absolute;
-    right: 20px; 
+    right: 20px;
 }
 #gender {text-transform: capitalize;}
 
@@ -5265,7 +5290,7 @@ h4.settings-button:after{
 
 #filter-options div {
     width: 100%;
-    left: 0; 
+    left: 0;
     background-color: rgb(247, 247, 247);
     margin-top: 1px;
     height: 45px;
@@ -5290,7 +5315,7 @@ button#female,
 }
 div#done,
 button#done {
-    margin-top: 7px; 
+    margin-top: 7px;
 }
 .ui-slider {
     position: relative;
@@ -5313,7 +5338,7 @@ button#done {
     border: 1px solid rgb(228, 228, 228);
     border-radius: 1em;
     top: -11px;
-    background-color: white;    
+    background-color: white;
 }
 
 /* Matches */
@@ -5463,7 +5488,7 @@ button#done {
 .onoffswitch {
     position: absolute;
     right: 8px;
-    top: 5px; 
+    top: 5px;
     width: 60px;
     -webkit-user-select:none;
 }
@@ -5471,25 +5496,25 @@ button#done {
     display: none;
 }
 .onoffswitch-label {
-    display: block; 
-    overflow: hidden; 
+    display: block;
+    overflow: hidden;
     border-radius: 5px;
 }
 .onoffswitch-inner {
-    width: 200%; 
+    width: 200%;
     margin-left: -100%;
     -webkit-transition: margin 0.3s ease-in 0s;
 }
-.onoffswitch-inner:before, 
+.onoffswitch-inner:before,
 .onoffswitch-inner:after {
-    float: left; 
-    width: 50%; 
-    height: 27px; 
-    padding: 0; 
+    float: left;
+    width: 50%;
+    height: 27px;
+    padding: 0;
     line-height: 27px;
-    font-size: 16px; 
-    color: white; 
-    font-family: Trebuchet, Arial, sans-serif; 
+    font-size: 16px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
     font-weight: bold;
     box-sizing: border-box;
 }
@@ -5502,21 +5527,21 @@ button#done {
 .onoffswitch-inner:after {
     content: " ";
     padding-right: 9px;
-    background-color: rgb(201, 201, 201); 
+    background-color: rgb(201, 201, 201);
     color: #666666;
     text-align: right;
 }
 .onoffswitch-switch {
-    width: 30px; 
+    width: 30px;
     margin: 0px;
     background: #FFFFFF;
     margin: 2px;
     border-radius: 3px;
-    position: absolute; 
-    top: 0; 
-    bottom: 0; 
+    position: absolute;
+    top: 0;
+    bottom: 0;
     right: 26px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner { margin-left: 0; }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch { right: 0px; }
@@ -5572,12 +5597,12 @@ button#done {
     padding: 10px;
 }
 #search-results p,
-#status-drop p, 
+#status-drop p,
 #menu-drop p {
     margin: 10px 0;
 }
 #search-results .result,
-#status-drop .result, 
+#status-drop .result,
 #menu-drop .result {
     overflow: hidden;
     border-bottom: 1px solid #999;
@@ -5595,7 +5620,7 @@ button#done {
     background-image: url(../images/discovery/no_poster.jpg);
 }
 #search-results .result .info,
-#status-drop .result .info, 
+#status-drop .result .info,
 #menu-drop .result .info {
     margin: 0;
     float: left;
@@ -5612,7 +5637,7 @@ button#done {
     line-height: 15px;
 }
 #search-results .result h2,
-#status-drop .result h2, 
+#status-drop .result h2,
 #menu-drop .result h2 {
     color: #666;
     text-align: left;
@@ -5767,7 +5792,7 @@ button#done {
     text-align: center;
     font-weight: bold;
     padding-top: 10px;
-    font-size: 17px; 
+    font-size: 17px;
 }
 #status-update-search {
     padding: 5px;
@@ -6151,8 +6176,8 @@ div#movie-list-view {
 
 .passion-poster-container {
     border:1px solid rgb(237, 237, 237);
-    padding: 0px 0 0 6px; 
-    position: relative; 
+    padding: 0px 0 0 6px;
+    position: relative;
     height: 150px;
     overflow: hidden;
 }
@@ -6287,7 +6312,7 @@ div#critic-rating.bottom-info { left: 80px;  }
     color: white;
     height: 100%;
     width: 100%;
-    opacity: 1; 
+    opacity: 1;
     top: 0;
 }
 #coach-section.feed #coach-arrow { top: 10px; left: 50px;}
@@ -6298,11 +6323,11 @@ div#critic-rating.bottom-info { left: 80px;  }
     display: block;
 }
 .want-to #coach-arrow {
-    
+
     font-size: 90px;
 }
 #coach-text {
-    margin: 150px 10px 90px; 
+    margin: 150px 10px 90px;
     font-size: .8em;
 }
 #coach-button {
@@ -6317,14 +6342,14 @@ div#critic-rating.bottom-info { left: 80px;  }
     color: white;
 }
 #coach-section.swipe #coach-button {
-    
+
 }
 #coach-section.swipe {
     background-position: center center;
 }
-#coach-button:active{ 
+#coach-button:active{
     background-color: #C0322F;
-    border-color: #C0322F; 
+    border-color: #C0322F;
 }
 
 /* buttons */

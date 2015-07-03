@@ -38,6 +38,14 @@
     top: 120px;
     left: 70px;
 }
+.list-grid-item {
+    height: 198px;
+    width: 132px;
+}
+.line {
+    font-size: 18px;
+    height: 9px;
+}
 #swiper-content .highlight-holder #favorite-highlight { top: 308px; }
 #discovery-complete {
     top: 0px;

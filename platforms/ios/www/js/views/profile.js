@@ -10,7 +10,7 @@ var ProfileModel = Backbone.Model.extend({
         isFriend: false,
         content: null,
         userID: null,
-        self: false, 
+        self: false,
 
     },
 
@@ -24,8 +24,8 @@ var ProfileModel = Backbone.Model.extend({
 
 
         Api.getFabricProfile(this.userID, function (response) {
-            
-            
+
+
             this.set('compatibility', parseInt(response.compatibility));
             this.set('messageCount', parseInt(response.messageCount));
             this.set('isFollowing', response.following);
@@ -55,7 +55,7 @@ var ProfileModel = Backbone.Model.extend({
         var routes = {
             followers:  "userLists?userID=" + userID + "&following=false",
             following:  "userLists?userID=" + userID + "&following=true",
-            friends:    "friends/" +userID
+            friends:    "friends/"+ userID +"/"+ this.get('self')
         };
 
         Backbone.history.navigate(routes[routeType], true);
@@ -121,71 +121,6 @@ var ProfileModel = Backbone.Model.extend({
         var self = this;
 
 
-        // global public events
-        $("#match-message-form").submit(function(e) {
-            e.preventDefault();
-            var msg = $("#message").val();
-            if(msg != "") {
-                Api.sendMessage(self.userID, msg, function(response) {
-                    $("#message").blur();
-                    $("#message").val("");
-                    setTimeout(function() {
-                        $("#match-message").hide();
-                    }, 250);
-                });
-            }
-            return true;
-        });
-
-
-        $("#feed").click(function() {
-            Backbone.history.navigate("userFeed/" + self.userID, true);
-            return false;
-        });
-
-        $("#settings-gear").fastClick(function(){
-            Backbone.history.navigate("settings", true);
-        });
-
-        $("#follow-button").click(function() {
-            if(self.isFollowing) {
-
-                var message = "Are you sure you want to unfollow " + self.toJSON().profileData.uName;
-
-                navigator.notification.confirm(message, function(button){
-                   if(button === 2) {
-                        Api.unFollowUser(self.userID, function(response) {
-                            if(response.success) {
-                                self.isFollowing = false;
-                                $("#follow-button").html("Follow");
-                                $("#follow-button").toggleClass("following");
-                            }
-                        });
-                    }
-                }, null, ["Cancel", "Unfollow"]);
-            } else {
-                Api.followUser(self.userID, function(response) {
-                    if(response.success) {
-                        self.isFollowing = true;
-                        $("#follow-button").html("Following");
-                        $("#follow-button").toggleClass("following");
-                    }
-                });
-            }
-            return false;
-        });
-
-
-        $("#send-greeting").click(function() {
-            if(self.isFriend || parseInt($(this).data("messagecount")) > 0) {
-                Backbone.history.navigate("messages/" + self.userID, true);
-            } else {
-                Backbone.history.navigate("greeting/" + self.userID, true);
-            }
-            return false;
-        });
-
-
         $(".right.button.more").fastClick(function() {
             UI.launchPopUpTwo(APP.load("reportUserPopup"), function() {
                 $(".report-content .button").fastClick(function() {
@@ -235,6 +170,14 @@ var ProfileView = Backbone.View.extend({
 
         this.profileInfo.render();
 
+        this.header.model.set('moreButton', !this.model.get('self'));
+
+        if(!this.model.get('self')) {
+
+            this.model.bindEvents();
+
+        }
+
     },
 
     fillContent: function() {
@@ -250,10 +193,10 @@ var ProfileView = Backbone.View.extend({
 
 
         var data = this.model.toJSON();
-        
+
 
         this.header = new HeaderView({
-            moreButton: (!data.self && this.model.userID !== "252990"),
+            // moreButton: (!data.self && this.model.userID !== "252990"),
             title: "Profile",
             home: false
         });
@@ -267,6 +210,7 @@ var ProfileView = Backbone.View.extend({
         $("#wrapper").html(this.$el);
 
         this.model.getProfileData();
+
         // Keep this to unmask the view
         callback();
 
@@ -285,7 +229,7 @@ var ProfileInfoView = Backbone.View.extend({
 
         this.listenTo(this.model, "change:isFollowing", this.toggleFollowState);
 
-    }, 
+    },
 
     events: {
         "touchstart #follow-info li" : "viewFollowFollowers",
@@ -296,7 +240,7 @@ var ProfileInfoView = Backbone.View.extend({
 
     viewFollowFollowers: function (e) {
 
-        
+
         this.model.viewFollowFollowers(e.currentTarget.id);
 
     },
@@ -330,7 +274,7 @@ var ProfileInfoView = Backbone.View.extend({
     },
 
     render: function(){
-        
+
         var info = APP.load("profileInfo", this.model.toJSON());
 
         this.$el.html(info);
@@ -341,11 +285,11 @@ var ProfileInfoView = Backbone.View.extend({
 });
 
 var ProfileContentView = Backbone.View.extend({
-    
+
     el: "#profile-content",
 
     initialize: function(options) {
-        content = options.content; 
+        content = options.content;
 
         this.collection = new ProfileContentCollection(content);
 
@@ -363,7 +307,7 @@ var ProfileContentView = Backbone.View.extend({
         var block = new ContentBlock({ model : contentBlock });
 
 
-        this.$el.append( block.render().el ); 
+        this.$el.append( block.render().el );
 
     },
 
@@ -379,7 +323,7 @@ var ProfileContentModel = Backbone.Model.extend({
 
     viewList: function() {
 
-        Backbone.history.navigate("lists/"+ this.get('ListID') +"/"+ this.get('section_id'), true);
+        Backbone.history.navigate("lists/"+ this.get('listID') +"/"+ this.get('section_id'), true);
 
     }
 
@@ -388,10 +332,6 @@ var ProfileContentModel = Backbone.Model.extend({
 var ProfileContentCollection = Backbone.Collection.extend({
 
     model: ProfileContentModel,
-
-    defaults: {
-        hello: 'test'
-    },
 
     initialize: function(options) {
 
@@ -429,4 +369,3 @@ var ContentBlock = Backbone.View.extend({
 
     }
 });
-

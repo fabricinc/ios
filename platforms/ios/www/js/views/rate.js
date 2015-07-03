@@ -339,6 +339,7 @@ var RateView = Backbone.View.extend({
                         if(!APP.working && !self.model.pflf) {
                             APP.working = true;
                             $(".load-more-spinner").css("visibility", "visible");
+                            UI.scroller.refresh();
                             Api.getHomeFeed(self.model.startF, Api.appSettings.feedLimit, APP.sectionID, function(response) {
                                 var moreFeed = APP.load("activityFeed", { feed: response.data.activityFeed.data });
                                 $(".load-more-spinner").hide();
@@ -362,7 +363,7 @@ var RateView = Backbone.View.extend({
                             $(".load-more-spinner").css("visibility", "visible");
                             Api.getHomeCategories(1, 100, self.model.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
                                 var categoryFeed = APP.load("categoryFeed", { items: response.data.categories });
-                                $(".load-more-spinner").hide();
+                                
                                 $("#content-container .content-scroller").append(categoryFeed);
 
                                 if(response.data.categories.length < Api.appSettings.discoveryLimit) {
@@ -377,8 +378,12 @@ var RateView = Backbone.View.extend({
                         }
 
                     } else {
+
+                        $(".load-more-spinner").css("visibility", "visible");
                         self.wantToList.addMore();
                         UI.scroller.refresh();
+                        $(".load-more-spinner").hide();
+
                     }
 
 

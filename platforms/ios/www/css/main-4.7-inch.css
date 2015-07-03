@@ -25,6 +25,13 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.line {
+    font-size: 15px; 
+}
+.list-grid-item {
+    height: 179px;
+    width: 119px;
+}
 #welcome div .title { 
     padding-bottom: 5px;  
     line-height: 19px;

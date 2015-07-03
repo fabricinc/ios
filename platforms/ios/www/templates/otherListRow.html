@@ -1,0 +1,23 @@
+<div id="list-row-wrapper">
+	<div style="float: left; width: 100%;">
+		<% if(itemsInCommon.length > 0){ %>
+			<div class="line">
+				<h1 class="list-grid-heading"><%= itemsInCommon.length %> in common</h1>
+			</div>
+			<% _.each(itemsInCommon, function(item){ %>
+				<img class="list-grid-item" src="<%= Api.appSettings.cdn %>/posters/<%= item.moviePublishedID %>_poster.jpg" />
+			<% });
+		} %>
+
+		<% if(items.length > 0) {
+			var heading = items[0].typeID === "3" ? "want-tos" : "favorites";
+			%>
+			<div class="line">
+				<h1 class="list-grid-heading">More <%= heading %></h1>
+			</div>
+			<% _.each(items, function(item){ %>
+				<img class="list-grid-item" src="<%= Api.appSettings.cdn %>/posters/<%= item.moviePublishedID %>_poster.jpg" />
+			<% }); %>
+		<% } %>
+	</div>
+</div>

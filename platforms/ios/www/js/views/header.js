@@ -3,6 +3,7 @@
             home: false,
 			player: false,
             slider: false,
+            self: false,
             title: "",
             leftButton: {
                 label: "Back",
@@ -26,8 +27,12 @@
         initialize: function(options, callback) { // Pass options value to the Model
             this.model = new HeaderModel(options);
 
+            this.listenTo(this.model, 'change:moreButton', this.updateMore);
             this.render(options, callback);
             return this;
+        },
+        events: {
+
         },
 
         render: function(options, callback) {
@@ -47,6 +52,12 @@
             callback();
 
             return this;
+        },
+
+        updateMore: function() {
+            // console.log('updateMore');
+            this.render();
+            APP.router.bindHeaderEvents('profile');
         },
 
         bindEvents: function() {
