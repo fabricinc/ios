@@ -185,7 +185,7 @@ var MovieListView = Backbone.View.extend({
                     });
 
 					this.inCommon = new ListSection({ id: 'in-common', collection: inCommon, heading: ' in common' });
-					this.notInCommon = new ListSection({ id: 'not-in-common', collection: notInCommon, heading: ' more '+ listName });
+					this.notInCommon = new ListSection({ id: 'not-in-common', collection: notInCommon, heading: ' more '+ listName +'s' });
 
 
 					this.$('#list-movies')
