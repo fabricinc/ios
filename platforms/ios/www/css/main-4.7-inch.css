@@ -18,28 +18,28 @@
 #category-container { height: 545px; }
 .recommended-filter #category-container{ height: 510px; }
 #welcome div .title,
-#category-container div .title { 
-    width: 340px; 
+#category-container div .title {
+    width: 340px;
     font-size: 19px;
     line-height: 22px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 .line {
-    font-size: 15px; 
+    font-size: 15px;
 }
 .list-grid-item {
     height: 179px;
     width: 119px;
 }
-#welcome div .title { 
-    padding-bottom: 5px;  
+#welcome div .title {
+    padding-bottom: 5px;
     line-height: 19px;
-    padding-top: 5px; 
+    padding-top: 5px;
     font-size: 15px;
 }
 #welcome-categories { height: 607px; }
-#welcome .catItem { max-height: 140px; } 
+#welcome .catItem { max-height: 140px; }
 #category-container .catItem { max-height: 200px; }
 #category-container #side-swipe { width: 355px; }
 .feed-item { width: 335px; }
@@ -78,7 +78,7 @@ input.slider-search-form {
 }
 
 .context-info {
-    width: 235px; 
+    width: 235px;
 }
 /* discovery */
 #discovery-background {
@@ -113,6 +113,7 @@ input.slider-search-form {
 #user-matches,
 #list-row-wrapper,
 #list-row-wrapper.no-edit,
+#friends #list-row-wrapper,
 #list-row-wrapper.friend-list,
 .follow-list #list-row-wrapper,
 .movie-seen-list #list-row-wrapper,
@@ -161,7 +162,8 @@ input.slider-search-form {
 #profile .poster:nth-child(3) { left: 166px; z-index: 2; }
 #profile .poster:nth-child(4) { left: 249px; z-index: 1; }
 .lists-nav { background-position: 380px; }
-#friends #list-row-wrapper { height: 517px; }
+#friends.self #list-row-wrapper { height: 517px; }
+
 header nav h1 { width: 270px; height: 65px; }
 div#mask .wheel {
     top: 300px;
@@ -176,7 +178,7 @@ div#mask .wheel {
 }
 .follow-name { width: 220px; }
 .swipe-icon {
-    height: 33px; 
+    height: 33px;
     width: 37px;
 }
 .swipe-icon span { font-size: 14px; top: 33px; }
@@ -202,12 +204,12 @@ div#mask .wheel {
     width: 172px;
 }
 #profile-content .content-info {
-    font-size: 15px; 
+    font-size: 15px;
 }
-#profile #action-buttons .button.follow, 
-#profile #action-buttons .button.greeting {  
-    background-position-x: 20px; 
-    line-height: 37px; 
+#profile #action-buttons .button.follow,
+#profile #action-buttons .button.greeting {
+    background-position-x: 20px;
+    line-height: 37px;
     height: 37px;
     width: 170px;
 }
@@ -246,8 +248,8 @@ div#mask .wheel {
 .bottom-info {
     font-size: 17px;
 }
-.bottom-info span { 
-    background-size: 100% 100%; 
+.bottom-info span {
+    background-size: 100% 100%;
     background-position: 0;
     height: 16px;
     width: 16px;
@@ -260,19 +262,19 @@ div#mask .wheel {
     height: 105px;
 }
 #list-items .item .movie-info h1 {
-    font-size: 18px; 
+    font-size: 18px;
     width: 75%;
 }
-.movie-info .buttons div { 
+.movie-info .buttons div {
     background-size: 15px;
     line-height: 30px;
     font-size: 13px;
     height: 30px;
-    width: 125px; 
+    width: 125px;
 }
 #list-items div.item-icons { margin-bottom: 10px; font-size: 20px; }
 #list-items div.item-icons div.recs {
-    background-size: 15px 15px; 
+    background-size: 15px 15px;
 }
 #list-items .item .movie-info .watch-icon { background-position-y: 8px; }
 #list-items .item .movie-info .seen-icon { background-position-y: 8px; }
@@ -285,7 +287,7 @@ div#mask .wheel {
 .feed-item .avatar.av-like-you {
     margin-bottom: 20px;
 }
-.feed-item .action { 
+.feed-item .action {
     line-height: 22px;
     font-size: 17px;
     min-height: 50px;
@@ -340,7 +342,7 @@ h6.like-you + .action {
 #current-icon.all, #dashboard header nav h1.open span {
     background-size: 20px 46px;
     height: 100%;
-    top: 0px; 
+    top: 0px;
 }
 #coach-section h1 span,
 #dashboard header nav h1 span {
@@ -365,10 +367,10 @@ header nav #tap-menu { width: 55px; }
 #synopsis {
 
 }
-.concierge-info h2, .concierge-button { 
-    margin: 20px auto; 
-    font-size: 16px; 
-    width: 100px; 
+.concierge-info h2, .concierge-button {
+    margin: 20px auto;
+    font-size: 16px;
+    width: 100px;
 }
 #menu-search-form { width: 87%; }
 #menu-search-form input { width: 100%; height: 18px; }
@@ -379,10 +381,10 @@ header nav #tap-menu { width: 55px; }
 #up-next-wrapper div .title { width: 330px; }
 #dashboard header nav h1.notify { line-height: 65px; }
 #more { font-size: 13px; }
-#seen-avatars .avatar { 
+#seen-avatars .avatar {
     border-radius: 30px;
-    margin-left: 23px; 
-    height: 60px; 
+    margin-left: 23px;
+    height: 60px;
     width: 60px;
 }
 .commerce h2 { font-size: 18px; }
@@ -390,10 +392,10 @@ header nav #tap-menu { width: 55px; }
 
 #statusUpdates .text-box textarea { width: 260px; height: 120px; font-size: 18px; margin-top: 12px; }
 .share-icons { height: 55px; }
-#category-container #status-drop { 
+#category-container #status-drop {
     max-height: 454px;
     margin-left: -1px;
-    width: 100%; 
+    width: 100%;
     top: 185px;
     right: 4px;
 }
@@ -403,27 +405,27 @@ header nav #tap-menu { width: 55px; }
 }
 #status-drop { max-height: 486px; }
 #search-results .result,
-#status-drop .result, 
+#status-drop .result,
 #menu-drop .result {
     height: 75px;
 }
 #search-results .result .poster,
-#status-drop .result .poster, 
+#status-drop .result .poster,
 #menu-drop .result .poster {
-    background-size: 100% 100%; 
-    height: 75px; 
+    background-size: 100% 100%;
+    height: 75px;
     width: 50px;
 }
 #search-results .result h1,
-#status-drop .result h1, 
+#status-drop .result h1,
 #menu-drop .result h1{
     padding-left: 10px;
     line-height: 18px;
-    padding-top: 2px; 
+    padding-top: 2px;
     font-size: 18px;
 }
 #search-results .result h2,
-#status-drop .result h2, 
+#status-drop .result h2,
 #menu-drop .result h2 {
     padding-left: 10px;
 }
@@ -482,7 +484,7 @@ header nav #notifications-menu {
 header nav #shopping-cart,
 
 
-#done-button, #more-button, #done-inter-button, #rec-filter-button { 
+#done-button, #more-button, #done-inter-button, #rec-filter-button {
     font-size: 18px !important;
     top: 24px;
 }
@@ -494,7 +496,7 @@ header nav #shopping-cart,
 .check-list-wrapper { height: 125px; line-height: 125px; }
 div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; }
 #category-container div img.check-list-poster { width: 78px; }
-.check-list-check { 
+.check-list-check {
     background-image: url(../images/6p/discovery/lightgrey-check.png); border: none;
     background-size: 100% 100%;
     background-position: 0;
@@ -533,11 +535,11 @@ div.check-list-wrapper div.check-list-item { line-height: 115px; height: 115px; 
     background-position: 8px;
     background-size: 30px;
     line-height: 45px;
-    font-size: 17px; 
+    font-size: 17px;
 }
 div#search-for-friends { background-size: 24px; }
 #search-for-friends input, #search-for-friends input::-webkit-input-placeholder {
-    font-size: 17px; 
+    font-size: 17px;
 }
 .lists-row .profile-picture {
     border-radius: 25px;
@@ -552,9 +554,9 @@ div#search-for-friends { background-size: 24px; }
 .follow-compatibility { width: 33px; font-size: 10px; }
 .percent-match { margin-top: 34px; }
 .greeting .credits,
-#user-matches h1.credits { 
-    background-position: 15px 2px; 
-    background-size: 23px 20px; 
+#user-matches h1.credits {
+    background-position: 15px 2px;
+    background-size: 23px 20px;
 }
 #use h1 { font-size: 24px; }
 .greeting .credits { background-position: 110px 9px; }
@@ -570,7 +572,7 @@ div#search-for-friends { background-size: 24px; }
     width: 140px;
 }
 .match .match-compatibility {
-    padding-top: 13px; 
+    padding-top: 13px;
     font-size: 14px;
     height: 50px;
     width: 60px;
@@ -588,8 +590,8 @@ div#search-for-friends { background-size: 24px; }
 
 }
 .greeting .content .box .info {
-    font-size: 18px; 
-    width: 220px; 
+    font-size: 18px;
+    width: 220px;
 }
 #messages-slider {
     overflow: hidden;
@@ -602,13 +604,13 @@ div#search-for-friends { background-size: 24px; }
     width: 296px;
 }
 .greeting .content h1 {
-    font-size: 17px; 
+    font-size: 17px;
 }
 
 .settings-button { line-height: 50px; font-size: 15px; }
 #logout {
     font-size: 19px;
-    height: 45px; 
+    height: 45px;
 }
 #update {height: 45px; }
 /* font fixes */

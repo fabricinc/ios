@@ -36,13 +36,17 @@
     }
     /* MUSIC */
 
-    
+
     /* END MUSIC */
     #messages-slider,
     #list-row-wrapper,
     #list-items-container {
         height: 519px;
         overflow: hidden;
+    }
+    #list-row-wrapper {
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
     }
     #messages-slider.like { height: 517px; }
     #messages-slider.comment { height: 468px; }

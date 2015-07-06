@@ -144,10 +144,11 @@ var MovieListView = Backbone.View.extend({
 			self.model.getListData(function(list) {
                 var otherTitle = null;
 
+				var sectionID = list[0] && list[0].section_id ? list[0].section_id : list[0].sectionID;
+				var listName = list[0].typeID === '2' ? 'Favorite' : 'Want-to';
 				var sectionType = ['all', 'movies', 'TV', 'travel', 'music'];
-				var listName = list[0].typeID === '3' ? 'Want-to' : 'Favorite';
 
-				otherTitle = listName +" "+ sectionType[parseInt(list[0].section_id)];
+				otherTitle = listName +" "+ sectionType[parseInt(sectionID)];
 
 				var html = APP.load("listRow", { items: list, ownQueue: self.ownQueue });
 
@@ -429,7 +430,7 @@ var MovieListView = Backbone.View.extend({
             Backbone.history.navigate("fabricPlayer/" + self.model.listID, true);
         });
 
-        UI.initScroller($("#list-row-wrapper")[0]);
+        // UI.initScroller($("#list-row-wrapper")[0]);
         UI.bindMovieRowEvents();
 
 
@@ -478,11 +479,10 @@ var ListSection = Backbone.View.extend({
 	// el: '#list-movies',
 
 	initialize: function (options) {
-		console.log( this );
+
 		this.collection = new List(options.collection);
 		this.heading = options.heading || null;
 
-		console.log( this );
 
 	},
 
