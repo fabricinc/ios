@@ -5852,6 +5852,10 @@ div#movie-list-view {
 #movie-list-view {
     background-color: rgb(241, 241, 241);
 }
+#movie-list-view #list-row-wrapper {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
 
 .report-content {
     width: 100%;
