@@ -24,7 +24,7 @@
                 </form>
                 <div id="close-search-drop"></div>
             </div> -->
-            <% if(items.length > 0 && items[0].movieID && items[0].section_id === "1") { %>
+            <% if(items.length > 0 && items[0].movieID && (items[0].section_id === "1" || items[0].sectionID === "1")) { %>
                 <div id="fabric-player-button">Play all trailers</div>
             <% } %>
         <% } %>

@@ -1,6 +1,4 @@
-var List = Backbone.Collection.extend({
 
-});
 
 var MovieListModel = Backbone.Model.extend({
 		start: 0,
@@ -157,7 +155,7 @@ var MovieListView = Backbone.View.extend({
 	            if (!self.header) {
                     self.header = new HeaderView({
                         title: otherTitle || "Fabric",
-                        filterButton: self.ownQueue ? true : false
+                        // filterButton: self.ownQueue ? true : false
                     });
                 }
 
@@ -475,6 +473,7 @@ var MovieListView = Backbone.View.extend({
 	}
 });
 
+
 var ListSection = Backbone.View.extend({
 	// el: '#list-movies',
 
@@ -530,9 +529,23 @@ var ListHeadingView = Backbone.View.extend({
 	},
 });
 
+var ListItemModel = Backbone.Model.extend({
+	sync: function () { return false; },
+	lobby: function () {
+
+		Backbone.history.navigate("movieLobby/" + this.get('movieID'), true);
+
+	},
+});
+
 var ListItem = Backbone.View.extend({
 	tagName: 'img',
 	className: 'list-grid-item',
+
+	events: {
+		'click' : 'lobby',
+	},
+
 
 	render: function () {
 
@@ -542,4 +555,15 @@ var ListItem = Backbone.View.extend({
 
 		return this;
 	},
+
+	lobby: function () {
+
+		this.model.lobby();
+
+	},
+});
+
+var List = Backbone.Collection.extend({
+	model: ListItemModel
+
 });
