@@ -4527,6 +4527,9 @@ div#search-for-friends {
     height: 475px;
     overflow: hidden;
 }
+#list-div {
+    width: 100%;
+}
 #list-movies { float: left; position: relative; }
 #list-movies .list-row, .lists-row {
     border-bottom: 5px solid rgb(241, 241, 241);

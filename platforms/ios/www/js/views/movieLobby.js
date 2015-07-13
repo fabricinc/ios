@@ -31,14 +31,14 @@ var MovieLobbyModel = Backbone.Model.extend({
 
             self.movie = response.movie;
             Api.getShoppingLinks(self.movie.moviePublishedID, function(response) {
-                console.log(response);
+                
                 if(response.success){
                     self.services = response.data;
-                } 
-                
+                }
+
                 callback(self.movie, self.services);
-                Api.getMovieCommonUsers(self.movie.moviePublishedID, function(response) { 
-                    self.loadSeenUsers(response); 
+                Api.getMovieCommonUsers(self.movie.moviePublishedID, function(response) {
+                    self.loadSeenUsers(response);
                 });
             });
 	    });
@@ -48,12 +48,12 @@ var MovieLobbyModel = Backbone.Model.extend({
     popupHide: function() {
         $("#popup-options").removeClass('show');
         $("#settings-mask").removeClass('show');
-        setTimeout(function(){ 
+        setTimeout(function(){
             $("#settings-mask").remove();
             $("#popup-options").hide();
         }, 250);
     },
-    
+
     bindMovieLobbyEvents: function(movie) {
         var self = this;
         var player = Player.set(self);
@@ -76,8 +76,8 @@ var MovieLobbyModel = Backbone.Model.extend({
 					    player.pause();
 					    $("#player").removeAttr("webkit-playsinline");
                         player.pressPlay(self.movie, false, self);
-                    });      
-                    
+                    });
+
                     $("#play, #player").fastClick(function() {
                         //$("#poster-layover").css("display", "none");
 					    $("#player").attr("webkit-playsinline", "webkit-playsinline");
@@ -91,7 +91,7 @@ var MovieLobbyModel = Backbone.Model.extend({
 
                     if($("#synopsis").height() + movieTitleStyleHeight <= synopsisWrapperStyleHeight){ $("#more").hide(); }
                     $("#more").click(function() {
-                        
+
                         var wrapHeight  = $("#synopsis-wrapper").height();
                             synHeight   = $("#synopsis").height();
                             height      = (wrapHeight == synopsisWrapperStyleHeight) ? synHeight + moreButtonStyleHeight : synopsisWrapperStyleHeight ,
@@ -101,7 +101,7 @@ var MovieLobbyModel = Backbone.Model.extend({
                         //$("#movie-info").height(height + moreButtonStyleHeight + 30);
                         $(this).html(more);
 
-                        setTimeout(function(){          // Wait for transition to be done before refreshing 
+                        setTimeout(function(){          // Wait for transition to be done before refreshing
                             UI.scroller.refresh();      // refesh scroller to compute height
                         }, 1000);
 
@@ -136,16 +136,16 @@ var MovieLobbyModel = Backbone.Model.extend({
                                 link: "https://itunes.apple.com/us/app/trailerpop/id587645214",
                                 picture: Api.appSettings.cdn + movie.posterPath.replace("/files", ""),
                             }
-                            
+
                             FB.ui(options, function(response) {});
                         } else if(action === "twitter-share"){
 
-                            User.tweet({ 
-                                title: movie.title, 
-                                publishedid: movie.moviePublishedID, 
+                            User.tweet({
+                                title: movie.title,
+                                publishedid: movie.moviePublishedID,
                                 poster: ""
-                            }, 
-                            "shareMovie", 
+                            },
+                            "shareMovie",
                             function() {});
 
                         }
@@ -169,7 +169,7 @@ var MovieLobbyModel = Backbone.Model.extend({
 
                         $(this).toggleClass("off");
 
-                        //If queue is active and seen is clicked 
+                        //If queue is active and seen is clicked
                         //remove movie from queue and update DOM
                         if(listID == userSeenListID && set && !isQueued){
                             $(this).siblings(".queue-button").addClass("off");      //only update sibling queue button
@@ -208,7 +208,7 @@ var MovieLobbyModel = Backbone.Model.extend({
             $("#play").hide();
             $("#fullscreen").hide();
         }
-        
+
         $("#movie-discussion").fastClick(function() {
             Backbone.history.navigate("movieDiscussion/" + self.movieID, true);
             return false;
@@ -226,7 +226,7 @@ var MovieLobbyModel = Backbone.Model.extend({
             var users = this.friendData.concat(this.seenData)
                 userCount = users.length;
 
-            
+
             if(userCount > 4) { users = users.splice(0, 4); }
 
             if(userCount > 0){
@@ -294,8 +294,8 @@ var MovieLobbyView = Backbone.View.extend({
                         month = parseInt(releaseD[1]) - 1,
                         rD = new Date(releaseD[0], month, releaseD[2]),
                         today = new Date();
-                    
-                    today.setHours(0,0,0,0); // Remove hours from todays date for later comparison 
+
+                    today.setHours(0,0,0,0); // Remove hours from todays date for later comparison
 
                     movie.releaseDate = today <= rD ? months[rD.getMonth()] +" "+ rD.getDate() +", "+ rD.getFullYear() : movie.year;
                 }

@@ -59,6 +59,8 @@ var DiscoveryModel = Backbone.Model.extend({
 
 		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
 
+            console.log( data );
+            
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
 
@@ -442,7 +444,7 @@ var DiscoveryModel = Backbone.Model.extend({
                     var route = this.welcomeCompleted ? "rate" : "welcome";
 
                     Util.alert("Great Scott! There seems to be a problem. Please select another pack");
-                    
+
 
                     Backbone.history.navigate(route, true);
 
@@ -517,7 +519,7 @@ var DiscoveryModel = Backbone.Model.extend({
             Backbone.history.navigate("movieLobby/" + movieID, true);
         });
 
-        
+
         $("#swiper-mask, #lobby-info").fastClick(function() {
             var movieID = $(self.SwiperContent).attr("data-movieid");
 
@@ -979,8 +981,8 @@ var DiscoveryView = Backbone.View.extend({
             if(self.model.movieList.length > 0) {
                 self.model.loadCategoryListSummary(function(movies, friends, suggestions) {
 
-                    // 
-                    var onboardDone = sMod.welcomeCompleted ? true : false;     
+                    //
+                    var onboardDone = sMod.welcomeCompleted ? true : false;
                     var html = APP.load("discovery", {
                         totalSeen: sMod.totalSeen,
                         totalMovies: sMod.totalMovies,
@@ -1038,7 +1040,7 @@ var DiscoveryView = Backbone.View.extend({
                 // !!!!!!!!!!!! Load List Summary !!!!!!!!!!!!!
 
                 Api.categoryDiscovered(self.model.categoryID);
-                
+
                 self.model.loadCategoryListSummary(function(movies, friends, suggestions) {
                     var sMod = self.model,
                         sortedMovies = sMod.sortMovies(movies);

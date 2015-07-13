@@ -488,7 +488,7 @@ var ListSection = Backbone.View.extend({
 
 	render: function () {
 
-		if(this.heading){
+		if(this.heading && this.collection.length){
 
 			this.heading = new ListHeadingView({ count: this.collection.length, heading: this.heading });
 			this.$el.prepend( this.heading.render().el );
