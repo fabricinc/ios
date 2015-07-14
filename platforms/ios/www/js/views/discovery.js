@@ -41,6 +41,9 @@ var DiscoveryModel = Backbone.Model.extend({
     feedType: null,
     ratio: 0,
     sectionID: null,
+    isAudioList: false,
+    audioList: {},
+    listType: null,
 
     initialize: function(opts) {
         this.categoryID = opts.categoryID || null;
@@ -60,17 +63,29 @@ var DiscoveryModel = Backbone.Model.extend({
 		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
 
             console.log( data );
-            
+
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
 
             self.categoryData = data.data[0];
-
+            self.listType = list[0].sectionID || null;
+            self.isAudioList = (self.listType === "4");
             self.movieList = [];
+
             for (var i in list) {
+
+                if(self.isAudioList) {
+
+                    self.audioList[ list[i].movieID ] = list[i].ad_path ? new Audio(list[i].ad_path) : null;
+
+                }
+
                 if(list[i].movieID) { self.movieList.push(list[i]); }
                 else { self.randData.push(list[i]); }
+
             }
+
+            console.log( self.audioList );
 
 			callback();
 		});
@@ -200,6 +215,7 @@ var DiscoveryModel = Backbone.Model.extend({
         callback = callback || function() {};
         var self = this;
 
+
         //if they are swiping but not queueing, guide them on how to queue movies
         if(self.currentPos === 30 && self.totalQueued == 0) {
             $("#queue-guide").addClass("show").on("transitionend", function() {
@@ -210,35 +226,51 @@ var DiscoveryModel = Backbone.Model.extend({
             });
         }
 
+        console.log( self.currentPos );
         $("#not-seen-highlight").removeClass("fade-in");
         $("#seen-highlight").removeClass("fade-in");
 
         if(self.currentPos < self.movieList.length) {
-            $("#swiper-content").css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos].moviePublishedID + "_poster.jpg)");
-            $("#swiper-content").attr("data-movieid", self.movieList[self.currentPos].movieID);
-            $("#swiper-content").attr("data-publishedid", self.movieList[self.currentPos].moviePublishedID);
-            $("#swiper-content").attr("data-seen", self.movieList[self.currentPos].movieSeen);
+
+
+            $("#swiper-content")
+                .css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos].moviePublishedID + "_poster.jpg)")
+                .attr({
+                    "data-movieid": self.movieList[self.currentPos].movieID,
+                    "data-publishedid": self.movieList[self.currentPos].moviePublishedID,
+                    "data-seen": self.movieList[self.currentPos].movieSeen
+                });
+
         } else {
-            $("#swiper-content").hide();
+            swiperContent.hide();
         }
         if(self.currentPos < self.movieList.length - 1) {
-            $("#swiper-content-two").css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos + 1].moviePublishedID + "_poster.jpg)");
-			$("#swiper-content-two").attr("data-movieid", self.movieList[self.currentPos + 1].movieID);
-            $("#swiper-content-two").attr("data-publishedid", self.movieList[self.currentPos + 1].moviePublishedID);
+
+            $("#swiper-content-two")
+                .css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos + 1].moviePublishedID + "_poster.jpg)")
+			    .attr("data-movieid", self.movieList[self.currentPos + 1].movieID)
+                .attr("data-publishedid", self.movieList[self.currentPos + 1].moviePublishedID);
+
         } else {
             $("#swiper-content-two").hide();
         }
         if(self.currentPos < self.movieList.length - 2) {
-            $("#swiper-content-three").css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos + 2].moviePublishedID + "_poster.jpg)");
-			$("#swiper-content-three").attr("data-movieid", self.movieList[self.currentPos + 2].movieID);
-            $("#swiper-content-three").attr("data-publishedid", self.movieList[self.currentPos + 2].moviePublishedID);
+
+            $("#swiper-content-three")
+                .css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos + 2].moviePublishedID + "_poster.jpg)")
+		        .attr("data-movieid", self.movieList[self.currentPos + 2].movieID)
+                .attr("data-publishedid", self.movieList[self.currentPos + 2].moviePublishedID);
+
         } else {
             $("#swiper-content-three").hide();
         }
 		if(self.currentPos < self.movieList.length - 3) {
-            $("#swiper-content-four").css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos + 3].moviePublishedID + "_poster.jpg)");
-			$("#swiper-content-four").attr("data-movieid", self.movieList[self.currentPos + 3].movieID);
-            $("#swiper-content-four").attr("data-publishedid", self.movieList[self.currentPos + 3].moviePublishedID);
+
+            $("#swiper-content-four")
+                .css("background-image", "url(" + Api.appSettings.cdn + "/posters/" + self.movieList[self.currentPos + 3].moviePublishedID + "_poster.jpg)")
+			    .attr("data-movieid", self.movieList[self.currentPos + 3].movieID)
+                .attr("data-publishedid", self.movieList[self.currentPos + 3].moviePublishedID);
+
         } else {
             $("#swiper-content-four").hide();
         }
@@ -300,6 +332,15 @@ var DiscoveryModel = Backbone.Model.extend({
     },
     loadNextPoster: function(ref) {
         var self = ref;
+
+
+        // HANDLE AUDIO PLAYBACK
+        if(self.listType === "5"){
+            $("#play-control").addClass('pause');
+            self.audioList[self.movieList[self.currentPos].movieID].pause();
+
+        }
+
         self.currentPos++;
         self.checkSH();
         self.updateProgressBar();
@@ -413,6 +454,13 @@ var DiscoveryModel = Backbone.Model.extend({
             }
 
         } else {
+            // HANDLE AUDIO PLAYBACK
+
+            if(self.isAudioList){
+
+                self.audioList[self.movieList[self.currentPos].movieID].play();
+
+            }
             self.loadPoster();
         }
     },
@@ -463,6 +511,21 @@ var DiscoveryModel = Backbone.Model.extend({
         Api.dispatcher(options, function(lists) {
             self.favoriteList = lists[0];
             self.watchList = lists[1];
+        });
+
+        // HANDLE AUDIO PLAYBACK
+        console.log( self.listType );
+        if (self.isAudioList) {
+            self.audioList[self.movieList[self.currentPos].movieID].play();
+        }
+
+
+        $("#tap-play-control").fastClick(function(e) {
+            var track = self.audioList[ self.movieList[self.currentPos].movieID ];
+
+            $("#play-control").toggleClass('pause');
+
+            track.paused ? track.play() : track.pause();
         });
 
         $("#seen").fastClick(function() {
@@ -1083,6 +1146,13 @@ var DiscoveryView = Backbone.View.extend({
         });
     },
     dealloc: function() {
+
+        // HANDLE AUDIO PLAYBACK
+        if (this.model.listType === '5') {
+
+            this.model.audioList[this.model.movieList[this.model.currentPos].movieID].pause();
+
+        }
 
     }
 });

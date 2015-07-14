@@ -6293,6 +6293,27 @@ div#friends-queued.bottom-info span { background-image: url(../images/lists/red_
 div#friends-favorited.bottom-info { left: 155px; }
 div#friends-favorited.bottom-info span { background-image: url(../images/lists/red_favorite.png) }
 div#critic-rating.bottom-info { left: 80px;  }
+#tap-play-control,
+#play-control {
+    text-align: center;
+    position: absolute;
+    line-height: 40px;
+    color: #C0322F;
+    height: 40px;
+    width: 40px;
+    left: -7px;
+    bottom: 0;
+}
+#play-control:after {
+    margin-left: 10px;
+    content: "\25BA";
+    font-size: 23px;
+}
+#play-control.pause:after {
+    content: "\2590 \2590";
+    font-size: 13px;
+    margin-left: 0;
+}
 
 #fabric-player-button {
     color: white;

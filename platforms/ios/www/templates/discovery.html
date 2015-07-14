@@ -1,4 +1,4 @@
-<% 
+<%
     section = parseInt(section);
     var sectionID = 0;
     if(section == 3) { sectionID = 1; }
@@ -10,7 +10,7 @@ var terms = [{
     },{
         "present": "visit",
         "past": "visited"
-        
+
     },{
         "present": "hear",
         "past": "heard"
@@ -32,12 +32,15 @@ var terms = [{
         <div id="seen-highlight"></div>
         <div id="favorite-highlight"></div>
         <div id="queue-highlight"></div>
+        <% if(section === 4){ %>
+            <div id="play-control" class="pause"></div>
+        <% } %>
     </div>
 </div>
 <div id="swiper-content-two" class="div-swiper"></div>
 <div id="swiper-content-three" class="div-swiper"></div>
 <div id="swiper-content-four" class="div-swiper"></div>
-<div id="swiper-mask" class="div-swiper"></div>
+<div id="swiper-mask" class="div-swiper"><div id="tap-play-control"></div></div>
 
 <div id="favorite" class="swipe-icon favorite"><span>Favorite</span></div>
 <div id="queue" class="swipe-icon queue"><span>Want to <%= terms[sectionID].present %></span></div>
