@@ -62,21 +62,24 @@ var DiscoveryModel = Backbone.Model.extend({
 
 		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
 
-            console.log( data );
 
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
 
-            self.categoryData = data.data[0];
-            self.listType = list[0].sectionID || null;
+            self.listType = list.length ? list[0].sectionID : null;
             self.isAudioList = (self.listType === "4");
+            self.categoryData = data.data[0];
             self.movieList = [];
 
-            for (var i in list) {
+            for (var i = 0; i < list.length; i++) {
 
                 if(self.isAudioList) {
 
-                    self.audioList[ list[i].movieID ] = list[i].ad_path ? new Audio(list[i].ad_path) : null;
+                    if(i === 0){
+                        self.playTrack = new Audio(list[i].ad_path);
+                        self.playTrack.play();
+                    }
+                    self.audioList[ list[i].movieID ] = new Audio(list[i].ad_path);
 
                 }
 
@@ -85,7 +88,6 @@ var DiscoveryModel = Backbone.Model.extend({
 
             }
 
-            console.log( self.audioList );
 
 			callback();
 		});
@@ -226,7 +228,7 @@ var DiscoveryModel = Backbone.Model.extend({
             });
         }
 
-        console.log( self.currentPos );
+
         $("#not-seen-highlight").removeClass("fade-in");
         $("#seen-highlight").removeClass("fade-in");
 
@@ -335,13 +337,15 @@ var DiscoveryModel = Backbone.Model.extend({
 
 
         // HANDLE AUDIO PLAYBACK
-        if(self.listType === "5"){
+        if(self.isAudioList){
             $("#play-control").addClass('pause');
-            self.audioList[self.movieList[self.currentPos].movieID].pause();
+            // self.audioList[self.movieList[self.currentPos].movieID].pause();
+            self.playTrack.pause();
 
         }
 
         self.currentPos++;
+        self.playTrack = self.currentPos < self.movieList.length ? self.audioList[self.movieList[self.currentPos].movieID] : null;
         self.checkSH();
         self.updateProgressBar();
 
@@ -429,7 +433,9 @@ var DiscoveryModel = Backbone.Model.extend({
                     self.bindListRecommended();
 
                     Api.getNextCategories(self.categoryID, function(response) {
-                        if(response.success) {
+
+                        console.log( response );
+                        if(response.success && response.data) {
                             var nextCats = APP.load("categoryFeed", { items: response.data }),
                                 upNext = APP.load("upNext"),
                                 upNextCats = $(upNext).find("#up-next-wrapper").append(nextCats);
@@ -458,7 +464,8 @@ var DiscoveryModel = Backbone.Model.extend({
 
             if(self.isAudioList){
 
-                self.audioList[self.movieList[self.currentPos].movieID].play();
+                // self.audioList[self.movieList[self.currentPos].movieID].play();
+                self.playTrack.play();
 
             }
             self.loadPoster();
@@ -514,14 +521,14 @@ var DiscoveryModel = Backbone.Model.extend({
         });
 
         // HANDLE AUDIO PLAYBACK
-        console.log( self.listType );
+        // INITIAL PLAY
         if (self.isAudioList) {
-            self.audioList[self.movieList[self.currentPos].movieID].play();
+            // self.audioList[self.movieList[self.currentPos].movieID].play();
         }
 
 
         $("#tap-play-control").fastClick(function(e) {
-            var track = self.audioList[ self.movieList[self.currentPos].movieID ];
+            var track = self.playTrack;
 
             $("#play-control").toggleClass('pause');
 
@@ -1148,9 +1155,10 @@ var DiscoveryView = Backbone.View.extend({
     dealloc: function() {
 
         // HANDLE AUDIO PLAYBACK
-        if (this.model.listType === '5') {
+        if (this.model.isAudioList && this.model.playTrack) {
 
-            this.model.audioList[this.model.movieList[this.model.currentPos].movieID].pause();
+            // this.model.audioList[this.model.movieList[this.model.currentPos].movieID].pause();
+            this.model.playTrack.pause();
 
         }
 
