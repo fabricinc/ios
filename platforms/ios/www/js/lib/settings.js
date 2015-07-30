@@ -1,5 +1,5 @@
 // Useful settings for testing.
-var TESTING_SETTINGS = false;
+var TESTING_SETTINGS = true;
 var STAGE_API = false,
     LOGGING = false;
 

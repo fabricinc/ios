@@ -72,6 +72,7 @@ Api.error = function(error, options) {
 Api.getJSON = function(scriptName, options, callback) {
     var self = this;
     callback = callback || function() { };
+
     $.ajax({
         url: Api.url + scriptName,
         dataType: 'jsonp',
@@ -1295,6 +1296,13 @@ Api.getRecommendedPeople = function(callback) {
     var options = {
         "action": "getRecommendedPeople"
     }
+    this.fetch(options, callback);
+}
+Api.getDigestItems = function(callback) {
+    callback = callback || function(){};
+    var options = {
+        "action": "digest"
+    };
     this.fetch(options, callback);
 }
 Api.incBalance = function(amount, note, callback) {

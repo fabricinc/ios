@@ -17,8 +17,9 @@ var RateModel = Backbone.Model.extend({
     concierge: null,
     removedList: [],
     defaults: {
+        digestItems: null,
+        people: null,
         Q: null,
-        people: null
     },
 
     initialize: function(options) {
@@ -64,10 +65,16 @@ var RateModel = Backbone.Model.extend({
 
                 // }.bind(self));
 
-                Api.getQ(APP.gameState.watchListID, APP.sectionID, function (response) {
+                // Api.getQ(APP.gameState.watchListID, APP.sectionID, function (response) {
 
-                    this.set("Q", response);
+                //     this.set("Q", response);
 
+                // }.bind(self));
+
+                Api.getDigestItems(function(response){
+                
+                    this.set('digestItems', response);
+                    
                 }.bind(self));
 
 
@@ -120,7 +127,8 @@ var RateView = Backbone.View.extend({
         self.filter = APP.feedFilter;
 
         this.listenTo(this.model, 'change:people', this.people);
-        this.listenTo(this.model, 'change:Q', this.wantTo);
+        this.listenTo(this.model, 'change:digestItems', this.digest);
+        // this.listenTo(this.model, 'change:Q', this.wantTo);
 
         callback();
         return this;
@@ -136,8 +144,18 @@ var RateView = Backbone.View.extend({
         var recommendedPeople = new RecommendedPeopleView( people );
 
     },
+    digest: function(){
+    
+        this.digestView = new DigestSection( this.model.get('digestItems') );
+
+
+        if(this.filter !== "activity-filter") { return; }
+
+        this.digestView.render();
+    
+    },
     wantTo: function () {
-        this.wantToList = new WantToListView(this.model.get("Q"));
+        // this.wantToList = new WantToListView(this.model.get("Q"));
         
         if (this.filter !== "want-to-filter") { return; }
 
@@ -310,10 +328,12 @@ var RateView = Backbone.View.extend({
             
         } else if(filter == "want-to-filter") {
 
-            
+            return;
+
             if(self.wantToList) { 
 
-                self.wantToList.render(); 
+                // self.wantToList.render(); 
+                self.digestView.render();
             
             } else {
                 
@@ -567,7 +587,8 @@ var RateView = Backbone.View.extend({
                     
                    if(self.wantToList) { 
                         
-                        self.wantToList.render(); 
+                        // self.wantToList.render(); 
+                        self.digestView.render();
                     
                     } else {
 
