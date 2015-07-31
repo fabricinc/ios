@@ -149,8 +149,8 @@ var RateView = Backbone.View.extend({
         this.digestView = new DigestSection( this.model.get('digestItems') );
 
 
-        if(this.filter !== "activity-filter") { return; }
-
+        if(this.filter !== "want-to-filter") { return; }
+        console.log('render');
         this.digestView.render();
     
     },
@@ -584,11 +584,12 @@ var RateView = Backbone.View.extend({
                         UI.bindCoachEvents('wantTo');
 
                     }
+
                     
-                   if(self.wantToList) { 
+                   if(self.digestView) { 
                         
-                        // self.wantToList.render(); 
                         self.digestView.render();
+                        // self.wantToList.render(); 
                     
                     } else {
 
