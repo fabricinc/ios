@@ -400,7 +400,7 @@ var RateView = Backbone.View.extend({
                     } else {
 
                         $(".load-more-spinner").css("visibility", "visible");
-                        self.wantToList.addMore();
+                        // self.wantToList.addMore();
                         UI.scroller.refresh();
                         $(".load-more-spinner").hide();
 

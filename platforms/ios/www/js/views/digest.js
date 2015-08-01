@@ -14,7 +14,7 @@ var DigestSection = Backbone.View.extend({
 	el: "#content-container .content-scroller",
 
 	initialize: function(items){
-
+		
 		this.collection = new DigestItems(items); 
 
 	
@@ -25,7 +25,6 @@ var DigestSection = Backbone.View.extend({
 		this.$el.empty();
 	
 		// Create Header
-
 
 		// Create items
 		this.collection.each(this.addOne, this);
@@ -70,7 +69,7 @@ var DigestHeader = Backbone.View.extend({
 
 var DigestItem = Backbone.View.extend({
 
-	className: '.digest-item',
+	className: 'digest-item',
 
 	initialize: function(){
 	
@@ -84,9 +83,12 @@ var DigestItem = Backbone.View.extend({
 		// Create Content
 		var content = new DigestItemContent({ model: this.model });
 
-		this.$el.append( content.render().el );
 
 		// Create Footer
+		var contentFooter = DigestItemFooter({});
+
+		// Put them on the page
+		this.$el.append( content.render().el );
 
 		return this;
 	
@@ -109,7 +111,6 @@ var DigestItemContent = Backbone.View.extend({
 			count: model.count
 		};
 
-		console.log( model );
 
 		// Create Header
 		var contentHeader = new DigestItemHeader({ model: headerModel });
@@ -121,6 +122,16 @@ var DigestItemContent = Backbone.View.extend({
 		this.$el
 			.append( contentHeader.render().el )
 			.append( img.render().el );
+
+		// Create Shopping links if its a clip
+		if(model.column_type === "clip") {
+
+			var purchaseLinks = new PurchaseLinks(digestData.links);
+
+			this.$el.append( purchaseLinks.render().el );
+			
+
+		}
 
 
 		return this;
@@ -137,9 +148,8 @@ var DigestItemHeader = Backbone.View.extend({
 		
 		var titles = this.model;
 
-		
 
-		this.$el.append('<img src="images/discovery/categoryIcons/' + titles.icon + '.png" /><h1>' + titles.typeTitle +'</h1><h2>' + titles.contentTitle + '</h2><p>' + (titles.count  + 1) + '</p>');
+		this.$el.append('<img class="digest-icon" src="images/discovery/categoryIcons/' + titles.icon + '.png" /><h1>' + titles.typeTitle +'</h1><h2>' + titles.contentTitle + '</h2><p>' + (titles.count  + 1) + '.</p>');
 		
 		
 		return this;
@@ -151,10 +161,81 @@ var DigestItemHeader = Backbone.View.extend({
 var DigestImage = Backbone.View.extend({
 	
 	className: 'digest-content-img',
+	tagName: 'img',
+
+	render: function() {
+		this.el.src = this.model.src;
+		// this.$el.html("<img src='" + this.model.src + "' />");
+		
+		return this;
+	},
+
+});
+
+var LinkModel = Backbone.Model.extend({
+
+	defaults: {
+		name: null,
+		link: null,
+	}
+
+});
+
+var Links = Backbone.Collection.extend({
+	model: LinkModel,
+
+
+	validateModels: function() {
+
+		this.remove(this.filter(function(model) {
+
+			return !model.get('link');
+
+		}));
+
+	},
+});
+
+
+
+var PurchaseLinks = Backbone.View.extend({
+	className: 'purchase-links',
+
+	initialize: function(links){
+
+		this.collection = new Links(links);
+		this.collection.validateModels();
+	
+	},
 
 	render: function() {
 
-		this.$el.html("<img src='" + this.model.src + "' />");
+		if(this.collection.length) {
+			this.$el.prepend("<p>Available on:</p>");
+			this.collection.each(this.addOne, this);
+		}
+		
+		return this;
+	},
+
+	addOne: function(link){
+	
+		purchaseLink = new PurchaseLink({ model: link }) ;
+
+		this.$el.append( purchaseLink.render().el );
+	
+	},
+
+});
+
+var PurchaseLink = Backbone.View.extend({
+	tagName: "a",
+	
+	render: function() {
+
+		this.el
+			.className = this.model.get('name')
+			.href = this.model.get('link');
 		
 		return this;
 	},

@@ -5,20 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3575EF05-E366-43A4-80A4-5F4F990DC21D</string>
+	<string>A6506892-2228-470F-9A1A-E4DF31A861C5</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Fabric</string>
+	<string>CordovaLib</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>8E3F36376CEAC99E02473AF2D2DB8E62E485630B</key>
 		<string>pl2.projectlocker.com:Fabric.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>platforms/ios/Fabric.xcodeproj</string>
+	<string>platforms/ios/CordovaLib/CordovaLib.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8E3F36376CEAC99E02473AF2D2DB8E62E485630B</key>
-		<string>../../../..</string>
+		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>pl2.projectlocker.com:Fabric.git</string>
