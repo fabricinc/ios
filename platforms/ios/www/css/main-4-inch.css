@@ -14,10 +14,6 @@
     }
     #category-container { height: 471px; }
     .recommended-filter #category-container { height: 428px; }
-    #category-container div h1 {
-        font-size: 14px;
-        margin: 5px 0;
-    }
     .button-holder {
         bottom: 75px;
         left: 30px;

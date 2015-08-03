@@ -1,6 +1,4 @@
-var DigestModel = Backbone.Model.extend({
-
-});
+var DigestModel = Backbone.Model.extend();
 
 
 var DigestItems = Backbone.Collection.extend({
@@ -85,14 +83,16 @@ var DigestItem = Backbone.View.extend({
 
 
 		// Create Footer
-		var contentFooter = DigestItemFooter({});
+		var footer = new DigestItemFooter({ model: this.model });
 
 		// Put them on the page
-		this.$el.append( content.render().el );
+		this.$el
+			.append( content.render().el )
+			.append( footer.render().el );
 
 		return this;
 	
-	},
+	}
 });
 
 var DigestItemContent = Backbone.View.extend({
@@ -135,6 +135,115 @@ var DigestItemContent = Backbone.View.extend({
 
 
 		return this;
+	},
+
+});
+
+var DigestItemFooter = Backbone.View.extend({
+
+	className: 'content-item-footer',
+
+	render: function() {
+
+		console.log( this.model );
+
+		var footer = this.footerLoader();
+
+		this.$el.append( footer );
+
+		
+		return this;
+	},
+
+	footerLoader: function(){
+	
+		switch (this.model.get('column_type')) {
+			case "pack":
+				return new PackFooter( this.model ).render().el;
+
+			case "people":
+				return "";
+
+			default:
+				return new ClipFooter( this.model ).render().el;
+
+		}
+	
+	},
+
+});
+
+var PackFooter = Backbone.View.extend({
+
+	className: "pack-footer",
+
+	tagName: "h1",
+
+	render: function() {
+
+		this.$el.append("See more packs");
+		
+		return this;
+	},
+
+});
+
+var ClipFooter = Backbone.View.extend({
+
+	className: 'clip-footer',
+
+	events: {
+		'click .favorite': 'interaction',
+		'click .queue': 'interaction',
+		'click .share': 'interaction'
+
+	},
+
+	initialize: function(attributes){
+	
+		this.model = new FooterModel(attributes); 
+	
+	},
+	
+	render: function() {
+
+		this.$el
+			.append( '<div class="favorite"></div>' )
+			.append( '<div class="queue"></div>' )
+			.append( '<div class="share"></div>' );
+
+		return this;
+	},
+
+	interaction: function(element){
+	
+		console.log( element );
+		this.model.handleInteraction(element);
+	
+	},
+
+
+});
+
+var FooterModel = Backbone.Model.extend({
+
+	defaults: {
+
+	},
+	
+	initialize: function(attributes) {
+
+		console.log( attributes );
+		
+	},
+	handleInteraction: function(element){
+		var objectID  = this.get('objectID');
+		console.log( element );
+
+		console.log( objectID );
+
+
+	
 	},
 
 });
