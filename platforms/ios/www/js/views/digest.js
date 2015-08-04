@@ -1,4 +1,41 @@
-var DigestModel = Backbone.Model.extend();
+var DigestModel = Backbone.Model.extend({
+
+	initialize: function(){
+	
+
+		this.set('favorite', !!parseInt(this.get('favorite')));
+		this.set('favoriteID', APP.gameState.favoriteListID);
+		this.set('queue', !!parseInt(this.get('queue')));
+		this.set('done', !!parseInt(this.get('done')));
+		this.set('queueID', APP.gameState.watchListID);
+	
+	},
+
+	handleInteraction: function(element){
+
+ 		var el = element.split(" ")[0],
+ 			listID = parseInt(this.get(el +'ID')),
+ 			setter = this.get(el);
+
+ 		console.log( setter );
+
+		switch(el){
+			case 'favorite':
+			case 'queue': 
+				console.log( 'in' );
+
+				Api.setMovieToFabricList(parseInt(this.get('object_id')), listID, !setter);
+
+				this.set(el, !setter);
+
+				break;
+				
+		}
+
+ 		
+	
+	},
+});
 
 
 var DigestItems = Backbone.Collection.extend({
@@ -145,8 +182,6 @@ var DigestItemFooter = Backbone.View.extend({
 
 	render: function() {
 
-		console.log( this.model );
-
 		var footer = this.footerLoader();
 
 		this.$el.append( footer );
@@ -159,13 +194,13 @@ var DigestItemFooter = Backbone.View.extend({
 	
 		switch (this.model.get('column_type')) {
 			case "pack":
-				return new PackFooter( this.model ).render().el;
+				return new PackFooter({ model: this.model }).render().el;
 
 			case "people":
 				return "";
 
 			default:
-				return new ClipFooter( this.model ).render().el;
+				return new ClipFooter({ model: this.model }).render().el;
 
 		}
 	
@@ -195,58 +230,48 @@ var ClipFooter = Backbone.View.extend({
 	events: {
 		'click .favorite': 'interaction',
 		'click .queue': 'interaction',
-		'click .share': 'interaction'
-
 	},
 
 	initialize: function(attributes){
 	
-		this.model = new FooterModel(attributes); 
+		this.listenTo(this.model, 'change:favorite', this.favoriteButton);
+		this.listenTo(this.model, 'change:queue', this.queueButton);
+
 	
 	},
 	
 	render: function() {
 
 		this.$el
-			.append( '<div class="favorite"></div>' )
-			.append( '<div class="queue"></div>' )
+			.append( '<div class="favorite'+ (this.model.get("favorite") ? " active" : "") +'"></div>' )
+			.append( '<div class="queue'+ (this.model.get("queue") ? " active" : "") +'"></div>' )
 			.append( '<div class="share"></div>' );
 
 		return this;
+
 	},
 
 	interaction: function(element){
 	
-		console.log( element );
-		this.model.handleInteraction(element);
+		this.model.handleInteraction(element.currentTarget.className);
 	
 	},
 
-
-});
-
-var FooterModel = Backbone.Model.extend({
-
-	defaults: {
-
-	},
-	
-	initialize: function(attributes) {
-
-		console.log( attributes );
+	favoriteButton: function(){
 		
-	},
-	handleInteraction: function(element){
-		var objectID  = this.get('objectID');
-		console.log( element );
-
-		console.log( objectID );
-
-
+		this.$('.favorite').toggleClass('active');
 	
 	},
 
+	queueButton: function(){
+	
+		this.$('.queue').toggleClass('active');
+	
+	},
+
+
 });
+
 
 var DigestItemHeader = Backbone.View.extend({
 	
@@ -320,7 +345,7 @@ var PurchaseLinks = Backbone.View.extend({
 	render: function() {
 
 		if(this.collection.length) {
-			this.$el.prepend("<p>Available on:</p>");
+			this.$el.prepend("<span class='available-on'>Available on:</span>");
 			this.collection.each(this.addOne, this);
 		}
 		
