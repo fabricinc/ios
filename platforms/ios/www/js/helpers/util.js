@@ -379,6 +379,8 @@ Util.handleExternalUrl = function(el) {
         return false;
     }
 
+    console.log( 'external' );
+
     var link = $(el).attr("href"),
         vendor = $(el).data("vendor"),
         appOnlyVendors = [
@@ -391,6 +393,7 @@ Util.handleExternalUrl = function(el) {
             'vudu',
             'hulu'
         ];
+
 
     // is this an in-app purchase from itunes store?
     if(vendor == 'itunes') {

@@ -5,9 +5,11 @@ var DigestModel = Backbone.Model.extend({
 
 		this.set('favorite', !!parseInt(this.get('favorite')));
 		this.set('favoriteID', APP.gameState.favoriteListID);
+		this.set('digestData', JSON.parse(this.get('data')));
 		this.set('queue', !!parseInt(this.get('queue')));
 		this.set('done', !!parseInt(this.get('done')));
 		this.set('queueID', APP.gameState.watchListID);
+
 	
 	},
 
@@ -17,12 +19,10 @@ var DigestModel = Backbone.Model.extend({
  			listID = parseInt(this.get(el +'ID')),
  			setter = this.get(el);
 
- 		console.log( setter );
 
 		switch(el){
 			case 'favorite':
 			case 'queue': 
-				console.log( 'in' );
 
 				Api.setMovieToFabricList(parseInt(this.get('object_id')), listID, !setter);
 
@@ -33,6 +33,21 @@ var DigestModel = Backbone.Model.extend({
 		}
 
  		
+	
+	},
+
+	imageClick: function(){
+	
+		if( this.get('column_type') === 'clip' ) {}
+
+		switch(this.get('column_type')){
+			case 'clip':
+				console.log( 'play clip' );
+				break;
+			case 'people':
+			case 'pack':
+				Backbone.history.navigate("discovery?categoryID=" +  this.get('digestData').categoryID + "&listID=null", true);
+		}
 	
 	},
 });
@@ -57,7 +72,9 @@ var DigestSection = Backbone.View.extend({
 	render: function(){
 
 		// empty out the div
-		this.$el.empty();
+		this.$el
+			.empty()
+			.removeClass('loading');
 	
 		// Create Header
 
@@ -106,26 +123,27 @@ var DigestItem = Backbone.View.extend({
 
 	className: 'digest-item',
 
-	initialize: function(){
-	
-		 
-	
-	},
-
 	render: function(){
 		
+		console.log( this.model.toJSON() );
 
 		// Create Content
 		var content = new DigestItemContent({ model: this.model });
 
 
+		var footer = "";
+
 		// Create Footer
-		var footer = new DigestItemFooter({ model: this.model });
+		if(this.model.get('column_type') !== 'people'){
+
+			footer = new DigestItemFooter({ model: this.model }).render().el;
+
+		}
 
 		// Put them on the page
 		this.$el
 			.append( content.render().el )
-			.append( footer.render().el );
+			.append( footer );
 
 		return this;
 	
@@ -154,7 +172,7 @@ var DigestItemContent = Backbone.View.extend({
 
 
 		// Create Image
-		var img = new DigestImage({ model: { src: digestData.objectImg }});
+		var img = new DigestImage({ model: this.model });
 		
 		this.$el
 			.append( contentHeader.render().el )
@@ -214,11 +232,21 @@ var PackFooter = Backbone.View.extend({
 
 	tagName: "h1",
 
+	events: {
+		'click': 'categoryFilter',
+	},
+
 	render: function() {
 
 		this.$el.append("See more packs");
 		
 		return this;
+	},
+
+	categoryFilter: function(){
+	
+		$('#category-filter').click();
+	
 	},
 
 });
@@ -295,13 +323,23 @@ var DigestItemHeader = Backbone.View.extend({
 var DigestImage = Backbone.View.extend({
 	
 	className: 'digest-content-img',
+
 	tagName: 'img',
 
+	events: {
+		'click' : 'navigate',
+	},
+
 	render: function() {
-		this.el.src = this.model.src;
-		// this.$el.html("<img src='" + this.model.src + "' />");
+
+		this.el.src = this.model.get('digestData').objectImg;
 		
 		return this;
+	},
+
+	navigate: function(){
+	
+		this.model.imageClick();	
 	},
 
 });
@@ -311,7 +349,14 @@ var LinkModel = Backbone.Model.extend({
 	defaults: {
 		name: null,
 		link: null,
-	}
+	},
+
+	shoppingLink: function(e){
+	
+
+		Util.handleExternalUrl( e );
+	
+	},
 
 });
 
@@ -345,9 +390,12 @@ var PurchaseLinks = Backbone.View.extend({
 	render: function() {
 
 		if(this.collection.length) {
-			this.$el.prepend("<span class='available-on'>Available on:</span>");
+
+			this.$el.prepend("<span class='available-on'>Available On</span>");
 			this.collection.each(this.addOne, this);
+
 		}
+
 		
 		return this;
 	},
@@ -364,14 +412,30 @@ var PurchaseLinks = Backbone.View.extend({
 
 var PurchaseLink = Backbone.View.extend({
 	tagName: "a",
+
+	events: {
+		'click': 'purchaseLink'
+	},
 	
 	render: function() {
 
-		this.el
-			.className = this.model.get('name')
-			.href = this.model.get('link');
+		var name = this.model.get('name').toLowerCase();
+
+		this.$el.attr({ 
+			'href' : this.model.get('link'),
+			'data-vendor': name,
+			'target': '_blank',
+			'class': name
+		});
+
 		
 		return this;
+	},
+
+	purchaseLink: function(e){
+		
+		this.model.shoppingLink(e.currentTarget);
+	
 	},
 
 });

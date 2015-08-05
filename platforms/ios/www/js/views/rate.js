@@ -150,7 +150,7 @@ var RateView = Backbone.View.extend({
 
 
         if(this.filter !== "want-to-filter") { return; }
-        console.log('render');
+        
         this.digestView.render();
     
     },
@@ -328,7 +328,7 @@ var RateView = Backbone.View.extend({
             
         } else if(filter == "want-to-filter") {
 
-            return;
+
 
             if(self.wantToList) { 
 
@@ -397,13 +397,6 @@ var RateView = Backbone.View.extend({
                             });
                         }
 
-                    } else {
-
-                        $(".load-more-spinner").css("visibility", "visible");
-                        // self.wantToList.addMore();
-                        UI.scroller.refresh();
-                        $(".load-more-spinner").hide();
-
                     }
 
 
@@ -428,7 +421,7 @@ var RateView = Backbone.View.extend({
         });
 
         // Change filters from categories to feed
-        $("#home-filters div.filter-div").fastClick(function() {
+        $("#home-filters div.filter-div, .pack-footer").fastClick(function(e) {
             if(APP.working) { return false; }
 
             var filter = this.id,
@@ -448,8 +441,6 @@ var RateView = Backbone.View.extend({
                 self.catPos = UI.scroller.y;
             }
 
-            // This sucks  -- remove sort if not on want-to filter
-            if(filter !== 'want-to-filter') { $("#want-to-sort").remove() }
 
             if(filter !== "recommended-filter") { self.model.startR = 0; }
 

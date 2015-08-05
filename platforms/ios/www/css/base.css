@@ -2408,6 +2408,8 @@ div.check-list-wrapper div.check-list-item {
 }
 .digest-item h1 {
     text-transform: uppercase;
+    font-weight: 200;
+    font-size: 12px;
     display: inline;
 }
 .digest-item h1,
@@ -2450,6 +2452,11 @@ div.check-list-wrapper div.check-list-item {
     height: 20px;
     color: gray;
 }
+h1.pack-footer {
+    display: inline-block;
+    width: 100%;
+    padding: 0;
+}
 .clip-footer { height: 100%; }
 
 .clip-footer div {
@@ -2477,10 +2484,20 @@ div.check-list-wrapper div.check-list-item {
     text-transform: none;
     color: gray;
 }
-
+.purchase-links a {
+    background-size: 100% 100%;
+    display: inline-block;
+    position: relative;
+    margin: 0 2px;
+    height: 20px;
+    width: 20px;
+    top: 5px;
+}
 .available-on {
     display: inline-block;
-    margin-top: 5px;
+    margin-right: 2px;
+    font-weight: 100;
+    font-size: 12px;
 }
 
 
@@ -4556,11 +4573,31 @@ h2#see-more-matches {
     margin-bottom: 2px;
 }
 .itunes h2 { text-transform: initial; }
-#services .commerce.spotify, #available-services .commerce.spotify { background-image: url(../images/lists/spotify.png); }
-#services .commerce.itunes, #available-services .commerce.itunes { background-image: url(../images/lists/itunes.png); }
-#services .commerce.amazon, #available-services .commerce.amazon { background-image: url(../images/lists/amazon.png); }
-#services .commerce.fandango, #available-services .commerce.fandango { background-image: url(../images/lists/fandango.png); }
-#services .commerce.netflix, #available-services .commerce.netflix { background-image: url(../images/lists/netflix.png); }
+.purchase-links .spotify,
+#services .commerce.spotify,
+#available-services .commerce.spotify 
+{ background-image: url(../images/lists/spotify.png); }
+
+.purchase-links .itunes,
+#services .commerce.itunes,
+#available-services .commerce.itunes 
+{ background-image: url(../images/lists/itunes.png); }
+
+.purchase-links .amazonprime,
+#services .commerce.amazon,
+#available-services .commerce.amazon 
+{ background-image: url(../images/lists/amazon.png); }
+
+.purchase-links .fandango,
+#services .commerce.fandango,
+#available-services .commerce.fandango 
+{ background-image: url(../images/lists/fandango.png); }
+
+.purchase-links .netflix,
+#services .commerce.netflix,
+#available-services .commerce.netflix 
+{ background-image: url(../images/lists/netflix.png); }
+
 #services-egress {
     position: absolute;
     left: 0;
