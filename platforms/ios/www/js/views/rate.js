@@ -25,7 +25,7 @@ var RateModel = Backbone.Model.extend({
     initialize: function(options) {
         var self = this;
         if(typeof APP.feedFilter === "undefined") {
-            APP.feedFilter = "category-filter"; // filters: category-filter, activity-filter, recommended-filter
+            APP.feedFilter = "want-to-filter"; // filters: category-filter, activity-filter, recommended-filter
         }
 
         self.filter = APP.feedFilter;
@@ -206,6 +206,9 @@ var RateView = Backbone.View.extend({
 
 
                         var cb = function() {
+
+                            console.log( 'init scoller' );
+
                             UI.initScrollerOpts($("#category-container")[0], { // #home-slider
                                 vScrollbar: false,
                                 hScroll: false,
@@ -214,7 +217,7 @@ var RateView = Backbone.View.extend({
                                 startY: feedPos
                             });
 
-                            // setTimeout(function() { UI.scroller.refresh(); }, 1000);
+                            setTimeout(function() { UI.scroller.refresh(); }, 1000);
 
                             APP.feedPos = 0;
 

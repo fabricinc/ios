@@ -10,8 +10,12 @@ var DigestModel = Backbone.Model.extend({
 		this.set('done', !!parseInt(this.get('done')));
 		this.set('queueID', APP.gameState.watchListID);
 		this.set('recommendation', this.get('digestData').recommendation);
+		this.set('typeTitle', this.get('column_type') === "people" ? "Friends" : this.get('digestData').typeTitle);
 
-	
+		var icon = this.get('column_type') === 'clip' ? this.get('digestData').typeTitle : this.get('column_type');
+		this.set('icon', 'images/discovery/categoryIcons/' + icon + '.png');
+
+
 	},
 
 	handleInteraction: function(element){
@@ -128,8 +132,6 @@ var DigestItem = Backbone.View.extend({
 
 	render: function(){
 		
-		console.log( 'Model' );
-		console.log( this.model.toJSON() );
 		// Create Content
 		var content = new DigestItemContent({ model: this.model });
 
@@ -160,7 +162,11 @@ var DigestItemContent = Backbone.View.extend({
 	render: function() {
 
 		var model = this.model.toJSON();
+
+		console.log( model );
+		
 		var digestData = JSON.parse(model.data);
+		
 		var headerModel = {
 			icon: model.column_type === "clip" ? digestData.typeTitle : model.column_type,
 			typeTitle: model.column_type === "people" ? "Friends" : digestData.typeTitle,
@@ -171,7 +177,7 @@ var DigestItemContent = Backbone.View.extend({
 
 
 		// Create Header
-		var contentHeader = new DigestItemHeader({ model: headerModel });
+		var contentHeader = new DigestItemHeader({ model: this.model });
 
 
 		// Create Image
@@ -193,7 +199,7 @@ var DigestItemContent = Backbone.View.extend({
 				this.$el.append( recommendation.render().el );
 			}
 
-			var purchaseLinks = new PurchaseLinks(digestData.links);
+			var purchaseLinks = new PurchaseLinks(this.model.get('digestData').links);
 
 			this.$el.append( purchaseLinks.render().el );
 			
@@ -285,8 +291,7 @@ var ClipFooter = Backbone.View.extend({
 
 		this.$el
 			.append( '<div class="favorite'+ (this.model.get("favorite") ? " active" : "") +'"></div>' )
-			.append( '<div class="queue'+ (this.model.get("queue") ? " active" : "") +'"></div>' )
-			.append( '<div class="share"></div>' );
+			.append( '<div class="queue'+ (this.model.get("queue") ? " active" : "") +'"></div>' );
 
 		return this;
 
@@ -364,11 +369,15 @@ var DigestItemHeader = Backbone.View.extend({
 
 	render: function() {
 
-		
-		var titles = this.model;
+		var icon = new DigestIcon({ src: this.model.get('icon') });
+		var objectTitle = new ObjectTitle({ model: this.model });
+		var title = new DigestTitle({ model: this.model });
 
-
-		this.$el.append('<img class="digest-icon" src="images/discovery/categoryIcons/' + titles.icon + '.png" /><h1>' + titles.typeTitle +'</h1><h2>' + titles.contentTitle + '</h2><p>' + (titles.count  + 1) + '.</p>');
+		this.$el
+			.append( icon.render().el )
+			.append( title.render().el )
+			.append( objectTitle.render().el )
+			.append('<p>' + (this.model.get('count') + 1) + '.</p>');
 		
 		
 		return this;
@@ -407,6 +416,43 @@ var DigestImage = Backbone.View.extend({
 
 });
 
+var DigestIcon = Backbone.View.extend({
+	
+	className: 'digest-icon',
+
+	tagName: 'img',
+
+	render: function() {
+
+		this.el.src = this.options.src;
+		
+		return this;
+	},
+
+});
+
+var DigestTitle = Backbone.View.extend({
+	tagName: 'h1',
+
+	render: function() {
+
+		var headline = "";
+
+		if( this.model.get('typeTitle') === 'Friends' ){
+
+			headline = "<span> Check out other fans of</span>";
+
+		}
+
+		this.$el
+			.append( this.model.get('typeTitle') )
+			.append( headline );	
+		
+		return this;
+	},
+
+});
+
 var LinkModel = Backbone.Model.extend({
 
 	defaults: {
@@ -423,6 +469,31 @@ var LinkModel = Backbone.Model.extend({
 
 });
 
+var ObjectTitle = Backbone.View.extend({
+	
+	className: 'digest-object-title bold',
+
+	tagName: 'h2',
+
+	render: function() {
+
+		var title = this.model.get('digestData').objectTitle,
+			artist = this.model.get('digestData').artist;
+
+		if( this.model.get('column_type') === "clip" ) {
+
+			this.el.className += " red uppercase";
+
+		}
+
+		this.$el
+			.append( artist || title )
+			.append( artist ? "<span> - "+ title +"</span>": "");
+		
+		return this;
+	},
+
+});
 var Links = Backbone.Collection.extend({
 	model: LinkModel,
 
@@ -440,7 +511,6 @@ var Faces = Backbone.View.extend({
 
 	tasteMate: function(mate){
 
-		console.log( mate );
 
 		var avatar = new Avatar({ src: mate });
 

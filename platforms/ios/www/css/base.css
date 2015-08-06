@@ -1235,7 +1235,7 @@ div#fancy-button:after {
 #want-to-filter-clone:after,
 #want-to-filter:after {
     background-image: url(../images/discovery/wantToButton.png);
-    content: "Want tos";
+    content: "Picks";
 }
 #profile-footer:after {
     background-image: url(../images/discovery/profileButton.png);
@@ -2446,6 +2446,14 @@ div.check-list-wrapper div.check-list-item {
 .digest-item-content {
     margin: 10px;
 }
+.digest-item-content-header h1 span{
+    text-transform: initial;
+}
+.digest-object-title span {
+    text-transform: capitalize;
+    font-weight: normal;
+    color: black;
+}
 .content-item-footer {
     border-top: 1px solid rgb(216, 216, 216);
     background-color: rgb(229, 229, 229);
@@ -2468,7 +2476,7 @@ h1.pack-footer {
     background-size: 16px;
     height: 100%;
     float: left;
-    width: 33%;
+    width: 50%;
 }
 .clip-footer .favorite {
     background-image: url(../images/lists/favorite.png);
@@ -6571,7 +6579,7 @@ h1.pop-up-content {
     font-size: 18px;
 }
 /* misc classes */
-
+.uppercase { text-transform: uppercase;}
 .scroller-settings { overflow: hidden; position: relative; }
 .fresh { background-image: url(../images/game/game-tomato_fresh.png); }
 .rotten { background-image: url(../images/game/game-tomato_rotten.png); }
