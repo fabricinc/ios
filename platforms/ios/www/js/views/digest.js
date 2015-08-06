@@ -9,6 +9,7 @@ var DigestModel = Backbone.Model.extend({
 		this.set('queue', !!parseInt(this.get('queue')));
 		this.set('done', !!parseInt(this.get('done')));
 		this.set('queueID', APP.gameState.watchListID);
+		this.set('recommendation', this.get('digestData').recommendation);
 
 	
 	},
@@ -45,6 +46,8 @@ var DigestModel = Backbone.Model.extend({
 				console.log( 'play clip' );
 				break;
 			case 'people':
+				Backbone.history.navigate("matches", true);
+				break;
 			case 'pack':
 				Backbone.history.navigate("discovery?categoryID=" +  this.get('digestData').categoryID + "&listID=null", true);
 		}
@@ -125,8 +128,8 @@ var DigestItem = Backbone.View.extend({
 
 	render: function(){
 		
+		console.log( 'Model' );
 		console.log( this.model.toJSON() );
-
 		// Create Content
 		var content = new DigestItemContent({ model: this.model });
 
@@ -178,8 +181,17 @@ var DigestItemContent = Backbone.View.extend({
 			.append( contentHeader.render().el )
 			.append( img.render().el );
 
+
 		// Create Shopping links if its a clip
 		if(model.column_type === "clip") {
+
+			// Create recommendation section if applicable 
+			if( this.model.get('recommendation') ){
+
+				var recommendation = new Recommendation({ model: this.model });
+
+				this.$el.append( recommendation.render().el );
+			}
 
 			var purchaseLinks = new PurchaseLinks(digestData.links);
 
@@ -187,6 +199,7 @@ var DigestItemContent = Backbone.View.extend({
 			
 
 		}
+
 
 
 		return this;
@@ -300,6 +313,50 @@ var ClipFooter = Backbone.View.extend({
 
 });
 
+var Recommendation = Backbone.View.extend({
+	className: 'digest-recommendation',
+
+	render: function() {
+
+		var rec = this.model.get('recommendation'),
+			facebookID = rec.facebookID || null,
+			userID = rec.userID || "",
+			name = rec.userName || "";
+
+		console.log( rec );
+
+		var avatar = new Avatar({ src: facebookID });
+
+		this.$el
+			.append( avatar.render().el )
+			.append('<h3><span class="bold">'+ name.split(" ")[0] +'</span> recommends this</h3>');
+		
+		return this;
+	},
+
+});
+
+var Avatar = Backbone.View.extend({
+
+	className: 'digest-avatar',
+
+	tagName: 'img',
+
+	initialize: function(options){
+
+		this.el.src = options.src 
+			? "https://graph.facebook.com/"+ options.src +"/picture?height=170&width=170" 
+			: "images/discovery/avatar.png";
+		
+	},
+
+	render: function() {
+		
+		return this;
+
+	},
+
+});
 
 var DigestItemHeader = Backbone.View.extend({
 	
@@ -324,15 +381,21 @@ var DigestImage = Backbone.View.extend({
 	
 	className: 'digest-content-img',
 
-	tagName: 'img',
-
 	events: {
 		'click' : 'navigate',
 	},
 
 	render: function() {
 
-		this.el.src = this.model.get('digestData').objectImg;
+		this.el.style.backgroundImage = 'url('+ this.model.get('digestData').objectImg +')';
+
+		if(this.model.get('column_type') === 'people'){
+
+			var faces = new Faces({ model: this.model });
+
+			this.$el.append( faces.render().el );
+
+		}
 		
 		return this;
 	},
@@ -363,18 +426,30 @@ var LinkModel = Backbone.Model.extend({
 var Links = Backbone.Collection.extend({
 	model: LinkModel,
 
-
-	validateModels: function() {
-
-		this.remove(this.filter(function(model) {
-
-			return !model.get('link');
-
-		}));
-
-	},
 });
 
+var Faces = Backbone.View.extend({
+	className: 'tastemates',
+
+	render: function() {
+
+		_.each(this.model.get('digestData').facebookIDs, this.tasteMate, this);
+		
+		return this;
+	},
+
+	tasteMate: function(mate){
+
+		console.log( mate );
+
+		var avatar = new Avatar({ src: mate });
+
+		this.$el.append( avatar.render().el );	
+		 
+	
+	},
+
+});
 
 
 var PurchaseLinks = Backbone.View.extend({
@@ -383,7 +458,6 @@ var PurchaseLinks = Backbone.View.extend({
 	initialize: function(links){
 
 		this.collection = new Links(links);
-		this.collection.validateModels();
 	
 	},
 

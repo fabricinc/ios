@@ -2438,7 +2438,10 @@ div.check-list-wrapper div.check-list-item {
 }
 
 .digest-content-img {
+    background-size: 100%;
+    position: relative;
     margin: 10px 0 0;
+    height: 140px;
 }
 .digest-item-content {
     margin: 10px;
@@ -2499,8 +2502,35 @@ h1.pack-footer {
     font-weight: 100;
     font-size: 12px;
 }
-
-
+.digest-recommendation {
+    margin-top: 5px;
+}
+.digest-avatar {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+.tastemates .digest-avatar {
+    border: 3px solid white;
+    margin: 0px 3px;
+    height: 40px;
+    width: 40px;
+}
+.tastemates {
+    position: absolute;
+    margin: 0 auto;
+    bottom: 5px;
+    width: 57%;
+    right: 0;
+    left: 0;
+}
+.digest-recommendation h3 {
+    display: inline-block;
+    position: absolute;
+    line-height: 30px;
+    margin-left: 5px;
+    font-size: 12px;
+}
 
 /* ++++++++++++++++++++ NEW REC FEED ++++++++++++++++++++ */
 

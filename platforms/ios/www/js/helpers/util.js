@@ -6,11 +6,11 @@ var MIN_TABLET_PIXEL_WIDTH = 500;
 // public functions
 Util.endsWith = function(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
-}
+};
 
 Util.isFunction = function(possibleFunction) {
     return (typeof(possibleFunction) == typeof(Function));
-}
+};
 
 Util.addCommas = function(nStr) {
     nStr += '';
@@ -22,18 +22,18 @@ Util.addCommas = function(nStr) {
         x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
-}
+};
 Util.defined = function(variable) {
 
     return typeof variable === 'undefined' ? false : true;
-}
+};
 
 Util.isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
-}
+};
 Util.profilePic = function(userId){
     
-}
+};
 
 // an enumeration of browser types
 Util.browserType = {
@@ -44,7 +44,7 @@ Util.browserType = {
     androidPhone : {value: 4, name: "android phone"},
     androidTablet : {value: 5, name: "android tablet"},
     other : {value: 6, name: "other web browser"}
-}
+};
 
 Util.detectBrowserType = function() {
     var agent = navigator.userAgent.toLowerCase();
@@ -76,7 +76,7 @@ Util.detectBrowserType = function() {
     else {
         return Util.browserType.other;
     }
-}
+};
 
 Util.validArray = function(array, filter){
     array = array || null;
@@ -91,7 +91,7 @@ Util.validArray = function(array, filter){
         }
     });
     return returnArray = [validArray, invalidArray];
-}
+};
 Util.sortFunction = function(property) {
     var sortOrder = 1,
         numberFilters = ["criticsScore", "totalCount", "Count"],
@@ -115,8 +115,8 @@ Util.sortFunction = function(property) {
             var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
         }
         return result * sortOrder;
-    }
-}
+    };
+};
 Util.trailerPlayer = function(){
     var player = $("video"), //object for video player
         trailer = player[0], //object for current trailer (play - pause)
@@ -167,25 +167,24 @@ Util.trailerPlayer = function(){
             // player.remove();
         },400);
     }, false);
-}
-
+};
 Util.createShareLink = function(isMovie, itemId){
     var link = Api.appSettings.shareLocation,
         route = isMovie ? "/item.php?movieID=" + itemId 
                         : "/list.php?listID=" + itemId + "&category=true";
 
     return link + route; 
-}
+};
 //detect if ipad 
 Util.isIPad =  function(){
-    var iPad = navigator.userAgent.match("iPad")
+    var iPad = navigator.userAgent.match("iPad");
     if (iPad) { return true; }
     else { return false; }
-}
+};
 // simple property to get if this is a mobile device
 Util.isMobile = function() {
     return Util.detectBrowserType() != Util.browserType.other;
-}
+};
 
 Util.vAlign = function (e) {
     $(e).each(function () {
@@ -195,12 +194,12 @@ Util.vAlign = function (e) {
         var mh = (ph - ch) / 2;
         el.css('top', mh);
     });
-}
+};
 
 Util.log = function(text, e) {
-    var text = text + ((e) ? ": " + e : "")
+    var text = text + ((e) ? ": " + e : "");
     if (LOGGING) console.log(text);
-}
+};
 
 // centers an item both horizontally and vertically
 Util.CenterItem = function(theItem){
@@ -222,7 +221,7 @@ Util.CenterItem = function(theItem){
     } else {
         $(theItem).css('top','0');
     }
-}
+};
 
 // use the native alert on mobile devices
 Util.alert = function(message, title, buttonName, callback) {
@@ -238,7 +237,7 @@ Util.alert = function(message, title, buttonName, callback) {
     }
 
     callback();
-}
+};
 
 Util.getBitRate = function() {
     var bit_rate;
@@ -252,7 +251,7 @@ Util.getBitRate = function() {
         }
     }
     return bit_rate;
-}
+};
 
 // Loads an image as a css background and adds fade-in class on load.
 Util.loadImage = function(url, $container, customSize) {
