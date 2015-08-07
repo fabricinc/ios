@@ -2468,6 +2468,14 @@ h1.pack-footer {
     width: 100%;
     padding: 0;
 }
+.pack-footer span {
+    color: rgb(189, 189, 189);
+    position: relative;
+    font-size: 18px;
+    float: right;
+    right: 10px;
+    top: 1px;
+}
 .clip-footer { height: 100%; }
 
 .clip-footer div {

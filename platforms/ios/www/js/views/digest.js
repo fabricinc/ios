@@ -14,8 +14,28 @@ var DigestModel = Backbone.Model.extend({
 
 		var icon = this.get('column_type') === 'clip' ? this.get('digestData').typeTitle : this.get('column_type');
 		this.set('icon', 'images/discovery/categoryIcons/' + icon + '.png');
+		
+		switch(this.get('typeTitle')){
+			case 'Music':
+				this.set('track', new Audio(this.get('digestData').clip));
+				break;
+			case 'Movie': 
+				this.set('track', this.createVideo(this.get('digestData').clip));
+
+		}
 
 
+	},
+
+	createVideo: function(clip){
+
+		console.log( 'create video' );
+		var video = document.createElement("VIDEO");
+
+		video.src = clip;
+
+		return video;
+	
 	},
 
 	handleInteraction: function(element){
@@ -37,17 +57,13 @@ var DigestModel = Backbone.Model.extend({
 				
 		}
 
- 		
-	
 	},
 
 	imageClick: function(){
-	
-		if( this.get('column_type') === 'clip' ) {}
 
 		switch(this.get('column_type')){
 			case 'clip':
-				console.log( 'play clip' );
+				this.collection.handlePlayback( this.get('track') );
 				break;
 			case 'people':
 				Backbone.history.navigate("matches", true);
@@ -57,12 +73,100 @@ var DigestModel = Backbone.Model.extend({
 		}
 	
 	},
+
+	playClip: function(clip){
+
+		if(this.get('typeTitle') === 'Music') {
+			// if()
+			this.get('track').play();
+		}
+		console.log( clip ); 
+	
+	},
 });
 
 
 var DigestItems = Backbone.Collection.extend({
 
 	model: DigestModel,
+
+	playing: false,
+
+	tack: null,
+
+	handlePlayback: function( track ){
+		
+
+		if(!track) { return; }
+
+		console.log( this );
+		
+		if(this.playing){
+
+			if (this.track === track) {
+
+				console.log( 'same track PAUSE' );
+
+				// pause track
+				this.pause();
+
+				// Set play status on collection
+				this.updatePlayStatus();
+
+			} else { 		// Set new track
+
+				// Pause old track
+				this.pause();
+
+				// Switch to new track
+				this.setTrack( track );
+
+				// Play new track
+				this.play();
+
+			}
+			
+			
+		} else { 	//Not playing any tracks
+
+			this.setTrack( track );
+
+			this.play();
+
+			this.updatePlayStatus();
+		}
+
+	},
+
+	setTrack: function(newTrack){
+	
+		this.track = newTrack;
+
+		this.track.addEventListener('ended', function() {
+			this.updatePlayStatus.call(this);
+		}.bind(this));
+	
+	},
+
+	play: function(){
+
+		this.track.play();
+	
+	},
+
+	pause: function(){
+	
+		this.track.pause();
+	
+	},
+
+	updatePlayStatus: function(){
+		console.log( 'update play status' );
+		 this.playing = !this.playing;
+
+		 console.log( this );
+	
+	},
 
 });
 
@@ -257,7 +361,7 @@ var PackFooter = Backbone.View.extend({
 
 	render: function() {
 
-		this.$el.append("See more packs");
+		this.$el.append("See more packs<span>&#10142;</span>");
 		
 		return this;
 	},

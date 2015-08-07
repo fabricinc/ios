@@ -32,6 +32,27 @@
     background-size: 320px 430px;
     height: 430px;
 }
+.digest-content-img {
+    height: 150px;
+}
+.purchase-links a {
+    height: 30px;
+    width: 30px;
+    top: 9px;
+}
+.available-on {
+    font-size: 15px;
+}
+.digest-recommendation h3 {
+    line-height: 40px;
+}
+.purchase-links {
+    height: 40px;
+}
+.digest-avatar {
+    height: 40px;
+    width: 40px;
+}
 .div-swiper {
     width: 172px !important;
     height: 258px !important;
