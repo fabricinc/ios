@@ -54,7 +54,7 @@
             "discovery?categoryID=:categoryID&listID=:listID": "discovery",
             "messages": "messages",
             "messages/:id": "conversation",
-            "movieLobby/:id": "movieLobby",
+            "movieLobby/:id(/:publishedID)": "movieLobby",
             "feedDiscussion/:id": "feedDiscussion",
             "feedLikes/:id": "feedLikes",
             "events": "events",
@@ -732,8 +732,8 @@
                     loadPageHtml: false
                 }, "messages");
             });
-            this.on("route:movieLobby", function(movieID) {
-                self.loadView(new MovieLobbyView({ movieID: movieID }), function() {
+            this.on("route:movieLobby", function(movieID, publishedID) {
+                self.loadView(new MovieLobbyView({ movieID: movieID, publishedID: publishedID}), function() {
                     // Stub for callback
                 }, {
                     scroller: false,

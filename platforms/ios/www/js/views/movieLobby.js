@@ -14,18 +14,22 @@ var MovieLobbyModel = Backbone.Model.extend({
     initialize: function(opts) {
         this.kce = opts.kce || false;
         this.movieID = opts.movieID || null;
+        this.publishedID = opts.publishedID || null;
     },
 
     init: function(callback) {
         var self = this;
         callback = callback || function() { };
 
-        Util.iOSVersion()[0] > 5 ? self.gtiOS5 = true : self.gtiOS5 = false;
+        self.gtiOS5 = Util.iOSVersion()[0] > 5 ? true : false;
 
+        console.log( 'movieID '+self.movieID );
+        console.log( 'publishedID '+ self.publishedID );
 	    // get the movie information and supply the html
-	    Api.getMovieData(self.movieID, null, function(response) {
+	    Api.getMovieData(self.movieID, self.publishedID, function(response) {
             if(!response.success) {
                 Util.alert("Sorry! There was an error gathering movie data!", "Oops!");
+                Backbone.history.navigate('back', true);
                 return false;
             }
 

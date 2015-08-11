@@ -39,10 +39,10 @@ Api.queueRequest = function(xhr) {
         };
     this.queue[pointer] = obj;
     return pointer;
-}
+};
 Api.unqueueRequest = function(index) {
     this.queue[index] = undefined;
-}
+};
 Api.abortAll = function(callback) {
     callback = callback || function() { };
     this.queueAborted = true;
@@ -55,7 +55,7 @@ Api.abortAll = function(callback) {
     }
     this.queueAborted = false;
     callback();
-}
+};
 Api.error = function(error, options) {
     Util.log("Error performing action: " + options.action + ".  Result: " + JSON.stringify(error));
     options = {
@@ -68,7 +68,7 @@ Api.error = function(error, options) {
     }
     this.dispatcher(options);
     if(!$(".player")) { UI.backButton(); }
-}
+};
 Api.getJSON = function(scriptName, options, callback) {
     var self = this;
     callback = callback || function() { };
@@ -91,7 +91,7 @@ Api.getJSON = function(scriptName, options, callback) {
             }
         }
     });
-}
+};
 Api.checkForErrorResponse = function(response) {
     if(response && response.error) {
         if(response.error.code == 403) {
@@ -101,7 +101,7 @@ Api.checkForErrorResponse = function(response) {
     } else {
         return false;
     }
-}
+};
 Api.dispatcher = function(options, callback) {
     var self = this;
     callback = callback || function() { };
@@ -129,7 +129,7 @@ Api.dispatcher = function(options, callback) {
 
     // Will run before async request.
     var index = this.queueRequest(xhr);
-}
+};
 Api.recoverPassword = function(email, callback) {
     var FAIL = 'There was a problem contacting our server.  If you see this message repeatedly, please contact Fabric support.',
         userAttributeArray = {
@@ -149,7 +149,7 @@ Api.recoverPassword = function(email, callback) {
             Util.log("error recover password: " + e);
         }
     });
-}
+};
 Api.createRegistration = function(username, emailAddress, password, facebookID, friendList, callback) {
     var FAIL = "There server couldn't process your registration. Please try again in a bit.",
         options = {
@@ -180,7 +180,7 @@ Api.createRegistration = function(username, emailAddress, password, facebookID, 
             Util.log("error in registration: " + JSON.stringify(e));
         }
     });
-}
+};
 Api.createNewRegistration = function(name, email, password, facebookID, friendlist, birthday, gender, callback) {
     callback = callback || function() { };
     var FAIL = "There server couldn't process your registration. Please try again in a bit.",
@@ -216,7 +216,7 @@ Api.createNewRegistration = function(name, email, password, facebookID, friendli
             Util.log("error in registration: " + JSON.stringify(e));
         }
     });
-}
+};
 Api.checkLogin = function(username, password, facebookData, callback) {
 
     var age = null;
@@ -262,7 +262,7 @@ Api.checkLogin = function(username, password, facebookData, callback) {
             APP.dispatcher('home');
         }
     });
-}
+};
 Api.getGameState = function(async, callback) {
     callback = callback || function() {};
     var options = {
@@ -283,12 +283,12 @@ Api.getGameState = function(async, callback) {
             APP.dispatcher("home");
         }
     });
-}
+};
 Api.getFabricState = function(callback) {
     callback = callback || function() {};
     var options = { "action": "getFabricState" };
     this.fetch(options, callback);
-}
+};
 Api.setGameState = function(correct, totalQuestions) {
     var options = {
         "round_score": APP.score,
@@ -297,7 +297,7 @@ Api.setGameState = function(correct, totalQuestions) {
         "rank": APP.rank,
         "category_id": APP.currentCategory
     };
-}
+};
 Api.getSelectMovie = function(categoryID, start, limit, movieID, callback) {
     callback = callback || function() {};
     if(!start) { start = 0; }
@@ -313,7 +313,7 @@ Api.getSelectMovie = function(categoryID, start, limit, movieID, callback) {
     Api.getJSON(Api.url + "getMovieForCat.php", options, function(response){
         callback(response);
     });
-}
+};
 Api.getNextMovie = function(options, ref, callback) {
     callback = callback || function() {};
     options.bitRate = Player.bitRate;
@@ -322,7 +322,7 @@ Api.getNextMovie = function(options, ref, callback) {
     Api.getJSON("getNextMovie.php", options, function(data) {
         callback(data, false, options.movieID, options.categoryID, ref);
     });
-}
+};
 Api.getLeaderboard = function(friendlist, callback) {
     callback = callback || function() {};
     var options = {
@@ -332,7 +332,7 @@ Api.getLeaderboard = function(friendlist, callback) {
     Api.getJSON("getLeaderboardByTotalScore.php", options, function(response) {
         callback(response);
     });
-}
+};
 Api.getLeaderboardInterval = function(interval, friendlist, callback) {
     callback = callback || function() {};
     var options = {
@@ -343,7 +343,7 @@ Api.getLeaderboardInterval = function(interval, friendlist, callback) {
     Api.getJSON("getLeaderboardByInterval.php", options, function(response) {
         callback(response);
     });
-}
+};
 Api.getMovieById = function(opts, ref, callback) {
     callback = callback || function() {};
     var options = {
@@ -355,7 +355,7 @@ Api.getMovieById = function(opts, ref, callback) {
     Api.getJSON("getMovieById.php", options, function(response) {
         callback(response, opts.isSimplePlayer, options.published_id, null, ref);
     });
-}
+};
 Api.setMovieHistory = function(movieID, percentWatched) {
     var options = {
         action: "setMovieToList",
@@ -364,7 +364,7 @@ Api.setMovieHistory = function(movieID, percentWatched) {
         listID: APP.gameState.historyListID
     };
     this.dispatcher(options);
-}
+};
 Api.getWelcomeCategories = function(callback){
     callback = callback || function() {};
     var options = {
@@ -372,7 +372,7 @@ Api.getWelcomeCategories = function(callback){
     };
 
     this.dispatcher(options, callback);
-}
+};
 Api.getShoppingLinks = function(publishedID, callback) {
     callback = callback || function() {};
     var options = {
@@ -380,22 +380,22 @@ Api.getShoppingLinks = function(publishedID, callback) {
         action: "getShoppingLinks"
     }
     this.dispatcher(options, callback);
-}
+};
 Api.getCategoryList = function(opts, callback) {
     Api.getJSON("getHomeCategories.php", opts, function(response) {
         Util.log(JSON.stringify(response));
         callback(response);
         if(Analytics) { Analytics.event("Main screen selected"); }
     });
-}
+};
 
 Api.getLocalizedStrings = function() {
     return Strings;
-}
+};
 Api.getProducersClub = function(callback) {
     callback = callback || function() {};
     Api.getJSON("getProducer.php", false, callback);
-}
+};
 Api.setEmailPreferences = function() {
     var url = Api.url + "setEmailPreferences.php",
         self = this;
@@ -415,7 +415,7 @@ Api.setEmailPreferences = function() {
             Util.log('setMovieHistory error: ' + e);
         }
     });
-}
+};
 Api.getEmailPreferences =  function(callback) {
     callback = callback || function() {};
     var url = "getEmailPreferences.php";
@@ -423,7 +423,7 @@ Api.getEmailPreferences =  function(callback) {
     Api.getJSON(url, {}, function(data) {
         callback(data);
     });
-}
+};
 Api.getInterstitialContent = function(callback) {
     callback = callback || function() {};
     var url = "getInterstitial.php?callback=?";
@@ -433,7 +433,7 @@ Api.getInterstitialContent = function(callback) {
         Util.log("interstitialContent: " + JSON.stringify(response)) ;
         callback(response);
     });
-}
+};
 // TODO: Legacy code
 Api.setAnswer = function(movieID, questionID, points, callback) {
     callback = callback || function() {};
@@ -463,7 +463,7 @@ Api.setAnswer = function(movieID, questionID, points, callback) {
             Util.log("setAnswer server failure.");
         }
     });
-}
+};
 Api.getPurchaseLinks = function(publishedID, callback) {
     callback = callback || function() {};
     var url = "getPurchaseLinks.php",
@@ -476,7 +476,7 @@ Api.getPurchaseLinks = function(publishedID, callback) {
     Api.getJSON(url, options, function(data) {
         callback(data);
     });
-}
+};
 // TODO: another weird function
 Api.setListSortOrder = function(listID, sortOrder) {
     var options = {
@@ -499,13 +499,13 @@ Api.setListSortOrder = function(listID, sortOrder) {
             Util.log("setSortOrder server failure.");
         }
     });
-}
+};
 Api.setListsListSortOrder = function(sortOrder) {
     var options = {
         "action": "setListsListSortOrder"
     };
     this.fetch(options);
-}
+};
 // TODO: Another weird function
 Api.setMovieSeen = function(moviePublishedID, seen, callback) {
     callback = callback || function() {};
@@ -528,7 +528,7 @@ Api.setMovieSeen = function(moviePublishedID, seen, callback) {
         }
         callback(success.success);
     });
-}
+};
 Api.getSwipeCategoryData = function(categoryID, listID, callback) {
     callback = callback || function() {};
     categoryID = categoryID || null;
@@ -539,7 +539,7 @@ Api.getSwipeCategoryData = function(categoryID, listID, callback) {
         "listID": listID
     };
     this.fetch(options, callback);
-}
+};
 Api.getRecSubList = function(listID, callback) {
     callback = callback || function() {};
     listID = listID || null;
@@ -549,7 +549,7 @@ Api.getRecSubList = function(listID, callback) {
     };
     
     this.fetch(options, callback);
-}
+};
 Api.getUserRecommendations = function(listID, callback) {
     callback = callback || function() {};
     listID = listID || null;
@@ -560,7 +560,7 @@ Api.getUserRecommendations = function(listID, callback) {
     };
     
     this.fetch(options, callback);
-}
+};
 Api.categoryMovieDiscovered = function(movieID, categoryID, listID, callback) {
     callback = callback || function() {};
     var options = {
@@ -570,7 +570,7 @@ Api.categoryMovieDiscovered = function(movieID, categoryID, listID, callback) {
         "movieID": movieID
     };
     this.fetch(options, callback);
-}
+};
 Api.getCategoryListItems = function(id, callback) {
     callback = callback || function() {};
     var options = {
@@ -578,7 +578,7 @@ Api.getCategoryListItems = function(id, callback) {
         "categoryListID": id.toString()
     };
     this.fetch(options, callback);
-}
+};
 Api.getNextCategories = function(categoryID, callback) {
     callback = callback || function() {};
     var options = {
@@ -587,7 +587,7 @@ Api.getNextCategories = function(categoryID, callback) {
         "sectionID": APP.sectionID
     };
     this.fetch(options, callback);
-}
+};
 // TODO: I don't see this being used, is it necessary?
 Api.getRecommendedCategoryListItems = function(categoryID, listID, callback) {
     categoryID = categoryID || null;
@@ -617,7 +617,7 @@ Api.getRecommendedCategoryListItems = function(categoryID, listID, callback) {
         error: function() {
         }
     });
-}
+};
 
 Api.setMovieToList = function(moviePublishedID, listID, setter, callback) {
     if(typeof moviePublishedID == "string") { moviePublishedID = parseInt(moviePublishedID); }
@@ -646,7 +646,7 @@ Api.setMovieToList = function(moviePublishedID, listID, setter, callback) {
             return true;
         }
     });
-}
+};
 Api.setMovieToFabricList = function(moviePublishedID, listID, setter, callback) {
     if(typeof moviePublishedID == "string") { moviePublishedID = parseInt(moviePublishedID); }
     if(!moviePublishedID || !listID) {
@@ -680,21 +680,21 @@ Api.setMovieToFabricList = function(moviePublishedID, listID, setter, callback) 
             return true;
         }
     });
-}
+};
 Api.getUnseenMessageCount = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getUnseenMessageCount"
     };
     this.fetch(options, callback);
-}
+};
 Api.getConversations = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getConversations"
     };
     this.fetch(options, callback);
-}
+};
 Api.getConversation = function(otherID, callback) {
     callback = callback || function() {};
     var options = {
@@ -702,7 +702,7 @@ Api.getConversation = function(otherID, callback) {
         "otherID": otherID
     };
     this.fetch(options, callback);
-}
+};
 Api.sendMessage = function(otherID, message, callback) {
     callback = callback || function() { };
     var options = {
@@ -729,7 +729,7 @@ Api.sendMessage = function(otherID, message, callback) {
         error: function() {}
     });
 
-}
+};
 Api.validateMessage = function(uuid, callback) {
     uuid = uuid || null;
     var options = {
@@ -737,14 +737,14 @@ Api.validateMessage = function(uuid, callback) {
         "uuid": uuid
     };
     this.fetch(options, callback);
-}
+};
 Api.seenConversation = function(otherID) {
     var options = {
         "action": "seenConversation",
         "otherID": otherID
     };
     this.fetch(options);
-}
+};
 Api.getMatchMe = function(moviePublishedID, listType, callback) {
     callback = callback || function() {};
     var options = {
@@ -753,7 +753,7 @@ Api.getMatchMe = function(moviePublishedID, listType, callback) {
         "listType": listType
     };
     this.fetch(options, callback);
-}
+};
 Api.getMovieData = function(movieID, moviePublishedID, callback) {
     movieID = movieID || null;
     moviePublishedID = moviePublishedID || null;
@@ -765,7 +765,7 @@ Api.getMovieData = function(movieID, moviePublishedID, callback) {
         "bitRate": Player.bitRate
     };
     this.fetch(options, callback);
-}
+};
 Api.getMovieCommonUsers = function(moviePublishedID, callback) {
     moviePublishedID = moviePublishedID || null;
     callback = callback || function() {};
@@ -774,7 +774,7 @@ Api.getMovieCommonUsers = function(moviePublishedID, callback) {
         "moviePublishedID": moviePublishedID
     };
     this.fetch(options, callback);
-}
+};
 Api.getRecommendationList = function(moviePublishedID, callback) {
     moviePublishedID = moviePublishedID || null;
     callback = callback || function() {};
@@ -783,7 +783,7 @@ Api.getRecommendationList = function(moviePublishedID, callback) {
         "moviePublishedID": moviePublishedID
     };
     this.fetch(options, callback);
-}
+};
 Api.getUserProfile = function(userID, callback) {
     userID = userID || null;
     callback = callback || function() {};
@@ -792,14 +792,14 @@ Api.getUserProfile = function(userID, callback) {
     };
     if(userID && userID != "") { options.userID = userID; }
     this.fetch(options, callback);
-}
+};
 Api.getDiscoveryFeed = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getDiscoveryFeed"
     };
     this.fetch(options, callback);
-}
+};
 Api.getDiscoveryFeedPart = function(offset, limit, callback) {
     offset = offset || 0;
     limit = limit || 100;
@@ -811,7 +811,7 @@ Api.getDiscoveryFeedPart = function(offset, limit, callback) {
         "sectionID": APP.sectionID
     };
     this.fetch(options, callback);
-}
+};
 Api.createFeed = function(type, objectID, data, callback) {
     callback = callback || function() {};
     data = data || null;
@@ -826,7 +826,7 @@ Api.createFeed = function(type, objectID, data, callback) {
         options.data = data;
     }
     this.fetch(options, callback);
-}
+};
 Api.followUser = function(userID, callback) {
     callback = callback || function() {};
     var options = {
@@ -847,7 +847,7 @@ Api.followUser = function(userID, callback) {
             Util.log("Oops! Something went wrong!");
         }
     });
-}
+};
 Api.unFollowUser = function(userID, callback) {
     callback = callback || function() {};
     var options = {
@@ -855,7 +855,7 @@ Api.unFollowUser = function(userID, callback) {
         "userID": userID
     };
     this.fetch(options, callback);
-}
+};
 Api.isFollowing = function(userID, callback) {
     callback = callback || function() {};
     var options = {
@@ -863,7 +863,7 @@ Api.isFollowing = function(userID, callback) {
         "userID": userID
     };
     this.fetch(options, callback);
-}
+};
 Api.getLists = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -884,7 +884,7 @@ Api.getLists = function(userID, callback) {
 
         callback(standardLists, customLists);
     });
-}
+};
 Api.getFeedComments = function(feedID, callback) {
     callback = callback || function() {};
     var options = {
@@ -892,7 +892,7 @@ Api.getFeedComments = function(feedID, callback) {
         "feedID": feedID
     };
     this.fetch(options, callback);
-}
+};
 Api.getMovieComments = function(movieID, callback) {
     callback = callback || function() {};
     var options = {
@@ -900,7 +900,7 @@ Api.getMovieComments = function(movieID, callback) {
         "movieID": movieID
     };
     this.fetch(options, callback);
-}
+};
 Api.createFeedComment = function(feedID, message, callback) {
     callback = callback || function() {};
     var options = {
@@ -909,7 +909,7 @@ Api.createFeedComment = function(feedID, message, callback) {
         "message": message
     };
     this.fetch(options, callback);
-}
+};
 Api.createMovieComment = function(movieID, message, callback) {
     callback = callback || function() {};
     var options = {
@@ -918,7 +918,7 @@ Api.createMovieComment = function(movieID, message, callback) {
         "message": message
     };
     this.fetch(options, callback);
-}
+};
 Api.likeFeed = function(feedID, callback) {
     callback = callback || function() {};
     var options = {
@@ -927,7 +927,7 @@ Api.likeFeed = function(feedID, callback) {
         "objectType": "feed"
     };
     this.fetch(options, callback);
-}
+};
 Api.getFollowers = function(userID, callback) {
     userID = userID || null;
     callback = callback || function() {};
@@ -936,7 +936,7 @@ Api.getFollowers = function(userID, callback) {
     }
     if(userID) { options.userID = userID; }
     this.fetch(options, callback);
-}
+};
 Api.getFollowing = function(userID, callback) {
     userID = userID || null;
     callback = callback || function() {};
@@ -945,28 +945,28 @@ Api.getFollowing = function(userID, callback) {
     };
     if(userID) { options.userID = userID; }
     this.fetch(options, callback);
-}
+};
 Api.getNotifications = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getNotifications"
     };
     this.fetch(options, callback);
-}
+};
 Api.getUnseenNotificationsCount = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getUnseenNotificationsCount"
     };
     this.fetch(options, callback);
-}
+};
 Api.notificationsSeen = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "notificationsSeen"
     };
     this.fetch(options, callback);
-}
+};
 Api.welcomeCompleted = function(friendList, callback) {
     var facebookID = APP.gameState.facebookID || null;
     friendList = friendList || [];
@@ -978,7 +978,7 @@ Api.welcomeCompleted = function(friendList, callback) {
     };
     if(friendList) { options.friendList = friendList.join(); }
     this.fetch(options, callback);
-}
+};
 Api.getLikes = function(objectType, objectID, callback) {
     callback = callback || function() {};
     objectType = objectType || null;
@@ -989,7 +989,7 @@ Api.getLikes = function(objectType, objectID, callback) {
         "objectID": objectID
     };
     this.fetch(options, callback);
-}
+};
 Api.categoryDiscovered = function(categoryID, callback) {
     categoryID = categoryID || null;
     callback = callback || function() {};
@@ -998,7 +998,7 @@ Api.categoryDiscovered = function(categoryID, callback) {
         "categoryID": categoryID
     };
     this.fetch(options, callback);
-}
+};
 Api.updateUserGeoData = function(pos, callback) {
     callback = callback || function() {};
     var self  = this;
@@ -1059,7 +1059,7 @@ Api.updateUserGeoData = function(pos, callback) {
             Util.log("Oops! Something went wrong!");
         }
     });
-}
+};
 Api.getMatches = function(categoryID, callback) {
     categoryID = categoryID || null;
     callback = callback || function() {};
@@ -1068,7 +1068,7 @@ Api.getMatches = function(categoryID, callback) {
         "categoryID": categoryID
     };
     this.fetch(options, callback);
-}
+};
 Api.getTopThree = function(userID, callback) {
     userID = userID || null;
     callback = callback || function() {};
@@ -1077,7 +1077,7 @@ Api.getTopThree = function(userID, callback) {
         "userID": userID
     };
     this.fetch(options, callback);
-}
+};
 Api.getRecentListItems = function(userID, callback) {
     userID = userID || null;
     callback = callback || function() {};
@@ -1086,7 +1086,7 @@ Api.getRecentListItems = function(userID, callback) {
         "userID": userID
     };
     this.fetch(options, callback);
-}
+};
 Api.updateUserPref = function(preference, value, callback) {
     preference = preference || null;
     callback = callback || function() {};
@@ -1112,7 +1112,7 @@ Api.updateUserPref = function(preference, value, callback) {
             Util.log("Oops! Something went wrong!");
         }
     });
-}
+};
 Api.updateOnboard = function(section, callback){
     section = section || null; 
 
@@ -1127,7 +1127,7 @@ Api.updateOnboard = function(section, callback){
 
 
     this.fetch(options, callback);
-}
+};
 Api.updateUserInfo = function(data, callback) {
     data = data || null;
     callback = callback || function() {};
@@ -1154,7 +1154,7 @@ Api.updateUserInfo = function(data, callback) {
             Util.log("Oops! Something went wrong!");
         }
     });
-}
+};
 Api.getMeetup = function(eventID, callback) {
     eventID = eventID || null;
     callback = callback || function() {};
@@ -1163,14 +1163,14 @@ Api.getMeetup = function(eventID, callback) {
         "eventID": eventID
     };
     this.fetch(options, callback);
-}
+};
 Api.getMeetups = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getMeetups"
     };
     this.fetch(options, callback);
-}
+};
 Api.createMeetup = function(data, callback) {
     data = data || null;
     callback = callback || function() {};
@@ -1179,7 +1179,7 @@ Api.createMeetup = function(data, callback) {
         "data": JSON.stringify(data)
     };
     this.fetch(options, callback);
-}
+};
 Api.updateMeetup = function(eventID, data, callback) {
     eventID = eventID || null;
     data = data || null;
@@ -1190,7 +1190,7 @@ Api.updateMeetup = function(eventID, data, callback) {
         "data": JSON.stringify(data)
     };
     this.fetch(options, callback);
-}
+};
 Api.inviteMeetupUsers = function(eventID, inviteList, callback) {
     eventID = eventID || null;
     inviteList = inviteList || null;
@@ -1201,14 +1201,14 @@ Api.inviteMeetupUsers = function(eventID, inviteList, callback) {
         "inviteList": inviteList
     };
     this.fetch(options, callback);
-}
+};
 Api.isMeetupOwner = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "isMeetupOwner"
     };
     this.fetch(options, callback);
-}
+};
 Api.messageMeetupAttendees = function(eventID, message, callback) {
     eventID = eventID || null;
     message = message || null;
@@ -1219,7 +1219,7 @@ Api.messageMeetupAttendees = function(eventID, message, callback) {
         "message": message
     };
     this.fetch(options, callback);
-}
+};
 Api.cancelMeetup = function(eventID, callback) {
     eventID = eventID || null;
     callback = callback || function() {};
@@ -1228,7 +1228,7 @@ Api.cancelMeetup = function(eventID, callback) {
         "eventID": eventID
     };
     this.fetch(options, callback);
-}
+};
 Api.sendMeetupRequest = function(eventID, callback) {
     eventID = eventID || null;
     callback = callback || function() {};
@@ -1237,7 +1237,7 @@ Api.sendMeetupRequest = function(eventID, callback) {
         "eventID": eventID
     };
     this.fetch(options, callback);
-}
+};
 Api.acceptMeetupRequest = function(eventID, otherID, callback) {
     eventID = eventID || null;
     otherID = otherID || null;
@@ -1248,7 +1248,7 @@ Api.acceptMeetupRequest = function(eventID, otherID, callback) {
         "otherID": otherID
     };
     this.fetch(options, callback);
-}
+};
 Api.acceptMeetupRequest = function(eventID, otherID, callback) {
     eventID = eventID || null;
     otherID = otherID || null;
@@ -1259,7 +1259,7 @@ Api.acceptMeetupRequest = function(eventID, otherID, callback) {
         "otherID": otherID
     };
     this.fetch(options, callback);
-}
+};
 Api.nearbyWantToSee = function(moviePublishedID, callback) {
     moviePublishedID = moviePublishedID || null;
     callback = callback || function() {};
@@ -1268,7 +1268,7 @@ Api.nearbyWantToSee = function(moviePublishedID, callback) {
         "moviePublishedID": moviePublishedID
     };
     this.fetch(options, callback);
-}
+};
 Api.createMatch = function(matchID, matchedOn, callback) {
     matchID = matchID || null;
     matchedOn = matchedOn || null;
@@ -1279,7 +1279,7 @@ Api.createMatch = function(matchID, matchedOn, callback) {
         "matchedOn": matchedOn
     };
     this.fetch(options, callback);
-}
+};
 Api.blockMatch = function(matchID, callback) {
     matchID = matchID || null;
     callback = callback || function() {};
@@ -1288,28 +1288,28 @@ Api.blockMatch = function(matchID, callback) {
         "matchID": matchID
     };
     this.fetch(options, callback);
-}
+};
 Api.getUserMatches = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getUserMatches"
     };
     this.fetch(options, callback);
-}
+};
 Api.getRecommendedPeople = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getRecommendedPeople"
     }
     this.fetch(options, callback);
-}
+};
 Api.getDigestItems = function(callback) {
     callback = callback || function(){};
     var options = {
         "action": "digest"
     };
     this.fetch(options, callback);
-}
+};
 Api.incBalance = function(amount, note, callback) {
     callback = callback || function() {};
     amount = amount || null;
@@ -1320,7 +1320,7 @@ Api.incBalance = function(amount, note, callback) {
         "note": note
     };
     this.fetch(options, callback);
-}
+};
 Api.decBalance = function(amount, note, callback) {
     callback = callback || function() {};
     amount = amount || null;
@@ -1331,7 +1331,7 @@ Api.decBalance = function(amount, note, callback) {
         "note": note
     };
     this.fetch(options, callback);
-}
+};
 Api.sendGreeting = function(otherID, message, callback) {
     callback = callback || function() {};
     var options = {
@@ -1340,7 +1340,7 @@ Api.sendGreeting = function(otherID, message, callback) {
         "message": message
     };
     this.fetch(options, callback);
-}
+};
 Api.getSuggestedGreeting = function(otherID, callback) {
     callback = callback || function() {};
     var options = {
@@ -1348,7 +1348,7 @@ Api.getSuggestedGreeting = function(otherID, callback) {
         "otherID": otherID
     };
     this.fetch(options, callback);
-}
+};
 Api.findMoviesLikeTitle = function(title, callback) {
     callback = callback || function() {};
     var options = {
@@ -1356,7 +1356,7 @@ Api.findMoviesLikeTitle = function(title, callback) {
         "title": title
     };
     this.fetch(options, callback);
-}
+};
 Api.getUserFeed = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1365,7 +1365,7 @@ Api.getUserFeed = function(userID, callback) {
     };
     if(userID) { options.userID = userID; }
     this.fetch(options, callback);
-}
+};
 Api.getMovieRecommendations = function(filter, callback) {
     callback = callback || function() {};
     filter = filter || null;
@@ -1375,7 +1375,7 @@ Api.getMovieRecommendations = function(filter, callback) {
         "bitRate": Player.bitRate
     };
     this.fetch(options, callback);
-}
+};
 Api.getFavoriteDelta = function(otherUserID, callback) {
     callback = callback || function() {};
     otherUserID = otherUserID || null;
@@ -1384,7 +1384,7 @@ Api.getFavoriteDelta = function(otherUserID, callback) {
         "otherUserID": otherUserID
     };
     this.fetch(options, callback);
-}
+};
 Api.getProfileData = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1394,7 +1394,7 @@ Api.getProfileData = function(userID, callback) {
     if(userID == "") { userID = null; }
     if(userID) { options.userID = userID; }
     this.fetch(options, callback);
-}
+};
 Api.getFabricProfile = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1404,7 +1404,7 @@ Api.getFabricProfile = function(userID, callback) {
     if(userID == "") { userID = null; }
     if(userID) { options.userID = userID; }
     this.fetch(options, callback);
-}
+};
 Api.getProfileContent = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1417,7 +1417,7 @@ Api.getProfileContent = function(userID, callback) {
     if(userID) { options.userID = userID; }
 
     this.fetch(options, callback);
-}
+};
 Api.getPassion = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1427,21 +1427,21 @@ Api.getPassion = function(userID, callback) {
     if(userID == "") { userID = null; }
     if(userID) { options.userID = userID; }
     this.fetch(options, callback);
-}
+};
 Api.getFavsInCommon = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
     Api.getListMoviesInCommon(userID, "2", function(response) {
         callback(response);
     });
-}
+};
 Api.getQueueInCommon = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
     Api.getListMoviesInCommon(userID, "3", function(response) {
         callback(response);
     });
-}
+};
 Api.getListMoviesInCommon = function(userID, listType, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1451,7 +1451,7 @@ Api.getListMoviesInCommon = function(userID, listType, callback) {
         "listType": listType
     };
     this.fetch(options, callback);
-}
+};
 Api.reportUser = function(userID, reason, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1461,7 +1461,7 @@ Api.reportUser = function(userID, reason, callback) {
         "reason": reason
     };
     this.fetch(options, callback);
-}
+};
 Api.getHomeData = function(mainCat, topCat, start, limit, sectionID, callback) {
     callback = callback || function() {};
     var options = {
@@ -1475,7 +1475,7 @@ Api.getHomeData = function(mainCat, topCat, start, limit, sectionID, callback) {
         options.sectionID = sectionID;
     }
     this.fetch(options, callback);
-}
+};
 Api.getHomeCategories = function(mainCat, topCat, start, limit, sectionID, callback) {
     callback = callback || function() {};
     var options = {
@@ -1487,14 +1487,14 @@ Api.getHomeCategories = function(mainCat, topCat, start, limit, sectionID, callb
         "sectionID": sectionID
     };
     this.fetch(options, callback);
-}
+};
 Api.concierge = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "concierge"
     };
     this.fetch(options, callback);
-}
+};
 Api.getHomeFeed = function(start, limit, sectionID, callback) {
     callback = callback || function() {};
     var options = {
@@ -1504,7 +1504,7 @@ Api.getHomeFeed = function(start, limit, sectionID, callback) {
         "sectionID": sectionID
     };
     this.fetch(options, callback);
-}
+};
 Api.getHomeRecs = function(sectionID, callback) {
     callback = callback || function() {};
     var options = {
@@ -1514,7 +1514,7 @@ Api.getHomeRecs = function(sectionID, callback) {
     };
 
     this.fetch(options, callback);
-}
+};
 Api.getQ = function(QID, sectionID, callback) {
     sectionID = sectionID || APP.sectionID;
     options = {
@@ -1524,14 +1524,14 @@ Api.getQ = function(QID, sectionID, callback) {
     };
 
     this.fetch(options, callback);
-}
+};
 Api.loadFBMovies = function(movieTitles) {
     var options = {
         "action": "loadFBMovies",
         "movieTitles": movieTitles
     };
     this.fetch(options);
-}
+};
 Api.loadFBLikes = function(likes, callback) {
     callback = callback || function() {};
 
@@ -1540,7 +1540,7 @@ Api.loadFBLikes = function(likes, callback) {
         "likes": likes
     };
     this.fetch(options, callback);
-}
+};
 Api.checkFBImages = function(data, callback) {
     callback = callback || function() {};
     var options = {
@@ -1548,17 +1548,17 @@ Api.checkFBImages = function(data, callback) {
         "data": data
     };
     this.fetch(options, callback);
-}
+};
 Api.deleteAccount = function(callback) {
     callback = callback || function() {};
     var options = { "action": "deleteAccount" };
     this.fetch(options, callback);
-}
+};
 Api.activateAccount = function(callback) {
     callback = callback || function() {};
     var options = { "action": "activateAccount" };
     this.fetch(options, callback);
-}
+};
 Api.getFabricCategoryData = function(categoryID, callback) {
     callback = callback || function() {};
     var options = {
@@ -1568,12 +1568,12 @@ Api.getFabricCategoryData = function(categoryID, callback) {
         "test": true        // REMOVE THIS
     };
     this.fetch(options, callback);
-}
+};
 Api.getUnseenActivity = function(callback) {
     callback = callback || function() {};
     var options = { "action": "getUnseenActivity" };
     this.fetch(options, callback);
-}
+};
 Api.getRecommendedLists = function(callback, offset, limit) {
     offset = offset || 0;
     limit = limit || 0;
@@ -1584,14 +1584,14 @@ Api.getRecommendedLists = function(callback, offset, limit) {
         "limit": limit
     };
     this.fetch(options, callback);
-}
+};
 Api.getCategoryListPart = function(options, callback) {
     options = options || {};
     callback = callback || function() {};
     options.action = "getCategoryListPart";
     options.sectionID = APP.sectionID;
     this.fetch(options, callback);
-}
+};
 Api.getCategoryDiscoveryData = function(categoryID, callback) {
     categoryID = categoryID || null;
     callback = callback || function() {};
@@ -1601,7 +1601,7 @@ Api.getCategoryDiscoveryData = function(categoryID, callback) {
         "bitRate": Util.getBitRate()
     };
     this.fetch(options, callback);
-}
+};
 Api.getListMovies = function(listID, recommendation, callback) {
     callback = callback || function() {};
     recommendation = recommendation || false;
@@ -1612,7 +1612,7 @@ Api.getListMovies = function(listID, recommendation, callback) {
     };
     if(recommendation) { options.recommendation = recommendation; }
     this.fetch(options, callback);
-}
+};
 Api.getMutualFollowers = function(userID, callback) {
     callback = callback || function() {};
     userID = userID || null;
@@ -1623,12 +1623,12 @@ Api.getMutualFollowers = function(userID, callback) {
     if(userID && userID !== "") { options.userID = userID; }
 
     this.fetch(options, callback);
-}
+};
 Api.getAppSettings = function(callback) {
     callback = callback || function() {};
     var options = { "action": "getAppSettings" };
     this.fetch(options, callback);
-}
+};
 
 // parent ajax function to handle timeouts
 Api.fetch = function(options, callback, success) {
@@ -1686,7 +1686,7 @@ Api.fetch = function(options, callback, success) {
             }
         }
     });
-}
+};
 
 // handles the refetch specifically
 Api.refetch = function(options, callback, success) {
@@ -1738,7 +1738,7 @@ Api.refetch = function(options, callback, success) {
             }
         });
     }
-}
+};
 
 // Api load settings
 Api.loadSettings = function(response, cb) {
@@ -1750,7 +1750,7 @@ Api.loadSettings = function(response, cb) {
         Api.levelSettings = response.levelSettings;
     }
     cb();
-}
+};
 
 Api.getUserCache = function() {
     var options = { "action": "getUserCache" };
@@ -1774,7 +1774,7 @@ Api.getUserCache = function() {
         },
         error: function() {}
     });
-}
+};
 
 Api.storeResponse = function(options, response) {
     // if action is NOT skippable,
@@ -1783,21 +1783,21 @@ Api.storeResponse = function(options, response) {
         // the actual cache storing happens here
         Api.response[Util.encode(options)] = JSON.stringify(response);
     }
-}
+};
 
 Api.skippableCache = function(action) {
     // return true if we skip cache of this action
     return Api.skipCache.hasOwnProperty(action);
-}
+};
 
 Api.skippableData = function(action) {
     // return true if response data not necessary for online mode
     return Api.skipData.hasOwnProperty(action);
-}
+};
 
 Api.clearUserCache = function() {
     Api.response = {};
-}
+};
 
 Api.reconnect = function() {
     if(!Api.connected) {
@@ -1805,8 +1805,8 @@ Api.reconnect = function() {
         $("#no-connection").remove();
         UI.unmask();
     }
-}
+};
 
 Api.disconnect = function() {
     Api.connected = false;
-}
+};

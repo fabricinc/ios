@@ -1,5 +1,9 @@
 var DigestModel = Backbone.Model.extend({
 
+	defaults: {
+		playing: false,
+	},
+
 	initialize: function(){
 	
 
@@ -17,24 +21,43 @@ var DigestModel = Backbone.Model.extend({
 		
 		switch(this.get('typeTitle')){
 			case 'Music':
-				this.set('track', new Audio(this.get('digestData').clip));
+				this.set('track', this.createMedia(this.get('digestData').clip));
 				break;
 			case 'Movie': 
-				this.set('track', this.createVideo(this.get('digestData').clip));
-
+				this.set('track', this.createMedia(this.get('digestData').clip));
 		}
-
 
 	},
 
-	createVideo: function(clip){
+	createMedia: function(clip){
 
-		console.log( 'create video' );
-		var video = document.createElement("VIDEO");
+		if(!clip) { return null; }
 
-		video.src = clip;
+		var mediaType = this.get('typeTitle') === "Music" ? "AUDIO" : "VIDEO";
+		var media = document.createElement(mediaType);
 
-		return video;
+		media.preload = "auto";
+		media.src = clip;
+
+		media.addEventListener('pause', function(e) { this.togglePlaying(); }.bind(this));
+		media.addEventListener('play', function(e) { this.togglePlaying(); }.bind(this));
+
+		if(mediaType === "VIDEO"){
+			media.addEventListener('ended', function(e) { this.exitFullScreen(); }.bind(this));
+		}
+
+		return media;
+	
+	},
+	togglePlaying: function(e){
+	
+		this.set('playing', !this.get('playing'));
+	
+	},
+
+	exitFullScreen: function(){
+	
+		this.get('track').webkitExitFullScreen();
 	
 	},
 
@@ -62,27 +85,29 @@ var DigestModel = Backbone.Model.extend({
 	imageClick: function(){
 
 		switch(this.get('column_type')){
-			case 'clip':
-				this.collection.handlePlayback( this.get('track') );
-				break;
+
 			case 'people':
 				Backbone.history.navigate("matches", true);
 				break;
 			case 'pack':
 				Backbone.history.navigate("discovery?categoryID=" +  this.get('digestData').categoryID + "&listID=null", true);
+
 		}
 	
 	},
 
-	playClip: function(clip){
+	goToLobby: function(){
 
-		if(this.get('typeTitle') === 'Music') {
-			// if()
-			this.get('track').play();
-		}
-		console.log( clip ); 
+		Backbone.history.navigate('movieLobby/null/'+ this.get('object_id'), true);
+
+	},
+
+	playPause: function(){
+	
+		this.collection.handlePlayback( this );	 
 	
 	},
+
 });
 
 
@@ -94,18 +119,17 @@ var DigestItems = Backbone.Collection.extend({
 
 	tack: null,
 
-	handlePlayback: function( track ){
+	handlePlayback: function( currentModel ){
 		
+		var track = currentModel.get('track');
+
 
 		if(!track) { return; }
 
-		console.log( this );
 		
 		if(this.playing){
 
 			if (this.track === track) {
-
-				console.log( 'same track PAUSE' );
 
 				// pause track
 				this.pause();
@@ -115,8 +139,13 @@ var DigestItems = Backbone.Collection.extend({
 
 			} else { 		// Set new track
 
+				// Set current model id
+				this.currentModelID = currentModel.cid;
+
 				// Pause old track
 				this.pause();
+
+				this.updatePlayStatus();
 
 				// Switch to new track
 				this.setTrack( track );
@@ -128,6 +157,9 @@ var DigestItems = Backbone.Collection.extend({
 			
 			
 		} else { 	//Not playing any tracks
+
+			// Set current model id
+			this.currentModelID = currentModel.cid;
 
 			this.setTrack( track );
 
@@ -142,8 +174,11 @@ var DigestItems = Backbone.Collection.extend({
 	
 		this.track = newTrack;
 
+		// When the track ends change playstatus 
 		this.track.addEventListener('ended', function() {
+
 			this.updatePlayStatus.call(this);
+
 		}.bind(this));
 	
 	},
@@ -161,10 +196,50 @@ var DigestItems = Backbone.Collection.extend({
 	},
 
 	updatePlayStatus: function(){
-		console.log( 'update play status' );
+
 		 this.playing = !this.playing;
 
-		 console.log( this );
+		 // Update the playing status on 
+		 // the model of the current track 
+		 // Pass playStatus after it has been updated
+
+		 // this.updateModelPlayStatus( this.playing );
+	
+	},
+
+	updateModelPlayStatus: function( playStatus ){
+
+		var trackModel = this.get(this.currentModelID);
+
+		trackModel.set('playing', playStatus);
+
+	
+	},
+
+});
+
+var DigestSectionModel = Backbone.Model.extend({
+
+	defaults: {
+		firstName: null,
+		day: null,
+	},
+	
+	initialize: function() {
+
+		this.set('firstName', APP.gameState.uName.split(" ")[0]);
+		this.set('day', this.getDay());
+
+		
+		
+	},
+
+	getDay: function(){
+	
+		var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+		var date = new Date();
+
+		return days[date.getDay()];
 	
 	},
 
@@ -176,18 +251,26 @@ var DigestSection = Backbone.View.extend({
 
 	initialize: function(items){
 		
-		this.collection = new DigestItems(items); 
-
+		this.collection = new DigestItems(items.digestData); 
+		this.model = new DigestSectionModel(items.heading);
 	
 	},
+
 	render: function(){
 
 		// empty out the div
 		this.$el
 			.empty()
 			.removeClass('loading');
+
+		var backgroundRed = new BackgroundRed();
+		backgroundRed.render();
 	
 		// Create Header
+		var header = new DigestHeader({ model: this.model });
+
+		this.$el
+			.append( header.render().el );
 
 		// Create items
 		this.collection.each(this.addOne, this);
@@ -210,17 +293,35 @@ var DigestSection = Backbone.View.extend({
 	},
 });
 
+var BackgroundRed = Backbone.View.extend({
+
+	el: '#content-container',
+	
+	render: function() {
+
+		console.log( 'background red' );
+
+		console.log( this );
+
+		this.$el.prepend( '<div id="background-red"></div>' );
+
+
+		return this;
+	},
+
+});
 
 var DigestHeader = Backbone.View.extend({
-
-	initialize: function(){
 	
-		 
-	
-	},
+	id: 'digest-header',
 
 	render: function(){
 	
+		// Day of the week
+		this.$el
+			.append( "<h1 id='digest-day'>It's "+ this.model.get("day") )
+			.append( "<p id='digest-line'>Hi " + this.model.get("firstName") + ", here are your daily picks powered by</p>" )
+			.append( "<p id='digest-facts'><span class='bold'>"+ this.model.get('interests') +" Interests</span> and <span class='bold'> "+ this.model.get('tastemates') +" Tastemates</span></p>" );
 		
 
 		return this;  
@@ -236,6 +337,7 @@ var DigestItem = Backbone.View.extend({
 
 	render: function(){
 		
+
 		// Create Content
 		var content = new DigestItemContent({ model: this.model });
 
@@ -267,19 +369,7 @@ var DigestItemContent = Backbone.View.extend({
 
 		var model = this.model.toJSON();
 
-		console.log( model );
 		
-		var digestData = JSON.parse(model.data);
-		
-		var headerModel = {
-			icon: model.column_type === "clip" ? digestData.typeTitle : model.column_type,
-			typeTitle: model.column_type === "people" ? "Friends" : digestData.typeTitle,
-			contentTitle: digestData.objectTitle, 
-			columnType: model.column_type,
-			count: model.count
-		};
-
-
 		// Create Header
 		var contentHeader = new DigestItemHeader({ model: this.model });
 
@@ -432,7 +522,6 @@ var Recommendation = Backbone.View.extend({
 			userID = rec.userID || "",
 			name = rec.userName || "";
 
-		console.log( rec );
 
 		var avatar = new Avatar({ src: facebookID });
 
@@ -501,6 +590,14 @@ var DigestImage = Backbone.View.extend({
 	render: function() {
 
 		this.el.style.backgroundImage = 'url('+ this.model.get('digestData').objectImg +')';
+
+		if (this.model.get('track')) {
+
+			var playButton = new PlayButton({ model: this.model });
+
+			this.$el.append( playButton.render().el );
+
+		}
 
 		if(this.model.get('column_type') === 'people'){
 
@@ -579,22 +676,37 @@ var ObjectTitle = Backbone.View.extend({
 
 	tagName: 'h2',
 
-	render: function() {
+	events: {
+		"click": "routeLobby"
+	},
 
-		var title = this.model.get('digestData').objectTitle,
-			artist = this.model.get('digestData').artist;
-
+	initialize: function(){
+	
 		if( this.model.get('column_type') === "clip" ) {
 
 			this.el.className += " red uppercase";
 
 		}
+	
+	},
+
+	render: function() {
+
+		var title = this.model.get('digestData').objectTitle,
+			artist = this.model.get('digestData').artist;
+
 
 		this.$el
 			.append( artist || title )
 			.append( artist ? "<span> - "+ title +"</span>": "");
 		
 		return this;
+	},
+
+	routeLobby: function(){
+	
+		this.model.goToLobby();
+
 	},
 
 });
@@ -620,6 +732,41 @@ var Faces = Backbone.View.extend({
 
 		this.$el.append( avatar.render().el );	
 		 
+	
+	},
+
+});
+
+var PlayButton = Backbone.View.extend({
+	className: 'play-button',
+
+	events: {
+		'click': 'playPause',
+	},
+
+	initialize: function(){
+	
+		this.listenTo(this.model, 'change:playing', this.playPauseButton);
+	
+	},
+
+	render: function() {
+
+		// this.$el.append(  );
+
+		return this;
+	},
+
+	playPause: function(){
+	
+		this.model.playPause();
+	
+	},
+
+	playPauseButton: function(){
+	
+		this.model.get('playing') 
+		this.$el.toggleClass('pause');
 	
 	},
 
