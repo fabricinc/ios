@@ -434,7 +434,7 @@ Util.handleExternalUrl = function(el) {
             'netflix' : "https://itunes.apple.com/us/app/netflix/id363590051",
             'spotify' : "https://itunes.apple.com/us/app/spotify-music/id324684580?mt=8",
             'amazon' : "https://itunes.apple.com/us/app/amazon-instant-video/id545519333?mt=8"
-        }
+        };
         Util.schemeSniffer(link, function(result) {
             if (result) {
                 if ((appOnlyVendors.indexOf(vendor) !== -1)) {  // app 2 app required

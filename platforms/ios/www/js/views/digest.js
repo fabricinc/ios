@@ -827,7 +827,8 @@ var PurchaseLink = Backbone.View.extend({
 	},
 
 	purchaseLink: function(e){
-		
+		e.preventDefault(); e.stopPropagation();
+
 		this.model.shoppingLink(e.currentTarget);
 	
 	},

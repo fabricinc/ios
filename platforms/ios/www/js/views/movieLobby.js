@@ -202,7 +202,7 @@ var MovieLobbyModel = Backbone.Model.extend({
 
         $(".commerce").click(function(e) {
             e.preventDefault();     e.stopPropagation();
-
+            console.log( this );
             Util.handleExternalUrl(this);
 
             return false;
@@ -218,7 +218,7 @@ var MovieLobbyModel = Backbone.Model.extend({
             return false;
         });
 
-        setTimeout(function() { UI.initScroller($("#fake-lobby-scroller")[0]) }, 550);
+        setTimeout(function() { UI.initScroller($("#fake-lobby-scroller")[0]); }, 550);
     },
     loadSeenUsers: function(response) {
         var self = this;
@@ -227,7 +227,7 @@ var MovieLobbyModel = Backbone.Model.extend({
             this.friendData = response.friendData;
             this.seenData = response.seenData;
 
-            var users = this.friendData.concat(this.seenData)
+            var users = this.friendData.concat(this.seenData);
                 userCount = users.length;
 
 

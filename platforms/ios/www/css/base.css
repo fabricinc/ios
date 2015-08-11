@@ -2528,7 +2528,7 @@ div.check-list-wrapper div.check-list-item {
 h1.pack-footer {
     background-image: url(../images/discovery/digest/arrow.png);
     background-position: center right;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-size: 22px;
     display: inline-block;
     line-height: 30px;
