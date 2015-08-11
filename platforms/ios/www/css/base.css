@@ -2526,41 +2526,37 @@ div.check-list-wrapper div.check-list-item {
     color: gray;
 }
 h1.pack-footer {
+    background-image: url(../images/discovery/digest/arrow.png);
+    background-position: center right;
+    background-repeat: none;
+    background-size: 22px;
     display: inline-block;
     line-height: 30px;
     height: 30px;
     width: 100%;
     padding: 0;
 }
-.pack-footer span {
-    color: rgb(189, 189, 189);
-    position: relative;
-    font-size: 18px;
-    float: right;
-    right: 10px;
-    top: 1px;
-}
 .clip-footer { height: 100%; }
 
 .clip-footer div {
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 20px;
     height: 100%;
     float: left;
     width: 50%;
 }
 .clip-footer .favorite {
-    background-image: url(../images/lists/favorite.png);
+    background-image: url(../images/discovery/digest/favorite.png);
 }
 .clip-footer .favorite.active {
-    background-image: url(../images/lists/red_favorite.png);
+    background-image: url(../images/discovery/digest/red_favorite.png);
 }
 .clip-footer .queue {
-    background-image: url(../images/lists/queue.png);
-    background-size: 25px;
+    background-image: url(../images/discovery/digest/queue.png);
 }
 .clip-footer .queue.active {
-    background-image: url(../images/lists/red_queue.png);
+    background-image: url(../images/discovery/digest/red_queue.png);
 }
 .content-item-footer h1 {
     text-transform: none;

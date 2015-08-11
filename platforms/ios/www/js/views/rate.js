@@ -72,7 +72,7 @@ var RateModel = Backbone.Model.extend({
                 // }.bind(self));
 
                 Api.getDigestItems(function(response){
-                
+                    console.log( response );
                     this.set('digestItems', response);
                     
                 }.bind(self));

@@ -17,7 +17,7 @@ var DigestModel = Backbone.Model.extend({
 		this.set('typeTitle', this.get('column_type') === "people" ? "Friends" : this.get('digestData').typeTitle);
 
 		var icon = this.get('column_type') === 'clip' ? this.get('digestData').typeTitle : this.get('column_type');
-		this.set('icon', 'images/discovery/categoryIcons/' + icon + '.png');
+		this.set('icon', 'images/discovery/categoryIcons/' + icon.toLowerCase() + '.png');
 		
 		switch(this.get('typeTitle')){
 			case 'Music':
@@ -83,7 +83,7 @@ var DigestModel = Backbone.Model.extend({
 	},
 
 	imageClick: function(){
-
+		console.log( this.get('column_type') );
 		switch(this.get('column_type')){
 
 			case 'people':
@@ -91,6 +91,12 @@ var DigestModel = Backbone.Model.extend({
 				break;
 			case 'pack':
 				Backbone.history.navigate("discovery?categoryID=" +  this.get('digestData').categoryID + "&listID=null", true);
+				break;
+			case 'clip':
+				if(!this.get('track')) {  // If there is no track route them to the lobby
+					this.goToLobby();
+				}
+				this.playPause();
 
 		}
 	
@@ -263,14 +269,15 @@ var DigestSection = Backbone.View.extend({
 			.empty()
 			.removeClass('loading');
 
+		// Create background red color at top of screen 
 		var backgroundRed = new BackgroundRed();
-		backgroundRed.render();
 	
 		// Create Header
 		var header = new DigestHeader({ model: this.model });
 
 		this.$el
-			.append( header.render().el );
+			.append( header.render().el )
+			.prepend( backgroundRed.render().el );
 
 		// Create items
 		this.collection.each(this.addOne, this);
@@ -295,18 +302,12 @@ var DigestSection = Backbone.View.extend({
 
 var BackgroundRed = Backbone.View.extend({
 
-	el: '#content-container',
-	
+	id: "background-red",
+
 	render: function() {
 
-		console.log( 'background red' );
-
-		console.log( this );
-
-		this.$el.prepend( '<div id="background-red"></div>' );
-
-
 		return this;
+
 	},
 
 });
@@ -451,7 +452,7 @@ var PackFooter = Backbone.View.extend({
 
 	render: function() {
 
-		this.$el.append("See more packs<span>&#10142;</span>");
+		this.$el.append("See more packs");
 		
 		return this;
 	},
@@ -569,8 +570,7 @@ var DigestItemHeader = Backbone.View.extend({
 		this.$el
 			.append( icon.render().el )
 			.append( title.render().el )
-			.append( objectTitle.render().el )
-			.append('<p>' + (this.model.get('count') + 1) + '.</p>');
+			.append( objectTitle.render().el );
 		
 		
 		return this;
@@ -741,7 +741,7 @@ var PlayButton = Backbone.View.extend({
 	className: 'play-button',
 
 	events: {
-		'click': 'playPause',
+		// 'click': 'playPause',
 	},
 
 	initialize: function(){
@@ -765,7 +765,6 @@ var PlayButton = Backbone.View.extend({
 
 	playPauseButton: function(){
 	
-		this.model.get('playing') 
 		this.$el.toggleClass('pause');
 	
 	},
