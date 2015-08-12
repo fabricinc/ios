@@ -15,17 +15,11 @@ var DigestModel = Backbone.Model.extend({
 		this.set('queueID', APP.gameState.watchListID);
 		this.set('recommendation', this.get('digestData').recommendation);
 		this.set('typeTitle', this.get('column_type') === "people" ? "Friends" : this.get('digestData').typeTitle);
+		this.set('track', this.createMedia(this.get('digestData').clip));
 
 		var icon = this.get('column_type') === 'clip' ? this.get('digestData').typeTitle : this.get('column_type');
 		this.set('icon', 'images/discovery/categoryIcons/' + icon.toLowerCase() + '.png');
 		
-		switch(this.get('typeTitle')){
-			case 'Music':
-				this.set('track', this.createMedia(this.get('digestData').clip));
-				break;
-			case 'Movie': 
-				this.set('track', this.createMedia(this.get('digestData').clip));
-		}
 
 	},
 
