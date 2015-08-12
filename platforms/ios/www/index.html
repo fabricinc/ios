@@ -111,7 +111,7 @@
 
         <script>
             function appInit() {
-
+                // alert();
                 if (!window.APP) window.APP = APP;
                 if(Util.isMobile()) {
                     document.addEventListener("deviceready", function() { MobileDevice.onDeviceReady(); }, false);
@@ -119,13 +119,13 @@
                 } else {
                     window.APP.init();
                 }
-            };
+            }
         </script>
 	</head>
 
 	<body onload="appInit();">
 	    <div id="splash"></div>
-	    <div id="mask" class="on">
+	    <div id="mask" class="off">
 	        <div class="can"></div>
             <div class="wheel"></div>
 	    </div>

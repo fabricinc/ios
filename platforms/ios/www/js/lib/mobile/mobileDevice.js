@@ -40,7 +40,7 @@
 			        "sound":"true",
 			        "alert":"true",
 			        "ecb":"onNotificationAPN"
-		    }
+		    };
 
 		    window.plugins.pushNotification.register(getToken, pushError, pushOptions);
 		    

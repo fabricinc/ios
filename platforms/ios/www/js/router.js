@@ -172,7 +172,7 @@
                     $("#coach-arrow").css({
                         left : ( window.innerWidth / 2 ) - ( $("#coach-arrow").width() / 2 ),
 
-                    })
+                    });
 
                     UI.bindCoachEvents('fabricMenu');
 
@@ -271,7 +271,7 @@
                 if(UI.scroller.y < 0) {
                     UI.scroller.scrollTo(0, 0, 800);
                 }
-            })
+            });
         },
 
         bindGlobalEvents: function() {
@@ -307,18 +307,9 @@
 					// callback
                 }, {
                     fadeImageClass: false,
+                    loadPageHtml: false,
                     scroller: false,
-                    loadPageHtml: false
-                }, "home");
-            });
-            
-            this.on("route:startSlid", function(slid) {
-                self.loadView(new StartView({view: "start", slid: slid }), function() {
-                    // callback
-                }, {
-                    fadeImageClass: false,
-                    scroller: false,
-                    loadPageHtml: false
+                    spinner: false,
                 }, "home");
             });
 
@@ -870,8 +861,8 @@
 	});
 	
 	function initializeRouter(options) {
+        options = options || {};
         var router = new Router(),
-            options = options || {},
             bindAppRoutes = (options.bindAppRoutes === false) ? false : true; // Default to true.
 
         router.bindLoginEvents();

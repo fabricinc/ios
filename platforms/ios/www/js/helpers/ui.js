@@ -10,14 +10,12 @@ var UI = {
         oldScrollPos: 0,
         oldTitle: null,
         mask: function(spinner, callback) {
-
-
-            // if(!spinner) { callback(); }
-
             var el = document.getElementById("mask"),
                 self = this;
             callback = callback || function() { };
-            spinner = spinner || function () { };
+            spinner = typeof spinner == 'undefined' ? true : spinner;
+
+
 
             if (el.className == "off" && spinner) {
                 el.className = "on";

@@ -45,6 +45,7 @@ var APP = {
     working: false,
 
     init: function() {
+        console.log( 'app init' );
         var self = this;
         if (!this.init.done) {
 			Facebook.init();
@@ -63,6 +64,8 @@ var APP = {
 
         APP.refreshSettings();
         User.fetchData(function(success) {
+
+            console.log('fetch data' + success );
             if (!self.router) {
                 self.router = initializeRouter({ bindAppRoutes: success });
             }
@@ -193,7 +196,8 @@ var APP = {
             "fabricMenu",
             "lastStatus"
         ], function() {
+            console.log( 'loaded templates' );
             window.APP.init();
         });
     }
-}
+};
