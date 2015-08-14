@@ -109,7 +109,6 @@ input.slider-search-form {
 
 #slider-container { width: 1875px; }
 #indicator { left: 153px; }
-.login-button { left: 80px; }
 
 
 /* iPhone 6+ */
@@ -315,8 +314,7 @@ h6.like-you + .action {
 #favorite-delta .feed-item { width: 345px; padding-bottom: 0;}
 #favorite-delta .feed-footer { border-top: none; }
 #favorite-delta .feed-footer { width: 345px; margin: 0 auto; }
-#facebook { top: 327px; }
-#sign-up { top: 411px; }
+
 #ready-to-start { margin-top: 30px; }
 .share-icons div {
     text-align: center;
@@ -328,7 +326,7 @@ h6.like-you + .action {
 .share-icons div.twitter { padding-right: 0; }
 
 #user-matches .match { margin: 10px auto 0; }
-.fl .login-text { width: 230px; }
+.fl .login-text { width: 242px; }
 #registration { left: 18px; }
 #registration .row.double .icon { height: 59px; }
 #match-found,

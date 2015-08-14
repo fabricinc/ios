@@ -1,9 +1,9 @@
 
 	var MobileDevice = {
 		onDeviceReady: function() {
-            setTimeout(function() {
-                cordova.exec(null, null, "SplashScreen", "hide", []);
-            }, 500);
+            // setTimeout(function() {
+                // cordova.exec(null, null, "SplashScreen", "show", []);
+            // }, 500);
 
 
 			var self = MobileDevice;

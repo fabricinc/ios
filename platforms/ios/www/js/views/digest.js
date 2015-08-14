@@ -14,12 +14,13 @@ var DigestModel = Backbone.Model.extend({
 		this.set('done', !!parseInt(this.get('done')));
 		this.set('queueID', APP.gameState.watchListID);
 		this.set('recommendation', this.get('digestData').recommendation);
-		this.set('typeTitle', this.get('column_type') === "people" ? "Friends" : this.get('digestData').typeTitle);
+		this.set('typeTitle', this.get('column_type') === "people" ? "people like you" : this.get('digestData').typeTitle);
 		this.set('track', this.createMedia(this.get('digestData').clip));
 
 		var icon = this.get('column_type') === 'clip' ? this.get('digestData').typeTitle : this.get('column_type');
-		this.set('icon', 'images/discovery/categoryIcons/' + icon.toLowerCase() + '.png');
+		this.set('icon', 'images/digest/categoryIcons/' + icon.toLowerCase() + '.png');
 		
+
 
 	},
 
@@ -77,7 +78,7 @@ var DigestModel = Backbone.Model.extend({
 	},
 
 	imageClick: function(){
-		console.log( this.get('column_type') );
+
 		switch(this.get('column_type')){
 
 			case 'people':
@@ -105,6 +106,14 @@ var DigestModel = Backbone.Model.extend({
 	playPause: function(){
 	
 		this.collection.handlePlayback( this );	 
+	
+	},
+
+	viewProfile: function(){
+	
+		var ID = this.model.get('recommendation').userID;
+
+		Backbone.history.navigate('profile/'+ ID, true);
 	
 	},
 
@@ -250,10 +259,13 @@ var DigestSection = Backbone.View.extend({
 	el: "#content-container .content-scroller",
 
 	initialize: function(items){
-		
+
+		items.digestData.push( this.makePeopleObject() );
 		this.collection = new DigestItems(items.digestData); 
 		this.model = new DigestSectionModel(items.heading);
-	
+
+		console.log( this.collection );
+
 	},
 
 	render: function(){
@@ -290,6 +302,18 @@ var DigestSection = Backbone.View.extend({
 		var item = new DigestItem({ model: digestItem });
 
 		this.$el.append( item.render().el );
+	
+	},
+
+	makePeopleObject: function(){
+	
+		var object = {
+			data: JSON.stringify({ objectImg: 'images/digest/6inviteItem.png'}),
+			column_type: "people",
+			done: 0,
+		};
+
+		return object;
 	
 	},
 });
@@ -535,6 +559,10 @@ var Avatar = Backbone.View.extend({
 
 	tagName: 'img',
 
+	events: {
+		'click': 'viewProfile'
+	},
+
 	initialize: function(options){
 
 		this.el.src = options.src 
@@ -547,6 +575,12 @@ var Avatar = Backbone.View.extend({
 		
 		return this;
 
+	},
+
+	viewProfile: function(){
+	
+		this.model.viewProfile();
+	
 	},
 
 });
@@ -600,6 +634,14 @@ var DigestImage = Backbone.View.extend({
 			this.$el.append( faces.render().el );
 
 		}
+
+		if(this.model.get('column_type') === 'pack'){
+
+			var packTitle = new PackTitle({ model: this.model });
+
+			this.$el.append( packTitle.render().el );
+
+		}
 		
 		return this;
 	},
@@ -607,6 +649,28 @@ var DigestImage = Backbone.View.extend({
 	navigate: function(){
 	
 		this.model.imageClick();	
+	},
+
+});
+
+var PackTitle = Backbone.View.extend({
+	
+	id: 'pack-title',
+	
+	className: 'section',
+	
+	render: function() {
+		var section = this.model.get('section_id');
+
+		this.el.className += section;
+
+		var icon = "<div class='icon icon"+ section + "'></div>";
+
+		this.$el
+			.append( icon )
+			.append( this.model.get('digestData').objectTitle );
+
+		return this;
 	},
 
 });
@@ -631,17 +695,9 @@ var DigestTitle = Backbone.View.extend({
 
 	render: function() {
 
-		var headline = "";
-
-		if( this.model.get('typeTitle') === 'Friends' ){
-
-			headline = "<span> Check out other fans of</span>";
-
-		}
 
 		this.$el
-			.append( this.model.get('typeTitle') )
-			.append( headline );	
+			.append( this.model.get('typeTitle') );	
 		
 		return this;
 	},
@@ -686,14 +742,19 @@ var ObjectTitle = Backbone.View.extend({
 
 	render: function() {
 
-		var title = this.model.get('digestData').objectTitle,
-			artist = this.model.get('digestData').artist;
+		if( this.model.get('column_type') === 'clip'){
+
+			var title = this.model.get('digestData').objectTitle,
+				artist = this.model.get('digestData').artist;
 
 
-		this.$el
-			.append( artist || title )
-			.append( artist ? "<span> - "+ title +"</span>": "");
-		
+			this.$el
+				.append( artist || title )
+				.append( artist ? "<span> - "+ title +"</span>": "");
+
+
+		}
+
 		return this;
 	},
 
@@ -714,7 +775,9 @@ var Faces = Backbone.View.extend({
 
 	render: function() {
 
-		_.each(this.model.get('digestData').facebookIDs, this.tasteMate, this);
+		this.$el.html('Check out people to follow for better recommendations');
+
+		// _.each(this.model.get('digestData').facebookIDs, this.tasteMate, this);
 		
 		return this;
 	},

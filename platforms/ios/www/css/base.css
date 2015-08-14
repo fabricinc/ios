@@ -139,6 +139,10 @@ header {
     right: 0%;
     overflow: hidden;
 }
+#wrapper.login {
+    background-image: url(../images/login/background.jpg);
+    background-size: 100%;
+}
 #wrapper.leftMenu { left: 87% !important; }
 #wrapper.rate div.left.button.back,
 #wrapper.welcome div.left.button.back,
@@ -170,34 +174,27 @@ header nav h1, #available-services h1 {
 }
 #coach-section h1,
 #dashboard header nav h1 {
-    background-color: #d32724;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.41);
-    text-transform: uppercase;
-    font-family: Knockout;
-    padding: 0 5px 0 12px;
+    background-image: url(../images/logo/6logo.png);
+    background-repeat:no-repeat;
+    background-position: 0 2px;
     display: inline-block;
-    font-weight: normal;
-    margin: 7px auto 0;
-    border-radius: 3px;
+    background-size: 100%;
     position: relative;
-    line-height: 32px;
-    padding-top: 3px;
-    text-align: left;
-    font-size: 28px;
-    color: white;
+    margin-top: 10px;
     width: 90px;
 }
 
 header nav h1 {
-    width: 210px;
-    margin: 0 0 0 45px;
-    font-size: 20px;
-    height: 47px;
-    display: table-cell;
     vertical-align: middle;
-    padding-left: 45px;
-    font-size: 16px;
+    display: table-cell;
+    position: absolute;
     line-height: 18px;
+    line-height: 47px;
+    font-size: 20px;
+    font-size: 16px;
+    height: 47px;
+    right: 0;
+    left: 0;
 }
 
 #dashboard header nav h1 {
@@ -228,65 +225,6 @@ header nav h1 {
 #dashboard header nav h1.open span {
     background-image: url(../images/discovery/fabricIcons/arrowRed.png);
 }
-#current-icon.all, #dashboard header nav h1.open span {
-    background-size: 100% 100%;
-    height: 36px;
-    position: absolute;
-    top: 0px;
-}
-#current-icon.all { background-image: url(../images/discovery/fabricIcons/arrowBlack.png); }
-#current-icon.travel { background-image: url(../images/discovery/travel.png); }
-#current-icon.music { background-image: url(../images/discovery/music.png); }
-#current-icon.tv { background-image: url(../images/discovery/tv.png); }
-
-#fabric-menu {
-    background-color: rgba(0, 0, 0, 0.82);
-    transition: top  400ms 200ms ease-in-out;
-    position: absolute;
-    height: 620px;
-    top: -620px;
-    width: 100%;
-    z-index: 1000;
-}
-.list #fabric-menu.open { top: 50px; }
-#dashboard #fabric-menu.open { top: 50px; }
-.fabric-nav-item {
-    margin: 5px;
-    line-height: 80px;
-    color: whitesmoke;
-    font-weight: bold;
-    font-size: 22px;
-    padding: 0 10px;
-    background-repeat: no-repeat;
-    background-position: 5px 24px;
-    background-size: 30px;
-}
-#fabric-menu div.fabric-nav-item.honda { background-color: transparent; }
-.fabric-nav-item div {
-    text-transform: uppercase;
-    padding-left: 34px;
-}
-.fabric-nav-item div.cs {
-    background-image: url(../images/discovery/coming-soon-banner.png);
-    background-position: 110px 0;
-    background-size: 98.5px 81px;
-    background-repeat: no-repeat;
-}
-#fabric-menu .count {
-    position: absolute;
-    right: 25px;
-    font-size: 18px;
-    font-weight: normal;
-}
-#fabric-menu .verb {
-
-}
-#all-nav { color: #777; background-color: rgb(255, 255, 255); background-image: url(../images/discovery/fabricIcons/alldot.png); }
-#movies-nav { background-color: rgb(249, 84, 84); background-image: url(../images/discovery/fabricIcons/movieMenuIcon.png); }
-#tv-nav { background-color: rgb(82, 196, 217); background-image: url(../images/discovery/fabricIcons/tvMenuIcon.png); }
-#music-nav { background-color: rgb(255, 179, 40); background-image: url(../images/discovery/fabricIcons/musicMenuIcon.png); }
-#travel-nav { background-color: rgb(3, 94, 255); background-image: url(../images/discovery/fabricIcons/travelMenuIcon.png); }
-
 header nav .slide,
 header nav #tap-menu,
 header nav #chat-menu,
@@ -641,36 +579,72 @@ div.left.button.back:active { opacity: 0.5; }
 	position: relative;
     border-top: 1px solid #D32724;
 }
-#wrapper.home {
-    /*background-color: rgb(215, 55, 48);
-    color: #FFF;*/
-}
-#slider {
-    width: 320px;
-    height: 480px;
-    overflow: hidden;
-}
-#slider-container {
-    width: 1600px;
-    height: auto;
-    overflow: hidden;
-}
-#slider-container .intro-slide {
-    position: relative;
-    float: left;
-    width: 320px;
-    height: 480px;
-    background-size: 100% 100%;
+/* * * * * * * * NEW LOGIN SEQUENCE* * * * * * * * */
+
+#login-logo {
+    background-image: url(../images/logo/6logo.png);
+    transition: top 100ms ease-in-out;
     background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    margin: 0 auto;
+    width: 150px;
+    height: 50px;
+    top: 18%;
+    right: 0;
+    left: 0;
 }
-/*url(../images/login/nslide1-4.png); */
-#slider-container #slide1 { background-image: url(../images/login/01_slide.png); }
-#slider-container #slide2 { background-image: url(../images/login/02_slide.png); }
-#slider-container #slide3 { background-image: url(../images/login/03_slide.png); }
-#slider-container #slide4 { background-image: url(../images/login/04_slide.png); }
-#slider-container #slide5 { background-color: white; }
+#login-content {
+    position: absolute;
+    font-weight: 300;
+    margin: 0 20px;
+    color: white;
+    bottom: 10px;
+    height: 74%;
+    right: 0;
+    left: 0;
+}
+#login-content p {
+    margin-top: 1.6em;
+    font-size: 1.6em;
+    line-height: 1.1em;
+}
+#bottom-line {
+    position: absolute;
+    text-align: center;
+    font-weight: 400;
+    font-size: 1em;
+    color: white;
+    bottom: 20px;
+    right: 10px;
+    left: 10px;
+}
+#bottom-line.create-account,
+#bottom-line.email {
+    font-size: 0.8em;
+}
+#bottom-line a,
+#bottom-line span {
+    font-weight: 500;
+    color: white;
+}
+#login {
+    background-color: rgba(255, 255, 255, 0.41);
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 15px;
+    height: 77%;
+}
+#login section {
+    transition: top 300ms ease-in-out;
+    margin-bottom: 15px;
+    position: relative;
+    height: 100%;
+    top: 0;
+
+}
 #login-content, #register-content { text-align: center;}
-#login-content {position: absolute;}
 #register-content #logo { display: none; }
 #logo {
     width: 200px;
@@ -683,8 +657,14 @@ div.left.button.back:active { opacity: 0.5; }
     margin: 20px auto;
 }
 #user-login {
-    width: 90%;
-    margin: 158px auto 35px auto;
+
+}
+.modal-overlay.active {
+    background-color: rgba(255, 255, 255, 0.54);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
 }
 #user-login .login-text {
     border: 1px solid gray;
@@ -694,16 +674,16 @@ div.left.button.back:active { opacity: 0.5; }
 }
 #user-login #username { border-bottom: none; }
 .fl .login-text {
-    width: 217px;
-    clear: both;
-    border: none;
-    font-size: 16px;
-    color: rgb(171, 171, 171);
-    margin: 0;
-    height: 21px;
     -webkit-appearance: none;
-    display: block;
+    color: rgb(80, 80, 80);
     border-radius: 0px;
+    font-size: 16px;
+    display: block;
+    border: none;
+    height: 21px;
+    width: 187px;
+    clear: both;
+    margin: 0;
 }
 #registration .row {
     overflow: hidden;
@@ -712,31 +692,33 @@ div.left.button.back:active { opacity: 0.5; }
     border: 1px solid #999;
 }
 #registration .row .icon {
+    background-position: 11px 3px;
+    border-right: 1px solid #999;
+    background-repeat: no-repeat;
+    background-size: 22px 23px;
+    background-color: white;
+    height: 29px;
     float: left;
     width: 44px;
-    height: 29px;
-    border-right: 1px solid #999;
-    background-size: 22px 23px;
-    background-repeat: no-repeat;
-    background-position: 11px 3px;
 }
 #registration .row.double .icon {
-    height: 57px;
     background-position: 11px 17px;
+    height: 59px;
 }
 #registration .row.name .icon { background-image: url(../images/login/register-user.png); }
 #registration .row.email .icon { background-image: url(../images/login/register-email.png); }
 #registration .row.password .icon { background-image: url(../images/login/register-lock.png); }
 #registration .row.birthday .icon { background-image: url(../images/login/register-cake.png); }
 #registration .row.double .login-text:first-child { border-bottom: 1px solid #999 !important; }
-#registration .gender-buttons { overflow: hidden; }
+#registration .gender-buttons { overflow: hidden; margin-left: 60px; }
 #registration .gender-buttons div {
-    width: 32%;
-    float: left;
-    height: 29px;
+    background-color:  rgb(198, 198, 198);
     text-align: center;
     line-height: 29px;
+    height: 29px;
+    float: left;
     color: #666;
+    width: 32%;
 }
 #registration .gender-buttons div.active {
     background-color: rgb(241, 241, 241);
@@ -780,67 +762,96 @@ div.left.button.back:active { opacity: 0.5; }
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-#login-back {
+
+#login-buttons {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    color: #C0322F;
-    background-image: url(../images/discovery/icon_back.png);
-    background-repeat: no-repeat;
-    background-size: 12px;
-    padding-left: 18px;
-    line-height: 20px;
+    margin: 0 auto;
+    bottom: 95px;
+    height: 30%;
+    width: 80%;
+    right: 0;
+    left: 0;
 }
 #recover-password,
 #register-button,
 #login-button {
-    color: whitesmoke;
-    background-color: #C0322F;
-    border: 0 none;
-    width: 100%;
-    border-radius: 5px;
-    padding: 10px;
     -webkit-appearance: none;
-    margin-top: 34px;
-    font-size: 24px;
-    text-transform: capitalize;
+    border: 0 none;
+    padding: 2px;
+    right: 10px;
+    left: 10px;
+    bottom: 0;
 }
-#register-button { margin: 17px 0 32px 0; }
-#register-back,
-#forgot-password {
+
+#login-button:after {
+    content: "Login";
+}
+#register-button:after {
+    content: "Sign Up";
+}
+#login-buttons .login-button:after {
+    margin-left: 50px;
+    text-align: left;
+}
+#login-buttons .login-button {
+    text-align: left;
+    width: 100%;
+}
+#email:after {
+    content: "Log in with Email";
+}
+#email {
+    bottom: 0;
+}
+.login-button {
+    background-color: rgba(189, 49, 46, 0.82);
+    position: absolute;
+    border-radius: 4px;
     text-align: center;
-    color: #C0322F;
-    font-size: 16px;
+    line-height: 58px;
+    font-weight: 500;
+    font-size: .9em;
+    color: white;
+    height: 55px;
+}
+#facebook {
+    background-repeat: no-repeat;
+    background-position: 10px 0;
+    background-color: #2F4EA5;
+    background-size: 28px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#forgot-password {
     text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
 }
 #create-account {
     margin-top: 10px;
     text-align: center;
-    color:  #666;
     font-size: 16px;
     text-decoration: none;
 }
-#create-account span { color: #C0322F; line-height: 24px; }
+#create-account span { font-weight: 500; }
 #terms {
     position: absolute;
+    line-height: 17px
+    text-align: left;
+    font-size: 15px;
+    margin: 0 auto;
     bottom: 10px;
+    color: gray;
+    width: 94%;
     right: 0;
     left: 0;
-    margin: 0 auto;
-    font-size: 15px;
-    text-align: left;
-    width: 94%;
-    color: gray;
-    line-height: 17px
 }
 #tos {
-    color: royalblue;
     text-decoration: none;
-}
-#registration {
-    position: absolute;
-    top: 125px;
-    padding: 0 20px;
 }
 #ready-to-start {
     color: black;
@@ -860,33 +871,10 @@ div.left.button.back:active { opacity: 0.5; }
     color: gray;
     line-height: 18px;
 }
-.login-button {
-    color: white;
-    width: 223px;
-    height: 49px;
-    position: absolute;
-    left: 50px;
-    z-index: 10;
-    background-size: 223px 49px;
-    text-align: center;
-    line-height: 49px;
-    border-radius: 4px;
-    font-size: 17px;
-    background-color: #C0322F;
-    color: white;
-}
+
 #sign-up { top: 361px; }
-#facebook {
-    top: 277px;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #526fa7;
-    background-image: url(../images/login/facebook.png);
-    background-repeat: no-repeat;
-    background-size: 28px;
-    background-position: 10px 0;
-    border: 1px solid #486498;
-    width: 221px;
+#facebook:after {
+    content: "Log in with Facebook";
 }
 #trailerpop { top: 300px; }
 #pop-up-wrapper {
@@ -929,9 +917,12 @@ div.left.button.back:active { opacity: 0.5; }
     margin: 20px 0;
 }
 #recover-password {
-    margin-top: 0;
+    background-color: rgb(189, 49, 46);
     font-size: 18px;
+    margin-top: 0;
     padding: 12px;
+    color: white;
+    width: 100%;
 }
 #category-container {
     background: #F5F5F7;
@@ -1373,7 +1364,6 @@ div#fancy-button:after {
 /*.poster img.category-img { height: 150px; }*/
 .music-section .poster img.movie-img { height: 258px;}
 .poster img.movie-img { height: 390px; }
-.poster img.movie-img.music { height: 260px; }
 #category-container div .highlight {
     position: absolute;
     top: 5px;
@@ -1388,6 +1378,7 @@ div#fancy-button:after {
     background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 0;
 }
+#pack-title,
 #welcome div .title,
 #recommended-list div .title,
 #up-next-wrapper div .title,
@@ -1409,19 +1400,24 @@ div#fancy-button:after {
     margin-bottom: 0px;
 }
 
+#pack-title.section1,
 #category-container div.catItem.section1 .title,
 #welcome div.catItem.section1 .title,
 #up-next-wrapper div.catItem.section1 .title { background-color: rgba(248, 58, 64, 0.9); }
+#pack-title.section2,
 #category-container div.catItem.section2 .title,
 #welcome div.catItem.section2 .title,
 #up-next-wrapper div.catItem.section2 .title { background-color: rgba(63, 184, 209, 0.9); }
+#pack-title.section3,
 #category-container div.catItem.section3 .title,
 #welcome div.catItem.section3 .title,
 #up-next-wrapper div.catItem.section3 .title { background-color: rgba(0, 55, 255, 0.9); }
+#pack-title.section4,
 #category-container div.catItem.section4 .title,
 #welcome div.catItem.section4 .title,
 #up-next-wrapper div.catItem.section4 .title { background-color: rgba(255, 167, 13, 0.9); }
 
+#pack-title .icon,
 #welcome div .title .icon,
 #recommended-list div .title .icon,
 #up-next-wrapper div .title .icon,
@@ -1434,18 +1430,19 @@ div#fancy-button:after {
     background-size: 100% 100%;
     margin-right: 5px;
 }
+#pack-title .icon1,
 #welcome div .title .icon.icon1,
 #category-container div .title .icon.icon1,
 #up-next-wrapper div .title .icon.icon1 { background-image: url(../images/discovery/movies.png); }
-
+#pack-title .icon2,
 #welcome div .title .icon.icon2,
 #category-container div .title .icon.icon2,
 #up-next-wrapper div .title .icon.icon2 { background-image: url(../images/discovery/tv.png); }
-
+#pack-title .icon3,
 #welcome div .title .icon.icon3,
 #category-container div .title .icon.icon3,
 #up-next-wrapper div .title .icon.icon3 { background-image: url(../images/discovery/travel.png); }
-
+#pack-title .icon4,
 #welcome div .title .icon.icon4,
 #category-container div .title .icon.icon4,
 #up-next-wrapper div .title .icon.icon4 { background-image: url(../images/discovery/music.png); }
@@ -2437,7 +2434,6 @@ div.check-list-wrapper div.check-list-item {
 #digest-day {
     font-family: WisdomScript;
     text-transform: capitalize;
-    font-style: italic;
     font-size: 27px;
     padding: 14px 0;
 }
@@ -2452,10 +2448,11 @@ div.check-list-wrapper div.check-list-item {
     padding: 5px 0;
 }
 .digest-item {
-    border: 1px solid lightgray;
+    box-shadow: -2px 6px 6px -4px #cdcdcd;
+    border: 1px solid #cdcdcd;
+    background: #ffffff;
     border-radius: 4px;
     position: relative;
-    background: #ffffff;
     margin: 10px;
 }
 .digest-item h1 {
@@ -2492,6 +2489,7 @@ div.check-list-wrapper div.check-list-item {
 .digest-content-img {
     background-size: 100%;
     position: relative;
+    overflow: hidden;
     margin: 1px 0 0;
     height: 153px;
 }
@@ -2509,6 +2507,7 @@ div.check-list-wrapper div.check-list-item {
 .digest-item-content {
     margin: 11px 10px;
 }
+.digest-item-content-header { min-height: 40px; }
 .digest-item-content-header h1 span{
     text-transform: initial;
 }
@@ -2518,7 +2517,7 @@ div.check-list-wrapper div.check-list-item {
     color: black;
 }
 .content-item-footer {
-    background-color: #EFEFF4;
+    border-top: 1px solid #CDCDCD;
     line-height: 20px;
     font-size: 10px;
     padding: 10px;
@@ -2531,7 +2530,10 @@ h1.pack-footer {
     background-repeat: no-repeat;
     background-size: 22px;
     display: inline-block;
+    text-align: center;
     line-height: 30px;
+    font-weight: 500;
+    font-size: 1.5em;
     height: 30px;
     width: 100%;
     padding: 0;
@@ -2547,16 +2549,16 @@ h1.pack-footer {
     width: 50%;
 }
 .clip-footer .favorite {
-    background-image: url(../images/discovery/digest/favorite.png);
+    background-image: url(../images/digest/favorite.png);
 }
 .clip-footer .favorite.active {
-    background-image: url(../images/discovery/digest/red_favorite.png);
+    background-image: url(../images/digest/red_favorite.png);
 }
 .clip-footer .queue {
-    background-image: url(../images/discovery/digest/queue.png);
+    background-image: url(../images/digest/queue.png);
 }
 .clip-footer .queue.active {
-    background-image: url(../images/discovery/digest/red_queue.png);
+    background-image: url(../images/digest/red_queue.png);
 }
 .content-item-footer h1 {
     text-transform: none;
@@ -2593,9 +2595,12 @@ h1.pack-footer {
 }
 .tastemates {
     position: absolute;
+    text-align: center;
+    font-weight: 500;
     margin: 0 auto;
-    bottom: 5px;
-    width: 57%;
+    color: white;
+    bottom: 40%;
+    width: 85%;
     right: 0;
     left: 0;
 }
@@ -2605,6 +2610,16 @@ h1.pack-footer {
     line-height: 30px;
     margin-left: 5px;
     font-size: 12px;
+}
+#pack-title {
+    text-shadow: none;
+    font-weight: 400;
+    width: 263px;
+}
+#pack-title .icon {
+    margin-top: 2px;
+    height: 15px;
+    width: 15px;
 }
 
 /* ++++++++++++++++++++ NEW REC FEED ++++++++++++++++++++ */
@@ -4978,13 +4993,18 @@ div#search-for-friends {
     background-color: rgb(228, 226, 225);
 }
 #feed-container #feed { padding-bottom: 20px; }
-.feed-item-card { margin-top: 10px;}
-.feed-item {
-    padding: 10px;
-    background-color: #FFF;
+.feed-item-card { 
+    border: 1px solid #CDCDCD;
+    border-radius: 5px;
     margin-top: 10px;
-    width: 280px;
+
+}
+.feed-item {
+    background-color: #FFF;
+    border-radius: 5px;
     position: relative;
+    margin-top: 10px;
+    padding: 10px;
 }
 .list-item .compatibility,
 .feed-item .compatibility {
@@ -5144,10 +5164,12 @@ h6.like-you + .action {
     color: rgb(117,117,117);
 }
 .feed-footer {
+    border-top: 1px solid rgb(228, 226, 225)
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: rgb(245, 245, 245);
     overflow: hidden;
     padding: 5px 0;
-    background: rgb(245, 245, 245);
-    border-top: 1px solid rgb(228, 226, 225)
 }
 .feed-footer.suggested {
     background-image: url(../images/discovery/carrot.png);

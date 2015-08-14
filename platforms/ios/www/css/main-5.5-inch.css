@@ -84,7 +84,6 @@
     height: 736px;
 }
 #indicator { left: 173px; }
-.login-button { left: 98px; }
 #side-swipe .contain,
 .empty-concierge {
     width: 395px;
@@ -208,8 +207,7 @@ div#friends-queued.bottom-info span {
 #favorite-delta .delta-poster img { width: 360px; }
 #favorite-delta .feed-item { width: 385px; }
 #favorite-delta .feed-footer { width: 385px; margin: 0 auto; }
-#facebook { top: 327px; }
-#sign-up { top: 411px; }
+
 #ready-to-start { margin-top: 30px; }
 .share-icons div {
     padding-right: 0;
@@ -234,7 +232,7 @@ h6.like-you + .action {
 }
 .feed-item .action .comment { margin-top: 45px; }
 #user-matches .match { margin: 10px auto 0; }
-.fl .login-text { width: 230px; }
+.fl .login-text { width: 281px; }
 #registration { left: 43px; }
 #registration .row.double .icon { height: 59px; }
 #match-found,

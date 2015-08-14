@@ -35,7 +35,7 @@ RegisterView = Backbone.View.extend({
 
         $("#tos").fastClick(function(){
             window.open("http://www.tryfabric.com/TOS/", '_blank', 'location=yes');
-        })
+        });
         $("#register-back").fastClick(function() {
             Backbone.history.navigate("login", true);
 

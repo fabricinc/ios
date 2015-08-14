@@ -317,8 +317,7 @@
         login: function() {
             var self = this;
             var password = $('#password').val(),
-                username = $('#username').val(),
-                self = this;
+                username = $('#username').val();
 
             if (/['"]/g.test(username)) {
                 Util.alert('Single quotes are not allowed in user names!', "Username Format");
@@ -356,10 +355,11 @@
             };
             var self = this;
             if(response.authorized && response.active) {
+
+
                 MobileDevice.getGeolocation(function(pos) {
                     Api.updateUserGeoData(pos);
                 });
-
 
                 
                 if (facebookData) {
@@ -431,6 +431,7 @@
                     */
                 }, 200);
             } else {
+                console.log( 'not logged in' );
                 cb(false);
                 $("input").blur();
                 setTimeout(function() {

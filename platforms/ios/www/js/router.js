@@ -6,8 +6,7 @@
             "back": "back",
             "home": "rate",
             "welcome": "welcome",
-            "start": "start",
-            "start/:slid": "startSlid",
+            "start(/:login)": "start",
             "login": "login",
             "register": "register",
             "friends(/:userID)(/:isSelf)": "friends",
@@ -90,8 +89,9 @@
 
         loadView: function(view, callback, options, className) {
 
-			var options = options || {},
-                fade = options.fadeImageClass === false ? false : true, // Default to true
+			options = options || {};
+
+            var fade = options.fadeImageClass === false ? false : true, // Default to true
                 scroller = options.scroller === false ? false : true, // Default to true
                 load = options.loadPageHtml === false ? false : true, // Default to true
                 spinner = options.spinner === false ? false : true, 
@@ -145,7 +145,7 @@
                 Backbone.history.navigate("rate", true);
 
                 return false;
-            })
+            });
 
             if(className != "messages") {
                 $("#chat-menu").fastClick(function() {
@@ -154,32 +154,7 @@
                     //UI.loadConversations($("#right-menu .content"));
                 });
             }
-            // show and hide fabric filter on Title click -- Only on dashboard / rate / home page
-            $("#dashboard header nav h1, #fabric-menu").fastClick(function(e) {
-                e.preventDefault(); e.stopPropagation();
-
-                $("#fabric-menu, #dashboard header nav h1").toggleClass("open"); 
-
-                // SHOW COACH 
-                if(this.id !== 'fabric-menu' && APP.gameState.fabricMenu === "0"){
-
-                    var coach = APP.load("coach", { section : 'fabricMenu' }),
-                        clone = $(this).clone();
-
-                    $('#coach-overlay').html(coach);
-                    $("#coach-section").prepend(clone);
-
-                    $("#coach-arrow").css({
-                        left : ( window.innerWidth / 2 ) - ( $("#coach-arrow").width() / 2 ),
-
-                    });
-
-                    UI.bindCoachEvents('fabricMenu');
-
-                }
-
-                return false;
-            });
+            
 
             // SHOW FABRIC MENU LIST ? not sure why
             $(".list header nav h1").fastClick(function(e) {
@@ -302,15 +277,15 @@
         },
         bindLoginEvents: function() {
             var self = this;
-            this.on("route:start", function() {
-                self.loadView(new StartView(), function() {
+            this.on("route:start", function(login) {
+                self.loadView(new StartView({login: login }), function() {
 					// callback
                 }, {
                     fadeImageClass: false,
                     loadPageHtml: false,
                     scroller: false,
                     spinner: false,
-                }, "home");
+                }, "login");
             });
 
             this.on("route:login", function() {
@@ -866,7 +841,8 @@
             bindAppRoutes = (options.bindAppRoutes === false) ? false : true; // Default to true.
 
         router.bindLoginEvents();
-
+        // Hide splash screen
+        navigator.splashscreen.hide();
 
 		if (bindAppRoutes) {
 
@@ -882,4 +858,4 @@
             Backbone.history.navigate("start", true);
 		}
         return router;
-    };
+    }

@@ -230,9 +230,10 @@ var RateView = Backbone.View.extend({
                         self.displayFeed(self.filter, cb); //Which feed filter to display
                     });
                 } else {
+                    console.log( 'not logged in on rate' );
                     Util.log("user is NOT active right now, handle this");
                     UI.unmask();
-                    Backbone.history.navigate("");
+                    Backbone.history.navigate("start/true", true);
                 }
             });
         });
