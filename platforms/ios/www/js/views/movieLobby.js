@@ -23,15 +23,18 @@ var MovieLobbyModel = Backbone.Model.extend({
 
         self.gtiOS5 = Util.iOSVersion()[0] > 5 ? true : false;
 
-        console.log( 'movieID '+self.movieID );
-        console.log( 'publishedID '+ self.publishedID );
 	    // get the movie information and supply the html
 	    Api.getMovieData(self.movieID, self.publishedID, function(response) {
+
+
             if(!response.success) {
                 Util.alert("Sorry! There was an error gathering movie data!", "Oops!");
                 Backbone.history.navigate('back', true);
                 return false;
             }
+
+            console.log( response );
+            self.movieID = response.movie.movieID;
 
             self.movie = response.movie;
             Api.getShoppingLinks(self.movie.moviePublishedID, function(response) {
@@ -139,7 +142,7 @@ var MovieLobbyModel = Backbone.Model.extend({
                                 caption: "Discover more @tryfabric",
                                 link: "https://itunes.apple.com/us/app/trailerpop/id587645214",
                                 picture: Api.appSettings.cdn + movie.posterPath.replace("/files", ""),
-                            }
+                            };
 
                             FB.ui(options, function(response) {});
                         } else if(action === "twitter-share"){
@@ -214,6 +217,7 @@ var MovieLobbyModel = Backbone.Model.extend({
         }
 
         $("#movie-discussion").fastClick(function() {
+            console.log( self.movieID );
             Backbone.history.navigate("movieDiscussion/" + self.movieID, true);
             return false;
         });

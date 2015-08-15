@@ -324,8 +324,10 @@
                 return false;
             }
 
-            // server-side auth
+
             UI.mask();
+            
+            // server-side auth
             Api.checkLogin(username, password, undefined, function(response, facebookData) {
                 self.loginCallback(response, facebookData);
             });
@@ -407,46 +409,11 @@
                         $("#pop-up-wrapper").hide();
                     });
 
-                    /*
-                    $("input").blur();
-                    setTimeout(function() {
-                        console.log("show inactive account");
-                        var html = APP.load("inactiveAccount");
-                        $("#pop-up-wrapper #pop-up").html(html).prepend("<div class=\"close\"></div>");
-                        $("#pop-up-wrapper").show();
-
-                        $("#activate").fastClick(function() {
-                            Api.activateAccount(function() {
-                                $("#pop-up-wrapper").hide();
-                                Backbone.history.navigate("", true);
-                            });
-                            return false;
-                        });
-
-                        $("#cancel, .close").fastClick(function() {
-                            $("#pop-up-wrapper").hide();
-                            return false;
-                        });
-                    }, 200);
-                    */
                 }, 200);
             } else {
-                console.log( 'not logged in' );
+
                 cb(false);
-                $("input").blur();
-                setTimeout(function() {
-                    UI.unmask();
-                    var html = APP.load("passwordRecovery");
-                    $("#pop-up-wrapper").html(html);
-                    $("#pop-up-wrapper").show();
-                    $('#recover').submit(function(e) {
-                        e.preventDefault();
-                        self.recover();
-                    });
-                    $(".close").fastClick(function() {
-                        $("#pop-up-wrapper").hide();
-                    });
-                }, 200);
+                
             }
         },
 

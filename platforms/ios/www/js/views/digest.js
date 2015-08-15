@@ -110,8 +110,8 @@ var DigestModel = Backbone.Model.extend({
 	},
 
 	viewProfile: function(){
-	
-		var ID = this.model.get('recommendation').userID;
+		console.log( this.m );
+		var ID = this.get('recommendation').userID;
 
 		Backbone.history.navigate('profile/'+ ID, true);
 	

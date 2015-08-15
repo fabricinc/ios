@@ -26,48 +26,25 @@
 	}
 
 
-    /*
-    ==============================================================    
-        intro slider
-    ============================================================== 
-    */
-
-    #slider {
-        width: 768px;
-        height: 1024px;
+    #login-content {
+        margin: 0 160px;
     }
-
-    #slider-container {
-        width: 3840px;
+    #login-buttons {
+        height: 20%;
     }
-
-    #slider-container .intro-slide {
-        width: 768px;
-        height: 1024px;
-        background-position: center;
-        background-size: auto;
-        background-size: 768px auto;
+    #login-back {
+        height: 40px;
+        width: 15px;
+        left: 35px;
+        top: 35px;
+        t
     }
-
-    #indicator {
-        bottom: 50px;
-        left: 352px;    
+    #login section {
+        margin-bottom: 27px;
     }
-
-    #slider #logo { top: 200px; }
-    #ready-to-start { top: 355px; }
-    #facebook { top: 477px; }
-    #sign-up { top: 561px; }
-    #slider .login-button { left: 273px; }
-
-    #get-started {
-        background-image: url(../images/login/ipad-tut.png);
+    #wrapper.login {
+        height: 1004px;
     }
-    #rate-first {
-        background-image: url(../images/discovery/coach/iPad/coach0.png);
-    }
-    #welcome-container #welcome-content.next { background-image: url(../images/discovery/ipadScrim01.png); }
-    #welcome-container #welcome-content.next-two { background-image: url(../images/discovery/ipadScrim02.png); }
 
 	/*
 	==============================================================    
@@ -317,16 +294,24 @@
     ============================================================== 
     */
 
+    .digest-item {
+        width: 40%;
+        float: left;
+        margin: 30px 35px;
+    }
+    #digest-day {
+        font-size: 2em;
+    }
+    #pack-title {
+        width: 272px;
+    }
+
     div.poster {
     	text-align: center;
     }
 
     #recommended-categories .category img {
     	width: auto;
-    }
-
-    #category-container div img {
-        width: 100%;
     }
 
     .card-flow-column .feed-item-card {
@@ -1191,10 +1176,9 @@
     .greeting .content .box .info { width: 620px; padding: 10px 5px; }
     .greeting .content .box form input[type="text"] { height: 35px; width: 692px; }
     .greeting .content .box #send-suggestion { margin-right: 3px; margin-top: 5px; }
-    #login-content { position: relative; overflow: hidden; }
     #pop-up { max-width: 80%; margin: 390px auto 0; }
     #recover-email { width: 597px; }
-    .fl .login-text { width: 427px; }
+    .fl .login-text { width: 355px; }
     #registration { left: 120px; top: 180px; }
     #services .commerce { background-size: 45px; height: 55px; }
     .commerce h2 {

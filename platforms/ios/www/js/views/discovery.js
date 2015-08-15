@@ -352,9 +352,9 @@ var DiscoveryModel = Backbone.Model.extend({
         if(self.currentPos == self.movieList.length) {
             $("#swiper-content").hide();
 
-            if(self.categoryID && self.categoryID != "") {
+            if(self.categoryID && self.categoryID !== "") {
                 self.feedType = "ratecompletecategory";
-            } else if(self.listID && self.listID != "") {
+            } else if(self.listID && self.listID !== "") {
                 self.feedType = "ratecompletelist";
             } else {
                 return false;

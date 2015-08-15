@@ -25,11 +25,15 @@ var DiscussionModel = Backbone.Model.extend({
                 });
             }
         } else if(this.type == "movie") {
+            console.log( 'movie' );
             Api.getMovieComments(self.objectID, function(response) {
                 callback(response);
             });
+
         } else {
+
             callback();
+
         }
         
         return this;
@@ -55,33 +59,57 @@ var DiscussionView = Backbone.View.extend({
         callback = callback || function() {};
 
         this.model.fetchData(function(response) {
+
+
+            console.log( response );
             if(self.model.type == "feed") {
-                var context = typeof response.context == "undefined" ? $.parseJSON(response[0].feedInfo) : $.parseJSON(response.context.feedInfo),
-                    type = self.model.notificationType;
-                context.creatorID = typeof response.context !== "undefined" ? response.context.creatorID : null;
+
+                var context = typeof response.context === "undefined"
+                        ? $.parseJSON(response[0].feedInfo) 
+                        : $.parseJSON(response.context.feedInfo);
+
+                    var type = self.model.notificationType;
+
+                context.creatorID = typeof response.context !== "undefined" 
+                    ? response.context.creatorID 
+                    : null;
+
             } else {
-                context = response.context;
+
+                var context = response.context;
+
             }
 
             
 
             if(type == "comment") {
+
                 var tpl = "discussion";
                 var title = "Comments";
+
             } else if(type == "like") {
+
                 var tpl = "likes";
                 var title = "Likes";
+
             } else {
+
                 type = self.model.type;
                 var tpl = "discussion";
+
                 if(self.model.type == "movie") {
-                    var title = context.movieTitle + " Discussion";
+
+                    var title = context ? context.movieTitle + " Discussion" : "Discussion";
+
                 } else {
+
                     var title = "Discussion";
+
                 }
             }
 
             var html = APP.load(tpl, { type: type, objects: response, context: context });
+
             self.$el.html(html);
 
             if (!self.header) {
@@ -119,9 +147,16 @@ var DiscussionView = Backbone.View.extend({
                 var msg = $("#message").val(),
                     type = $(".context-info span").eq(1).text();
 
-                if(msg != "") {
+                if(msg !== "") {
                     if(self.model.type == "movie") {
+
+                        console.log( 'submit' );
+                        console.log( self.model.objectID );
+                        console.log( msg );
+                        
                         Api.createMovieComment(self.model.objectID, msg, function(response) {
+
+                            console.log( response );
                             $("#message").blur();
                             $("#message").val("");
 

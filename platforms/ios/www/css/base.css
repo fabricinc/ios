@@ -190,8 +190,8 @@ header nav h1 {
     position: absolute;
     line-height: 18px;
     line-height: 47px;
+    font-size: 1.2em;
     font-size: 20px;
-    font-size: 16px;
     height: 47px;
     right: 0;
     left: 0;
@@ -594,6 +594,23 @@ div.left.button.back:active { opacity: 0.5; }
     right: 0;
     left: 0;
 }
+#login-back {
+    background-image: url(../images/login/backChevron.png);
+    -webkit-transition: opacity 100ms ease-in-out;
+    -o-transition: opacity 100ms ease-in-out;
+    transition: opacity 100ms ease-in-out;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    height: 20px;
+    width: 10px;
+    opacity: 0;
+    left: 15px;
+    top: 14px;
+}
+#login-back.visable {
+    opacity: 1;
+}
 #login-content {
     position: absolute;
     font-weight: 300;
@@ -790,7 +807,7 @@ div.left.button.back:active { opacity: 0.5; }
     content: "Sign Up";
 }
 #login-buttons .login-button:after {
-    margin-left: 50px;
+    margin-left: 55px;
     text-align: left;
 }
 #login-buttons .login-button {
@@ -800,27 +817,30 @@ div.left.button.back:active { opacity: 0.5; }
 #email:after {
     content: "Log in with Email";
 }
-#email {
-    bottom: 0;
-}
 .login-button {
     background-color: rgba(189, 49, 46, 0.82);
+    background-position-y: center;
+    background-repeat: no-repeat;
     position: absolute;
     border-radius: 4px;
-    text-align: center;
-    line-height: 58px;
+    line-height: 55px;
     font-weight: 500;
     font-size: .9em;
     color: white;
     height: 55px;
 }
+#email {
+    background-image: url(../images/login/emailLoginIcon.png);
+    background-position-x: 16px;
+    background-size: 1.5em;
+    bottom: 0;
+}
 #facebook {
+    background-image: url(../images/login/facebookLoginIcon.png);
     background-repeat: no-repeat;
-    background-position: 10px 0;
+    background-position-x: 22px;
     background-color: #2F4EA5;
-    background-size: 28px;
-    font-weight: bold;
-    font-size: 15px;
+    background-size: 0.9em;
 }
 
 #forgot-password {
@@ -852,6 +872,7 @@ div.left.button.back:active { opacity: 0.5; }
 }
 #tos {
     text-decoration: none;
+    line-height: 16px;
 }
 #ready-to-start {
     color: black;
@@ -3134,7 +3155,7 @@ div.right.button, div.left.button {
 }
 #list-items .share-buttons #fb.btn { margin-left: 6px; background-image: url(../images/discovery/share-fb.png); }
 #list-items .share-buttons #twitter.btn { background-image: url(../images/discovery/share-tw.png); }
-#list-items .share-buttons #email.btn { background-image: url(../images/discovery/share-email.png); }
+#list-items .share-buttons #email-share.btn { background-image: url(../images/discovery/share-email.png); }
 #list-items .share-buttons #sms.btn { background-image: url(../images/discovery/share-sms.png); }
 
 #message-context {

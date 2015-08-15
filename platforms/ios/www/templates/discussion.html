@@ -1,5 +1,5 @@
 <% 
-var feedType = objects.context.feedType;
+var feedType = objects.context ? objects.context.feedType : null ;
 var watchStatus = typeof feedType !== 'undefined' && feedType === 'watchstatus' ? true : false;
 %>
 

@@ -32,6 +32,9 @@
     height: 179px;
     width: 119px;
 }
+#pack-title {
+    width: 318px;
+}
 .digest-content-img {
     height: 145px;
 }
@@ -171,7 +174,7 @@ input.slider-search-form {
 .lists-nav { background-position: 380px; }
 #friends.self #list-row-wrapper { height: 517px; }
 
-header nav h1 { width: 270px; height: 65px; }
+header nav h1 { width: 270px; height: 60px; line-height: 60px;}
 div#mask .wheel {
     top: 300px;
     left: 160px;

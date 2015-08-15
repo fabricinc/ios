@@ -38,7 +38,7 @@ var StartModel = Backbone.Model.extend({
 
 });
 
-StartView = Backbone.View.extend({
+var StartView = Backbone.View.extend({
 
     initialize: function(options){
 
@@ -60,19 +60,6 @@ StartView = Backbone.View.extend({
         return this;
     },
 
-
-    bindLoginEvents:function() {
-        
-        $("#facebook").fastClick(function() {
-            Backbone.history.navigate("fb-connect", true);
-        });
-
-        $("#sign-up").fastClick(function() {
-            Backbone.history.navigate("login", true);
-        });
-
-    },
-
     dealloc:function() {
         return this;
     }
@@ -86,14 +73,7 @@ var StartContent = Backbone.View.extend({
     
         this.vent = this.options.vent;
 
-        this.vent.on('buttonClick', this.moveLogo, this);
-    
-    },
 
-    moveLogo: function(){
-
-        this.fabricLogo.el.style.top = '12%';
-    
     },
 
     render: function() {
@@ -109,7 +89,7 @@ var StartContent = Backbone.View.extend({
             vent: this.vent 
         });
 
-
+        this.backButton = new BackButton({ vent: this.vent });
 
         loginContent = new LoginContent({ 
             model: this.model,
@@ -123,6 +103,7 @@ var StartContent = Backbone.View.extend({
 
 
         this.$el
+            .append( this.backButton.render().el )
             .append( this.fabricLogo.render().el )
             .append( loginContent.render().el )
             .append( this.bottomLine.render().el );
@@ -136,12 +117,75 @@ var StartContent = Backbone.View.extend({
 var FabricLogo = Backbone.View.extend({
     id: 'login-logo',
     tagName: 'h1',
+
+    initialize: function(){
+        
+        this.vent = this.options.vent;
+
+        this.vent.on('buttonClick', this.moveLogo, this);
+        this.vent.on('back', this.lowerLogo, this);
+    
+    },
+
+    lowerLogo: function(){
+    
+        this.el.style.top = '';
+    
+    },
+    moveLogo: function(){
+
+        this.el.style.top = '12%';
+    
+    },
     
     render: function() {
 
 
 
         return this;
+    },
+
+});
+
+var BackButton = Backbone.View.extend({
+    id: 'login-back',
+    
+    events: {
+        'touchstart': 'back'
+    },
+
+    initialize: function(){
+    
+        this.vent = this.options.vent;
+
+        this.vent.on('showBackButton', this.showButton, this);
+        this.vent.on('back', this.hideButton, this);
+    
+    },
+
+    hideButton: function(){
+    
+        this.$el.removeClass( 'visable' );
+    
+    },
+
+    showButton: function(){
+    
+        this.$el.addClass( 'visable' );
+    
+    },
+
+    render: function() {
+
+        
+
+        return this;
+    },
+
+    back: function(){
+    
+        this.vent.trigger('back');
+    
     },
 
 });
@@ -155,6 +199,7 @@ var LoginContent = Backbone.View.extend({
         this.vent = this.options.vent;
 
         this.vent.on('buttonClick', this.showContent, this);
+        this.vent.on('back', this.back, this);
     
     },
 
@@ -168,6 +213,11 @@ var LoginContent = Backbone.View.extend({
     
     },
 
+    back: function(){
+
+        this.facebookLogin.render();  
+    
+    },
     
     render: function() {
 
@@ -192,8 +242,13 @@ var LoginContent = Backbone.View.extend({
     
         if( this.model.get('emailLogin') ){
 
+            console.log( 'show popup' );
+            var recover = new PasswordRecover({ model: this.model });
+
+
             this.emailLogin.render();
             this.vent.trigger('buttonClick');
+            recover.render();
 
 
         } else {
@@ -216,6 +271,8 @@ var FacebookLogin  = Backbone.View.extend({
     },
 
     render: function() {
+
+        this.$el.empty();
 
         facebookButton = new ButtonView({
             vent: this.vent, id: "facebook",
@@ -265,7 +322,7 @@ var EmailLogin = Backbone.View.extend({
     
     render: function() {
 
-        this.passwordRecover = new PasswordRecover();
+        this.passwordRecover = new PasswordRecover({ model: this.model });
 
         var loginButton = new ButtonView({ 
             id: 'login-button',
@@ -292,6 +349,8 @@ var EmailLogin = Backbone.View.extend({
         this.$('#register-section')
             .html( register )
             .append( registerButton.render().el );
+
+            this.vent.trigger( 'showBackButton' );
 
 
         return this;
@@ -327,8 +386,7 @@ var EmailLogin = Backbone.View.extend({
     
     },
     passwordRecovery: function(){
-    
-        console.log( 'password' );
+        this.$(':focus').blur();
         this.passwordRecover.render();
     
     },
@@ -422,7 +480,7 @@ var BottomLine = Backbone.View.extend({
                 text = "By pressing sign up, you acknowledge that you've read &amp; agree to the <a id='tos'>Terms of Service.</a>";
                 break;
             default:
-                text = "Don't have and account? <span>Sign Up</span>";
+                text = "Don't have an account? <span>Sign Up</span>";
 
         }    
 
@@ -450,36 +508,41 @@ var PasswordRecover = Backbone.View.extend({
     el: '.modal-overlay',
 
     events: {
-        'touchstart #recover': 'submitRecover',
+        'touchstart #recover-password': 'submitRecover',
         'touchstart .close': 'closeRecovery',
     },
     
     render: function() {
 
-        this.$el.addClass('active');
 
-        var html = APP.load("passwordRecovery", { message: "recover" });
+        this.$el
+            .empty()
+            .addClass('active');
 
-        this.$el.append( html );
+        var message = this.model.get('emailLogin') ? '' : 'recover';
+
+        var html = APP.load("passwordRecovery", { message: message });
+
+        this.$el.html( html );
+
 
         return this;
 
     },
 
     submitRecover: function(){
-    
+
         User.recover();
     
     },
 
     closeRecovery: function(){
-    
-        console.log( 'closeRecovery' );
-        this.$el.removeClass('active');
+        
+        this.$el
+            .removeClass('active')
+            .empty();
     
     },
-
-
 
 });
 

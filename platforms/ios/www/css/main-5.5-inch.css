@@ -43,6 +43,9 @@
 .available-on {
     font-size: 15px;
 }
+#pack-title {
+    width: 357px;
+}
 .digest-recommendation h3 {
     line-height: 40px;
 }
@@ -110,8 +113,6 @@
 header nav h1 {
     width: 320px;
     height: 65px;
-    font-size: 20px;
-    line-height: 22px;
 }
 div#mask .wheel {
     top: 320px;
