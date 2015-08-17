@@ -1248,10 +1248,12 @@ div#fancy-button:after {
     background-position: center;
     content: "";
 }
-#want-to-filter-clone:after,
-#want-to-filter:after {
-    background-image: url(../images/discovery/wantToButton.png);
-    content: "Picks";
+#home-filters div#want-to-filter-clone:after,
+#home-filters div#want-to-filter:after {
+    background-image: url(../images/nav/heartFilled.png);
+    background-position-x: center;
+    background-size: 20px;
+    content: "For You";
 }
 #profile-footer:after {
     background-image: url(../images/discovery/profileButton.png);
@@ -2475,6 +2477,13 @@ div.check-list-wrapper div.check-list-item {
     border-radius: 4px;
     position: relative;
     margin: 10px;
+}
+
+.digest-title.people,
+.digest-title.pack {
+    line-height: 33px;
+    font-weight: 400;
+    font-size: 0.8em;
 }
 .digest-item h1 {
     text-transform: uppercase;

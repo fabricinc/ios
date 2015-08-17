@@ -184,7 +184,7 @@ var BackButton = Backbone.View.extend({
 
     back: function(){
     
-        this.vent.trigger('back');
+        this.vent.trigger('back', '');
     
     },
 
@@ -242,12 +242,11 @@ var LoginContent = Backbone.View.extend({
     
         if( this.model.get('emailLogin') ){
 
-            console.log( 'show popup' );
             var recover = new PasswordRecover({ model: this.model });
 
 
             this.emailLogin.render();
-            this.vent.trigger('buttonClick');
+            this.vent.trigger('buttonClick', 'email');
             recover.render();
 
 
@@ -416,7 +415,6 @@ var ButtonView = Backbone.View.extend({
 
     login: function(){
     
-        console.log( 'login' );
     
     },
 
@@ -445,9 +443,9 @@ var BottomLine = Backbone.View.extend({
     initialize: function(){
         
         this.vent = this.options.vent;
-        this.el.className = "";
+        this.el.className = this.model.get('emailLogin') ? 'email' : '';
 
-        this.vent.on('showRegister buttonClick', this.changeLine, this);
+        this.vent.on('showRegister buttonClick back', this.changeLine, this);
     
     },
     
@@ -459,8 +457,10 @@ var BottomLine = Backbone.View.extend({
     },
 
     changeLine: function( route ){
-        
+        console.log( 'change line' );
+
         if(route === 'login-button') { return; }
+
         this.el.className = route;
         this.render();
     
@@ -470,8 +470,10 @@ var BottomLine = Backbone.View.extend({
         stuff = stuff || null;
         var text;
 
-    
+        console.log( 'set line' );
+        console.log( this.el.className );
         switch( this.el.className ){
+
 
             case 'email':
                 text = "";
@@ -479,7 +481,7 @@ var BottomLine = Backbone.View.extend({
             case 'create-account':
                 text = "By pressing sign up, you acknowledge that you've read &amp; agree to the <a id='tos'>Terms of Service.</a>";
                 break;
-            default:
+            case '':
                 text = "Don't have an account? <span>Sign Up</span>";
 
         }    

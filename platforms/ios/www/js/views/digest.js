@@ -542,7 +542,7 @@ var Recommendation = Backbone.View.extend({
 			name = rec.userName || "";
 
 
-		var avatar = new Avatar({ src: facebookID });
+		var avatar = new Avatar({ model: this.model, src: facebookID });
 
 		this.$el
 			.append( avatar.render().el )
@@ -598,7 +598,7 @@ var DigestItemHeader = Backbone.View.extend({
 		this.$el
 			.append( icon.render().el )
 			.append( title.render().el )
-			.append( objectTitle.render().el );
+			.append( this.model.get('column_type') === 'clip'? objectTitle.render().el : '');
 		
 		
 		return this;
@@ -691,7 +691,16 @@ var DigestIcon = Backbone.View.extend({
 });
 
 var DigestTitle = Backbone.View.extend({
+	
+	className: 'digest-title',
+
 	tagName: 'h1',
+
+	initialize: function(){
+	
+		this.el.className += " "+ this.model.get('column_type');
+	
+	},
 
 	render: function() {
 
