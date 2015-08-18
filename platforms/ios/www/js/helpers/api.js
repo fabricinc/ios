@@ -933,7 +933,7 @@ Api.getFollowers = function(userID, callback) {
     callback = callback || function() {};
     var options = {
         "action": "getFollowers"
-    }
+    };
     if(userID) { options.userID = userID; }
     this.fetch(options, callback);
 };

@@ -80,7 +80,7 @@ var UI = {
             });
         },
         bindCoachEvents: function(section){
-            section = section || null
+            section = section || null;
             $("#coach-button").fastClick(function(){
                 $("#coach-section").css({ opacity : 0 });
                 
@@ -775,42 +775,40 @@ var UI = {
 
 
                 if($("#notifications-container").hasClass("open")) {
-                    // self.oldScrollPos = parseInt(UI.scroller.y);
+                    
+
                     self.oldTitle = $("header nav h1").html();
                     
                     $("header nav h1").html("Notifications");
+
                     Api.getNotifications(function(response) {
                         self.bindNotificationEvents(response.notifications);
                         APP.click = false;
                     });
+
+
                 } else {
+
                     $("header nav h1").html(self.oldTitle);
                     self.oldTitle = null;
-                    if(self.oldScrollID) {
-                        if(self.oldScrollPos != 0) {
-                            // UI.initScrollerOpts($("#"+self.oldScrollID)[0], {
-                            //     vScrollbar: false,
-                            //     hScroll: false,
-                            //     bounce: true,
-                            //     click: true,
-                            //     startY: self.oldScrollPos
-                            // });
-                            // self.oldScrollPos = 0;
-                        } else {
-                            // UI.initScroller($("#"+self.oldScrollID)[0]);
-                        }
-                    }
+                    
+                    
                     APP.click = false;
                 }
+
             } else {
-                // if(UI.scroller) {
-                //     self.oldScrollID = UI.scroller.scroller.parentElement.id;
-                //     self.oldScrollPos = parseInt(UI.scroller.y);
-                // }
-                $("#wrapper").append("<div id=\"notifications-container\" class=\"open\"></div>");
+
+
+                $("#wrapper").append("<div id='notifications-container' class='open'></div>");
+
+                // $("#notifications-container").addClass('open');
+
                 $("#notifications-menu").addClass("on");
+
                 Api.getNotifications(function(response) {
+
                     self.bindNotificationEvents(response.notifications);
+                    console.log( response );
                     APP.click = false;
                 });
                 self.oldTitle = $("header nav h1").html();
@@ -818,38 +816,40 @@ var UI = {
             }
         },
         bindNotificationEvents: function(notifications) {
+            
             var html = APP.load("notifications", { notifications: notifications });
+
             $("#notifications-container").html(html);
-            $("#notifications-num").html("").hide();
-            Api.notificationsSeen();
-            // setTimeout(function() { UI.initScroller($("#notifications-container")[0]) }, 10);
 
-            $(".notification .content").click(function(e) {
-                var objectID = $(this).parent().data("objectid");
-                var objectType = $(this).parent().data("objecttype");
-                var notificationType = $(this).parent().data("notificationtype");
-                var senderID = $(this).parent().data("senderid");
+            // $("#notifications-num").html("").hide();
+            // Api.notificationsSeen();
 
-                if(notificationType == "comment" || notificationType == "thread") {
-                    APP.feedPos = self.oldScrollPos;
-                    Backbone.history.navigate("feedDiscussion/" + objectID, true);
-                } else if(notificationType == "follow") {
-                    Backbone.history.navigate("profile/" + senderID, true);
-                } else if("followback") {
-                    Backbone.history.navigate("profile/" + senderID, true);
-                } else {
-                    APP.feedPos = self.oldScrollPos;
-                    Backbone.history.navigate("feedLikes/" + objectID, true);
-                }
-                var params = { type: notificationType};
-                if(Analytics) Analytics.eventAndParams("Notification tapped", params);
-            });
+            // $(".notification .content").click(function(e) {
+            //     var objectID = $(this).parent().data("objectid");
+            //     var objectType = $(this).parent().data("objecttype");
+            //     var notificationType = $(this).parent().data("notificationtype");
+            //     var senderID = $(this).parent().data("senderid");
 
-            $(".notification .avatar").click(function(e) {
-                var senderID = $(this).parent().data("senderid");
-                Backbone.history.navigate("profile/" + senderID, true);
-                if(Analytics) Analytics.eventAndParams("Profile (other) viewed",{ from: "Notifications" });
-            });
+            //     if(notificationType == "comment" || notificationType == "thread") {
+            //         APP.feedPos = self.oldScrollPos;
+            //         Backbone.history.navigate("feedDiscussion/" + objectID, true);
+            //     } else if(notificationType == "follow") {
+            //         Backbone.history.navigate("profile/" + senderID, true);
+            //     } else if("followback") {
+            //         Backbone.history.navigate("profile/" + senderID, true);
+            //     } else {
+            //         APP.feedPos = self.oldScrollPos;
+            //         Backbone.history.navigate("feedLikes/" + objectID, true);
+            //     }
+            //     var params = { type: notificationType};
+            //     if(Analytics) Analytics.eventAndParams("Notification tapped", params);
+            // });
+
+            // $(".notification .avatar").click(function(e) {
+            //     var senderID = $(this).parent().data("senderid");
+            //     Backbone.history.navigate("profile/" + senderID, true);
+            //     if(Analytics) Analytics.eventAndParams("Profile (other) viewed",{ from: "Notifications" });
+            // });
         },
         noConnection: function(options, callback) {
             if($("#no-connection").length) {
@@ -867,4 +867,4 @@ var UI = {
                 return false;
             });
         }
-}
+};

@@ -25,7 +25,9 @@
 		-webkit-animation: spin 1.3s infinite linear;
 	}
 
-
+    #wrapper.login {
+        background-image: url(../images/login/ipadBackground.png);
+    }
     #login-content {
         margin: 0 160px;
     }
@@ -41,9 +43,6 @@
     }
     #login section {
         margin-bottom: 27px;
-    }
-    #wrapper.login {
-        height: 1004px;
     }
 
 	/*
@@ -295,9 +294,11 @@
     */
 
     .digest-item {
-        width: 40%;
+        width: 47%;
         float: left;
-        margin: 30px 35px;
+    }
+    .digest-item:nth-child(even){
+        float: right;
     }
     #digest-day {
         font-size: 2em;
@@ -305,17 +306,35 @@
     #pack-title {
         width: 272px;
     }
-
+    .digest-content-img {
+        height: 190px;
+    }
+    #pack-title {
+        font-size: 20px;
+        width: 326px;
+    }
+    .purchase-links a {
+        height: 30px;
+        width: 30px;
+        top: 8px;
+    }
+    .available-on {
+        font-size: 18px;
+    }
+    .digest-recommendation h3 {
+        line-height: 49px;
+        font-size: 1em;
+    }
+    .digest-avatar {
+        height: 45px;
+        width: 45px;
+    }
     div.poster {
     	text-align: center;
     }
 
     #recommended-categories .category img {
     	width: auto;
-    }
-
-    .card-flow-column .feed-item-card {
-        margin-top: 0;
     }
 
     #slide-filters #activity-filter-x {
@@ -736,7 +755,6 @@
     }
 
     .feed-footer {
-        width: 340px;
         margin-left: 10px;
     }
 
@@ -842,18 +860,12 @@
     }
 
     .feed-item {
-        width: 340px;
         margin: 0;
-    }
-
-    .feed-item:first-child {
-        margin-top: 10px; 
     }
 
     .feed-item .action { font-size: 22px; line-height: 26px; }
     .feed-item .action .timeago { font-size: 20px; line-height: 24px; }
     .feed-footer {
-        width: 360px;
         margin: 0 auto;
     }
     .feed-footer.suggested {

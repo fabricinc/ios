@@ -24,12 +24,17 @@ var DigestModel = Backbone.Model.extend({
 
 	},
 
-	createMedia: function(clip){
+	createMedia: function( clip ){
+
 
 		if(!clip) { return null; }
 
+
 		var mediaType = this.get('typeTitle') === "Music" ? "AUDIO" : "VIDEO";
+
+
 		var media = document.createElement(mediaType);
+
 
 		media.preload = "auto";
 		media.src = clip;
@@ -39,13 +44,14 @@ var DigestModel = Backbone.Model.extend({
 
 		if(mediaType === "VIDEO"){
 			media.addEventListener('ended', function(e) { this.exitFullScreen(); }.bind(this));
+			media.addEventListener('play', function() { this.webkitEnterFullScreen(); });
 		}
 
 		return media;
 	
 	},
 	togglePlaying: function(e){
-	
+		
 		this.set('playing', !this.get('playing'));
 	
 	},
@@ -110,7 +116,7 @@ var DigestModel = Backbone.Model.extend({
 	},
 
 	viewProfile: function(){
-		console.log( this.m );
+		
 		var ID = this.get('recommendation').userID;
 
 		Backbone.history.navigate('profile/'+ ID, true);
@@ -264,8 +270,6 @@ var DigestSection = Backbone.View.extend({
 		this.collection = new DigestItems(items.digestData); 
 		this.model = new DigestSectionModel(items.heading);
 
-		console.log( this.collection );
-
 	},
 
 	render: function(){
@@ -274,6 +278,14 @@ var DigestSection = Backbone.View.extend({
 		this.$el
 			.empty()
 			.removeClass('loading');
+
+
+        // ONBOARD digest
+        if(APP.gameState.digest === "0"){
+
+			this.coach();            
+
+        }
 
 		// Create background red color at top of screen 
 		var backgroundRed = new BackgroundRed();
@@ -316,6 +328,92 @@ var DigestSection = Backbone.View.extend({
 		return object;
 	
 	},
+
+	coach: function(){
+
+	
+		var coach = APP.load("coach", { section : 'wantTo' }),
+    	    button = document.getElementById('want-to-filter'),
+			icon = document.getElementById('tap-menu'),
+            buttonClone = button.cloneNode(true),
+            position = $(button).position().left,
+            iconStyle, buttonStyle, content;
+
+
+        // GET THE STYLE OF THE ORIGINAL NODE
+        // iconStyle = window.getComputedStyle(icon, null);
+
+
+        // SET ID OF DIV TO '' (can't have two divs with the same id)
+        buttonClone.className += ' clone';
+        buttonClone.id += '-clone';
+
+        // Set clond button position to original button
+        $(buttonClone).css({ left : position }); 
+
+
+        $('#coach-overlay').html(coach);
+
+        $("#coach-section")
+            .append( $(buttonClone) );
+
+        // Center arrow on button
+        $("#coach-arrow").css({ 
+            bottom : $(button).height() + 20,
+            width : $(button).width(),
+            left : position
+        });
+
+        $("#coach-button").fastClick(function(){
+
+        	this.coach1();
+
+        }.bind(this));
+	
+	},
+
+	coach1: function(){
+
+        var button = document.getElementById('want-to-filter'),
+        	coach = APP.load("coach", { section : 'feed' }),
+            icon = document.getElementById('tap-menu'),
+            buttonClone = button.cloneNode(true),
+            position = $(icon).position(),
+            clone = icon.cloneNode(true),
+            iconStyle, buttonStyle, content;
+
+
+        // SET ID OF DIV TO '' (can't have two divs with the same id)
+        buttonClone.id = 'filter-clone';
+        clone.id += '-clone';
+
+        // Set clone  position to original item position
+        $(clone).css({ 
+            backgroundColor : "#d32724",
+            height : $(icon).height(),
+            width : $(icon).width(),
+            left :  position.left,
+            top : position.top
+        }); 
+
+
+        $('#coach-overlay').html( coach );
+
+
+        $("#coach-section")
+            .prepend( $(clone) );
+
+        // position arrow
+        $("#coach-arrow").css({
+            top : ( $(icon).height() / 2 ) - 10,
+            left : $(icon).width() + 22,
+        });
+
+        UI.bindCoachEvents('digest');
+
+
+	},
+
 });
 
 var BackgroundRed = Backbone.View.extend({

@@ -27,7 +27,7 @@
         initialize: function(options, callback) { // Pass options value to the Model
             this.model = new HeaderModel(options);
 
-            this.listenTo(this.model, 'change:moreButton', this.updateMore);
+            // this.listenTo(this.model, 'change:moreButton', this.updateMore);
             this.render(options, callback);
             return this;
         },

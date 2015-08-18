@@ -155,8 +155,11 @@ header nav {
     height: 50px;
     color: #FFF;
 }
-.list header nav h1.notifiy,
-#dashboard header nav h1.notify,
+
+#dashboard header nav h1.notify {
+    background-image: none;
+    width: 70%;
+}
 header nav h1, #available-services h1 {
     margin: 0;
     padding: 0;
@@ -172,7 +175,7 @@ header nav h1, #available-services h1 {
     border: none;
     font-weight: bold;
 }
-#coach-section h1,
+
 #dashboard header nav h1 {
     background-image: url(../images/logo/6logo.png);
     background-repeat:no-repeat;
@@ -200,12 +203,7 @@ header nav h1 {
 #dashboard header nav h1 {
     height: 33px !important;
 }
-#dashboard header nav h1.notify,
-.list header nav h1.notify {
-    height: 45px !important;
-    box-shadow: none;
-    background: none;
-}
+
 
 /* Fabric Navigation */
 #coach-section h1 span,
@@ -338,7 +336,6 @@ header nav #tap-menu {
 }
 #friends,
 #dashboard {
-    transition: left 500ms ease;
     position: relative;
     height: 100%;
     left: 0;
@@ -1248,7 +1245,7 @@ div#fancy-button:after {
     background-position: center;
     content: "";
 }
-#home-filters div#want-to-filter-clone:after,
+#coach-section div#want-to-filter-clone:after,
 #home-filters div#want-to-filter:after {
     background-image: url(../images/nav/heartFilled.png);
     background-position-x: center;
@@ -2538,7 +2535,7 @@ div.check-list-wrapper div.check-list-item {
     margin: 11px 10px;
 }
 .digest-item-content-header { min-height: 40px; }
-.digest-item-content-header h1 span{
+.digest-item-content-header h1 span {
     text-transform: initial;
 }
 .digest-object-title span {
@@ -5295,18 +5292,18 @@ h6.like-you + .action {
 /* notifications */
 
 #notifications-container {
-    position: absolute;
-    left: 0;
-    top: 50px;
-    width: 100%;
-    height: 518px;
-    z-index: 1000;
-    display: none;
-    background-color: white;
-    overflow: hidden;
     background-color: rgb(225,225,225);
+    position: absolute;
+    overflow: hidden;
+    display: none;
+    z-index: 1000;
+    height: 518px;
+    width: 100%;
+    top: 50px;
+    left: 0;
 }
-#notifications-container.open::-webkit-scrollbar { display: none; }
+#notifications-container.open:-webkit-scrollbar { display: none; }
+
 #notifications-container.open {
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;

@@ -156,14 +156,6 @@
             }
             
 
-            // SHOW FABRIC MENU LIST ? not sure why
-            $(".list header nav h1").fastClick(function(e) {
-                e.preventDefault(); e.stopPropagation();
-
-                $("#fabric-menu, .list header nav h1").toggleClass("open"); 
-
-                return false;
-            });
             $("#rec-filter-button").fastClick(function(e) {
                 e.preventDefault();     e.stopPropagation();
 
@@ -186,40 +178,6 @@
                     Backbone.history.navigate("rate", true);
                 });
             });
-            // handle selection of filter
-            $("#fabric-menu .fabric-nav-item").fastClick(function(e) {
-                e.preventDefault(); e.stopPropagation();
-
-                var sectionID = $(this).data("section-id"),
-                    title = $(this).data("title"),
-                    button = $(this);
-
-
-                // Darken the selected section button for 400 ms
-                button.addClass("honda");
-                setTimeout(function() { button.removeClass("honda"); }, 400);
-
-                // Change Icon in the Fabric Tab class
-                $("#current-icon")[0].className = title;
-                $("body").attr({ "class": title + "-section" });
-
-                // Update section id on the APP
-                APP.sectionID = sectionID;
-                    
-                // Put away Fabric Menu 
-                $("#fabric-menu, #dashboard header nav h1").toggleClass("open");
-                $(".list header nav h1").toggleClass("open");
-
-                if(Analytics) { Analytics.eventAndParams("Fabric Section Changed ", { sectionID: sectionID }); }
-
-                // Refresh the page
-                setTimeout(function() {
-                    UI.mask();
-                    Backbone.history.loadUrl(window.location.hash.replace("#",""), true);
-                }, 400);
-
-                return false;
-            });
 
             $("#notifications-menu").fastClick(function(e) {
                 e.preventDefault();
@@ -230,7 +188,7 @@
                     $("nav h1").toggleClass("notify");
 
                     if(Analytics && $(this).hasClass("on")) { Analytics.event("Notifications viewed"); }
-                    else { $(this).trigger("notify"); }
+                    // else { $(this).trigger("notify"); }
                     APP.click = false;
                 }
 
@@ -679,7 +637,8 @@
                     // Stub for callback
                 }, {
                     scroller: false,
-                    loadPageHtml: false
+                    loadPageHtml: false,
+                    spinner: true,
                 }, "rate");
             });
             this.on("route:messages", function() {

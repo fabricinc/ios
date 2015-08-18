@@ -71,8 +71,9 @@ var RateModel = Backbone.Model.extend({
 
                 // }.bind(self));
 
+
                 Api.getDigestItems(function(response){
-                    console.log( response );
+
                     this.set('digestItems', response);
                     
                 }.bind(self));
@@ -148,7 +149,6 @@ var RateView = Backbone.View.extend({
     
         this.digestView = new DigestSection( this.model.get('digestItems') );
 
-
         if(this.filter !== "want-to-filter") { return; }
         
         this.digestView.render();
@@ -207,7 +207,6 @@ var RateView = Backbone.View.extend({
 
                         var cb = function() {
 
-                            console.log( 'init scoller' );
 
                             UI.initScrollerOpts($("#category-container")[0], { // #home-slider
                                 vScrollbar: false,
@@ -230,7 +229,6 @@ var RateView = Backbone.View.extend({
                         self.displayFeed(self.filter, cb); //Which feed filter to display
                     });
                 } else {
-                    console.log( 'not logged in on rate' );
                     Util.log("user is NOT active right now, handle this");
                     UI.unmask();
                     Backbone.history.navigate("start/true", true);
@@ -245,6 +243,7 @@ var RateView = Backbone.View.extend({
         if(!filter){ return; }      //If filter is not set exit
         var self = this;
 
+
         // add current filter class to the scroller/slider container
         $("#home-slider").attr("class", filter);
 
@@ -253,7 +252,7 @@ var RateView = Backbone.View.extend({
             // show activity filter
             
 
-            if(!self.model.feedLoaded || self.model.feed == null) {
+            if(!self.model.feedLoaded || self.model.feed === null) {
                 self.feedInterval = setInterval(function() {
                     if(self.model.feedLoaded && self.model.feed) {
                         var activityFeed = APP.load("activityFeed", { feed: self.model.feed.feed });
@@ -286,41 +285,6 @@ var RateView = Backbone.View.extend({
         } else if(filter == "category-filter") {
 
 
-            // ONBOARD EXPORE
-            if(APP.gameState.explore === "0"){
-
-                var coach = APP.load("coach", { section : 'explore' }),
-                    button = document.getElementById(filter),
-                    buttonClone = button.cloneNode(true),
-                    position = $(button).position().left,
-                    iconStyle, buttonStyle, content;
-
-
-
-                // SET ID OF DIV TO '' (can't have two divs with the same id)
-                buttonClone.className += ' clone';
-                buttonClone.id += '-clone';
-
-                // Set clond button position to original button
-                $(buttonClone).css({ left : position }); 
-
-
-                $('#coach-overlay').html(coach);
-
-                $("#coach-section")
-                    .append( $(buttonClone) );
-
-                // Center arrow on button
-                $("#coach-arrow").css({ 
-                    bottom : $(button).height() + 20,
-                    width : $(button).width(),
-                    left : position
-                });
-
-                UI.bindCoachEvents('explore');
-
-            }
-
             // show category filter
             var categoryFeed = APP.load("categoryFeed", { items: self.model.categories });
             $("#content-container .content-scroller").html(categoryFeed);
@@ -333,11 +297,11 @@ var RateView = Backbone.View.extend({
         } else if(filter == "want-to-filter") {
 
 
-
-            if(self.wantToList) { 
+            if(self.digestView) { 
 
                 // self.wantToList.render(); 
                 self.digestView.render();
+
             
             } else {
                 
@@ -453,53 +417,9 @@ var RateView = Backbone.View.extend({
                 $("#" +filter).addClass("filter");
 
                 if(filter === "activity-filter") {
-                    // !!!!!!!!!!!!!!!!!!! ACTIVITY FILTER !!!!!!!!!!!!!!!!!!!
+                    // !!!!!!!!!!!!!!!!!!! ACTIVITY FILTER !!!!!!!!!!!!!!!!!!
 
-
-                    // ONBOARD THE FEED
-                    if(APP.gameState.feed === "0"){
-
-                        var coach = APP.load("coach", { section : 'feed' }),
-                            icon = document.getElementById('tap-menu'),
-                            button = document.getElementById(filter),
-                            buttonClone = button.cloneNode(true),
-                            position = $(icon).position(),
-                            clone = icon.cloneNode(true),
-                            iconStyle, buttonStyle, content;
-
-
-                        // SET ID OF DIV TO '' (can't have two divs with the same id)
-                        buttonClone.id = 'filter-clone';
-                        clone.id += '-clone';
-
-                        // Set clone  position to original item position
-                        $(clone).css({ 
-                            backgroundColor : "#d32724",
-                            height : $(icon).height(),
-                            width : $(icon).width(),
-                            left :  position.left,
-                            top : position.top
-                        }); 
-
-
-                        $('#coach-overlay').html( coach );
-
-
-                        $("#coach-section")
-                            .prepend( $(clone) );
-
-                        // position arrow
-                        $("#coach-arrow").css({
-                            top : ( $(icon).height() / 2 ) - 10,
-                            left : $(icon).width() + 22,
-                        });
-
-                        UI.bindCoachEvents('feed');
-
-                    }
-
-
-                    if(!self.model.feedLoaded || self.model.feed == null) {
+                    if(!self.model.feedLoaded || self.model.feed === null) {
                         $("#content-container .content-scroller").html("");
                         self.feedInterval = setInterval(function() {
                             if(self.model.feedLoaded && self.model.feed) {
@@ -531,8 +451,6 @@ var RateView = Backbone.View.extend({
 
                     // !!!!!!!!!!!!!!!!!!! CATEGORY FEED !!!!!!!!!!!!!!!!!!!
 
-
-
                     self.model.lastFeed = $("#content-container .content-scroller").html(); // Update feed html to show current likes and comments
                     $("#content-container .content-scroller").html(APP.load("categoryFeed", { items: self.model.categories }));
 
@@ -541,44 +459,6 @@ var RateView = Backbone.View.extend({
                     var curPos = self.catPos;
 
                 } else if(filter === "want-to-filter") {
-                    
-                    // ONBOARD WANT-TO
-                    if(APP.gameState.wantTo === "0"){
-
-                        var coach = APP.load("coach", { section : 'wantTo' }),
-                            button = document.getElementById(filter),
-                            buttonClone = button.cloneNode(true),
-                            position = $(button).position().left,
-                            iconStyle, buttonStyle, content;
-
-
-                        // GET THE STYLE OF THE ORIGINAL NODE
-                        iconStyle = window.getComputedStyle(icon, null);
-
-
-                        // SET ID OF DIV TO '' (can't have two divs with the same id)
-                        buttonClone.className += ' clone';
-                        buttonClone.id += '-clone';
-
-                        // Set clond button position to original button
-                        $(buttonClone).css({ left : position }); 
-
-
-                        $('#coach-overlay').html(coach);
-
-                        $("#coach-section")
-                            .append( $(buttonClone) );
-
-                        // Center arrow on button
-                        $("#coach-arrow").css({ 
-                            bottom : $(button).height() + 20,
-                            width : $(button).width(),
-                            left : position
-                        });
-
-                        UI.bindCoachEvents('wantTo');
-
-                    }
 
                     
                    if(self.digestView) { 
