@@ -10,10 +10,10 @@ var UI = {
         oldScrollPos: 0,
         oldTitle: null,
         mask: function(spinner, callback) {
+            spinner = typeof spinner === 'undefined' ? true : spinner;
+            callback = callback || function() { };
             var el = document.getElementById("mask"),
                 self = this;
-            callback = callback || function() { };
-            spinner = typeof spinner == 'undefined' ? true : spinner;
 
 
 
@@ -238,7 +238,7 @@ var UI = {
 		makeRow: function(list, publishedID) {
 	        var $listHTML = "",
 	            camelName = list.list.replace(/ /g, "").toLowerCase(),
-	            active = (list.active != 0) ? ' active' : '';
+	            active = (list.active !== 0) ? ' active' : '';
 
 	        $listHTML = $('<div><div class="list-item" movieID="" listID=""><div></div></div></div>');
 	        $listHTML.find(".list-item").addClass(camelName).addClass(active).attr("movieid", publishedID).attr("listID", list.ID).find("div").append(list.list);
@@ -348,119 +348,6 @@ var UI = {
 
 
             return avatar[0].outerHTML;
-        },
-        loadRightMenu: function(options) {
-            if(!$("#right-menu").length) {
-                var html = APP.load("rightMenu");
-                $("#wrapper").prepend(html);
-            }
-        },
-        bindSideMenuEvents: function() {
-            $(".nav-menu-item").click(function() {
-                var list    = APP.gameState,
-                    wClass  = $("#wrapper").attr("class").split(" ")[0],
-                    nav     = $(this).data().actionid,
-                    listID  = nav === "queue" ? list.watchListID : list.favoriteListID;
-
-                if(nav === "queue") {
-                    Backbone.history.navigate('lists/' + listID, true);
-                } else {
-                    Backbone.history.navigate(nav, true);
-                }
-                
-                if(Analytics) { Analytics.event(nav +" selected"); }
-
-                UI.menuSlideAction();
-            });
-
-
-            // side nav close
-            $("#side-nav-close").fastClick(function() {
-                UI.menuSlideAction();
-                return false;
-            });
-
-            var sUpdate = $("#menu-search-form input");
-            // set up the auto drop down
-            sUpdate.on("input", function(e) {
-                var title = $(this).val();
-                $("#close-menu-drop").show();
-
-                if(title.length > 2) {
-                    Api.findMoviesLikeTitle($(this).val(), function(response) {
-                        if(response.data.length > 0) {
-                            var html = APP.load("feedSearchResults", { data: response.data });
-
-                            $("#menu-drop div").html(html);
-                            $("#menu-drop").addClass("on");
-
-                            $("#menu-drop .result").unbind("click").click(function() {
-                                var movieID = $(this).data("movieid");
-                                Backbone.history.navigate("movieLobby/" + movieID, true);
-                            });
-
-                            UI.deallocScroller();
-                            UI.initScroller($("#menu-drop")[0], false);
-                            setTimeout(function() {
-                                // IN IOS 8 BLUR COLLAPSED DROP DOWN
-                                // UI.scroller.on('scrollStart', function () {
-                                //     sUpdate.blur();
-                                // });
-                            }, 500);
-                        } else {
-                            // hide the drop down
-                            $("#menu-drop div").html("<p style=\"padding-left: 10px;\">No results</p>");
-                            //$("#menu-drop").removeClass("on");
-                        }
-                    });
-                } else if(title.length === 0) {
-                    $("#close-menu-drop").hide();
-                } else {
-                    // hide the thing
-                    $("#menu-drop div").html("");
-                    $("#menu-drop").removeClass("on");
-                    // remove scroller from it
-                }
-            });
-
-            /*
-             sUpdate.blur(function() {
-             sUpdate.val("");
-             $("#close-menu-drop").hide();
-             $("#menu-drop div").html("");
-             $("#menu-drop").removeClass("on");
-
-             UI.deallocScroller();
-
-             return false;
-             });
-             */
-
-            $(document).on("keydown", function(e) {
-                if(e.keyCode == 13) { sUpdate.blur(); }
-            });
-
-            $("#close-menu-drop").fastClick(function(e) {
-                e.preventDefault();  e.stopPropagation();
-
-                sUpdate.val("");
-                $("#close-menu-drop").hide();
-                $("#menu-drop div").html("");
-                $("#menu-drop").removeClass("on");
-
-                return false;
-            });
-        },
-        rightMenuSlide: function(html) {
-            var sideNav = $("#right-menu"),
-                delay   = (sideNav.hasClass("open-slide")) ? 500 : 10;
-
-            $("#right-menu .content").html(html);
-            $("#wrapper").toggleClass("rightMenu");
-
-            setTimeout(function() {
-                $(sideNav).toggleClass('open-slide');
-            }, delay);
         },
         loadConversations: function(el, callback) {
             callback = callback || function() {};
@@ -798,17 +685,20 @@ var UI = {
 
             } else {
 
+                var container = $("<div>", {
+                    id: 'notifications-container',
+                    class: 'open',
+                });
 
-                $("#wrapper").append("<div id='notifications-container' class='open'></div>");
+                $("#wrapper").append( container );
 
-                // $("#notifications-container").addClass('open');
 
                 $("#notifications-menu").addClass("on");
 
                 Api.getNotifications(function(response) {
 
+
                     self.bindNotificationEvents(response.notifications);
-                    console.log( response );
                     APP.click = false;
                 });
                 self.oldTitle = $("header nav h1").html();
@@ -817,39 +707,40 @@ var UI = {
         },
         bindNotificationEvents: function(notifications) {
             
+
             var html = APP.load("notifications", { notifications: notifications });
 
             $("#notifications-container").html(html);
 
-            // $("#notifications-num").html("").hide();
-            // Api.notificationsSeen();
+            $("#notifications-num").html("").hide();
+            Api.notificationsSeen();
 
-            // $(".notification .content").click(function(e) {
-            //     var objectID = $(this).parent().data("objectid");
-            //     var objectType = $(this).parent().data("objecttype");
-            //     var notificationType = $(this).parent().data("notificationtype");
-            //     var senderID = $(this).parent().data("senderid");
+            $(".notification .content").click(function(e) {
+                var objectID = $(this).parent().data("objectid");
+                var objectType = $(this).parent().data("objecttype");
+                var notificationType = $(this).parent().data("notificationtype");
+                var senderID = $(this).parent().data("senderid");
 
-            //     if(notificationType == "comment" || notificationType == "thread") {
-            //         APP.feedPos = self.oldScrollPos;
-            //         Backbone.history.navigate("feedDiscussion/" + objectID, true);
-            //     } else if(notificationType == "follow") {
-            //         Backbone.history.navigate("profile/" + senderID, true);
-            //     } else if("followback") {
-            //         Backbone.history.navigate("profile/" + senderID, true);
-            //     } else {
-            //         APP.feedPos = self.oldScrollPos;
-            //         Backbone.history.navigate("feedLikes/" + objectID, true);
-            //     }
-            //     var params = { type: notificationType};
-            //     if(Analytics) Analytics.eventAndParams("Notification tapped", params);
-            // });
+                if(notificationType == "comment" || notificationType == "thread") {
+                    APP.feedPos = self.oldScrollPos;
+                    Backbone.history.navigate("feedDiscussion/" + objectID, true);
+                } else if(notificationType == "follow") {
+                    Backbone.history.navigate("profile/" + senderID, true);
+                } else if("followback") {
+                    Backbone.history.navigate("profile/" + senderID, true);
+                } else {
+                    APP.feedPos = self.oldScrollPos;
+                    Backbone.history.navigate("feedLikes/" + objectID, true);
+                }
+                var params = { type: notificationType};
+                if(Analytics) Analytics.eventAndParams("Notification tapped", params);
+            });
 
-            // $(".notification .avatar").click(function(e) {
-            //     var senderID = $(this).parent().data("senderid");
-            //     Backbone.history.navigate("profile/" + senderID, true);
-            //     if(Analytics) Analytics.eventAndParams("Profile (other) viewed",{ from: "Notifications" });
-            // });
+            $(".notification .avatar").click(function(e) {
+                var senderID = $(this).parent().data("senderid");
+                Backbone.history.navigate("profile/" + senderID, true);
+                if(Analytics) Analytics.eventAndParams("Profile (other) viewed",{ from: "Notifications" });
+            });
         },
         noConnection: function(options, callback) {
             if($("#no-connection").length) {

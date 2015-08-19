@@ -4,7 +4,6 @@ var ProfileModel = Backbone.Model.extend({
         profileData: null,
         compatibility: null,
         isFollowing: false,
-        profileData: null,
         followData: null,
         messageCount: 0,
         isFriend: false,
@@ -125,7 +124,7 @@ var ProfileModel = Backbone.Model.extend({
             UI.launchPopUpTwo(APP.load("reportUserPopup"), function() {
                 $(".report-content .button").fastClick(function() {
                     var reason = $(".report-content textarea").val();
-                    if(reason == "") { reason = "Unknown"; }
+                    if(reason === "") { reason = "Unknown"; }
                     if(self.userID) {
                         Api.reportUser(self.userID, reason, function(response) {
                             $(".report-content p").html("This user has been reported to Fabric.");
@@ -181,7 +180,7 @@ var ProfileView = Backbone.View.extend({
     },
 
     fillContent: function() {
-
+        console.log( this.model.get('content') );
         this.profileContent = new ProfileContentView({ content:  this.model.get('content') });
 
         this.profileContent.render();
@@ -322,7 +321,8 @@ var ProfileContentModel = Backbone.Model.extend({
     },
 
     viewList: function() {
-
+        console.log( 'visit list' );
+        console.log( this.get('listID') );
         Backbone.history.navigate("lists/"+ this.get('listID') +"/"+ this.get('section_id'), true);
 
     }

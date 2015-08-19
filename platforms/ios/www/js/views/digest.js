@@ -39,12 +39,14 @@ var DigestModel = Backbone.Model.extend({
 		media.preload = "auto";
 		media.src = clip;
 
-		media.addEventListener('pause', function(e) { this.togglePlaying(); }.bind(this));
-		media.addEventListener('play', function(e) { this.togglePlaying(); }.bind(this));
+		media.addEventListener('pause', function() { this.togglePlaying(); }.bind(this));
+		media.addEventListener('play', function() { this.togglePlaying(); }.bind(this));
 
 		if(mediaType === "VIDEO"){
-			media.addEventListener('ended', function(e) { this.exitFullScreen(); }.bind(this));
+
+			media.addEventListener('ended', function() { this.exitFullScreen(); }.bind(this));
 			media.addEventListener('play', function() { this.webkitEnterFullScreen(); });
+
 		}
 
 		return media;
@@ -496,7 +498,8 @@ var DigestItemContent = Backbone.View.extend({
 		
 		this.$el
 			.append( contentHeader.render().el )
-			.append( img.render().el );
+			.append( img.render().el )
+			.append( this.model.get('track') );
 
 
 		// Create Shopping links if its a clip
@@ -719,9 +722,12 @@ var DigestImage = Backbone.View.extend({
 
 		if (this.model.get('track')) {
 
+			this.el.className += this.model.get('typeTitle') === 'Music' ? ' audio' : ' video';
+
 			var playButton = new PlayButton({ model: this.model });
 
-			this.$el.append( playButton.render().el );
+			this.$el
+				.append( playButton.render().el );
 
 		}
 
@@ -902,11 +908,8 @@ var Faces = Backbone.View.extend({
 });
 
 var PlayButton = Backbone.View.extend({
+	
 	className: 'play-button',
-
-	events: {
-		// 'click': 'playPause',
-	},
 
 	initialize: function(){
 	

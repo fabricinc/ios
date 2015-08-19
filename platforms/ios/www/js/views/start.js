@@ -2,10 +2,11 @@ var StartModel = Backbone.Model.extend({
 
     defaults: {
         emailLogin: false,
+        register: false
     },
     
     initialize: function(options) {
-        login = options.login || false;
+        var login = options.login || false;
 
         this.set('emailLogin', login);
         
@@ -36,6 +37,12 @@ var StartModel = Backbone.Model.extend({
     
     },
 
+    toggleRegister: function(){
+    
+        this.set('register', !this.get('register'));
+    
+    },
+
 });
 
 var StartView = Backbone.View.extend({
@@ -52,8 +59,8 @@ var StartView = Backbone.View.extend({
         callback = callback || function() {};
 
 
-        var startContent = new StartContent({ model: this.model, vent: this.vent });
-        startContent.render();
+        this.startContent = new StartContent({ model: this.model, vent: this.vent });
+        this.startContent.render();
 
 
         callback();
@@ -61,7 +68,8 @@ var StartView = Backbone.View.extend({
     },
 
     dealloc:function() {
-        return this;
+
+
     }
 });
 
@@ -78,6 +86,7 @@ var StartContent = Backbone.View.extend({
 
     render: function() {
 
+        console.log( 'start content' );
         this.$el
             .empty()
             .append('<div id="login-content"></div>');
@@ -89,9 +98,9 @@ var StartContent = Backbone.View.extend({
             vent: this.vent 
         });
 
-        this.backButton = new BackButton({ vent: this.vent });
+        this.backButton = new BackButton({ model: this.model, vent: this.vent });
 
-        loginContent = new LoginContent({ 
+        var loginContent = new LoginContent({ 
             model: this.model,
             vent: this.vent 
         });
@@ -185,6 +194,7 @@ var BackButton = Backbone.View.extend({
     back: function(){
     
         this.vent.trigger('back', '');
+        this.model.toggleRegister();
     
     },
 
@@ -195,7 +205,7 @@ var LoginContent = Backbone.View.extend({
     el: '#login-content',
 
     initialize: function(){
-    
+        console.log( 'login content' );
         this.vent = this.options.vent;
 
         this.vent.on('buttonClick', this.showContent, this);
@@ -227,6 +237,7 @@ var LoginContent = Backbone.View.extend({
             vent: this.vent 
         });
 
+        // this.recover = new PasswordRecover({ model: this.model });
 
         this.emailLogin = new EmailLogin({
             model: this.model,
@@ -239,15 +250,11 @@ var LoginContent = Backbone.View.extend({
     },
 
     chooseRender: function(){
-    
+
         if( this.model.get('emailLogin') ){
 
-            var recover = new PasswordRecover({ model: this.model });
 
-
-            this.emailLogin.render();
             this.vent.trigger('buttonClick', 'email');
-            recover.render();
 
 
         } else {
@@ -321,6 +328,7 @@ var EmailLogin = Backbone.View.extend({
     
     render: function() {
 
+        console.log( 'email recover render' );
         this.passwordRecover = new PasswordRecover({ model: this.model });
 
         var loginButton = new ButtonView({ 
@@ -351,6 +359,10 @@ var EmailLogin = Backbone.View.extend({
 
             this.vent.trigger( 'showBackButton' );
 
+        if ( this.model.get('emailLogin') ) {
+            this.passwordRecover.render();
+        }
+
 
         return this;
 
@@ -358,8 +370,14 @@ var EmailLogin = Backbone.View.extend({
     },
     submitLogin: function(e){
 
+
         if(e.keyCode === 13){
-            this.model.buttonClick('login-button');
+
+            var buttonType = this.model.get('register') ? 'register-button' : 'login-button';
+
+
+            this.model.buttonClick( buttonType );
+
         }
     
     },
@@ -372,8 +390,10 @@ var EmailLogin = Backbone.View.extend({
     },
 
     showRegister: function(){
+
         this.$('#register-firstname').blur();
         this.$('section').css({ top: '-105%'});
+        this.model.toggleRegister();
     
     },
 
@@ -381,10 +401,11 @@ var EmailLogin = Backbone.View.extend({
         
         $('.active').removeClass('active');
         e.currentTarget.className = 'active';
-        
     
     },
+
     passwordRecovery: function(){
+
         this.$(':focus').blur();
         this.passwordRecover.render();
     
@@ -457,7 +478,6 @@ var BottomLine = Backbone.View.extend({
     },
 
     changeLine: function( route ){
-        console.log( 'change line' );
 
         if(route === 'login-button') { return; }
 
@@ -470,8 +490,6 @@ var BottomLine = Backbone.View.extend({
         stuff = stuff || null;
         var text;
 
-        console.log( 'set line' );
-        console.log( this.el.className );
         switch( this.el.className ){
 
 
@@ -512,6 +530,14 @@ var PasswordRecover = Backbone.View.extend({
     events: {
         'touchstart #recover-password': 'submitRecover',
         'touchstart .close': 'closeRecovery',
+        'keypress' : 'submitRecover',
+        'submit form': 'recover'
+    },
+
+    initialize: function(){
+    
+        console.count();
+
     },
     
     render: function() {
@@ -532,9 +558,32 @@ var PasswordRecover = Backbone.View.extend({
 
     },
 
-    submitRecover: function(){
+    recover: function( e ){
+        e.preventDefault(); e.stopPropagation();
 
-        User.recover();
+        console.log( this );
+
+        User.recover(function(r) {
+            if(r) {
+
+                this.closeRecovery();
+
+            } 
+        }.bind(this));
+        
+
+        return false;
+    },
+
+    submitRecover: function(e){
+        
+        this.recover(e);
+    
+    },
+
+    clickRecover: function( e ){
+    
+        
     
     },
 

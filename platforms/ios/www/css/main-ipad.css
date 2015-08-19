@@ -14,16 +14,19 @@
 		opening/splash screens
 	============================================================== 
 	*/
-
+    #category-container .content-scroller.loading,
 	div#mask .wheel {
 		position: absolute;
 		top: 446px;
 		left: 340px;
 		width: 100px;
 		height: 100px;
-		background-size: 100px 100px;
+		background-size: 100% 100%;
 		-webkit-animation: spin 1.3s infinite linear;
 	}
+    #category-container .content-scroller.loading {
+        top: 396px;
+    }
 
     #wrapper.login {
         background-image: url(../images/login/ipadBackground.png);
@@ -306,9 +309,19 @@
     #pack-title {
         width: 272px;
     }
+    .digest-item-content video {
+        position: absolute;
+        display: block;
+        z-index: -50;
+        height: 80%;
+        width: 80%;
+        bottom: 0;
+    }
     .digest-content-img {
         height: 190px;
     }
+    .digest-content-img.video .pause { display: none; }
+
     #pack-title {
         font-size: 20px;
         width: 326px;
@@ -674,6 +687,7 @@
         margin: 175px 0 0;
     }
     #profile-picture {
+        background-image: url(../images/discovery/ipadProfile.png);
         border-radius: 0;
     }
     #profile .info {
@@ -1097,7 +1111,6 @@
         width: 100%;
         height: 100%;
         background-color: black;
-        opacity: 0.6;
     }
 
     .modal-overlay.active {

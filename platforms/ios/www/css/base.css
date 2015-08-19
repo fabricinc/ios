@@ -109,7 +109,7 @@ div#mask .wheel {
     width: 60px;
     height: 60px;
     background-image: url(../images/discovery/loader.png); /*url(../images/discovery/wheel.png);*/
-    background-size: 60px 60px;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     top: 240px;
     left: 130px;
@@ -179,11 +179,10 @@ header nav h1, #available-services h1 {
 #dashboard header nav h1 {
     background-image: url(../images/logo/6logo.png);
     background-repeat:no-repeat;
-    background-position: 0 2px;
+    background-position: 0;
     display: inline-block;
     background-size: 100%;
     position: relative;
-    margin-top: 10px;
     width: 90px;
 }
 
@@ -201,7 +200,7 @@ header nav h1 {
 }
 
 #dashboard header nav h1 {
-    height: 33px !important;
+    height: 47px !important;
 }
 
 
@@ -596,14 +595,16 @@ div.left.button.back:active { opacity: 0.5; }
     -webkit-transition: opacity 100ms ease-in-out;
     -o-transition: opacity 100ms ease-in-out;
     transition: opacity 100ms ease-in-out;
+    background-origin: content-box;
     background-repeat: no-repeat;
+    padding: 20px 20px 20px 22px;
     background-size: 100%;
     position: absolute;
     height: 20px;
     width: 10px;
     opacity: 0;
-    left: 15px;
-    top: 14px;
+    left: 0;
+    top: 0;
 }
 #login-back.visable {
     opacity: 1;
@@ -613,7 +614,7 @@ div.left.button.back:active { opacity: 0.5; }
     font-weight: 300;
     margin: 0 20px;
     color: white;
-    bottom: 10px;
+    bottom: 20px;
     height: 74%;
     right: 0;
     left: 0;
@@ -627,7 +628,7 @@ div.left.button.back:active { opacity: 0.5; }
     position: absolute;
     text-align: center;
     font-weight: 400;
-    font-size: 1em;
+    font-size: 0.8em;
     color: white;
     bottom: 20px;
     right: 10px;
@@ -648,7 +649,7 @@ div.left.button.back:active { opacity: 0.5; }
     border-radius: 5px;
     overflow: hidden;
     padding: 15px;
-    height: 77%;
+    height: 85%;
 }
 #login section {
     transition: top 300ms ease-in-out;
@@ -694,7 +695,7 @@ div.left.button.back:active { opacity: 0.5; }
     font-size: 16px;
     display: block;
     border: none;
-    height: 21px;
+    height: 25px;
     width: 187px;
     clear: both;
     margin: 0;
@@ -706,18 +707,17 @@ div.left.button.back:active { opacity: 0.5; }
     border: 1px solid #999;
 }
 #registration .row .icon {
-    background-position: 11px 3px;
+    background-position: 11px center;
     border-right: 1px solid #999;
     background-repeat: no-repeat;
     background-size: 22px 23px;
     background-color: white;
-    height: 29px;
+    height: 33px;
     float: left;
     width: 44px;
 }
 #registration .row.double .icon {
-    background-position: 11px 17px;
-    height: 59px;
+    height: 67px;
 }
 #registration .row.name .icon { background-image: url(../images/login/register-user.png); }
 #registration .row.email .icon { background-image: url(../images/login/register-email.png); }
@@ -729,6 +729,7 @@ div.left.button.back:active { opacity: 0.5; }
     background-color:  rgb(198, 198, 198);
     text-align: center;
     line-height: 29px;
+    font-size: 12px;
     height: 29px;
     float: left;
     color: #666;
@@ -2520,6 +2521,9 @@ div.check-list-wrapper div.check-list-item {
     margin: 1px 0 0;
     height: 153px;
 }
+.digest-item-content video {
+    display: none;
+}
 .play-button {
     background-color: rgba(255, 255, 255, 0.59);
     border-radius: 40% / 70%;
@@ -2552,7 +2556,6 @@ div.check-list-wrapper div.check-list-item {
     color: gray;
 }
 h1.pack-footer {
-    background-image: url(../images/discovery/digest/arrow.png);
     background-position: center right;
     background-repeat: no-repeat;
     background-size: 22px;
@@ -5302,11 +5305,12 @@ h6.like-you + .action {
     top: 50px;
     left: 0;
 }
-#notifications-container.open:-webkit-scrollbar { display: none; }
+/*#notifications-container.open:-webkit-scrollbar { display: none; }*/
 
 #notifications-container.open {
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
+    overflow-x: hidden;
     display: block;
 }
 #notifications-container .notification {
@@ -5337,6 +5341,10 @@ h6.like-you + .action {
 .blank-message,
 .blank-instructions {
     text-align: center;
+}
+#notifications-container .blank-message.notification {
+    border: none;
+    background-color: transparent;
 }
 .blank-message {
     color: darkgray;

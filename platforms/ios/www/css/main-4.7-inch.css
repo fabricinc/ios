@@ -36,7 +36,7 @@
     width: 318px;
 }
 .digest-content-img {
-    height: 145px;
+    height: 185px;
 }
 .purchase-links a {
     height: 25px;
@@ -331,7 +331,7 @@ h6.like-you + .action {
 #user-matches .match { margin: 10px auto 0; }
 .fl .login-text { width: 242px; }
 #registration { left: 18px; }
-#registration .row.double .icon { height: 59px; }
+#registration .row.double .icon { height: 67px; }
 #match-found,
 #rate-first,
 #get-started {
@@ -343,10 +343,9 @@ h6.like-you + .action {
 
 #coach-section h1,
 #dashboard header nav h1 {
-    height: 40px !important;
-    width: 110px;
-    font-size: 36px;
+    height: 55px !important;
     line-height: 40px;
+    width: 110px;
 }
 #current-icon.all, #dashboard header nav h1.open span {
     background-size: 20px 46px;

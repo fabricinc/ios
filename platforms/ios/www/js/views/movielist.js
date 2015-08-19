@@ -68,6 +68,8 @@ var MovieListModel = Backbone.Model.extend({
 				"sectionID": self.sectionID
 			};
 
+            console.log( 'opsint' );
+        console.log( options );
 
 		self.offset += self.limit;
 
@@ -82,6 +84,8 @@ var MovieListModel = Backbone.Model.extend({
 				"offset": self.offset,
 				"limit": self.limit
 			};
+
+
 
 
 

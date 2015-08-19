@@ -33,8 +33,9 @@
     height: 430px;
 }
 .digest-content-img {
-    height: 150px;
+    height: 200px;
 }
+
 .purchase-links a {
     height: 30px;
     width: 30px;
@@ -235,7 +236,7 @@ h6.like-you + .action {
 #user-matches .match { margin: 10px auto 0; }
 .fl .login-text { width: 281px; }
 #registration { left: 43px; }
-#registration .row.double .icon { height: 59px; }
+
 #match-found,
 #rate-first,
 #get-started {
@@ -262,7 +263,6 @@ div#fancy-button::after {
 #dashboard header nav h1 {
     height: 46px !important;
     width: 122px;
-    font-size: 34px;
     line-height: 46px;
 }
 #dashboard header nav h1 span {

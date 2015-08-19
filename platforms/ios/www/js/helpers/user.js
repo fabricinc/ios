@@ -276,12 +276,14 @@
             return true;
         },
 
-        recover: function() {
+        recover: function(callback) {
+            callback = callback || function() {};
             var email = $('#recover-email').val(),
                 msg = "",
                 failMsg = "Oops! There was a problem contacting our server.  If the problem persists, please contact Fabric support.";
 
             if (this.emailRegex.test(email)) {
+
                 Api.recoverPassword(email, function(response){
                     if(response) {
                         Util.log(JSON.stringify(response));
@@ -289,11 +291,11 @@
                         if(response.success) {
                             msg = "We have emailed username and password reset information to: " + email;
 
-                        } else if (response.error.code == 0) { // Email address not found.
+                        } else if (response.error.code === 0) { // Email address not found.
                             msg = "Oops! " + email + " is not in our records. Please double check and try again, or create a new account.";
 
                         } else if (response.error.code === 1) { // Facebook account.
-                            msg = "Oops! " + email + " is for a Facebook account.  Please try logging in with Facebook instead!"
+                            msg = "Oops! " + email + " is for a Facebook account.  Please try logging in with Facebook instead!";
 
                         } else { // WTF?
                             var error = self.checkForErrorResponse(response);
@@ -308,10 +310,16 @@
                     }
 
                     Util.alert(msg);
+                    callback(response.success);
+
                 });
+
             } else {
+
                 Util.alert("Oops! That email address doesn't appear to be formatted correctly.", "Invalid Email");
+
             }
+
         },
 
         login: function() {
