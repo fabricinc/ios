@@ -168,6 +168,9 @@ var RateView = Backbone.View.extend({
 
 
         APP.refreshSettings(function() {
+
+            // Get Fabric State
+            
             User.fetchMinData(function(success) {
                 if(success) {
                     // IF DEEP ROUTE IS SET send them

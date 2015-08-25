@@ -1300,7 +1300,7 @@ Api.getRecommendedPeople = function(callback) {
     callback = callback || function() {};
     var options = {
         "action": "getRecommendedPeople"
-    }
+    };
     this.fetch(options, callback);
 };
 Api.getDigestItems = function(callback) {

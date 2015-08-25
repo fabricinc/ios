@@ -16,6 +16,7 @@ var DigestModel = Backbone.Model.extend({
 		this.set('recommendation', this.get('digestData').recommendation);
 		this.set('typeTitle', this.get('column_type') === "people" ? "people like you" : this.get('digestData').typeTitle);
 		this.set('track', this.createMedia(this.get('digestData').clip));
+		this.set('friendCount', parseInt(this.get('digestData').friendCount));
 
 		var icon = this.get('column_type') === 'clip' ? this.get('digestData').typeTitle : this.get('column_type');
 		this.set('icon', 'images/digest/categoryIcons/' + icon.toLowerCase() + '.png');
@@ -271,6 +272,8 @@ var DigestSection = Backbone.View.extend({
 		items.digestData.push( this.makePeopleObject() );
 		this.collection = new DigestItems(items.digestData); 
 		this.model = new DigestSectionModel(items.heading);
+		
+		console.log( this.collection.toJSON() );
 
 	},
 
@@ -637,18 +640,26 @@ var Recommendation = Backbone.View.extend({
 
 	render: function() {
 
-		var rec = this.model.get('recommendation'),
+		var s = this.model.get('friendCount') >= 2 ? "" : "s",
+			rec = this.model.get('recommendation'),
 			facebookID = rec.facebookID || null,
 			userID = rec.userID || "",
 			name = rec.userName || "";
 
 
+		var others = new Others({ count: this.model.get('friendCount') });
 		var avatar = new Avatar({ model: this.model, src: facebookID });
+
+		console.log( others );
 
 		this.$el
 			.append( avatar.render().el )
-			.append('<h3><span class="bold">'+ name.split(" ")[0] +'</span> recommends this</h3>');
+			.append(
+				'<h3><span class="bold">'+ name.split(" ")[0] +'</span> '+ 
+				others.render().el.outerHTML +' recommend'+ s +' this</h3>'
+			);
 		
+
 		return this;
 	},
 
@@ -681,6 +692,39 @@ var Avatar = Backbone.View.extend({
 	viewProfile: function(){
 	
 		this.model.viewProfile();
+	
+	},
+
+});
+
+var Others = Backbone.View.extend({
+	className: 'other-recs',
+	tagName: 'span',
+	
+	render: function() {
+
+		var count = this.options.count;
+
+		if ( count >= 2 ) {
+
+			this.$el.append( 'and '+ ( count - 1 ) + this.noun() );
+
+		}
+		
+
+		return this;
+	},
+
+	noun: function(){
+	
+		switch ( this.options.count ) {
+
+			case 2:
+				return " other";
+			default: 
+				return " others";
+
+		}
 	
 	},
 

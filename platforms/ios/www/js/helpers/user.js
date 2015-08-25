@@ -109,8 +109,10 @@
         },
 
         register: function(callback) {
-            console.log('register');
+            
             callback = callback || function(success) { Util.log("Registration success: " + success); };
+
+
             var firstname = $('#register-firstname').val(),
                 lastname = $('#register-lastname').val(),
                 email = $('#register-email').val(),
@@ -122,6 +124,7 @@
 
 
             if (this.registrationValidation(firstname, lastname, email, password, passwordConfirm, birthday, gender)) {
+                UI.mask();
                 Api.createNewRegistration(firstname + " " + lastname, email, password, null, null, birthday, gender, function(data) {
                     if (Analytics) { Analytics.event("Fabric registration"); }
 
@@ -141,6 +144,7 @@
                     }
                 });
             } else {
+                UI.unmask();
                 callback(false);
             }
         },
@@ -162,6 +166,7 @@
 
                 self.fetchData(function(success) {
                     if(success) {
+                        console.log( 'dispatch' );
                         APP.dispatcher("welcome");
                     } else {
                         Util.log("register callback failed to successfully get game state data");
@@ -322,7 +327,8 @@
 
         },
 
-        login: function() {
+        login: function(respond) {
+            respond = respond || function() {};
             var self = this;
             var password = $('#password').val(),
                 username = $('#username').val();
@@ -333,12 +339,29 @@
             }
 
 
+            
             UI.mask();
             
             // server-side auth
             Api.checkLogin(username, password, undefined, function(response, facebookData) {
-                self.loginCallback(response, facebookData);
+
+                var i = self.loginCallback(response, facebookData);
+
+                if( i ){
+
+                    Backbone.history.navigate("rate", true);
+                    respond(true);
+                    
+                } else {
+
+                    UI.unmask();
+                    respond(false);
+
+                }
+
+
             });
+
             localStorage.uName = username;
         },
 
@@ -357,13 +380,16 @@
         },
 
         loginCallback: function(response, facebookData, cb) {
+
             cb = cb || function() {
                 APP.router.dealloc();
                 APP.router.bindAppEvents();
                 APP.router.bindLoginEvents();
-                APP.dispatcher("rate");
+                // APP.dispatcher("rate");
             };
+
             var self = this;
+
             if(response.authorized && response.active) {
 
 
@@ -377,17 +403,21 @@
                     self.setFacebookID(facebookData.id);
                     self.isFacebook = true; // Why?
 
-                    cb(true);
                 } else {
+
                     if (Analytics) { Analytics.event("Fabric login"); }
                     self.isFacebook = false;
 
-                    cb(true);
+
                 }
+                cb(true);
+                return true;
             } else if(response.facebookUserNotFound) {
+
                 Facebook.getFbFriends(function(tpFbFriends) {
                     self.createRegistrationWithFacebookData(facebookData, tpFbFriends);
                 });
+
             } else if(response.authorized && !response.active) {
                 //cb(false);
                 // deactivated user is authorized but not active - was deleted at some point but returned
@@ -418,9 +448,11 @@
                     });
 
                 }, 200);
+
             } else {
 
                 cb(false);
+                return false;
                 
             }
         },

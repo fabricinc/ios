@@ -2,7 +2,8 @@ var StartModel = Backbone.Model.extend({
 
     defaults: {
         emailLogin: false,
-        register: false
+        loginError: false,
+        register: false,
     },
     
     initialize: function(options) {
@@ -20,20 +21,35 @@ var StartModel = Backbone.Model.extend({
                 Backbone.history.navigate('fb-connect', true);
                 break;
             case 'login-button':
-                User.login();
+
+                User.login(function(r){
+
+                    if( !r ){
+
+                        this.set('loginError', true);
+
+                    }
+
+                }.bind(this));
+
                 break;
             case 'register-button':
-                UI.mask(true, function() {
+                
 
-                    User.register(function(success) {
-                        Util.log("User.register success: " + success);
-                        UI.unmask();
-                        self.click = false;
-                    });
-                    
+                User.register(function(success) {
+                    Util.log("User.register success: " + success);
+
+                    self.click = false;
                 });
+                
                 break;
         }
+    
+    },
+
+    resetLoginError: function(){
+    
+        this.set('loginError', false);
     
     },
 
@@ -58,9 +74,10 @@ var StartView = Backbone.View.extend({
     render:function(callback) {
         callback = callback || function() {};
 
+        
+        var startContent = new StartContent({ model: this.model, vent: this.vent });
 
-        this.startContent = new StartContent({ model: this.model, vent: this.vent });
-        this.startContent.render();
+        startContent.render();
 
 
         callback();
@@ -86,7 +103,6 @@ var StartContent = Backbone.View.extend({
 
     render: function() {
 
-        console.log( 'start content' );
         this.$el
             .empty()
             .append('<div id="login-content"></div>');
@@ -205,7 +221,7 @@ var LoginContent = Backbone.View.extend({
     el: '#login-content',
 
     initialize: function(){
-        console.log( 'login content' );
+
         this.vent = this.options.vent;
 
         this.vent.on('buttonClick', this.showContent, this);
@@ -328,7 +344,6 @@ var EmailLogin = Backbone.View.extend({
     
     render: function() {
 
-        console.log( 'email recover render' );
         this.passwordRecover = new PasswordRecover({ model: this.model });
 
         var loginButton = new ButtonView({ 
@@ -368,12 +383,13 @@ var EmailLogin = Backbone.View.extend({
 
 
     },
+
     submitLogin: function(e){
 
-
         if(e.keyCode === 13){
+            var form = $("form :focus").closest('form')[0].id;
 
-            var buttonType = this.model.get('register') ? 'register-button' : 'login-button';
+            var buttonType = form === "registration" ? 'register-button' : 'login-button';
 
 
             this.model.buttonClick( buttonType );
@@ -386,6 +402,7 @@ var EmailLogin = Backbone.View.extend({
         e.preventDefault();     e.stopPropagation();
 
         this.vent.trigger('showRegister', e.currentTarget.id);
+        $('form :focus').blur();
     
     },
 
@@ -440,7 +457,6 @@ var ButtonView = Backbone.View.extend({
     },
 
     buttonClick: function(e){
-
 
         this.model.buttonClick( e.currentTarget.id );
 
@@ -536,8 +552,8 @@ var PasswordRecover = Backbone.View.extend({
 
     initialize: function(){
     
-        console.count();
-
+        this.listenTo(this.model, 'change:loginError', this.show);
+    
     },
     
     render: function() {
@@ -558,10 +574,17 @@ var PasswordRecover = Backbone.View.extend({
 
     },
 
+    show: function(){
+    
+        this.render();
+
+        this.model.resetLoginError();
+    
+    },
+
     recover: function( e ){
         e.preventDefault(); e.stopPropagation();
 
-        console.log( this );
 
         User.recover(function(r) {
             if(r) {

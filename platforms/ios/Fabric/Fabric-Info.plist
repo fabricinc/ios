@@ -71,7 +71,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>27</string>
+	<string>33</string>
 	<key>FacebookAppID</key>
 	<string>908540922496603</string>
 	<key>FacebookDisplayName</key>
@@ -79,8 +79,6 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSMainNibFile~ipad</key>
 	<string></string>
 	<key>UILaunchImages</key>
 	<array>

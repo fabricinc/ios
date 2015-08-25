@@ -50,9 +50,7 @@
 .digest-recommendation h3 {
     line-height: 40px;
 }
-.purchase-links {
-    height: 40px;
-}
+
 .digest-avatar {
     height: 40px;
     width: 40px;
@@ -261,9 +259,9 @@ div#fancy-button::after {
 #home-filters img { right: 44%; }
 #coach-section h1,
 #dashboard header nav h1 {
-    height: 46px !important;
+    height: 66px !important;
     width: 122px;
-    line-height: 46px;
+    line-height: 66px;
 }
 #dashboard header nav h1 span {
     top: 14px;

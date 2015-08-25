@@ -68,9 +68,6 @@ var MovieListModel = Backbone.Model.extend({
 				"sectionID": self.sectionID
 			};
 
-            console.log( 'opsint' );
-        console.log( options );
-
 		self.offset += self.limit;
 
 		Api.dispatcher(options, function(list) { callback(list); });
@@ -143,6 +140,7 @@ var MovieListView = Backbone.View.extend({
 
 		//load specific list
 		if(list) {
+            
 			self.model.getListData(function(list) {
                 var otherTitle = null;
 
@@ -152,6 +150,8 @@ var MovieListView = Backbone.View.extend({
 
 				otherTitle = listName +" "+ sectionType[parseInt(sectionID)];
 
+
+                console.log( list );
 				var html = APP.load("listRow", { items: list, ownQueue: self.ownQueue });
 
 				self.$el.html(html);

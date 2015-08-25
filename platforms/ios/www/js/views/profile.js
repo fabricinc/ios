@@ -39,9 +39,7 @@ var ProfileModel = Backbone.Model.extend({
 
         Api.getProfileContent(this.userID, function (response){
 
-
             this.set('content', response.content);
-
 
         }.bind(this));
 
