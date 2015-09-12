@@ -14,8 +14,6 @@
 		    document.addEventListener("pause", self.onDevicePause, false);
 		    document.addEventListener("resume", self.onDeviceResume, false);
 
-		    //document.addEventListener("batterycritical", function() { APP.Player.resumePlayer() }, false);
-            //document.addEventListener("batterylow", function() { APP.Player.resumePlayer() }, false);
 
             // Get token for Push notifications
  			MobileDevice.setPushNotifications();
@@ -125,6 +123,8 @@
 		    Util.log(msg);
 		},
 		onDeviceOffline: function() {
+
+			cordova.exec(null, null, "SplashScreen", "hide", []);
             //MobileDevice.report('going into offline mode');
 		    //$.blockUI({ message: '<div class="blocking-dialog"><img src="images/waitingForInternet.gif"><p><h1>waiting for internet connection...</h1></div>' });
             Util.CenterItem('.blocking-dialog');
@@ -140,6 +140,7 @@
             Util.log('going into pause mode');
 		},
 		onDeviceResume: function() {
+
 		    MobileDevice.checkNetworkConnection();
 		    if (!APP.click) {  // Will be false unless we're waiting for Facebook login.
 		        Api.getFabricState(function(response) {
@@ -151,14 +152,15 @@
 		                Util.log("game state NOT ok. login again");
 		                APP.dispatcher("rate");
 		            }
+		            cordova.exec(null, null, "SplashScreen", "hide", []);
 		        });
 		    } else {
 		        APP.click = false;
 		    }
 		},
 		onDeviceOnline: function() {
-		    //$.unblockUI();
-			this.checkNetworkConnection();
+
+			MobileDevice.checkNetworkConnection();
             Util.log('device online');
 		    //if ($("#wrapper").hasClass("player")) { APP.skipMovie(); }
 		},
@@ -169,6 +171,9 @@
 		    if(MobileDevice.connectionIsCellular()) {
                 MobileDevice.displayCellularWarning();
 		    }
+		    
+		    $("#retry").click();
+
 		}
-	}
+	};
 

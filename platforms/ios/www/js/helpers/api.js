@@ -378,7 +378,7 @@ Api.getShoppingLinks = function(publishedID, callback) {
     var options = {
         moviePublishedID: publishedID,
         action: "getShoppingLinks"
-    }
+    };
     this.dispatcher(options, callback);
 };
 Api.getCategoryList = function(opts, callback) {

@@ -53,7 +53,7 @@ var DigestModel = Backbone.Model.extend({
 		return media;
 	
 	},
-	togglePlaying: function(e){
+	togglePlaying: function( e ){
 		
 		this.set('playing', !this.get('playing'));
 	
@@ -65,7 +65,7 @@ var DigestModel = Backbone.Model.extend({
 	
 	},
 
-	handleInteraction: function(element){
+	handleInteraction: function( element ){
 
  		var el = element.split(" ")[0],
  			listID = parseInt(this.get(el +'ID')),
@@ -79,11 +79,39 @@ var DigestModel = Backbone.Model.extend({
 				Api.setMovieToFabricList(parseInt(this.get('object_id')), listID, !setter);
 
 				this.set(el, !setter);
+				break;
 
+			case 'share':
+
+				this.shareItem();
 				break;
 				
 		}
 
+	},
+
+	shareItem: function(){
+		// console.log( this.toJSON() );
+		
+		window.plugins.socialsharing.share(
+			this.createShareMessage( this.get('digestData').objectTitle ),
+			this.get('digestData').objectTitle,
+			null,
+			this.createShareLink( this.get('digestData').ID )
+		);
+	
+	},
+
+	createShareLink: function( movieID ) {
+	
+		return Api.appSettings.shareLocation + "/item.php?movieID=" + movieID;
+	
+	},
+
+	createShareMessage: function( title ){
+	
+		return "I just checked out '" + title + "' @tryfabric";
+	
 	},
 
 	imageClick: function(){
@@ -273,8 +301,6 @@ var DigestSection = Backbone.View.extend({
 		this.collection = new DigestItems(items.digestData); 
 		this.model = new DigestSectionModel(items.heading);
 		
-		console.log( this.collection.toJSON() );
-
 	},
 
 	render: function(){
@@ -594,6 +620,7 @@ var ClipFooter = Backbone.View.extend({
 	events: {
 		'click .favorite': 'interaction',
 		'click .queue': 'interaction',
+		'click .share': 'interaction'
 	},
 
 	initialize: function(attributes){
@@ -608,7 +635,8 @@ var ClipFooter = Backbone.View.extend({
 
 		this.$el
 			.append( '<div class="favorite'+ (this.model.get("favorite") ? " active" : "") +'"></div>' )
-			.append( '<div class="queue'+ (this.model.get("queue") ? " active" : "") +'"></div>' );
+			.append( '<div class="queue'+ (this.model.get("queue") ? " active" : "") +'"></div>' )
+			.append( '<div class="share"></div>');
 
 		return this;
 
@@ -650,7 +678,6 @@ var Recommendation = Backbone.View.extend({
 		var others = new Others({ count: this.model.get('friendCount') });
 		var avatar = new Avatar({ model: this.model, src: facebookID });
 
-		console.log( others );
 
 		this.$el
 			.append( avatar.render().el )
@@ -922,6 +949,7 @@ var ObjectTitle = Backbone.View.extend({
 	},
 
 });
+
 var Links = Backbone.Collection.extend({
 	model: LinkModel,
 

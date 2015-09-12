@@ -634,7 +634,7 @@ var RateView = Backbone.View.extend({
         // footer share button
         $(".feed-footer .share").unbind().click(function() {
             var id = $(this).parent().data("feedid"),
-                title = $("#feed"+ id +" .action p .object").html(),
+                title = $("#feed"+ id +" .action-info .object").html(),
                 movieID = $("#feed"+ id +" img").data("movieid"),
                 catID = $("#feed"+ id +" img").data("catid"),
                 shareLink = Api.appSettings.shareLocation,
