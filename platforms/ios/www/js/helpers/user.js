@@ -119,7 +119,7 @@
                 password = $('#register-password').val(),
                 passwordConfirm = $('#register-confirm').val(),
                 birthday = $('#register-birthday').val(),
-                gender = $('.gender-buttons .active').attr("id"),
+                gender = $('#gender-select').val(),
                 self = this;
 
 

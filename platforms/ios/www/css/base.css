@@ -724,16 +724,11 @@ div.left.button.back:active { opacity: 0.5; }
 #registration .row.password .icon { background-image: url(../images/login/register-lock.png); }
 #registration .row.birthday .icon { background-image: url(../images/login/register-cake.png); }
 #registration .row.double .login-text:first-child { border-bottom: 1px solid #999 !important; }
-#registration .gender-buttons { overflow: hidden; margin-left: 60px; }
-#registration .gender-buttons div {
-    background-color:  rgb(198, 198, 198);
-    text-align: center;
-    line-height: 29px;
-    font-size: 12px;
-    height: 29px;
-    float: left;
-    color: #666;
-    width: 32%;
+
+#gender-select {
+    height: 30px;
+    width: 100%;
+    border: 0;
 }
 #registration .gender-buttons div.active {
     background-color: rgb(241, 241, 241);

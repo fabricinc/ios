@@ -415,9 +415,22 @@ var EmailLogin = Backbone.View.extend({
     },
 
     genderButton: function(e){
+
+        console.log( this );
+        console.log( e );
+
+        // $('.active').removeClass('active');
+
+        if( e.currentTarget.className !== 'active' ) {
+
+            e.currentTarget.className = 'active';
+
+        } else {
+
+            e.currentTarget.className = '';
+            
+        }
         
-        $('.active').removeClass('active');
-        e.currentTarget.className = 'active';
     
     },
 
