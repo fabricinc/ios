@@ -2576,7 +2576,7 @@ h1.pack-footer {
     background-size: 20px;
     height: 100%;
     float: left;
-    width: 50%;
+    width: 33%;
 }
 .clip-footer .favorite {
     background-image: url(../images/digest/favorite.png);
@@ -2589,6 +2589,9 @@ h1.pack-footer {
 }
 .clip-footer .queue.active {
     background-image: url(../images/digest/red_queue.png);
+}
+.clip-footer .share {
+    background-image: url(../images/digest/share.png);
 }
 .content-item-footer h1 {
     text-transform: none;
