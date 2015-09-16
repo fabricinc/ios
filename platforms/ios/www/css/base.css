@@ -726,6 +726,8 @@ div.left.button.back:active { opacity: 0.5; }
 #registration .row.double .login-text:first-child { border-bottom: 1px solid #999 !important; }
 
 #gender-select {
+    background-color: white;
+    color: gray;
     height: 30px;
     width: 100%;
     border: 0;

@@ -16,8 +16,8 @@ if (STAGE_API) {
 // Set production API
 if (!TESTING_SETTINGS) {
     STAGE_API = false;
-    API_URL = "http://api.tryfabric.com/";
-    API_SURL = "http://api.tryfabric.com/";
+    API_URL = "https://api.tryfabric.com/";
+    API_SURL = "https://api.tryfabric.com/";
 }
 
 // Constants from User.

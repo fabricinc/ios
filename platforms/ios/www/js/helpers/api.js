@@ -9,7 +9,7 @@ Api.appSettings = {
     apiTimeout: 5000,
     unseenInterval: 10000,
     maskTimeout: 30,
-    cdn: "http://d3j6zu3ol1gh5f.cloudfront.net",
+    cdn: "https://d3j6zu3ol1gh5f.cloudfront.net",
     shareLocation: "http://www.trailerpop.com/single_pages",
     discoveryLimit: 50,
     feedLimit: 10,
