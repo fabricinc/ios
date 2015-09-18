@@ -606,6 +606,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: trailerpop, inc. (E74G4ZJ9RR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: trailerpop, inc. (E74G4ZJ9RR)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					Fabric/Plugins/com.phonegap.plugins.facebookconnect,
@@ -651,6 +652,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: trailerpop, inc. (E74G4ZJ9RR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: trailerpop, inc. (E74G4ZJ9RR)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					Fabric/Plugins/com.phonegap.plugins.facebookconnect,

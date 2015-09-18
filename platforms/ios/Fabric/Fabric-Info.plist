@@ -48,12 +48,6 @@
 			<false/>
 		</dict>
 	</dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-	  <!--Include to allow all connections -->
-	  <key>NSAllowsArbitraryLoads</key>
-	      <true/>
-	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.trailerpop.fabric</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -77,13 +71,18 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>10</string>
 	<key>FacebookAppID</key>
 	<string>908540922496603</string>
 	<key>FacebookDisplayName</key>
 	<string>Fabric</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchImages</key>
@@ -189,6 +188,8 @@
 			<string>{768, 1024}</string>
 		</dict>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>

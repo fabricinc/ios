@@ -136,9 +136,10 @@
             var self = this;
             
             $(".left.button.back").fastClick(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                Backbone.history.navigate("back", true);
+                e.preventDefault(); e.stopPropagation();
+                window.vent.trigger( 'back' );
+                // Backbone.history.navigate("back", false);
+
             });
             $("#done-button").fastClick(function(e){
                 e.preventDefault();     e.stopPropagation();
@@ -298,6 +299,12 @@
 
         bindAppEvents: function() {
             var self = this;
+            window.vent.on('back', function (response) {
+                console.log( 'back' );
+                Backbone.history.history.back();
+
+            });
+            console.log( 'bind app events' );
             this.on("route:home", function() {
                 this.off("route:welcome");
                 self.loadView(new HomeView(), function() {
@@ -321,8 +328,9 @@
                 } else {
                     Backbone.history.navigate("rate", true);
                 }
-            })
+            });
             this.on("route:back", function() {
+                console.log( 'route back' );
                 // "back" Route BACK
 				// Sounds.back();
                 if(APP.url.set){
@@ -331,7 +339,9 @@
                     APP.url.set = false;                             // Clear APP.url
                 } else {
                     if (Backbone.history.history.length > 1) {
-                        Backbone.history.history.go(-2);
+                        // Backbone.history.history.go(-2);
+                        Backbone.history.history.back();
+                        // Backbone.history.history.back();
                     } else {
                         this.navigate("");
                     }
@@ -790,6 +800,7 @@
 
         dealloc: function() {
             this.off();
+            window.vent.off();
         }
 
 	});
