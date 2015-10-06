@@ -128,6 +128,8 @@ var APP = {
             "listRow",
             "otherListRow",
             "moreMovies",
+            "newSearch",
+            "result",
             "userLists",
             "login",
             "inviteUserList",

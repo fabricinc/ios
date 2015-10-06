@@ -6616,6 +6616,37 @@ div#critic-rating.bottom-info { left: 80px;  }
     margin: 10px auto;
 }
 
+/* SEARCH DROP DOWN */
+#search #input {
+    margin: 10px 0 0 0;
+    padding: 8px 2%;
+    font-size: 13px;
+    border: none;
+    width: 96%;
+}
+#search #search-results {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    padding: 0;
+}
+#search #search-results.active {
+    height: 440px;
+}
+#search #close {
+    background-color: transparent;
+    position: absolute;
+    padding: 5px 7px;
+    font-size: 14px;
+    border: none;
+    right: 10px;
+    top: 13px;
+    margin: 0;
+    color: white;
+}
+#search #close.active {
+    color: gray;
+}
+
 /*  COACH MARK STYLE  */
 #coach-section {
     background-color: rgba(0, 0, 0, 0.86);

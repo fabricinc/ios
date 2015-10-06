@@ -290,7 +290,11 @@ var RateView = Backbone.View.extend({
 
             // show category filter
             var categoryFeed = APP.load("categoryFeed", { items: self.model.categories });
-            $("#content-container .content-scroller").html(categoryFeed);
+            var search = new Search();
+
+            $("#content-container .content-scroller")
+                .html(categoryFeed)
+                .prepend(search.render().el);
 
 
             // bind category feed events
@@ -453,9 +457,11 @@ var RateView = Backbone.View.extend({
                 } else if(filter === "category-filter") {
 
                     // !!!!!!!!!!!!!!!!!!! CATEGORY FEED !!!!!!!!!!!!!!!!!!!
-
+                    var search = new Search();
                     self.model.lastFeed = $("#content-container .content-scroller").html(); // Update feed html to show current likes and comments
-                    $("#content-container .content-scroller").html(APP.load("categoryFeed", { items: self.model.categories }));
+                    $("#content-container .content-scroller")
+                        .html(APP.load("categoryFeed", { items: self.model.categories }))
+                        .prepend(search.render().el);
 
                     self.bindCategoryEvents();
                     APP.feedFilter = "category-filter";
@@ -690,7 +696,7 @@ var RateView = Backbone.View.extend({
         });
 
         sUpdate.click(function(e) {
-            e.preventDefault;
+            e.preventDefault();
 
             UI.scroller.scrollTo(0, -80, 0);
         });

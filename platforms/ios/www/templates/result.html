@@ -1,0 +1,7 @@
+<img class='poster' src="<%=Api.appSettings.cdn + result.imageThumbnail.replace('/files','') %>" alt="">
+<div class="result-info">
+<h1><%= result.movieTitle %></h2>
+	<% if(parseInt(result.releaseYear) > 0) { %> 
+		<h2><%= result.releaseYear %></h2>
+	<% } %>
+</div>
