@@ -245,7 +245,9 @@ div#mask .wheel {
 #fake-lobby-scroller .list-buttons .list-button.queue-button { background-position: 8px 11px; background-size: 12px; }
 #fake-lobby-scroller .list-buttons .list-button.favorite-button { background-position: 15px 12px; }
 #fake-lobby-scroller .list-buttons .list-button.seen-button { background-position: 26px 12px; }
-
+#search #search-results.active {
+    height: 503px;
+}
 #poster-layover {
     width: 100%;
     clip: rect(0px, 375px, 210px, 0px);

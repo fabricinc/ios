@@ -97,6 +97,7 @@
         <script src="js/views/whosGoing.js"></script>
         <script src="js/views/register.js"></script>
         <script src="js/views/search.js"></script>
+        <script src="js/views/newSearch.js"></script>
         <script src="js/views/settings.js"></script>
         <script src="js/views/statusUpdates.js"></script>
         <script src="js/views/suggestedCategories.js"></script>
@@ -120,6 +121,8 @@
                 // alert();
 
                 if (!window.APP) window.APP = APP;
+                if (!window.vent) { window.vent = _.extend({}, Backbone.Events); }
+                
                 if(Util.isMobile()) {
                     document.addEventListener("deviceready", function() { MobileDevice.onDeviceReady(); }, false);
                     // document.addEventListener("touchmove", function(e) { e.preventDefault(); }, false);

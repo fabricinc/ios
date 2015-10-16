@@ -136,10 +136,12 @@
             var self = this;
             
             $(".left.button.back").fastClick(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log( 'left button back' );
-                Backbone.history.navigate("back", true);
+                e.preventDefault(); e.stopPropagation();
+
+                window.vent.trigger( 'back' );
+                // Backbone.history.navigate("back", false);
+
+
             });
             $("#done-button").fastClick(function(e){
                 e.preventDefault();     e.stopPropagation();
@@ -299,6 +301,12 @@
 
         bindAppEvents: function() {
             var self = this;
+            window.vent.on('back', function (response) {
+                console.log( 'back' );
+                Backbone.history.history.back();
+
+            });
+            console.log( 'bind app events' );
             this.on("route:home", function() {
                 this.off("route:welcome");
                 self.loadView(new HomeView(), function() {
@@ -324,6 +332,7 @@
                 }
             });
             this.on("route:back", function() {
+                console.log( 'route back' );
                 // "back" Route BACK
 				// Sounds.back();
                 console.log( 'back' );
@@ -334,9 +343,10 @@
                 } else {
                     console.log( 'not deep link' );
                     if (Backbone.history.history.length > 1) {
-                        console.log( 'length' );
-                        Backbone.history.history.go(-2);
-                        console.log( window.location.hash );
+
+                        // Backbone.history.history.go(-2);
+                        Backbone.history.history.back();
+                        // Backbone.history.history.back();
                     } else {
                         this.navigate("");
                     }
@@ -795,6 +805,7 @@
 
         dealloc: function() {
             this.off();
+            window.vent.off();
         }
 
 	});

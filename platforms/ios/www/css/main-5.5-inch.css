@@ -2,7 +2,9 @@
 #wrapper { width: 414px; height: 736px; position: relative; }
 #home-filters div, #coach-section div.filter.clone { height: 52px; background-size: 46px; }
 #home-filters { width: 414px; }
-
+#search #search-results.active {
+    height: 571px;
+}
 
 #category-container { height: 613px; }
 #welcome-categories div .title,
