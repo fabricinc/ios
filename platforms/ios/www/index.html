@@ -9,6 +9,12 @@
         <link href="css/main.css" rel="stylesheet">
 
         <script src="js/lib/vendor/jquery-1.9.1.js"></script>
+        <script type="text/javascript">
+        $(document).bind("mobileinit", function(){
+              $.mobile.hashListeningEnabled = false;
+              alert('model init');
+          });
+        </script>
         <script src="js/lib/vendor/jquery.timeago.js"></script>
 
         <script src="cordova.js"></script>

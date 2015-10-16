@@ -138,6 +138,7 @@
             $(".left.button.back").fastClick(function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log( 'left button back' );
                 Backbone.history.navigate("back", true);
             });
             $("#done-button").fastClick(function(e){
@@ -321,17 +322,21 @@
                 } else {
                     Backbone.history.navigate("rate", true);
                 }
-            })
+            });
             this.on("route:back", function() {
                 // "back" Route BACK
 				// Sounds.back();
+                console.log( 'back' );
                 if(APP.url.set){
                     // IF deep linking url set and then 'back' is pressed take them home b/c there is no 'back'
                     Backbone.history.navigate("rate", true);
                     APP.url.set = false;                             // Clear APP.url
                 } else {
+                    console.log( 'not deep link' );
                     if (Backbone.history.history.length > 1) {
+                        console.log( 'length' );
                         Backbone.history.history.go(-2);
+                        console.log( window.location.hash );
                     } else {
                         this.navigate("");
                     }
