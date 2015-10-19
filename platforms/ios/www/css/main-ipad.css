@@ -235,14 +235,23 @@
     #home-slider {
         height: 974px;
     }
-
+    .category-filter .content-scroller {
+        padding: 0 20px;
+    }
+    #search #close {
+        right: 19px;
+    }
     #category-container .catItem {
         float: left;
-        width: 354px;
+        width: 356px;
         height: 207px;
-        margin: 20px 0 0 20px;
+        margin: 20px 15px 0 0;
         overflow-y: hidden;
         max-height: 207px;
+    }
+
+    #category-container .catItem:nth-child(odd) {
+        margin-right: 0;
     }
 
     #category-container .catItem img {
@@ -887,9 +896,15 @@
     .feed-footer span { font-size: 22px; }
     .feed-social span { font-size: 18px; line-height: 22px; }
     #category-container div .title,
-    #content-container .list-item .title { width: 339px; }
+    #content-container .list-item .title { width: 341px; }
     #fabric-player-button { margin: 15px 20px 0; }
 
+    #search #input {
+        font-size: 15px;
+    }
+    #search #search-results.active {
+        height: 872px;
+    }
     #feed-container {
         position: relative;
         height: 976px;

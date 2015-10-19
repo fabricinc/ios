@@ -492,6 +492,7 @@ div.left.button.back:active { opacity: 0.5; }
     width: 100%;
     background-color: rgb(230, 230, 230);
 }
+
 #menu-search-form input::-webkit-input-placeholder,
 #search-form input::-webkit-input-placeholder{
     background-image: url(../images/discovery/search.png);
@@ -6618,12 +6619,20 @@ div#critic-rating.bottom-info { left: 80px;  }
 
 /* SEARCH DROP DOWN */
 #search #input {
+    background-image: url(../images/discovery/search.png);
+    background-repeat: no-repeat;
+    background-position: 6px;
+    background-size: 11px;
     margin: 10px 0 0 0;
-    padding: 8px 2%;
+    padding: 8px 6%;
     font-size: 13px;
     border: none;
-    width: 96%;
+    width: 88%;
 }
+#search input#input::-webkit-input-placeholder {
+    padding: 0 15px;
+}
+
 #search #search-results {
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
