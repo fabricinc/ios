@@ -178,7 +178,7 @@ var ProfileView = Backbone.View.extend({
     },
 
     fillContent: function() {
-        console.log( this.model.get('content') );
+
         this.profileContent = new ProfileContentView({ content:  this.model.get('content') });
 
         this.profileContent.render();
@@ -319,8 +319,6 @@ var ProfileContentModel = Backbone.Model.extend({
     },
 
     viewList: function() {
-        console.log( 'visit list' );
-        console.log( this.get('listID') );
         Backbone.history.navigate("lists/"+ this.get('listID') +"/"+ this.get('section_id'), true);
 
     }

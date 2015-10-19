@@ -9,6 +9,12 @@
         <link href="css/main.css" rel="stylesheet">
 
         <script src="js/lib/vendor/jquery-1.9.1.js"></script>
+        <script type="text/javascript">
+        $(document).bind("mobileinit", function(){
+              $.mobile.hashListeningEnabled = false;
+              alert('model init');
+          });
+        </script>
         <script src="js/lib/vendor/jquery.timeago.js"></script>
 
         <script src="cordova.js"></script>
@@ -72,6 +78,7 @@
         <script src="js/views/events.js"></script>
         <script src="js/views/feed.js"></script>
         <script src="js/views/matches.js"></script>
+        <script src="js/views/invite.js"></script>
 		<script src="js/views/header.js"></script>
         <script src="js/views/greeting.js"></script>
         <script src="js/views/home.js"></script>

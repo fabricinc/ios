@@ -17,6 +17,7 @@
             "leaderboard": "leaderboard",
             "screening-room": "screeningRoom",
             "settings": "settings",
+            "invite": "invite",
             "settings/:template": "innerSettings",
             "recommendations": "recommendations",
             "recommendedList/:submenu": "recommendedList",
@@ -137,8 +138,10 @@
             
             $(".left.button.back").fastClick(function(e) {
                 e.preventDefault(); e.stopPropagation();
+
                 window.vent.trigger( 'back' );
                 // Backbone.history.navigate("back", false);
+
 
             });
             $("#done-button").fastClick(function(e){
@@ -333,12 +336,15 @@
                 console.log( 'route back' );
                 // "back" Route BACK
 				// Sounds.back();
+                console.log( 'back' );
                 if(APP.url.set){
                     // IF deep linking url set and then 'back' is pressed take them home b/c there is no 'back'
                     Backbone.history.navigate("rate", true);
                     APP.url.set = false;                             // Clear APP.url
                 } else {
+                    console.log( 'not deep link' );
                     if (Backbone.history.history.length > 1) {
+
                         // Backbone.history.history.go(-2);
                         Backbone.history.history.back();
                         // Backbone.history.history.back();
@@ -723,6 +729,15 @@
                     scroller: false,
                     loadPageHtml: false
                 }, "matches");
+            });
+            this.on("route:invite", function() {
+                self.loadView(new Invite(), function() {
+
+                    // Stub for callback
+                }, {
+                    scroller: false,
+                    loadPageHtml: false
+                }, "invite");
             });
             this.on("route:greeting", function(userID) {
                 self.loadView(new GreetingView({ userID: userID }), function() {

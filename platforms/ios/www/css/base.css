@@ -143,6 +143,15 @@ header {
     background-image: url(../images/login/background.jpg);
     background-size: 100%;
 }
+#wrapper.invite {
+    background-image: url(../images/invite/invite.jpg);
+    background-size: cover;
+}
+#invite-back {
+    background-image: url(../images/discovery/icon_back.png);
+    height: 40px;
+    width: 40px;
+}
 #wrapper.leftMenu { left: 87% !important; }
 #wrapper.rate div.left.button.back,
 #wrapper.welcome div.left.button.back,
