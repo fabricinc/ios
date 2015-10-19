@@ -17,6 +17,7 @@
             "leaderboard": "leaderboard",
             "screening-room": "screeningRoom",
             "settings": "settings",
+            "invite": "invite",
             "settings/:template": "innerSettings",
             "recommendations": "recommendations",
             "recommendedList/:submenu": "recommendedList",
@@ -728,6 +729,15 @@
                     scroller: false,
                     loadPageHtml: false
                 }, "matches");
+            });
+            this.on("route:invite", function() {
+                self.loadView(new Invite(), function() {
+
+                    // Stub for callback
+                }, {
+                    scroller: false,
+                    loadPageHtml: false
+                }, "invite");
             });
             this.on("route:greeting", function(userID) {
                 self.loadView(new GreetingView({ userID: userID }), function() {

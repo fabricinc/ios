@@ -51,6 +51,12 @@ var MatchesModel = Backbone.Model.extend({
 
             return false;
         });
+        
+        $("#invite-friends").fastClick(function () {
+            
+            Backbone.history.navigate('invite', true);
+        
+        });
 
         $(".greet").click(function(e) {
             e.preventDefault();
