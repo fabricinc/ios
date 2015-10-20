@@ -1620,8 +1620,14 @@ Api.getMutualFollowers = function(userID, callback) {
     console.log(userID);
 
     var options = { "action": "getMutualFollowers" };
-    if(userID && userID !== "") { options.userID = userID; }
+    
+    if(userID && userID !== "") { 
 
+        options.userID = userID; 
+
+    }
+
+    console.log( options );
     this.fetch(options, callback);
 };
 Api.getAppSettings = function(callback) {

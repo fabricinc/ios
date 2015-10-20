@@ -1,7 +1,40 @@
 var ShareModel = Backbone.Model.extend({
 
 	defaults: {
-		name: null
+		name: null,
+		text: null,
+	},
+
+	share: function(){
+		
+		var name = this.get('name');
+		var shareType = this.shareTypes[name];
+
+		console.log( shareType );
+
+		if(shareType) {
+
+			window.plugins.socialsharing.shareVia(
+				shareType,
+				"Check out this app Fabric. We can recommend movies/TV/music to each other: http://bit.ly/fabricapp",
+				"Check out Fabric",
+				null,
+				"http://bit.ly/fabricapp"
+			);
+
+		} else {
+
+			Backbone.history.navigate('friends/null/true', true);
+
+		}
+	
+	},
+
+	shareTypes: {
+		"facebook": "Facebook",
+		"twitter": "Twitter",
+		"email": "Email",
+		"text": "SMS"
 	},
 	
 
@@ -21,8 +54,9 @@ var Invite = Backbone.View.extend({
 		var shareButtons = new ShareButtons();
 		var back = new BButton();
 
+		this.$el.html( '<div id="invite"></div>' );
 
-		this.$el
+		this.$("#invite")
 			.html( back.el )
 			.append('<h3>Now invite your tastemates</h3><h4>We know you have friends with good taste like you. Why not invite them and discover togeather</h4>')
 			.append( shareButtons.el );
@@ -60,8 +94,8 @@ var BButton = Backbone.View.extend({
 	},
 
 	back: function(){
-	
-		Backbone.history.navigate('back', true);
+
+		window.vent.trigger('back');
 	
 	},
 });
@@ -72,11 +106,11 @@ var ShareButtons = Backbone.View.extend({
 	
 	initialize: function(){
 		var shares = [
-			{ name: "text" }, 
-			{ name: "email" }, 
-			{ name: "twitter" }, 
-			{ name: "facebook" }, 
-			{ name: "fabric" }
+			{ name: "text", "text": "Invite via" }, 
+			{ name: "email", "text": "Invite via" }, 
+			{ name: "twitter", "text": "" }, 
+			{ name: "facebook", "text": "" }, 
+			{ name: "fabric", "text": "Find friends on" }
 		];
 
 		this.collection = new ShareCollection(shares);
@@ -102,13 +136,34 @@ var ShareButtons = Backbone.View.extend({
 });
 
 var ShareButton = Backbone.View.extend({
-	className: 'share-button',
+
+	events: {
+		'click': 'share'
+	},
+
+	initialize: function(){
+		
+		var name = this.model.get('name');
+
+		this.$el		
+			.addClass(name)
+			.css({'backgroundImage' : 'url(images/invite/'+ name +'.jpg)'});
+
+	
+	},
 	
 	render: function() {
+		var _m = this.model.toJSON();
 
-		this.$el.append( this.model.toJSON().name );
+		this.$el.append( _m.text +" "+ _m.name );
 
 		return this;
+	},
+
+	share: function(){
+	
+		this.model.share();
+	
 	},
 
 });

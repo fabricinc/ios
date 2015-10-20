@@ -140,7 +140,7 @@
                 e.preventDefault(); e.stopPropagation();
 
                 window.vent.trigger( 'back' );
-                // Backbone.history.navigate("back", false);
+                
 
 
             });
@@ -333,16 +333,13 @@
                 }
             });
             this.on("route:back", function() {
-                console.log( 'route back' );
-                // "back" Route BACK
-				// Sounds.back();
-                console.log( 'back' );
+                
                 if(APP.url.set){
                     // IF deep linking url set and then 'back' is pressed take them home b/c there is no 'back'
                     Backbone.history.navigate("rate", true);
                     APP.url.set = false;                             // Clear APP.url
                 } else {
-                    console.log( 'not deep link' );
+                
                     if (Backbone.history.history.length > 1) {
 
                         // Backbone.history.history.go(-2);
@@ -547,6 +544,7 @@
                 }, "follow-list");
             });
             this.on("route:friends", function(userID, isSelf) {
+                console.log( 'friends' );
                 self.loadView(new FriendView({userID: userID, isSelf: isSelf}), function() {
                     // Stub for callback
                 }, {

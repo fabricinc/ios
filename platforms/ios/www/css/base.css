@@ -143,15 +143,61 @@ header {
     background-image: url(../images/login/background.jpg);
     background-size: 100%;
 }
-#wrapper.invite {
+#invite-friends {
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: rgb(244, 0, 244);
+    margin-top: 5px;
+    font-weight: bold;
+    color: white;
+}
+#invite {
     background-image: url(../images/invite/invite.jpg);
     background-size: cover;
+    text-align: center;
+    color: white;
+    padding: 5%;
+    height: 95%;
+    width: 90%;
+}
+#wrapper.invite h3 {
+    font-weight: bold;
+    font-size: 18px;
+}
+#wrapper.invite h4 {
+    line-height: 30px;
+    margin-top: 25px;
+    font-size: 17px;
+    font-weight: 300;
+    padding: 15px;
+}
+#share-buttons {
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+}
+#share-buttons div {
+    border-bottom: 1px solid gray;
+    padding: 20px 60px;
+    text-align: left;
+    text-transform: capitalize;
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: 10px center;
 }
 #invite-back {
     background-image: url(../images/discovery/icon_back.png);
-    height: 40px;
-    width: 40px;
+    height: 20px;
+    width: 15px;
+    margin: 15px 10px;
+    box-sizing: content-box;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
+
 #wrapper.leftMenu { left: 87% !important; }
 #wrapper.rate div.left.button.back,
 #wrapper.welcome div.left.button.back,
@@ -5657,7 +5703,7 @@ button#done {
     background-size: 100% 100%;
     background-image: url(../images/discovery/settings.png);
     position: absolute;
-    top: 10px;
+    top: 58px;
     right: 10px;
 }
 

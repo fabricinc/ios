@@ -38,6 +38,7 @@
     height: 200px;
 }
 
+
 .purchase-links a {
     height: 30px;
     width: 30px;
@@ -529,7 +530,7 @@ div#friends-queued.bottom-info { left: 250px; }
     width: 25px;
     height: 25px;
     background-size: 25px 25px;
-    top: 6px;
+    top: 55px;
 }
 .list-movie-info { width: 285px; }
 .list-title {

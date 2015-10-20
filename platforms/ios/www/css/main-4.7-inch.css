@@ -25,6 +25,9 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+#share-buttons {
+    margin-top: 70px;
+}
 .line {
     font-size: 15px;
 }

@@ -4,7 +4,11 @@ var FriendModel = Backbone.Model.extend({
         isSelf: false,
     },
     initialize: function(options) {
-        this.set('userID', options.userID);
+        
+        var userID = options.userID === 'null' ? null : options.userID;
+
+        this.set('userID', userID);
+
         this.set('isSelf', options.isSelf);
     },
 
@@ -30,8 +34,7 @@ var FriendModel = Backbone.Model.extend({
 
     removeAppUsers: function(FBFriends) {
         var currentAppUsers = Facebook.tpFbFriendIDs,
-            cleanFriends = [],
-            clean;
+            cleanFriends = [];
             
         for(f = 0; f < FBFriends.length; f++) {
             var clean = $.inArray(FBFriends[f].id, currentAppUsers);
@@ -54,15 +57,18 @@ var FriendView = Backbone.View.extend({
         options = options || { };
         var self = this;
 
-
         this.model = new FriendModel(options);
     },
 
     render: function(callback) {
         var self = this;
 
+        console.log( 'friends' );
+        console.log( self.model.get('userID') );
+
         Api.getMutualFollowers(self.model.get('userID'), function(response) {
 
+            console.log( response );
 
             var friendHead = self.model.get('isSelf') === "true" ? ( self.$el.addClass('self'), APP.load("inviteUserList") ) : "",
                 html = APP.load("userLists", { followers: response.friends, followAction: "following" });
