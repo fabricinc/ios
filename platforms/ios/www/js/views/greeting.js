@@ -13,7 +13,9 @@ var GreetingModel = Backbone.Model.extend({
 
         Api.getSuggestedGreeting(this.userID, function(response) {
             if(response.greeted) {
-                Backbone.history.navigate("messages/" + self.userID, true);
+                console.log( 'greeted' );
+                // Backbone.history.navigate("messages/" + self.userID, true);
+                // window.vent.trigger('back');
                 return false;
             } else {
                 var user = response.data.user[0], fName = user.uName.split(" ")[0];
@@ -56,19 +58,25 @@ var GreetingModel = Backbone.Model.extend({
             };
 
         $("#send-suggestion").fastClick(function() {
-            if(parseInt(APP.gameState.credits) > 0) {
+            // if(parseInt(APP.gameState.credits) > 0) {
                 Api.sendGreeting(self.userID, self.suggestion, function(response) {
+                    console.log( response );
                     if(response.success) {
+                        
+                        console.log( 'send greeting' );
                         APP.gameState.credits = (parseInt(APP.gameState.credits) - 1).toString();
                         Backbone.history.navigate("back", true);
-                        params = { "Greeting type": "Suggested" }
+                        
+
+
+                        params = { "Greeting type": "Suggested" };
                         mixpanel.track("Greeting sent ", params);
                         if(Analytics) { Analytics.eventAndParams("Greeting Sent", params ); }
                     }
                 });
-            } else {
-                Util.alert("No worries - your credits are restored each day so you'll be back in action tomorrow", "Out Of Credits");
-            }
+            // } else {
+            //     Util.alert("No worries - your credits are restored each day so you'll be back in action tomorrow", "Out Of Credits");
+            // }
         });
 
         $("input#custom-message")
@@ -103,7 +111,7 @@ var GreetingModel = Backbone.Model.extend({
                     if(response.success) {
                         APP.gameState.credits = (parseInt(APP.gameState.credits) - 1).toString();
                         Backbone.history.navigate("back", true);
-                        params = { "Greeting type": "Custom" }
+                        params = { "Greeting type": "Custom" };
                         mixpanel.track("Greeting sent ", params);
                         if(Analytics) { Analytics.eventAndParams("Greeting Sent", params); }
                     }

@@ -303,7 +303,7 @@
         bindAppEvents: function() {
             var self = this;
             window.vent.on('back', function (response) {
-                console.log( 'back' );
+
                 Backbone.history.history.back();
 
             });

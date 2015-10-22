@@ -593,6 +593,28 @@
         margin-right: 20px;
     }
 
+    #invite h3 {
+        font-size: 28px;
+    }
+    #invite h4 {
+        font-size: 27px;
+        margin: 25px;
+        line-height: 45px;
+    }
+    #invite-back {
+        height: 40px;
+        width: 30px;
+    }
+    
+    #share-buttons {
+        margin: 100px auto;
+        width: 60%;
+    }
+
+    #invite-friends {
+        width: 50%;
+        margin: 5px auto;
+    }
 
     /*
     ==============================================================    
