@@ -29,6 +29,7 @@
 #fabric-menu { top: -670px; }
 .greeting .content { height: 100%; }
 .settings-button { background-position: 390px; line-height: 55px; }
+#friends.self #list-row-wrapper { height: 617px; }
 #discovery-background {
     background-image: url(../images/discovery/rateOverlay3.png);
     background-size: 320px 430px;
@@ -396,6 +397,15 @@ input.slider-search-form { width: 383px; }
     font-size: 24px;
     margin: 5px 0;
 }
+#invite h3 {
+    font-size: 25px;
+}
+#invite h4 {
+    line-height: 30px;
+    margin-top: 25px;
+    font-size: 25px;
+    font-weight: 300;
+}
 #friends .lists-row, .movie-seen-list .lists-row, .friend-list .lists-row { height: 56px; }
 .search-users .profile-picture, .lists-row .profile-picture,
 .movie-seen-list .profile-picture, .follow-list .profile-picture { height: 55px; border-radius: 27px; width: 55px; }
@@ -527,10 +537,9 @@ div#friends-queued.bottom-info { left: 250px; }
 #sort-button { bottom: -62px; }
 #update, #logout { height: 43px; }
 #user-matches #match-config {
-    width: 25px;
-    height: 25px;
-    background-size: 25px 25px;
-    top: 55px;
+    width: 20px;
+    height: 20px;
+    background-size: 100% 100%;
 }
 .list-movie-info { width: 285px; }
 .list-title {

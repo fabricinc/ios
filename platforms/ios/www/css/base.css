@@ -149,7 +149,7 @@ header {
     border-radius: 5px;
     color: #C0322F;
     background-color: white;
-    margin-top: 5px;
+    margin: 10px;
     background-image: url(../images/invite/inviteIcon.png);
     border: 1px solid;
     font-weight: bold;
@@ -4814,7 +4814,7 @@ h2#see-more-matches {
     left: 0;
     top: 0;
 }
-#friends.self #list-row-wrapper { height: 435px; }
+#friends.self #list-row-wrapper { height: 474px; }
 #friends #list-row-wrapper { height: 517px; }
 
 #friends #list-row-wrapper.no-friends { height: 439px; }
@@ -5708,7 +5708,7 @@ button#done {
     background-size: 100% 100%;
     background-image: url(../images/discovery/settings.png);
     position: absolute;
-    top: 58px;
+    top: 7px;
     right: 10px;
 }
 

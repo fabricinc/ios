@@ -1,6 +1,5 @@
 <div id="user-matches">
     <div class="cf rel">
-        <div id="match-config"></div>
         <div id="invite-friends">Invite Friends</div>
         <% if(matches.length == 0) { %>
             <div id="no-matches">
@@ -10,8 +9,9 @@
                 </p>
             </div>
         <% } else { %>
-            <div class="cf">
+            <div class="cf" style='position: relative;'>
                 <h1 class="credits"><%= APP.gameState.credits %> Credits</h1>
+                <div id="match-config"></div>
             </div>
             <% _.each(matches, function(match) { %>
                 <% compatibility = parseInt(match.compatibility) %>
