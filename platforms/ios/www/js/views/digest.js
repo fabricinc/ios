@@ -896,8 +896,8 @@ var LinkModel = Backbone.Model.extend({
 	},
 
 	shoppingLink: function(e){
-	
-
+		
+		
 		Util.handleExternalUrl( e );
 	
 	},
