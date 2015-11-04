@@ -19,7 +19,7 @@ var ShareModel = Backbone.Model.extend({
 				"Check out this app Fabric. We can recommend movies/TV/music to each other: http://bit.ly/fabricapp",
 				"Check out Fabric",
 				null,
-				"http://bit.ly/fabricapp"
+				null
 			);
 
 		} else {
@@ -58,7 +58,7 @@ var Invite = Backbone.View.extend({
 
 		this.$("#invite")
 			.html( back.el )
-			.append('<h3>Now invite your tastemates</h3><h4>We know you have friends with good taste like you. Why not invite them and discover togeather</h4>')
+			.append('<h3>Invite Friends</h3><h4>Which of your friends have the best taste? We highly recommend inviting them to start discovering together.</h4>')
 			.append( shareButtons.el );
 
 		callback();
@@ -147,7 +147,7 @@ var ShareButton = Backbone.View.extend({
 
 		this.$el		
 			.addClass(name)
-			.css({'backgroundImage' : 'url(images/invite/'+ name +'.jpg)'});
+			.css({'backgroundImage' : 'url(images/invite/'+ name +'.png)'});
 
 	
 	},

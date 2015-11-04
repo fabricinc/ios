@@ -147,7 +147,7 @@ header {
     text-align: center;
     padding: 15px;
     border-radius: 5px;
-    background-color: rgb(244, 0, 244);
+    background: linear-gradient(#c149f0,#fa7ffe );
     margin-top: 5px;
     font-weight: bold;
     color: white;
@@ -185,6 +185,9 @@ header {
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: 10px center;
+}
+#share-buttons div:last-child {
+    border: none;
 }
 #invite-back {
     background-image: url(../images/discovery/icon_back.png);
