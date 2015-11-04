@@ -175,7 +175,7 @@ input.slider-search-form {
 #profile .poster:nth-child(3) { left: 166px; z-index: 2; }
 #profile .poster:nth-child(4) { left: 249px; z-index: 1; }
 .lists-nav { background-position: 380px; }
-#friends.self #list-row-wrapper { height: 517px; }
+#friends.self #list-row-wrapper { height: 559px; }
 
 header nav h1 { width: 270px; height: 60px; line-height: 60px;}
 div#mask .wheel {

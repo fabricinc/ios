@@ -303,7 +303,7 @@
         bindAppEvents: function() {
             var self = this;
             window.vent.on('back', function (response) {
-                console.log( 'back' );
+
                 Backbone.history.history.back();
 
             });
@@ -333,7 +333,7 @@
                 }
             });
             this.on("route:back", function() {
-                
+
                 if(APP.url.set){
                     // IF deep linking url set and then 'back' is pressed take them home b/c there is no 'back'
                     Backbone.history.navigate("rate", true);

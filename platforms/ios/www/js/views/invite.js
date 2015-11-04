@@ -14,12 +14,14 @@ var ShareModel = Backbone.Model.extend({
 
 		if(shareType) {
 
+			var link = name === "facebook" ? "http://bit.ly/getfabric" : "";
+
 			window.plugins.socialsharing.shareVia(
 				shareType,
-				"Check out this app Fabric. We can recommend movies/TV/music to each other: http://bit.ly/fabricapp",
+				"Check out this app Fabric. We can recommend movies/TV/music to each other: http://bit.ly/getfabric",
 				"Check out Fabric",
 				null,
-				null
+				link
 			);
 
 		} else {
@@ -58,11 +60,12 @@ var Invite = Backbone.View.extend({
 
 		this.$("#invite")
 			.html( back.el )
-			.append('<h3>Invite Friends</h3><h4>Which of your friends have the best taste? We highly recommend inviting them to start discovering together.</h4>')
+			.append('<h3>Invite Friends</h3><h4>We all know friends who have great taste. Why not invite them so you can start discovering together!</h4>')
 			.append( shareButtons.el );
 
 		callback();
 	},
+
 	dealloc: function(){
 	
 		

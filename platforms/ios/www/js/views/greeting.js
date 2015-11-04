@@ -13,7 +13,7 @@ var GreetingModel = Backbone.Model.extend({
 
         Api.getSuggestedGreeting(this.userID, function(response) {
             if(response.greeted) {
-                Backbone.history.navigate("messages/" + self.userID, true);
+                window.vent.trigger('back');
                 return false;
             } else {
                 var user = response.data.user[0], fName = user.uName.split(" ")[0];
@@ -60,8 +60,8 @@ var GreetingModel = Backbone.Model.extend({
                 Api.sendGreeting(self.userID, self.suggestion, function(response) {
                     if(response.success) {
                         APP.gameState.credits = (parseInt(APP.gameState.credits) - 1).toString();
-                        Backbone.history.navigate("back", true);
-                        params = { "Greeting type": "Suggested" }
+                        Backbone.history.navigate("messages/" + self.userID, true);
+                        params = { "Greeting type": "Suggested" };
                         mixpanel.track("Greeting sent ", params);
                         if(Analytics) { Analytics.eventAndParams("Greeting Sent", params ); }
                     }

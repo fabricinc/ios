@@ -147,10 +147,15 @@ header {
     text-align: center;
     padding: 15px;
     border-radius: 5px;
-    background: linear-gradient(#c149f0,#fa7ffe );
-    margin-top: 5px;
+    color: #C0322F;
+    background-color: white;
+    margin: 10px;
+    background-image: url(../images/invite/inviteIcon.png);
+    border: 1px solid;
     font-weight: bold;
-    color: white;
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: 40px center;
 }
 #invite {
     background-image: url(../images/invite/invite.jpg);
@@ -161,11 +166,11 @@ header {
     height: 95%;
     width: 90%;
 }
-#wrapper.invite h3 {
+#invite h3 {
     font-weight: bold;
     font-size: 18px;
 }
-#wrapper.invite h4 {
+#invite h4 {
     line-height: 30px;
     margin-top: 25px;
     font-size: 17px;
@@ -4812,7 +4817,7 @@ h2#see-more-matches {
     left: 0;
     top: 0;
 }
-#friends.self #list-row-wrapper { height: 435px; }
+#friends.self #list-row-wrapper { height: 474px; }
 #friends #list-row-wrapper { height: 517px; }
 
 #friends #list-row-wrapper.no-friends { height: 439px; }
@@ -5706,7 +5711,7 @@ button#done {
     background-size: 100% 100%;
     background-image: url(../images/discovery/settings.png);
     position: absolute;
-    top: 58px;
+    top: 7px;
     right: 10px;
 }
 
