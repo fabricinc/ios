@@ -191,6 +191,9 @@ header {
     background-size: 40px;
     background-position: 10px center;
 }
+#share-buttons div:last-child {
+    border: none;
+}
 #invite-back {
     background-image: url(../images/discovery/icon_back.png);
     height: 20px;
