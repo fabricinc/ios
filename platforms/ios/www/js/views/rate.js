@@ -40,8 +40,9 @@ var RateModel = Backbone.Model.extend({
         Api.appSettings.feedLimit = parseInt(Api.appSettings.feedLimit);
 
 
-        Api.getHomeCategories(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
+        Api.getCategoryListPart3(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
             
+            console.log( response );
 
 
             self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
@@ -356,7 +357,7 @@ var RateView = Backbone.View.extend({
                         if(!APP.working && !self.model.pclf) {
                             APP.working = true;
                             $(".load-more-spinner").css("visibility", "visible");
-                            Api.getHomeCategories(1, 100, self.model.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
+                            Api.getCategoryListPart3(1, 100, self.model.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
                                 var categoryFeed = APP.load("categoryFeed", { items: response.data.categories });
                                 
                                 $("#content-container .content-scroller").append(categoryFeed);
