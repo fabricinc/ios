@@ -17,12 +17,16 @@ var terms = [{
     }];
 %>
 
+<div id="swipe-heading">
+    <b id="rated"><%= currentPos %></b>
+    <div class="inlineb">
+        <h1>Title</h1>
+
+    </div>
+</div>
 <div id="progress">
     <div class="outer-bar">
         <div id="inner-bar"></div>
-    </div>
-    <div class="numbers">
-        <span id="rated"><%= currentPos %></span> / <%= totalMovies %>
     </div>
 </div>
 
@@ -42,10 +46,10 @@ var terms = [{
 <div id="swiper-content-four" class="div-swiper"></div>
 <div id="swiper-mask" class="div-swiper"><div id="tap-play-control"></div></div>
 
-<div id="favorite" class="swipe-icon favorite"><span>Favorite</span></div>
-<div id="queue" class="swipe-icon queue"><span>Want to <%= terms[sectionID].present %></span></div>
-<div id="seen" class="swipe-icon seen"><span><%= terms[sectionID].past %></span></div>
-<div id="not-seen" class="swipe-icon not-seen"><span>Not <%= terms[sectionID].past %></span></div>
+<div id="favorite" class="swipe-icon favorite"></div>
+<div id="queue" class="swipe-icon queue"></div>
+<div id="seen" class="swipe-icon seen"></div>
+<div id="not-seen" class="swipe-icon not-seen"></div>
 
 <div id="gravity"></div>
 

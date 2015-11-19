@@ -1544,7 +1544,7 @@ div.recommendation.list-item.userChoice .title {
     position: absolute;
     background-repeat: no-repeat;
     box-shadow: 0px 1px 4px #888888;
-    border: 4px solid rgba(230, 213, 175, 1);
+
     background-color: rgba(200, 200, 200, 1);
     left: 56px;
     -webkit-transform-origin-y: 140%;
@@ -6534,6 +6534,7 @@ div#movie-list-view {
     overflow: hidden;
 }
 
+
 .passion-poster-container {
     border:1px solid rgb(237, 237, 237);
     padding: 0px 0 0 6px;
@@ -6551,37 +6552,43 @@ div#movie-list-view {
 }
 #category-container #progress .outer-bar,
 #up-next-wrapper #progress .outer-bar { width: 300px; }
+#swipe-heading {
+    font-weight: bold;
+    padding: 5px;
+}
+#swipe-heading b {
+    border-right: 1px solid gray;
+    display: inline-block;
+    padding: 0 25px 0 20px;
+    line-height: 47px;
+    font-size: 1.5em;
+}
 #progress {
-    width: 290px;
-    margin: 0 auto;
+    width: 100%;
     overflow: auto;
     position: absolute;
-    top: 60px;
-    padding: 5px;
-    border-radius: 10px;
-    background-color: rgb(200, 204, 208);
-    left:10px;
+    top: 107px;
+    background-color: transparent;
     z-index: 1;
 }
 #progress .outer-bar {
-    width: 240px;
-    height: 10px;
+    width: 100%;
+    height: 5px;
     float: left;
-    background-color: rgb(160, 160, 160);
-    border-radius: 10px;
+    background-color:transparent;
     margin-right: 5px
 }
 #progress .outer-bar #inner-bar {
+    background-color: rgb(162, 162, 162);
     height: 10px;
     width: 0%;
-    border-radius: 10px;
-    background-color: rgb(197, 66, 62);
 }
 #progress .numbers {
     font-size: 12px;
     line-height: 10px;
     text-align: center;
 }
+
 .swipe-icon {
     width: 29px;
     height: 26px;
@@ -6599,25 +6606,25 @@ div#movie-list-view {
 .swipe-icon.favorite {
     top: 90px;
     left: 143px;
-    background-image: url(../images/discovery/white_favorite.png);
+    background-image: url(../images/swipe/favorite.png);
 }
 .swipe-icon.favorite span { left: -7px; }
 .swipe-icon.queue {
     bottom: 60px;
     left: 143px;
-    background-image: url(../images/discovery/white_queue.png);
+    background-image: url(../images/swipe/queue.png);
 }
 .swipe-icon.queue span { left: -19px; width: 80px; }
 .swipe-icon.seen {
     right: 14px;
     top: 250px;
-    background-image: url(../images/discovery/white_seen.png);
+    background-image: url(../images/swipe/seen.png);
 }
 .swipe-icon.seen span { text-transform: capitalize; }
 .swipe-icon.not-seen {
     left: 14px;
     top: 250px;
-    background-image: url(../images/discovery/white_notseen.png);
+    background-image: url(../images/swipe/notSeen.png);
 }
 .swipe-icon.not-seen span {
     left: -10px;
