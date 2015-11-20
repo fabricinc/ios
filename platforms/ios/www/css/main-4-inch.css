@@ -25,10 +25,9 @@
     #match-found { height: 570px; }
     #rate-first, #get-started { background-size: 320px 568px; }
     .div-swiper {
-        width: 200px !important;
-        height: 300px !important;
-        background-size: 200px 300px;
-        top: 140px;
+        height: 366px !important;
+        width: 244px !important;
+        top: 147px;
     }
     /* MUSIC */
 

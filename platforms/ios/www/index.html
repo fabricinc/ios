@@ -125,6 +125,7 @@
                 if (!window.vent) { window.vent = _.extend({}, Backbone.Events); }
                 
                 if(Util.isMobile()) {
+                    console.log( 'device ready' );
                     document.addEventListener("deviceready", function() { MobileDevice.onDeviceReady(); }, false);
                     // document.addEventListener("touchmove", function(e) { e.preventDefault(); }, false);
                 } else {

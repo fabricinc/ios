@@ -1544,9 +1544,9 @@ div.recommendation.list-item.userChoice .title {
     position: absolute;
     background-repeat: no-repeat;
     box-shadow: 0px 1px 4px #888888;
-
     background-color: rgba(200, 200, 200, 1);
-    left: 56px;
+    background-size: 100% 100%;
+    left: 37px;
     -webkit-transform-origin-y: 140%;
 }
 #swiper-content { z-index: 3; }
@@ -1809,10 +1809,6 @@ div.recommendation.list-item.userChoice .title {
 }
 #favorite-container.queue #favorite-mask { background-image: url(../images/discovery/queued.png); }
 #gravity {
-    background-image: url(../images/discovery/gravity.png);
-    background-position: center 405px;
-    background-repeat: no-repeat;
-    background-size: 310px 20px;
     background-color: #E9E8E7;
     position: relative;
     height: 100%;
@@ -6553,7 +6549,9 @@ div#movie-list-view {
 #category-container #progress .outer-bar,
 #up-next-wrapper #progress .outer-bar { width: 300px; }
 #swipe-heading {
+    background-color: white;
     font-weight: bold;
+    height: 2.9em;
     padding: 5px;
 }
 #swipe-heading b {
@@ -6562,6 +6560,23 @@ div#movie-list-view {
     padding: 0 25px 0 20px;
     line-height: 47px;
     font-size: 1.5em;
+    float: left;
+}
+#swipe-heading div.inlineb {
+    margin: 6px 15px;
+    font-size: 1.1em;
+}
+#swipe-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    width: 200px;
+}
+#stats {
+    position: relative;
+    margin-top: 3px;
+    font-size: .7em;
+    height: 20px;
 }
 #progress {
     width: 100%;
@@ -6590,7 +6605,7 @@ div#movie-list-view {
 }
 
 .swipe-icon {
-    width: 29px;
+    width: 22px;
     height: 26px;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -6604,26 +6619,26 @@ div#movie-list-view {
     color: rgb(100, 100, 100);
 }
 .swipe-icon.favorite {
-    top: 90px;
+    top: 120px;
     left: 143px;
     background-image: url(../images/swipe/favorite.png);
 }
 .swipe-icon.favorite span { left: -7px; }
 .swipe-icon.queue {
-    bottom: 60px;
+    bottom: 6px;
     left: 143px;
     background-image: url(../images/swipe/queue.png);
 }
 .swipe-icon.queue span { left: -19px; width: 80px; }
 .swipe-icon.seen {
-    right: 14px;
-    top: 250px;
+    right: 8px;
+    top: 299px;
     background-image: url(../images/swipe/seen.png);
 }
 .swipe-icon.seen span { text-transform: capitalize; }
 .swipe-icon.not-seen {
-    left: 14px;
-    top: 250px;
+    left: 7px;
+    top: 301px;
     background-image: url(../images/swipe/notSeen.png);
 }
 .swipe-icon.not-seen span {
@@ -6632,14 +6647,12 @@ div#movie-list-view {
     font-size: 11px;
 }
 .bottom-info {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    float: left;
 }
 .bottom-info span {
-    background-size: 13px;
+    background-size: 11px;
     background-repeat: no-repeat;
-    background-position: 0px 2px;
+    background-position: 3px 4px;
     width: 15px;
     height: 16px;
     top: 2px;
@@ -6648,11 +6661,9 @@ div#movie-list-view {
     display: inline-block;
 }
 
-div#friends-queued.bottom-info { left: 210px; }
-div#friends-queued.bottom-info span { background-image: url(../images/lists/red_queue.png) }
-div#friends-favorited.bottom-info { left: 155px; }
+div#friends-favorited.bottom-info {  }
 div#friends-favorited.bottom-info span { background-image: url(../images/lists/red_favorite.png) }
-div#critic-rating.bottom-info { left: 80px;  }
+div#critic-rating.bottom-info { width: 43px; }
 #tap-play-control,
 #play-control {
     text-align: center;

@@ -20,8 +20,11 @@ var terms = [{
 <div id="swipe-heading">
     <b id="rated"><%= currentPos %></b>
     <div class="inlineb">
-        <h1>Title</h1>
-
+        <h1 id="swipe-title">Title</h1>
+        <div id="stats">
+            <div id="friends-favorited" class="bottom-info"><span></span>Tastemates</div>
+            <div id="critic-rating" class="bottom-info"><span class="fresh"></span></div>
+        </div>
     </div>
 </div>
 <div id="progress">
@@ -53,6 +56,4 @@ var terms = [{
 
 <div id="gravity"></div>
 
-<div id="critic-rating" class="bottom-info"><span class="fresh"></span></div>
-<div id="friends-favorited" class="bottom-info"><span></span></div>
-<div id="friends-queued" class="bottom-info"><span></span></div>
+

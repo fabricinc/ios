@@ -42,8 +42,6 @@ var RateModel = Backbone.Model.extend({
 
         Api.getCategoryListPart3(1, 100, self.start, Api.appSettings.discoveryLimit, APP.sectionID, function(response) {
             
-            console.log( response );
-
 
             self.start = Api.appSettings.discoveryLimit;  // suppose to be 0, but javascript can't seem to add 0 + 50 together, so...
             self.categories = response.data.categories;

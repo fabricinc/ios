@@ -62,7 +62,6 @@ var DiscoveryModel = Backbone.Model.extend({
 
 		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
 
-            console.log( data );
 
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
@@ -218,7 +217,6 @@ var DiscoveryModel = Backbone.Model.extend({
         callback = callback || function() {};
         var self = this;
 
-
         //if they are swiping but not queueing, guide them on how to queue movies
         if(self.currentPos === 30 && self.totalQueued === 0) {
             $("#queue-guide").addClass("show").on("transitionend", function() {
@@ -279,8 +277,10 @@ var DiscoveryModel = Backbone.Model.extend({
         }
 
         // switch the bottoms
-        $("#friends-favorited").html("<span></span> " + self.movieList[self.currentPos].friendsFavorited);
+        $("#friends-favorited").html("<span></span> " + self.movieList[self.currentPos].friendsFavorited + " Tastemates");
         $("#friends-queued").html("<span></span> " + self.movieList[self.currentPos].friendsQueued);
+        $("#swipe-title").html(self.movieList[self.currentPos].movieTitle);
+
 
         if(self.movieList[self.currentPos].criticsScore && self.movieList[self.currentPos].criticsScore !== "") {
             $("#critic-rating").html("<span class='fresh'></span> " + self.movieList[self.currentPos].criticsScore + "%").show();
@@ -435,7 +435,6 @@ var DiscoveryModel = Backbone.Model.extend({
 
                     Api.getNextCategories(self.categoryID, function(response) {
 
-                        console.log( response );
                         if(response.success && response.data) {
                             var nextCats = APP.load("categoryFeed", { items: response.data }),
                                 upNext = APP.load("upNext"),
@@ -1110,7 +1109,6 @@ var DiscoveryView = Backbone.View.extend({
                     }
                 }, self.model.interval);
             } else {
-                console.log( 'else ' );
                 // !!!!!!!!!!!! Load List Summary !!!!!!!!!!!!!
 
                 Api.categoryDiscovered(self.model.categoryID);
