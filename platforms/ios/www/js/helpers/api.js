@@ -790,7 +790,7 @@ Api.getUserProfile = function(userID, callback) {
     var options = {
         "action": "getUserProfile"
     };
-    if(userID && userID != "") { options.userID = userID; }
+    if(userID && userID !== "") { options.userID = userID; }
     this.fetch(options, callback);
 };
 Api.getDiscoveryFeed = function(callback) {
