@@ -62,6 +62,7 @@ var DiscoveryModel = Backbone.Model.extend({
 
 		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
 
+            console.log( data );
 
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
@@ -219,7 +220,7 @@ var DiscoveryModel = Backbone.Model.extend({
 
 
         //if they are swiping but not queueing, guide them on how to queue movies
-        if(self.currentPos === 30 && self.totalQueued == 0) {
+        if(self.currentPos === 30 && self.totalQueued === 0) {
             $("#queue-guide").addClass("show").on("transitionend", function() {
                 $("#arrow-down").css({"margin-top": "150px"});
             });
@@ -281,7 +282,7 @@ var DiscoveryModel = Backbone.Model.extend({
         $("#friends-favorited").html("<span></span> " + self.movieList[self.currentPos].friendsFavorited);
         $("#friends-queued").html("<span></span> " + self.movieList[self.currentPos].friendsQueued);
 
-        if(self.movieList[self.currentPos].criticsScore && self.movieList[self.currentPos].criticsScore != "") {
+        if(self.movieList[self.currentPos].criticsScore && self.movieList[self.currentPos].criticsScore !== "") {
             $("#critic-rating").html("<span class='fresh'></span> " + self.movieList[self.currentPos].criticsScore + "%").show();
             if(parseInt(self.movieList[self.currentPos].criticsScore) < 50) {
                 $("#critic-rating span").removeClass("fresh").addClass("rotten");
@@ -1027,6 +1028,9 @@ var DiscoveryModel = Backbone.Model.extend({
     }
 });
 
+
+
+
 var DiscoveryView = Backbone.View.extend({
     model: null,
 
@@ -1106,7 +1110,7 @@ var DiscoveryView = Backbone.View.extend({
                     }
                 }, self.model.interval);
             } else {
-
+                console.log( 'else ' );
                 // !!!!!!!!!!!! Load List Summary !!!!!!!!!!!!!
 
                 Api.categoryDiscovered(self.model.categoryID);

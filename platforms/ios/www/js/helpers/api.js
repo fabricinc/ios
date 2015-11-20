@@ -1488,6 +1488,18 @@ Api.getHomeCategories = function(mainCat, topCat, start, limit, sectionID, callb
     };
     this.fetch(options, callback);
 };
+Api.getCategoryListPart3 = function(mainCat, topCat, start, limit, sectionID, callback) {
+    callback = callback || function() {};
+    var options = {
+        "action": "getCategoryListPart3",
+        "categoryListID": mainCat,
+        "topCat": topCat,
+        "start": start,
+        "limit": limit,
+        "sectionID": 1
+    };
+    this.fetch(options, callback);
+};
 Api.concierge = function(callback) {
     callback = callback || function() {};
     var options = {
@@ -1565,7 +1577,6 @@ Api.getFabricCategoryData = function(categoryID, callback) {
         "action": "getFabricCategoryData",
         "bitRate": Player.bitRate,
         "categoryID": categoryID,
-        "test": true        // REMOVE THIS
     };
     this.fetch(options, callback);
 };

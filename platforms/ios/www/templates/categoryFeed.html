@@ -1,7 +1,7 @@
 
 <% 	_.each(items, function(item) { %>
 	<% var category = item.tile_image.indexOf("_tv") === -1 ? "movie" : "tv"; %>
-	<div data-catid="<%= item.category_id %>" data-listid="<%= item.list_id %>" class="section<%= item.section_id %> catItem <%= category %><% if(item.completed == 1) { %> completed<% } %>">
+	<div data-catid="<%= item.category_id %>" data-listid="<%= item.list_id %>" data-limit="<%= item.limiter %>" class="section<%= item.section_id %> catItem <%= category %><% if(item.completed == 1) { %> completed<% } %>">
 	    <div class="title"><div class="icon icon<%= item.section_id %>"></div><%= item.title %></div>
 	    <img src="<%= item.tile_image %>" />
 	</div>
