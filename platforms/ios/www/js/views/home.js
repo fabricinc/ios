@@ -1,10 +1,12 @@
-var HomeModel = Backbone.Model.extend({
+
+
+var Section = Backbone.Model.extend({
 
     defaults: {
         discoveryLimit: null,
-        sections: [1,2,4],
         categories: null,
         currentTab: 0,
+        digest: null,
         sectionID: 0,
         start: 0,
     },
@@ -12,42 +14,28 @@ var HomeModel = Backbone.Model.extend({
     initialize: function(){
 
         this.set("discoveryLimit", Api.appSettings.discoveryLimit);
-        this.set("sectionID", APP.sectionID);
 
 
-        APP.refreshSettings(function () {
-            
-             User.fetchMinData(function (success) {
-                 
-                // If user is not logged in go to login screen
-                if(!success) { Backbone.history.navigate('start/true', true); }
+        var discoveryLimit = this.get('discoveryLimit'),
+            sectionID = this.get('sectionID'),
+            start = this.get('start');
 
-
-
-                var discoveryLimit = this.get('discoveryLimit'),
-                    sectionID = this.get('sectionID'),
-                    sections = this.get('sections'),
-                    start = this.get('start');
-
-                    var sectionData = sections.map(function (section) {
-                        
-                        Api.getCategoryListPart3(1, 100, start, discoveryLimit, section, function(response){
-
-                            console.log( response );
-                            return response.data.categories;
-                            // this.set('categories', response.data.categories);
-
-                        });
-                        
-                    
-                    });
-
-
-                }.bind(this));
 
         
+        Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function(response){
+
+            this.set('categories', response.data.categories);
+
         }.bind(this));
-        
+
+
+        Api.getDigestLite(function (response) {
+            
+            this.set("digest", response.digestData.filter(this.filterDigest, this)[0]);
+
+        }.bind(this));
+                
+                    
     
     },
 
@@ -57,7 +45,41 @@ var HomeModel = Backbone.Model.extend({
     
     },
 
+    filterDigest: function(item){
+
+        return +item.section_id === this.get('sectionID');
     
+    },
+
+    
+});
+
+var Sections = Backbone.Collection.extend({
+
+    model: Section,
+    
+
+});
+
+var HomeModel = Backbone.Model.extend({
+
+    defaults: {
+        sectionID: 0
+    },
+    
+    initialize: function() {
+
+        this.set("sectionID", APP.sctionID);
+        
+        
+    },
+
+    changeSection: function(tab){
+    
+        this.set("sectionID", tab);
+    
+    },
+
 });
 
 var HomeView = Backbone.View.extend({
@@ -65,10 +87,13 @@ var HomeView = Backbone.View.extend({
 
     initialize: function() {
 
+        var sections = [{sectionID: 1}, {sectionID: 2}, {sectionID:4}];
+        this.collection = new Sections(sections);
+
         this.model = new HomeModel();
 
 
-        this.listenTo(this.model, "change:categories", this.load);
+        // this.listenTo(this.model, "change:categories", this.load);
         
     },
 
@@ -147,7 +172,7 @@ var TabController = Backbone.View.extend({
 
     changeTab: function(e){
 
-        this.model.changeTab(e.target.id);
+        this.model.changeSection(e.target.id);
     
     },
 

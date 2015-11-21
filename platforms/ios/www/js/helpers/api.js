@@ -1310,6 +1310,13 @@ Api.getDigestItems = function(callback) {
     };
     this.fetch(options, callback);
 };
+Api.getDigestLite = function (callback) {
+    
+    callback = callback || function(){};
+
+    this.fetch({action: 'digestLite'}, callback);
+
+};
 Api.incBalance = function(amount, note, callback) {
     callback = callback || function() {};
     amount = amount || null;
