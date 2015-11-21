@@ -239,7 +239,8 @@ header nav h1, #available-services h1 {
     font-weight: bold;
 }
 
-#dashboard header nav h1 {
+#dashboard header nav h1,
+#wrapper.home header nav h1 {
     background-image: url(../images/logo/6logo.png);
     background-repeat:no-repeat;
     background-position: 0;

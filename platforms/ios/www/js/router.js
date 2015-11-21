@@ -4,7 +4,7 @@
         routes: {
             "": "welcome", // home, rate
             "back": "back",
-            "home": "rate",
+            "home": "home",
             "welcome": "welcome",
             "start(/:login)": "start",
             "login": "login",
@@ -49,7 +49,7 @@
             "recommendedByList/:movieID": "recommendedByList",
 			"feed": "feed",
             "userFeed/:id": "userFeed",
-            "rate": "rate",
+            "rate": "home",
 			"fb-connect": "fb-connect",
             "discovery?categoryID=:categoryID&listID=:listID": "discovery",
             "messages": "messages",

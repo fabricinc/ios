@@ -97,6 +97,14 @@
                             APP.models.currentUser.set(response);
                         }
 
+
+                        // handle deeplinking
+                        if(APP.url.set) {
+                            APP.url.set = false;
+                            Backbone.history.navigate(APP.url.route, true);
+                            return false;
+                        }
+
                         callback(true);
                     } else {
                         callback(false);
