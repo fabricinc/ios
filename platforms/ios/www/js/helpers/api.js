@@ -745,6 +745,15 @@ Api.seenConversation = function(otherID) {
     };
     this.fetch(options);
 };
+
+Api.getMatchDisplay = function (callback) {
+    
+    callback = callback || function(){};
+
+    this.fetch({action: 'getMatchDisplay'}, callback);
+
+};
+
 Api.getMatchMe = function(moviePublishedID, listType, callback) {
     callback = callback || function() {};
     var options = {

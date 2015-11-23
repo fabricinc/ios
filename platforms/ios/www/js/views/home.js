@@ -4,10 +4,10 @@ var Section = Backbone.Model.extend({
 
     defaults: {
         discoveryLimit: null,
-        categories: null,
-        currentTab: 0,
+        categories: [],
         digest: null,
         sectionID: 0,
+        matches: [],
         start: 0,
     },
     
@@ -21,27 +21,28 @@ var Section = Backbone.Model.extend({
             start = this.get('start');
 
 
-        
-        Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function(response){
+        console.log( 'sectionID', sectionID );
+        Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function (response){
 
+            // console.log( 'categories', response.data );
             this.set('categories', response.data.categories);
 
         }.bind(this));
 
 
         Api.getDigestLite(function (response) {
-            
+
             this.set("digest", response.digestData.filter(this.filterDigest, this)[0]);
 
         }.bind(this));
-                
-                    
-    
-    },
 
-    changeTab: function(tab){
-    
-        this.set("currentTab", tab.toLowerCase()); 
+
+        Api.getMatchDisplay(function (matches) {
+
+            this.set("matches", matches);
+        
+        }.bind(this));
+                
     
     },
 
@@ -61,10 +62,31 @@ var Sections = Backbone.Collection.extend({
 
 });
 
+var Pack = Backbone.Model.extend({
+
+    defaults: {
+        
+    },
+    
+    initialize: function() {
+
+        
+        
+    },
+
+});
+
+var PackCollection = Backbone.Collection.extend({
+
+    model: Pack,
+
+});
+
 var HomeModel = Backbone.Model.extend({
 
     defaults: {
-        sectionID: 0
+        currentTab: 0,
+        sectionID: 0,
     },
     
     initialize: function() {
@@ -76,7 +98,10 @@ var HomeModel = Backbone.Model.extend({
 
     changeSection: function(tab){
     
-        this.set("sectionID", tab);
+        if(tab === this.get('currentTab')) { return; }
+
+
+        this.set("currentTab", +tab);
     
     },
 
@@ -86,14 +111,16 @@ var HomeView = Backbone.View.extend({
     el: "#wrapper",
 
     initialize: function() {
+        alert();
+
+        this.sections = [];
 
         var sections = [{sectionID: 1}, {sectionID: 2}, {sectionID:4}];
         this.collection = new Sections(sections);
 
         this.model = new HomeModel();
 
-
-        // this.listenTo(this.model, "change:categories", this.load);
+        this.listenTo(this.model, 'change:currentTab', this.changeTab, this);
         
     },
 
@@ -111,18 +138,41 @@ var HomeView = Backbone.View.extend({
             .append(contentContainer.render().el);
 
 
+        this.collection.each(this.addPage, this);
+
+        console.log( 'this', this );
+        console.log( 'sections', this.sections );
+
+        this.sections[this.model.get('currentTab')].render();
+
         callback();
 
     },
 
-    load: function(){
+    addPage: function(section){
     
-        console.log( 'load' );
-        console.log( this.model.get('categories') );
+
+        var sectionView = new SectionView({ model: section });
+
+        this.sections.push(sectionView);
     
     },
 
+    changeTab: function(){
+        
+        console.log( 'change tab' );
+        var section = this.model.get('currentTab');
+
+
+        this.sections[section].render();
+    
+    },
+
+    
     dealloc: function() {
+        console.log( 'dealloc', this );
+        
+        // this.sections.empty();
 		
     }
 });
@@ -144,11 +194,7 @@ var HomeContent = Backbone.View.extend({
         return this;
     },
 
-    methodName: function(){
-    
-        console.log( 'change content' );
-    
-    },
+
 
 });
 
@@ -157,23 +203,101 @@ var TabController = Backbone.View.extend({
     id: 'tab-control',
 
     events: {
-        "click": "changeTab"
+        "touchstart .nav-tab": "changeTab"
     },
     
     
     render: function() {
 
         this.$el.append( 
-            "<div id='Movies'>Movies</div><div id='TV'>TV</div><div id='Music'>Music</div>" 
+            "<div class='nav-tab' data-tag='0' id='movies'>Movies</div><div class='nav-tab' data-tag='1' id='tv'>TV</div><div class='nav-tab' data-tag='2' id='music'>Music</div>" 
         );
 
         return this;
     },
 
     changeTab: function(e){
-
-        this.model.changeSection(e.target.id);
+        
+        this.model.changeSection(e.target.dataset.tag);
     
     },
 
 });
+
+var SectionView = Backbone.View.extend({
+    el: '#home-content',
+    packs: [],
+    
+    initialize: function(){
+    
+        
+        this.listenTo(this.model, "change:categories", this.loadPacks);
+        this.listenTo(this.model, "change:matches", this.loadMatches);
+        this.listenTo(this.model, "change:digest", this.loadDigest);
+    
+    },
+    
+    render: function() {
+
+
+        this.$el.html( "<div id='picks'></div><div id='people'></div><div id='packs'></div>" );
+
+        this.loadPacks.call(this);
+
+
+        return this;
+    },
+
+    loadPacks: function(){
+        
+        var packList = this.model.get('categories');
+
+        if(!packList.length) { console.log( 'no packs' ); return; }
+
+
+        this.packs = this.packs.length ? this.packs : new PackCollection(packList);
+
+        
+        this.packs.each(this.addPack, this);
+        
+    
+    },
+
+    loadMatches: function(){
+    
+        
+        
+    
+    },
+
+    loadDigest: function(){
+        
+        
+        
+        
+    
+    },
+
+    addPack: function(packModel){
+    
+        var pack = new PackView({ model: packModel });
+
+        this.$('#packs').append( pack.render().el );
+
+    },
+
+});
+
+var PackView = Backbone.View.extend({
+    className: 'pack',
+    
+    
+    render: function() {
+
+        this.$el.html( this.model.get('title') );
+
+        return this;
+    },
+
+});
+

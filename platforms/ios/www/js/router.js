@@ -102,6 +102,7 @@
             callback = callback || function() {};
 
                 // A little cleanup may be in order.
+
                 if (APP.view.previous) { APP.view.current.dealloc(); }
                 
                 APP.view.previous = APP.view.current;
@@ -307,7 +308,7 @@
                 Backbone.history.history.back();
 
             });
-            console.log( 'bind app events' );
+
             this.on("route:home", function() {
                 this.off("route:welcome");
                 self.loadView(new HomeView(), function() {
