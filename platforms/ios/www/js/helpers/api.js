@@ -745,6 +745,15 @@ Api.seenConversation = function(otherID) {
     };
     this.fetch(options);
 };
+
+Api.getMatchDisplay = function (callback) {
+    
+    callback = callback || function(){};
+
+    this.fetch({action: 'getMatchDisplay'}, callback);
+
+};
+
 Api.getMatchMe = function(moviePublishedID, listType, callback) {
     callback = callback || function() {};
     var options = {
@@ -790,7 +799,7 @@ Api.getUserProfile = function(userID, callback) {
     var options = {
         "action": "getUserProfile"
     };
-    if(userID && userID != "") { options.userID = userID; }
+    if(userID && userID !== "") { options.userID = userID; }
     this.fetch(options, callback);
 };
 Api.getDiscoveryFeed = function(callback) {
@@ -1309,6 +1318,13 @@ Api.getDigestItems = function(callback) {
         "action": "digest"
     };
     this.fetch(options, callback);
+};
+Api.getDigestLite = function (callback) {
+    
+    callback = callback || function(){};
+
+    this.fetch({action: 'digestLite'}, callback);
+
 };
 Api.incBalance = function(amount, note, callback) {
     callback = callback || function() {};

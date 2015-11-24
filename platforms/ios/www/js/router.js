@@ -4,7 +4,7 @@
         routes: {
             "": "welcome", // home, rate
             "back": "back",
-            "home": "rate",
+            "home": "home",
             "welcome": "welcome",
             "start(/:login)": "start",
             "login": "login",
@@ -49,7 +49,7 @@
             "recommendedByList/:movieID": "recommendedByList",
 			"feed": "feed",
             "userFeed/:id": "userFeed",
-            "rate": "rate",
+            "rate": "home",
 			"fb-connect": "fb-connect",
             "discovery?categoryID=:categoryID&listID=:listID": "discovery",
             "messages": "messages",
@@ -102,6 +102,7 @@
             callback = callback || function() {};
 
                 // A little cleanup may be in order.
+
                 if (APP.view.previous) { APP.view.current.dealloc(); }
                 
                 APP.view.previous = APP.view.current;
@@ -307,7 +308,7 @@
                 Backbone.history.history.back();
 
             });
-            console.log( 'bind app events' );
+
             this.on("route:home", function() {
                 this.off("route:welcome");
                 self.loadView(new HomeView(), function() {

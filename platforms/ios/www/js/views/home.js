@@ -1,234 +1,415 @@
+
+
+var Section = Backbone.Model.extend({
+
+    defaults: {
+        discoveryLimit: null,
+        categories: [],
+        digest: null,
+        sectionID: 0,
+        matches: [],
+        start: 0,
+    },
+    
+    initialize: function(){
+
+        this.set("discoveryLimit", Api.appSettings.discoveryLimit);
+
+
+        var discoveryLimit = this.get('discoveryLimit'),
+            sectionID = this.get('sectionID'),
+            start = this.get('start');
+
+
+        Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function (response){
+
+            // console.log( 'categories', response.data );
+            this.set('categories', response.data.categories);
+
+        }.bind(this));
+
+
+        Api.getDigestLite(function (response) {
+
+            this.set("digest", response.digestData.filter(this.filterDigest, this)[0]);
+
+        }.bind(this));
+
+
+        Api.getMatchDisplay(function (matches) {
+
+            this.set("matches", matches);
+        
+        }.bind(this));
+                
+    
+    },
+
+    filterDigest: function(item){
+
+        return +item.section_id === this.get('sectionID');
+    
+    },
+
+    
+});
+
+var Sections = Backbone.Collection.extend({
+
+    model: Section,
+    
+
+});
+
+var Pack = Backbone.Model.extend({
+
+    defaults: {
+        
+    },
+    
+    initialize: function() {
+
+        
+        
+    },
+
+});
+
+var PackCollection = Backbone.Collection.extend({
+
+    model: Pack,
+
+});
+
+var Person = Backbone.Model.extend({
+
+    defaults: {
+        
+    },
+    
+    initialize: function() {
+
+        
+        
+    },
+
+});
+
+var People = Backbone.Collection.extend({
+
+    model: Person,
+    
+});
+
 var HomeModel = Backbone.Model.extend({
-    start: 0,
-    limit: 50,
-    fetchData: function(callback) {
-        var self = this;
-        callback = callback || function() {};
 
-        Api.getDiscoveryFeedPart(self.start, self.limit, function(response) {
-            self.set(response);
-            callback();
-        });
+    defaults: {
+        currentTab: 0,
+        sectionID: 0,
+    },
+    
+    initialize: function() {
 
-        return this;
-    }
+        this.set("currentTab", +APP.sectionID);
+        
+        
+    },
+
+    changeSection: function(tab){
+    
+        if(tab === this.get('currentTab')) { return; }
+
+
+        this.set("currentTab", +tab);
+    
+    },
+
 });
 
 var HomeView = Backbone.View.extend({
-    id: "home",
-    model: null,
-    scroller: null,
+    el: "#wrapper",
 
-    initialize: function(callback) {
-        callback = callback || function() {};
+    initialize: function() {
+        // alert();
+
+        this.sections = [];
+
+        var sections = [{sectionID: 1}, {sectionID: 2}, {sectionID:4}];
+        this.collection = new Sections(sections);
 
         this.model = new HomeModel();
 
-        callback();
-        return this;
+        this.listenTo(this.model, 'change:currentTab', this.changeTab, this);
+        
     },
 
     render: function(callback, update) {
-        var self = this;
         callback = callback || function() { };
-        // get newest data
-        User.fetchData(function(success) {
-            self.model.fetchData(function() {
-                var html = APP.load("home", self.model.toJSON());
-                self.$el.html(html);
 
-                if (!self.header) {
-                    self.header = new HeaderView({
-                        slider: true,
-                        leftButton: {class: "slide"},
-                        title: "Discovery"
-                        //home: true
-                    });
-                    self.$el.prepend(self.header.el);
-                }
+        var contentContainer = new HomeContent({ model: this.model });
+        var tabController = new TabController({ model: this.model });
+        var header = new HeaderView({ home: true });
 
-                $("#wrapper").html(self.$el);
-                self.bindTileEvents();
-                self.setTimeouts();
+        
+        this.$el
+            .html(header.el)
+            .append(tabController.render().el)
+            .append(contentContainer.render().el);
 
-                callback();
-            });
-        });
 
-        return this;
+        this.collection.each(this.addPage, this);
+
+        this.sections[this.model.get('currentTab')].render();
+
+        callback();
+
     },
 
-	bindTileEvents: function() {
-        var self = this;
+    addPage: function(section){
+    
 
-        $("#status-update").on("input", function(e) {
-            var title = $(this).val();
+        var sectionView = new SectionView({ model: section });
 
-            if(title.length > 2) {
-                Api.findMoviesLikeTitle($(this).val(), function(response) {
-                    if(response.data.length > 0) {
-                        var html = APP.load("feedSearchResults", { data: response.data });
-
-                        $("#status-drop div").html(html);
-                        $("#status-drop").addClass("on");
-
-                        $("#status-drop .result").unbind("click").click(function() {
-                            var movieID = $(this).data("movieid");
-                            Backbone.history.navigate("statusUpdate/" + movieID, true);
-                        });
-
-                        //APP.feedPos = UI.scroller.y;s
-                        UI.deallocScroller();
-                        UI.initScroller($("#status-drop")[0]);
-                        setTimeout(function() {
-                            UI.scroller.on('scrollStart', function () {
-                                $("#status-update").blur();
-                            });
-                        }, 500);
-                    } else {
-                        // hide the thing
-                        $("#status-drop div").html("");
-                        $("#status-drop").removeClass("on");
-                        // remove scroller from it
-                        UI.deallocScroller();
-                        self.setTimeouts(200);
-                    }
-                });
-            } else {
-                // hide the thing
-                $("#status-drop div").html("");
-                $("#status-drop").removeClass("on");
-                // remove scroller from it
-                UI.deallocScroller();
-
-                self.setTimeouts();
-            }
-        });
-
-        $("#close-status-drop").fastClick(function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            $("#status-update").val("");
-            $("#status-drop div").html("");
-            $("#status-drop").removeClass("on");
-
-            UI.deallocScroller();
-            self.setTimeouts();
-
-            return false;
-        });
-
-        $(".poster img").click(function() {
-            var movieID = $(this).data("movieid");
-            var categoryID = $(this).data("catid");
-
-            APP.feedPos = UI.scroller.y;
-            if(movieID) {
-                Backbone.history.navigate("movieLobby/" + movieID, true);
-            } else if(categoryID) {
-                Backbone.history.navigate("discovery?categoryID=" + categoryID + "&listID=null", true);
-            }
-        });
-
-        $(".like").click(function() {
-            var el = $(this);
-            var feedID = $(this).parent().data("feedid");
-
-            Api.likeFeed(feedID, function(response) {
-                if(response.success) {
-                    var tl = $("#like_"+feedID+" .totalLikes");
-                    var tlNum = parseInt(tl.html());
-
-                    if(el.hasClass("liked")) {
-                        tlNum--;
-                    } else {
-                        tlNum++;
-                    }
-
-                    el.toggleClass("liked");
-                    tl.html(tlNum);
-
-                    if(tlNum <= 0) {
-                        $("#like_"+feedID).hide();
-                    } else {
-                        $("#like_"+feedID).show();
-                    }
-                }
-            });
-
-            return false;
-        });
-
-        $(".comment").click(function(e) {
-            var feedID = $(this).parent().data("feedid");
-            var discussion = $("#feed"+feedID+" .feed-discussion");
-            
-            APP.feedPos = UI.scroller.y;
-            Backbone.history.navigate("feedDiscussion/" + feedID, true);
-
-            return false;
-        });
-
-        $(".likes").click(function(e) {
-            var feedID = this.id.split("_")[1];
-            Backbone.history.navigate("feedLikes/" + feedID, true);
-
-            return false;
-        });
-
-
-        $(".avatar").click(function() {
-            var actorID = $(this).data("actorid");
-
-            APP.feedPos = UI.scroller.y;
-            Backbone.history.navigate("profile/" + actorID, true);
-
-            return false;
-        });
-	},
-
-    setTimeouts: function(time) {
-        time = time || 1000;
-        var self = this;
-
-        setTimeout(function() {
-            if(APP.feedPos && APP.feedPos != 0) {
-                UI.initScrollerOpts($("#feed-container")[0], {
-                    vScrollbar: false,
-                    hScroll: false,
-                    bounce: true,
-                    click: true,
-                    startY: APP.feedPos
-                });
-                APP.feedPos = 0;
-            } else {
-                UI.initScroller($("#feed-container")[0]);
-            }
-        }, 100);
-
-        // refresh after 1 second to give the posters enough time to space themselves
-        setTimeout(function() {
-            UI.scroller.refresh();
-            UI.scroller.on("scrollEnd", function() {
-                if(Math.abs(this.maxScrollY) - Math.abs(this.y) < 10) {
-                    self.model.start = self.model.start + self.model.limit;
-                    Api.getDiscoveryFeedPart(self.model.start, self.model.limit, function(response) {
-                        var html = APP.load("feedItem", { feed: response.feed });
-                        $("#feed").append(html);
-                        UI.scroller.refresh();
-                        self.bindTileEvents();
-                        setTimeout(function() { UI.scroller.refresh() }, 1000); // we refresh again in 1 second to give the images time to load more properly
-                    });
-                }
-            });
-        }, time);
+        this.sections.push(sectionView);
+    
     },
 
+    changeTab: function(){
+        
+        console.log( 'change tab' );
+        console.log( 'sections', this.sections );
+        var section = this.model.get('currentTab');
+
+
+        this.sections[section].render();
+    
+    },
+
+    
     dealloc: function() {
-        var self = this;
-        this.click = false;
+        console.log( 'dealloc', this );
+        
+        // this.sections.empty();
 		
-        return this;
     }
 });
+
+var HomeContent = Backbone.View.extend({
+    id: 'home-content',
+    
+
+    initialize: function(){
+    
+        this.listenTo(this.model, "change:currentTab", this.changeContent);
+    
+    },
+    
+    render: function() {
+
+        
+
+        return this;
+    },
+
+
+
+});
+
+
+var TabController = Backbone.View.extend({
+    id: 'tab-control',
+
+    events: {
+        "touchstart .nav-tab": "changeTab"
+    },
+
+    initialize: function(){
+    
+        this.listenTo(this.model, 'change:currentTab', this.activeTab);
+    
+    },
+    
+    
+    render: function() {
+
+        this.$el.append( 
+            "<div class='nav-tab' data-tag='0' id='movies'>Movies</div><div class='nav-tab' data-tag='1' id='tv'>TV</div><div class='nav-tab' data-tag='2' id='music'>Music</div>" 
+        );
+
+
+        // Set active class on current tab
+        var tab = this.$('.nav-tab')[this.model.get('currentTab')];
+
+        $(tab).addClass('active');
+
+        return this;
+    },
+
+    changeTab: function(e){
+        
+        this.model.changeSection(e.target.dataset.tag);
+    
+    },
+
+    activeTab: function(){
+    
+
+        var t = this.model.get('currentTab');
+        var tab = this.$('.nav-tab')[t];
+
+        this.$('.active').removeClass('active');
+
+
+        $(tab).addClass('active');
+    
+    },
+
+});
+
+var SectionView = Backbone.View.extend({
+    el: '#home-content',
+    people: [],
+    packs: [],
+    
+    initialize: function(){
+    
+        
+        this.listenTo(this.model, "change:categories", this.loadPacks);
+        this.listenTo(this.model, "change:matches", this.loadMatches);
+        // this.listenTo(this.model, "change:digest", this.loadDigest);
+    
+    },
+    
+    render: function() {
+
+
+        this.$el
+            .html( "<div id='pick'></div><div id='people'></div><div id='packs'></div>" )
+            .prepend(this.model.get('sectionID'));
+
+
+        // var people = new PeopleView({ model: this.model });
+        var pick = new PickView({ model: this.model });
+
+        pick.render();
+        // people.render();
+
+        this.loadMatches.call(this);
+        this.loadPacks.call(this);
+
+
+        return this;
+    },
+
+    loadPacks: function(){
+        
+        var packList = this.model.get('categories');
+
+        if(!packList.length) { console.log( 'no packs' ); return; }
+
+
+        this.packs = this.packs.length ? this.packs : new PackCollection(packList);
+
+        
+        this.packs.each(this.addPack, this);
+        
+    
+    },
+
+    loadMatches: function(){
+
+        var people = this.model.get('matches');
+
+
+        if(!people.length) { return; }
+
+
+        this.people = this.people.length ? this.people : new People(people);
+
+        this.people.each(this.addPerson, this);
+            
+    
+    },
+
+    loadDigest: function(){
+        
+        var pickView = new PickView({ model: this.model });
+    
+    },
+
+    addPack: function(packModel){
+    
+        var pack = new PackView({ model: packModel });
+
+        this.$('#packs').append( pack.render().el );
+
+    },
+
+    addPerson: function(personModel){
+    
+        var person = new PeopleView({ model: personModel });
+
+
+        this.$("#people").append( person.render().el );
+    
+    },
+
+});
+
+var PickView = Backbone.View.extend({
+    el: "#pick",
+
+    initialize: function(){
+    
+        this.listenTo(this.model, 'change:digest', this.render);
+    
+    },
+    
+    render: function() {
+
+        if(!this.model.get('digest')) { return; }
+
+
+        var data = JSON.parse(this.model.get('digest').data);
+
+
+        this.$el.html( "Pick: "+ data.objectTitle );
+
+        return this;
+    },
+
+});
+
+var PeopleView = Backbone.View.extend({
+    className: 'match',
+
+    // initialize: function(){
+    
+    //     this.listenTo(this.model, 'change:matches', this.render);
+    
+    // },
+    
+    render: function() {
+
+        this.$el.html( this.model.get('uName') );
+
+        
+
+        return this;
+    },
+
+});
+
+var PackView = Backbone.View.extend({
+    className: 'pack',
+    
+    
+    render: function() {
+
+        this.$el.html( this.model.get('title') );
+
+        return this;
+    },
+
+});
+
