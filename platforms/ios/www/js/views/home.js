@@ -23,7 +23,6 @@ var Section = Backbone.Model.extend({
 
         Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function (response){
 
-            // console.log( 'categories', response.data );
             this.set('categories', response.data.categories);
 
         }.bind(this));
@@ -176,8 +175,6 @@ var HomeView = Backbone.View.extend({
 
     changeTab: function(){
         
-        console.log( 'change tab' );
-        console.log( 'sections', this.sections );
         var section = this.model.get('currentTab');
 
 
@@ -210,9 +207,6 @@ var HomeContent = Backbone.View.extend({
 
         return this;
     },
-
-
-
 });
 
 
@@ -284,8 +278,7 @@ var SectionView = Backbone.View.extend({
 
 
         this.$el
-            .html( "<div id='pick'></div><div id='people'></div><div id='packs'></div>" )
-            .prepend(this.model.get('sectionID'));
+            .html( "<div id='pick'></div><div id='people'></div><div id='packs'></div>" );
 
 
         // var people = new PeopleView({ model: this.model });
@@ -305,7 +298,7 @@ var SectionView = Backbone.View.extend({
         
         var packList = this.model.get('categories');
 
-        if(!packList.length) { console.log( 'no packs' ); return; }
+        if(!packList.length) { return; }
 
 
         this.packs = this.packs.length ? this.packs : new PackCollection(packList);
@@ -367,13 +360,24 @@ var PickView = Backbone.View.extend({
     
     render: function() {
 
-        if(!this.model.get('digest')) { return; }
+        var digest = this.model.get('digest');
+
+        
+        if(!digest) { return; }
+        
 
 
-        var data = JSON.parse(this.model.get('digest').data);
+        var data = JSON.parse(digest.data);
+
+        console.log( data );
+
+        var pick = APP.load("picks", { data: data });
 
 
-        this.$el.html( "Pick: "+ data.objectTitle );
+
+        this.$el
+            .css({ "background-image": "url(" + data.objectImg + ")" })
+            .html( pick );
 
         return this;
     },

@@ -1,0 +1,11 @@
+ <% console.log('picks') %>
+<div id="pick-content">
+	<p id="daily-pick">DAILY PICKS</p>
+	<h1><%= data.objectTitle %></h1>
+	<% if(+data.friendCount) { %>
+		<p id="tastemates"><%= data.friendCount %> Tastemates</p>
+	<% } %>
+</div>
+<div class="purchase-links">
+	<a href="<%= data.links[0].link %>" class="<%= data.links[0].name.toLowerCase() %>"></a>
+</div>

@@ -9,12 +9,7 @@
         <link href="css/main.css" rel="stylesheet">
 
         <script src="js/lib/vendor/jquery-1.9.1.js"></script>
-        <script type="text/javascript">
-        $(document).bind("mobileinit", function(){
-              $.mobile.hashListeningEnabled = false;
-              alert('model init');
-          });
-        </script>
+        
         <script src="js/lib/vendor/jquery.timeago.js"></script>
 
         <script src="cordova.js"></script>
@@ -125,7 +120,6 @@
                 if (!window.vent) { window.vent = _.extend({}, Backbone.Events); }
                 
                 if(Util.isMobile()) {
-                    console.log( 'device ready' );
                     document.addEventListener("deviceready", function() { MobileDevice.onDeviceReady(); }, false);
                     // document.addEventListener("touchmove", function(e) { e.preventDefault(); }, false);
                 } else {
