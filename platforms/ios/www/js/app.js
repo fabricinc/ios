@@ -127,6 +127,7 @@ var APP = {
             "lists",
             "listRow",
             "picks",
+            "pack",
             "otherListRow",
             "moreMovies",
             "newSearch",

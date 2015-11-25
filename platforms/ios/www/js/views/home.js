@@ -5,6 +5,7 @@ var Section = Backbone.Model.extend({
     defaults: {
         discoveryLimit: null,
         categories: [],
+        matchCount: 0,
         digest: null,
         sectionID: 0,
         matches: [],
@@ -37,9 +38,15 @@ var Section = Backbone.Model.extend({
 
         Api.getMatchDisplay(function (matches) {
 
-            this.set("matches", matches);
+            Api.getMatchCount(function (count) {
+                
+                this.set('matchCount', count[0].MatchCount);
+                this.set("matches", matches);
+            
+            }.bind(this));
         
         }.bind(this));
+
                 
     
     },
@@ -103,8 +110,10 @@ var People = Backbone.Collection.extend({
 var HomeModel = Backbone.Model.extend({
 
     defaults: {
+        scrollPositions: [0,0,0],
         currentTab: 0,
         sectionID: 0,
+
     },
     
     initialize: function() {
@@ -118,7 +127,13 @@ var HomeModel = Backbone.Model.extend({
     
         if(tab === this.get('currentTab')) { return; }
 
+        // set scroll position
+        var pos = this.get('scrollPositions');
+        var curTab = this.get("currentTab");
 
+        pos[curTab] = UI.scroller.y;
+
+        this.set('scrollPositions', pos);
         this.set("currentTab", +tab);
     
     },
@@ -145,9 +160,9 @@ var HomeView = Backbone.View.extend({
     render: function(callback, update) {
         callback = callback || function() { };
 
+        var tabController    = new TabController({ model: this.model });
         var contentContainer = new HomeContent({ model: this.model });
-        var tabController = new TabController({ model: this.model });
-        var header = new HeaderView({ home: true });
+        var header           = new HeaderView({ home: true });
 
         
         this.$el
@@ -158,6 +173,7 @@ var HomeView = Backbone.View.extend({
 
         this.collection.each(this.addPage, this);
 
+        // Render selected tab
         this.sections[this.model.get('currentTab')].render();
 
         callback();
@@ -196,16 +212,33 @@ var HomeContent = Backbone.View.extend({
     
 
     initialize: function(){
-    
-        this.listenTo(this.model, "change:currentTab", this.changeContent);
+        
+        this.listenTo(this.model, 'change:currentTab', this.refresh);
+
     
     },
     
     render: function() {
 
-        
+        this.el.style.height = (document.height - 83) + "px";
+
+        this.$el.append( '<div></div>' );
+
+        UI.initScroller(this.$el[0]);
 
         return this;
+    },
+
+    refresh: function(){
+        
+        var pos = this.model.get('scrollPositions');
+        var tab = this.model.get('currentTab');
+        
+
+        UI.scroller.scrollTo(0, pos[tab], 0);
+
+        setTimeout(function() { UI.scroller.refresh(); }, 250);
+    
     },
 });
 
@@ -261,91 +294,33 @@ var TabController = Backbone.View.extend({
 });
 
 var SectionView = Backbone.View.extend({
-    el: '#home-content',
+    el: '#home-content div',
     people: [],
     packs: [],
     
-    initialize: function(){
-    
-        
-        this.listenTo(this.model, "change:categories", this.loadPacks);
-        this.listenTo(this.model, "change:matches", this.loadMatches);
-        // this.listenTo(this.model, "change:digest", this.loadDigest);
-    
-    },
     
     render: function() {
 
 
         this.$el
-            .html( "<div id='pick'></div><div id='people'></div><div id='packs'></div>" );
+            .html( "<div id='pick'></div><div id='people'></div><div id='packs'><p id='heading'>top ranking this week</p></div>" );
 
 
-        // var people = new PeopleView({ model: this.model });
-        var pick = new PickView({ model: this.model });
+        var people = new PeopleView({ model: this.model });
+        var pick   = new PickView({ model: this.model });
+        var packs  = new PacksView({ model: this.model });
 
         pick.render();
-        // people.render();
+        people.render();
+        packs.render();
 
-        this.loadMatches.call(this);
-        this.loadPacks.call(this);
+        // this.loadPacks.call(this);
 
 
         return this;
     },
 
-    loadPacks: function(){
-        
-        var packList = this.model.get('categories');
 
-        if(!packList.length) { return; }
-
-
-        this.packs = this.packs.length ? this.packs : new PackCollection(packList);
-
-        
-        this.packs.each(this.addPack, this);
-        
-    
-    },
-
-    loadMatches: function(){
-
-        var people = this.model.get('matches');
-
-
-        if(!people.length) { return; }
-
-
-        this.people = this.people.length ? this.people : new People(people);
-
-        this.people.each(this.addPerson, this);
-            
-    
-    },
-
-    loadDigest: function(){
-        
-        var pickView = new PickView({ model: this.model });
-    
-    },
-
-    addPack: function(packModel){
-    
-        var pack = new PackView({ model: packModel });
-
-        this.$('#packs').append( pack.render().el );
-
-    },
-
-    addPerson: function(personModel){
-    
-        var person = new PeopleView({ model: personModel });
-
-
-        this.$("#people").append( person.render().el );
-    
-    },
 
 });
 
@@ -361,19 +336,11 @@ var PickView = Backbone.View.extend({
     render: function() {
 
         var digest = this.model.get('digest');
-
-        
         if(!digest) { return; }
         
 
-
         var data = JSON.parse(digest.data);
-
-        console.log( data );
-
         var pick = APP.load("picks", { data: data });
-
-
 
         this.$el
             .css({ "background-image": "url(" + data.objectImg + ")" })
@@ -385,21 +352,94 @@ var PickView = Backbone.View.extend({
 });
 
 var PeopleView = Backbone.View.extend({
-    className: 'match',
+    el: "#people",
+    people: [],
 
-    // initialize: function(){
+    initialize: function(){
     
-    //     this.listenTo(this.model, 'change:matches', this.render);
+        
+        this.listenTo(this.model, 'change:matches', this.render);
+
     
-    // },
+    },
     
     render: function() {
 
-        this.$el.html( this.model.get('uName') );
+        var people = this.model.get('matches');
+
+        if(!people.length) { return this; }
+
+        var matchCount = +this.model.get('matchCount');
+
+        this.$el.append( "all picks ranked by your <span class='bold'> " + matchCount + " tastemates</span>" );
+
+
+        this.people = this.people.length ? this.people : new People(people);                
+
+        this.people.each(this.addPerson, this);
+
+
+        this.$el.append( "<div class='match plus'>" + (matchCount - 5) + "+</div>" );
 
         
 
         return this;
+    },
+
+    addPerson: function(personModel){
+    
+        var personView = new PersonView({ model: personModel });
+
+        this.$el.append( personView.render().el );
+    
+    },
+
+});
+
+var PersonView = Backbone.View.extend({
+    className: 'match',
+    tagName: 'img',
+    
+    render: function() {
+
+        this.el.src =  "https://graph.facebook.com/"+ this.model.get('facebook_id') +"/picture?height=170&width=170";
+
+        return this;
+    },
+
+});
+
+var PacksView = Backbone.View.extend({
+    el: '#packs',
+    packs: [],
+    
+    initialize: function(){
+    
+        this.listenTo(this.model, 'change:categories', this.render);
+    
+    },
+    
+    render: function() {
+
+        var packList = this.model.get('categories');
+
+        if(!packList.length) { return this; }
+
+
+        this.packs = this.packs.length ? this.packs : new PackCollection(packList);
+
+        this.packs.each(this.addPack, this);
+        
+
+        return this;
+    },
+
+    addPack: function(packModel){
+    
+        var pack = new PackView({ model: packModel });
+
+        this.$el.append( pack.render().el );
+
     },
 
 });
@@ -410,7 +450,11 @@ var PackView = Backbone.View.extend({
     
     render: function() {
 
-        this.$el.html( this.model.get('title') );
+        var pack = APP.load('pack', this.model.toJSON());
+
+
+        this.$el.append( pack );
+
 
         return this;
     },

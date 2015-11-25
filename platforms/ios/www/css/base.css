@@ -410,6 +410,7 @@ header nav #tap-menu {
 
 /*      New Home       */
 
+    /* Pick */
 #tab-control {
     background-color: #A21600;
     padding: 7px 10px;
@@ -430,7 +431,9 @@ header nav #tap-menu {
     background-color: white;
     color: #C0322F;
 }
-
+#home-content {
+    overflow: hidden;
+}
 #home-content #pick {
     background-repeat: no-repeat;
     text-transform: uppercase;
@@ -456,6 +459,76 @@ header nav #tap-menu {
     font-size: 0.7em;
 
 }
+
+    /* People */
+
+#people {
+    text-transform: uppercase;
+    color: rgb(81, 81, 81);
+    text-align: center;
+    font-size: 0.8em;
+    padding: 15px;
+}
+#people .bold {
+    color: #000;
+}
+#people .match {
+    display: inline-block;
+    border-radius: 50%;
+    width: 40px;
+    margin: 4px;
+}
+#people .plus {
+    background-color: rgb(212, 212, 212);
+    line-height: 40px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: white;
+    height: 40px;
+    float: right;
+}
+
+    /* Packs */
+
+#packs {
+    margin: 0 10px;
+}
+#packs #heading {
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.7em;
+}
+#packs .pack {
+    background-color: rgb(246, 246, 246);
+    margin-bottom: 10px;
+    height: 85px;
+}
+#packs .pack-image {
+    float: left;
+    width: 50px;
+    margin: 5px;
+}
+.pack-info {
+    text-transform: uppercase;
+    margin-left: 10px;
+    margin-top: 20px;
+    font-weight: 600;
+    float: left;
+    width: 75%;
+}
+.pack-info h4 {
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    color: gray;
+}
+.pack-info p {
+    font-size: 0.7em;
+}
+
+/*      END OF NEW HOME     */
+
+
 #intro-nav {
     position: absolute;
     bottom: 30px;
@@ -1826,6 +1899,13 @@ div.recommendation.list-item.userChoice .title {
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+
+/*      WELCOME        */
+#wrapper.welcome {
+    background-image: url(../images/coach/couch.jpg);
+    background-size: 100% 100%;
+}
+
 #welcome-container #welcome-content { background-color: rgba(0, 0, 0, 0.5); }
 #welcome-container #welcome-content.next { background-image: url(../images/discovery/05_scrim.png); }
 #welcome-container #welcome-content.next-two { background-image: url(../images/discovery/06_scrim.png); }

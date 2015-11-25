@@ -754,6 +754,14 @@ Api.getMatchDisplay = function (callback) {
 
 };
 
+Api.getMatchCount = function (callback) {
+    
+    callback = callback || function() {};
+
+    this.fetch({action: 'getMatchCount'}, callback);
+
+};
+
 Api.getMatchMe = function(moviePublishedID, listType, callback) {
     callback = callback || function() {};
     var options = {
@@ -1509,10 +1517,10 @@ Api.getCategoryListPart3 = function(mainCat, topCat, start, limit, sectionID, ca
     var options = {
         "action": "getCategoryListPart3",
         "categoryListID": mainCat,
+        "sectionID": sectionID,
         "topCat": topCat,
         "start": start,
         "limit": limit,
-        "sectionID": 1
     };
     this.fetch(options, callback);
 };
