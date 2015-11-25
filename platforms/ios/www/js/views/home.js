@@ -37,14 +37,15 @@ var Section = Backbone.Model.extend({
 
 
         Api.getMatchDisplay(function (matches) {
-
-            Api.getMatchCount(function (count) {
-                
-                this.set('matchCount', count[0].MatchCount);
-                this.set("matches", matches);
-            
-            }.bind(this));
+            console.log( 'matches', matches );
+            this.set("matches", matches);
         
+        }.bind(this));
+
+        Api.getMatchCount(function (count) {
+            console.log( 'count', count );
+            this.set('matchCount', count[0].MatchCount);
+
         }.bind(this));
 
                 
@@ -144,7 +145,6 @@ var HomeView = Backbone.View.extend({
     el: "#wrapper",
 
     initialize: function() {
-        // alert();
 
         this.sections = [];
 
@@ -171,7 +171,7 @@ var HomeView = Backbone.View.extend({
             .append(contentContainer.render().el);
 
 
-        this.collection.each(this.addPage, this);
+        this.collection.each(this.addSection, this);
 
         // Render selected tab
         this.sections[this.model.get('currentTab')].render();
@@ -180,7 +180,7 @@ var HomeView = Backbone.View.extend({
 
     },
 
-    addPage: function(section){
+    addSection: function(section){
     
 
         var sectionView = new SectionView({ model: section });
@@ -211,7 +211,7 @@ var HomeContent = Backbone.View.extend({
     id: 'home-content',
     
 
-    initialize: function(){
+    initialize: function() {
         
         this.listenTo(this.model, 'change:currentTab', this.refresh);
 
@@ -295,29 +295,47 @@ var TabController = Backbone.View.extend({
 
 var SectionView = Backbone.View.extend({
     el: '#home-content div',
-    people: [],
-    packs: [],
+    people: null,
+    packs: null,
+    pick: null,
     
+    initialize: function(){
+
+        // this.listenTo(this.model, 'change:categories', this.renderPacks);
+    
+    },
     
     render: function() {
 
-
         this.$el
-            .html( "<div id='pick'></div><div id='people'></div><div id='packs'><p id='heading'>top ranking this week</p></div>" );
+            .html( "<div id='pick'></div>" );
 
 
-        var people = new PeopleView({ model: this.model });
+        this.people = this.people || new PeopleView({ model: this.model });
         var pick   = new PickView({ model: this.model });
-        var packs  = new PacksView({ model: this.model });
+        this.packs  = this.packs || new PacksView({ model: this.model });
+
 
         pick.render();
-        people.render();
-        packs.render();
+        // people.render();
 
-        // this.loadPacks.call(this);
+
+        this.$el
+            .append(this.people.render().el)
+            .append(this.packs.render().el);
 
 
         return this;
+    },
+
+    renderPacks: function(){
+    
+        if(this.packs){
+
+            this.packs.addPacks();
+
+        }
+    
     },
 
 
@@ -352,38 +370,44 @@ var PickView = Backbone.View.extend({
 });
 
 var PeopleView = Backbone.View.extend({
-    el: "#people",
+    id: "people",
     people: [],
 
     initialize: function(){
+
+
+        if(this.model.get('matches').length){
+
+            this.addPeople();
+
+        }
+
+        if(this.model.get('matchCount').length){
+
+            this.matchCount();
+
+        }
     
         
-        this.listenTo(this.model, 'change:matches', this.render);
+        this.listenTo(this.model, 'change:matchCount', this.matchCount);
+        this.listenTo(this.model, 'change:matches', this.addPeople);
 
-    
     },
     
     render: function() {
 
-        var people = this.model.get('matches');
+        return this;
 
-        if(!people.length) { return this; }
+    },
 
-        var matchCount = +this.model.get('matchCount');
-
-        this.$el.append( "all picks ranked by your <span class='bold'> " + matchCount + " tastemates</span>" );
+    addPeople: function(){
 
 
-        this.people = this.people.length ? this.people : new People(people);                
+        this.people = this.people.length ? this.people : new People(this.model.get('matches'));                
 
         this.people.each(this.addPerson, this);
-
-
-        this.$el.append( "<div class='match plus'>" + (matchCount - 5) + "+</div>" );
-
         
-
-        return this;
+    
     },
 
     addPerson: function(personModel){
@@ -391,6 +415,16 @@ var PeopleView = Backbone.View.extend({
         var personView = new PersonView({ model: personModel });
 
         this.$el.append( personView.render().el );
+    
+    },
+
+    matchCount: function(){
+
+        var matchCount = this.model.get('matchCount');
+        
+        this.$el
+            .prepend( "all picks ranked by your <span class='bold'> " + matchCount + " tastemates</span>" )
+            .append( "<div class='match plus'>" + (matchCount - 5) + "+</div>" );
     
     },
 
@@ -410,32 +444,43 @@ var PersonView = Backbone.View.extend({
 });
 
 var PacksView = Backbone.View.extend({
-    el: '#packs',
+    id: 'packs',
     packs: [],
     
     initialize: function(){
-    
-        this.listenTo(this.model, 'change:categories', this.render);
-    
+
+        // Incase we missed the categories set event 
+        if(this.model.get('categories').length){
+
+            this.addPacks();
+
+        }
+
+        this.listenTo(this.model, 'change:categories', this.addPacks);
+
+        this.$el.prepend( "<p id='heading'>top ranking this week</p>" );
+
     },
     
     render: function() {
 
+        return this;
+
+    },
+
+    addPacks: function(){
+
+        console.log( 'add packs' + this.model.get('sectionID') );
         var packList = this.model.get('categories');
-
-        if(!packList.length) { return this; }
-
-
+        
         this.packs = this.packs.length ? this.packs : new PackCollection(packList);
 
         this.packs.each(this.addPack, this);
-        
 
-        return this;
     },
 
     addPack: function(packModel){
-    
+
         var pack = new PackView({ model: packModel });
 
         this.$el.append( pack.render().el );

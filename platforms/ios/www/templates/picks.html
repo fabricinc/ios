@@ -1,4 +1,3 @@
- <% console.log('picks') %>
 <div id="pick-content">
 	<p id="daily-pick">DAILY PICKS</p>
 	<h1><%= data.objectTitle %></h1>
@@ -7,5 +6,7 @@
 	<% } %>
 </div>
 <div class="purchase-links">
-	<a href="<%= data.links[0].link %>" class="<%= data.links[0].name.toLowerCase() %>"></a>
+	<% if(data.links.length) { %>
+		<a href="<%= data.links[0].link %>" class="<%= data.links[0].name.toLowerCase() %>"></a>
+	<% } %>
 </div>
