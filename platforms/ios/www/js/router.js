@@ -51,7 +51,7 @@
             "userFeed/:id": "userFeed",
             "rate": "home",
 			"fb-connect": "fb-connect",
-            "discovery?categoryID=:categoryID&listID=:listID": "discovery",
+            "discovery?categoryID=:categoryID&listID=:listID&limiter=:limiter": "discovery",
             "messages": "messages",
             "messages/:id": "conversation",
             "movieLobby/:id(/:publishedID)": "movieLobby",
@@ -72,7 +72,7 @@
             "fabricPlayer/:id": "fabricPlayer",
             "fabricPlayerRec/:id": "fabricPlayerRec",
             "movieDiscussion/:id": "movieDiscussion",
-            "*path": "rate"
+            "*path": "home"
         },
 
         /**
@@ -639,8 +639,10 @@
                     loadPageHtml: false
                 }, "contestLeaderboard");
             });
-            this.on("route:discovery", function(categoryID, listID) {
-                self.loadView(new DiscoveryView({ categoryID: categoryID, listID: listID }), function() {
+            this.on("route:discovery", function(categoryID, listID, limiter) {
+
+                console.log( 'discovery', arguments);
+                self.loadView(new DiscoveryView({ categoryID: categoryID, listID: listID, limiter: limiter }), function() {
                     // Stub for callback
                 }, {
                     scroller: false,

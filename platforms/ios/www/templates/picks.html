@@ -7,6 +7,6 @@
 </div>
 <div class="purchase-links">
 	<% if(data.links.length) { %>
-		<a href="<%= data.links[0].link %>" class="<%= data.links[0].name.toLowerCase() %>"></a>
+		<a href="<%= data.links[0].link %>" data-vendor="<%= data.links[0].name.toLowerCase() %>" target="_blank" class="<%= data.links[0].name.toLowerCase() %>"></a>
 	<% } %>
 </div>

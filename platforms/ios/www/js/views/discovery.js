@@ -46,8 +46,11 @@ var DiscoveryModel = Backbone.Model.extend({
     listType: null,
 
     initialize: function(opts) {
+        console.log( 'opts', opts );
         this.categoryID = opts.categoryID || null;
+        this.limiter = opts.limiter || null;
         this.listID = opts.listID || null;
+
         this.welcomeCompleted = parseInt(APP.gameState.welcomeCompleted);
     },
     init: function(callback) {
@@ -60,8 +63,9 @@ var DiscoveryModel = Backbone.Model.extend({
         //});
 
 
-		Api.getSwipeCategoryData(self.categoryID, self.listID, function(data) {
+		Api.getSwipeCategoryData(self.categoryID, self.listID, self.limiter, function(data) {
 
+            console.log( 'swipe cat data', data );
 
 			if (data.movies) { var list = data.movies; }
             else { var list = data; }
@@ -473,7 +477,8 @@ var DiscoveryModel = Backbone.Model.extend({
     },
     loadCategoryListSummary: function(callback) {
         var self = this;
-        Api.getFabricCategoryData(self.categoryID, function(response) {
+
+        Api.getFabricCategoryData(self.categoryID, self.limiter, function(response) {
             if(response.data) {
                 if(response.data.movies.list.length) {
                     if (response.data.movies.list) { var list = response.data.movies.list; }

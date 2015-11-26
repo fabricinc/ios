@@ -529,14 +529,15 @@ Api.setMovieSeen = function(moviePublishedID, seen, callback) {
         callback(success.success);
     });
 };
-Api.getSwipeCategoryData = function(categoryID, listID, callback) {
+Api.getSwipeCategoryData = function(categoryID, listID, limiter, callback) {
     callback = callback || function() {};
     categoryID = categoryID || null;
     listID = listID || null;
     var options = {
-        "action": "getSwipeCategoryData",
-        "categoryID": categoryID,
-        "listID": listID
+        action: "getSwipeCategoryData",
+        categoryID: categoryID,
+        limiter: limiter,
+        listID: listID
     };
     this.fetch(options, callback);
 };
@@ -1595,13 +1596,16 @@ Api.activateAccount = function(callback) {
     var options = { "action": "activateAccount" };
     this.fetch(options, callback);
 };
-Api.getFabricCategoryData = function(categoryID, callback) {
+Api.getFabricCategoryData = function(categoryID, limiter, callback) {
     callback = callback || function() {};
+    
     var options = {
-        "action": "getFabricCategoryData",
-        "bitRate": Player.bitRate,
-        "categoryID": categoryID,
+        action: "getFabricCategoryData",
+        bitRate: Player.bitRate,
+        categoryID: categoryID,
+        limiter: limiter,
     };
+
     this.fetch(options, callback);
 };
 Api.getUnseenActivity = function(callback) {

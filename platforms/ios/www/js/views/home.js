@@ -37,24 +37,35 @@ var Section = Backbone.Model.extend({
 
 
         Api.getMatchDisplay(function (matches) {
-            console.log( 'matches', matches );
+
             this.set("matches", matches);
         
         }.bind(this));
 
+
         Api.getMatchCount(function (count) {
-            console.log( 'count', count );
+
             this.set('matchCount', count[0].MatchCount);
 
         }.bind(this));
 
-                
-    
     },
 
     filterDigest: function(item){
 
         return +item.section_id === this.get('sectionID');
+    
+    },
+
+    lobby: function(){
+
+        Backbone.history.navigate('movieLobby/null/'+ this.get('digest').object_id, true);
+    
+    },
+
+    appToapp: function(e){
+    
+        Util.handleExternalUrl(e);
     
     },
 
@@ -74,9 +85,9 @@ var Pack = Backbone.Model.extend({
         
     },
     
-    initialize: function() {
-
-        
+    goToSwipe: function() {
+        console.log( this.toJSON() );
+        Backbone.history.navigate("discovery?categoryID=" +  this.get('category_id') + "&listID=null&limiter=" + this.get('limiter'), true);
         
     },
 
@@ -89,15 +100,17 @@ var PackCollection = Backbone.Collection.extend({
 });
 
 var Person = Backbone.Model.extend({
+    
+    viewProfile: function() {
 
-    defaults: {
+        Backbone.history.navigate('profile/'+ this.get('userID'), true);
         
     },
-    
-    initialize: function() {
 
-        
-        
+    viewMates: function(){
+    
+        console.log( 'view Mates' );
+    
     },
 
 });
@@ -299,28 +312,19 @@ var SectionView = Backbone.View.extend({
     packs: null,
     pick: null,
     
-    initialize: function(){
-
-        // this.listenTo(this.model, 'change:categories', this.renderPacks);
-    
-    },
     
     render: function() {
 
-        this.$el
-            .html( "<div id='pick'></div>" );
+        this.$el.html( "<div></div>" );
 
 
         this.people = this.people || new PeopleView({ model: this.model });
-        var pick   = new PickView({ model: this.model });
+        this.pick   = this.pick || new PickView({ model: this.model });
         this.packs  = this.packs || new PacksView({ model: this.model });
 
 
-        pick.render();
-        // people.render();
-
-
         this.$el
+            .append(this.pick.render().el)
             .append(this.people.render().el)
             .append(this.packs.render().el);
 
@@ -338,33 +342,59 @@ var SectionView = Backbone.View.extend({
     
     },
 
-
-
 });
 
 var PickView = Backbone.View.extend({
-    el: "#pick",
+    id: "pick",
+
+    events: {
+        'click .purchase-links a': 'appToapp',
+        'click': 'goToPick',
+    },
 
     initialize: function(){
+
+        if (this.model.get('digest')) {
+
+            this.fillPick();
+
+        }
     
-        this.listenTo(this.model, 'change:digest', this.render);
+        this.listenTo(this.model, 'change:digest', this.fillPick);
     
     },
     
     render: function() {
 
-        var digest = this.model.get('digest');
-        if(!digest) { return; }
-        
 
+        return this;
+    },
+
+    fillPick: function(){
+    
+
+        var digest = this.model.get('digest');
         var data = JSON.parse(digest.data);
         var pick = APP.load("picks", { data: data });
 
         this.$el
             .css({ "background-image": "url(" + data.objectImg + ")" })
             .html( pick );
+    
+    },
 
-        return this;
+    appToapp: function(e){
+        e.preventDefault(); e.stopPropagation();
+
+
+        this.model.appToapp(e.currentTarget);
+    
+    },
+
+    goToPick: function(){
+    
+        this.model.lobby();
+    
     },
 
 });
@@ -372,6 +402,10 @@ var PickView = Backbone.View.extend({
 var PeopleView = Backbone.View.extend({
     id: "people",
     people: [],
+
+    events: {
+        'click .match .plus': 'viewMates'
+    },
 
     initialize: function(){
 
@@ -405,9 +439,9 @@ var PeopleView = Backbone.View.extend({
 
         this.people = this.people.length ? this.people : new People(this.model.get('matches'));                
 
+
         this.people.each(this.addPerson, this);
-        
-    
+            
     },
 
     addPerson: function(personModel){
@@ -428,17 +462,33 @@ var PeopleView = Backbone.View.extend({
     
     },
 
+    viewMates: function(){
+    
+        this.model.viewMates();
+    
+    },
+
 });
 
 var PersonView = Backbone.View.extend({
     className: 'match',
     tagName: 'img',
+
+    events: {
+        'click': 'viewProfile'
+    },
     
     render: function() {
 
         this.el.src =  "https://graph.facebook.com/"+ this.model.get('facebook_id') +"/picture?height=170&width=170";
 
         return this;
+    },
+
+    viewProfile: function(){
+    
+        this.model.viewProfile();
+    
     },
 
 });
@@ -470,7 +520,6 @@ var PacksView = Backbone.View.extend({
 
     addPacks: function(){
 
-        console.log( 'add packs' + this.model.get('sectionID') );
         var packList = this.model.get('categories');
         
         this.packs = this.packs.length ? this.packs : new PackCollection(packList);
@@ -492,7 +541,10 @@ var PacksView = Backbone.View.extend({
 var PackView = Backbone.View.extend({
     className: 'pack',
     
-    
+    events: {
+        'click': 'goToSwipe'
+    },
+
     render: function() {
 
         var pack = APP.load('pack', this.model.toJSON());
@@ -502,6 +554,12 @@ var PackView = Backbone.View.extend({
 
 
         return this;
+    },
+
+    goToSwipe: function(){
+    
+        this.model.goToSwipe();
+    
     },
 
 });
