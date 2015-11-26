@@ -126,11 +126,28 @@ var HomeModel = Backbone.Model.extend({
     defaults: {
         scrollPositions: [0,0,0],
         currentTab: 0,
-        sectionID: 0,
-
+        sections: []
     },
     
     initialize: function() {
+
+        APP.refreshSettings(function() {
+            User.fetchMinData(function(success) {
+                
+                if(!success) {
+                    
+                    Backbone.history.navigate("start/true", true);
+
+                }
+
+                else {
+
+                    this.set('sections', [{sectionID: 1}, {sectionID: 2}, {sectionID: 4}]);
+
+                }
+            }.bind(this));
+
+        }.bind(this));
 
         this.set("currentTab", +APP.sectionID);
         
@@ -159,27 +176,35 @@ var HomeView = Backbone.View.extend({
 
     initialize: function() {
 
-        this.sections = [];
-
-        var sections = [{sectionID: 1}, {sectionID: 2}, {sectionID:4}];
-        this.collection = new Sections(sections);
-
         this.model = new HomeModel();
 
+        this.sections = [];
+
         this.listenTo(this.model, 'change:currentTab', this.changeTab, this);
+        this.listenTo(this.model, 'change:sections', this.build);
         
     },
 
     render: function(callback, update) {
         callback = callback || function() { };
 
+        var header = new HeaderView({ home: true });
+
+        this.$el.html(header.el);
+
+        callback();
+
+    },
+
+    build: function(){
+    
+        this.collection = new Sections(this.model.get('sections'));
+
         var tabController    = new TabController({ model: this.model });
         var contentContainer = new HomeContent({ model: this.model });
-        var header           = new HeaderView({ home: true });
 
         
         this.$el
-            .html(header.el)
             .append(tabController.render().el)
             .append(contentContainer.render().el);
 
@@ -189,8 +214,7 @@ var HomeView = Backbone.View.extend({
         // Render selected tab
         this.sections[this.model.get('currentTab')].render();
 
-        callback();
-
+    
     },
 
     addSection: function(section){
