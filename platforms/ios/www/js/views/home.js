@@ -189,8 +189,8 @@ var HomeView = Backbone.View.extend({
         callback = callback || function() { };
 
         var header = new HeaderView({ home: true });
-
         this.$el.html(header.el);
+
 
         callback();
 
@@ -198,15 +198,14 @@ var HomeView = Backbone.View.extend({
 
     build: function(){
     
-        this.collection = new Sections(this.model.get('sections'));
-
-        var tabController    = new TabController({ model: this.model });
-        var contentContainer = new HomeContent({ model: this.model });
+        this.collection   = new Sections(this.model.get('sections'));
+        var tabController = new TabController({ model: this.model });
+        var content       = new HomeContent({ model: this.model });
 
         
         this.$el
             .append(tabController.render().el)
-            .append(contentContainer.render().el);
+            .append(content.render().el);
 
 
         this.collection.each(this.addSection, this);
