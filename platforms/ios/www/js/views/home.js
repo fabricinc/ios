@@ -86,7 +86,7 @@ var Pack = Backbone.Model.extend({
     },
     
     goToSwipe: function() {
-        console.log( this.toJSON() );
+
         Backbone.history.navigate("discovery?categoryID=" +  this.get('category_id') + "&listID=null&limiter=" + this.get('limiter'), true);
         
     },
@@ -245,6 +245,10 @@ var HomeView = Backbone.View.extend({
 
 var HomeContent = Backbone.View.extend({
     id: 'home-content',
+
+    events: {
+        'touchstart' : 'checkScroller'
+    },
     
 
     initialize: function() {
@@ -274,6 +278,12 @@ var HomeContent = Backbone.View.extend({
         UI.scroller.scrollTo(0, pos[tab], 0);
 
         setTimeout(function() { UI.scroller.refresh(); }, 250);
+    
+    },
+
+    checkScroller: function(){
+    
+        UI.scroller.refresh();
     
     },
 });
