@@ -17,7 +17,12 @@
                 visibility: "hidden",
                 class: "edit"
             }
-        }
+        },
+        initialize: function(){
+
+            this.set('facebookID', APP.gameState.facebookID);
+        
+        },
     });
 
     var HeaderView = Backbone.View.extend({
@@ -26,6 +31,7 @@
 
         initialize: function(options, callback) { // Pass options value to the Model
             this.model = new HeaderModel(options);
+
 
             // this.listenTo(this.model, 'change:moreButton', this.updateMore);
             this.render(options, callback);

@@ -6,7 +6,7 @@
     var postButton = postButton || false; 
     var doneInter = doneInter || false; 
     var filterButton = filterButton || false; 
-
+    var picture = facebookID ? "https://graph.facebook.com/"+ facebookID +"/picture?height=170&width=170" : "hi";
 %>
 
 <nav>
@@ -36,7 +36,7 @@
             <div class="rel"></div> 
             <div id="notifications-num"></div>
         </div>
-        <div id="chat-menu">
+        <div id="profile-nav" style="background-image: url(<%= picture %>)">
             <div class="rel"></div> <div id="chat-num"></div>
         </div>
     <% } %>

@@ -205,6 +205,12 @@
                 Backbone.history.navigate("matches", true);
             });
 
+            $("#profile-nav").fastClick(function () {
+                
+                Backbone.history.navigate('profile', true);
+            
+            });
+
             $("#scroll-top").fastClick(function() {
                 if(UI.scroller.y < 0) {
                     UI.scroller.scrollTo(0, 0, 800);

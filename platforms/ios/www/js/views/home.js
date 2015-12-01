@@ -4,6 +4,7 @@ var Section = Backbone.Model.extend({
 
     defaults: {
         discoveryLimit: null,
+        nextCategories: [],
         categories: [],
         matchCount: 0,
         digest: null,
@@ -14,7 +15,7 @@ var Section = Backbone.Model.extend({
     
     initialize: function(){
 
-        this.set("discoveryLimit", Api.appSettings.discoveryLimit);
+        this.set("discoveryLimit", +Api.appSettings.discoveryLimit);
 
 
         var discoveryLimit = this.get('discoveryLimit'),
@@ -63,9 +64,46 @@ var Section = Backbone.Model.extend({
     
     },
 
-    appToapp: function(e){
+    appToApp: function(e){
     
         Util.handleExternalUrl(e);
+    
+    },
+
+    moreCategories: function(){
+    
+        var discoveryLimit = +this.get('discoveryLimit');
+
+        
+        // Bump up start first
+        this.set('start', this.get('start') + discoveryLimit);
+
+        var sectionID = this.get('sectionID'),
+            start = this.get('start');
+
+
+        Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function (response){
+
+            console.log( 'response', response );
+            this.set('nextCategories', response.data.categories);
+
+        }.bind(this));
+
+    },
+
+    getCategories: function(){
+
+        var discoveryLimit = this.get('discoveryLimit'),
+            sectionID = this.get('sectionID'),
+            start = this.get('start');
+
+
+        Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function (response){
+
+            this.set('categories', response.data.categories);
+
+        }.bind(this));
+        
     
     },
 
@@ -125,8 +163,9 @@ var HomeModel = Backbone.Model.extend({
 
     defaults: {
         scrollPositions: [0,0,0],
+        loadMore: false,
         currentTab: 0,
-        sections: []
+        sections: [],
     },
     
     initialize: function() {
@@ -145,6 +184,7 @@ var HomeModel = Backbone.Model.extend({
                     this.set('sections', [{sectionID: 1}, {sectionID: 2}, {sectionID: 4}]);
 
                 }
+
             }.bind(this));
 
         }.bind(this));
@@ -169,6 +209,12 @@ var HomeModel = Backbone.Model.extend({
     
     },
 
+    loadMore: function(){
+    
+        this.set('loadMore', !this.get('loadMore'));
+    
+    },
+
 });
 
 var HomeView = Backbone.View.extend({
@@ -181,6 +227,7 @@ var HomeView = Backbone.View.extend({
         this.sections = [];
 
         this.listenTo(this.model, 'change:currentTab', this.changeTab, this);
+        this.listenTo(this.model, 'change:loadMore', this.progressiveLoad);
         this.listenTo(this.model, 'change:sections', this.build);
         
     },
@@ -189,6 +236,7 @@ var HomeView = Backbone.View.extend({
         callback = callback || function() { };
 
         var header = new HeaderView({ home: true });
+
         this.$el.html(header.el);
 
 
@@ -199,8 +247,10 @@ var HomeView = Backbone.View.extend({
     build: function(){
     
         this.collection   = new Sections(this.model.get('sections'));
+
         var tabController = new TabController({ model: this.model });
         var content       = new HomeContent({ model: this.model });
+        var current       = this.model.get('currentTab');
 
         
         this.$el
@@ -211,7 +261,7 @@ var HomeView = Backbone.View.extend({
         this.collection.each(this.addSection, this);
 
         // Render selected tab
-        this.sections[this.model.get('currentTab')].render();
+        this.sections[current].render();
 
     
     },
@@ -234,6 +284,15 @@ var HomeView = Backbone.View.extend({
     
     },
 
+    progressiveLoad: function(){
+    
+        console.log( 'progressiveLoad' );
+        var section = this.model.get('currentTab');
+
+        this.sections[section].model.moreCategories();
+
+    },
+
     
     dealloc: function() {
         console.log( 'dealloc', this );
@@ -247,7 +306,7 @@ var HomeContent = Backbone.View.extend({
     id: 'home-content',
 
     events: {
-        'touchstart' : 'checkScroller'
+        'touchstart' : 'refreshScroller'
     },
     
 
@@ -281,9 +340,25 @@ var HomeContent = Backbone.View.extend({
     
     },
 
-    checkScroller: function(){
-    
+    refreshScroller: function() {
+        
         UI.scroller.refresh();
+        this.progressiveLoad();
+    
+    },
+
+    progressiveLoad: function(){
+    
+        var s = UI.scroller;
+        var scrollDiff = s.y - s.maxScrollY;
+
+
+        if (scrollDiff < 800) {
+
+            console.log( 'load more' );
+            this.model.loadMore();
+
+        }
     
     },
 });
@@ -348,6 +423,7 @@ var SectionView = Backbone.View.extend({
     
     render: function() {
 
+        // Weird but if I don't put in a div the section content gets mixed up
         this.$el.html( "<div></div>" );
 
 
@@ -365,23 +441,13 @@ var SectionView = Backbone.View.extend({
         return this;
     },
 
-    renderPacks: function(){
-    
-        if(this.packs){
-
-            this.packs.addPacks();
-
-        }
-    
-    },
-
 });
 
 var PickView = Backbone.View.extend({
     id: "pick",
 
     events: {
-        'click .purchase-links a': 'appToapp',
+        'click .purchase-links a': 'appToApp',
         'click': 'goToPick',
     },
 
@@ -416,11 +482,11 @@ var PickView = Backbone.View.extend({
     
     },
 
-    appToapp: function(e){
+    appToApp: function(e){
         e.preventDefault(); e.stopPropagation();
 
 
-        this.model.appToapp(e.currentTarget);
+        this.model.appToApp(e.currentTarget);
     
     },
 
@@ -532,14 +598,18 @@ var PacksView = Backbone.View.extend({
     
     initialize: function(){
 
+        this.packs = new PackCollection();
+        this.listenTo(this.packs, 'add', this.addPack);
+
         // Incase we missed the categories set event 
         if(this.model.get('categories').length){
 
-            this.addPacks();
+            this.renderPacks();
 
         }
 
-        this.listenTo(this.model, 'change:categories', this.addPacks);
+        this.listenTo(this.model, 'change:nextCategories', this.addCategories);
+        this.listenTo(this.model, 'change:categories', this.renderPacks);
 
         this.$el.prepend( "<p id='heading'>top ranking this week</p>" );
 
@@ -551,22 +621,28 @@ var PacksView = Backbone.View.extend({
 
     },
 
-    addPacks: function(){
+    renderPacks: function(){
 
         var packList = this.model.get('categories');
-        
-        this.packs = this.packs.length ? this.packs : new PackCollection(packList);
 
-        this.packs.each(this.addPack, this);
+        this.packs = this.packs.length ? this.packs : this.packs.add(packList);
 
     },
 
     addPack: function(packModel){
-
+        
         var pack = new PackView({ model: packModel });
 
         this.$el.append( pack.render().el );
 
+    },
+
+    addCategories: function(){
+        
+        var nextCategories = this.model.get('nextCategories');
+
+        this.packs.add(nextCategories);
+    
     },
 
 });

@@ -289,6 +289,7 @@ header nav .slide,
 header nav #tap-menu,
 header nav #chat-menu,
 header nav #share-icon,
+header nav #profile-nav,
 header nav #shopping-cart,
 header nav #notifications-menu,
 header nav #header-edit-button {
@@ -339,6 +340,14 @@ header nav #chat-menu {
     background-image: url(../images/discovery/chat.png);
     background-size: 20px;
     background-position: 7px 15px;
+}
+header nav #profile-nav {
+    background-size: 100% 100%;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    right: 0;
+    top: 0px;
 }
 header nav #shopping-cart,
 header nav #notifications-menu {
