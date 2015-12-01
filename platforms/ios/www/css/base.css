@@ -454,6 +454,7 @@ header nav #tap-menu {
 #home-content #pick-content {
     padding: 84px 15px 12px;;
     font-weight: 600;
+    text-shadow: #222 1px 1px 1px;
 }
 #pick-content h1 {
     font-size: 1.2em;
