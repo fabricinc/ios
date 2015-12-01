@@ -38,7 +38,18 @@
 .digest-content-img {
     height: 200px;
 }
-
+#people {
+    font-size: 1em;
+    height: 67px;
+}
+#people .match {
+    margin-top: 8px;
+    width: 55px;
+}
+#people .plus {
+    line-height: 55px;
+    height: 55px;
+}
 
 .purchase-links a {
     height: 30px;

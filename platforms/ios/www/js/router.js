@@ -185,8 +185,7 @@
             });
 
             $("#notifications-menu").fastClick(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+                e.preventDefault(); e.stopPropagation();
 
                 if(!APP.working) {
                     UI.toggleNotifications();

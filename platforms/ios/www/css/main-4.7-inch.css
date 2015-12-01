@@ -25,6 +25,20 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+header nav #profile-nav {
+    height: 45px;
+    width: 45px;
+}
+#people {
+    font-size: 0.8em;
+}
+#people .match {
+    width: 49px;
+}
+#people .plus {
+    line-height: 49px;
+    height: 49px;
+}
 #share-buttons {
     margin-top: 70px;
 }
@@ -367,6 +381,9 @@ h6.like-you + .action {
 }
 header nav { height: 59px; }
 
+header nav #notifications-menu {
+    right: 50px;
+}
 header nav #share-icon,
 header nav #shopping-cart,
 header nav #notifications-menu,
