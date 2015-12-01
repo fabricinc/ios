@@ -1,0 +1,89 @@
+
+.welcome-screen {
+	position: relative;
+	z-index: 1000;
+	width: 640px;
+	height: 1136px;
+	background-image: url('../images/welcome/welcome-screen-1.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.welcome-screen .mask {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	background-color: #000;
+	opacity: 0.5;
+}
+
+.welcome-text-container {
+	display: table;
+	position: relative;
+	z-index: 500;
+	height: 50%;
+}
+
+.welcome-text {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+#welcome-screen-1 {
+	color: #e1fefe;
+}
+
+.headline {
+	font-family: "San Francisco Text", Helvetica, Sans-serif;
+	font-weight: 800;
+	font-size: 48px;
+}
+
+.sub-headline, .instruction {
+	font-family: "Helvetica Neue Light", Helvetica, Sans-serif;
+	font-weight: 200;
+	font-size: 38px;
+	line-height: 130%;
+}
+
+.user-favorite-interest {
+	position: relative;
+	z-index: 500;
+	width: 90%;
+	height: 60px;
+	margin: 0 auto;
+	padding: 16px;
+	border-radius: 10px;
+	background-color: rgba(255,255,255,0.25);
+}
+
+.user-favorite-interest .movie-interest {
+	height: 60px;
+	width: 76%;
+	padding: 0 16px;
+	background-color: rgba(255,255,255,0.6);
+	border: medium none;
+	font-size: 32px;
+	line-height: 60px;
+	text-align: left;
+}
+
+.user-favorite-interest .go {
+	float: right;
+	height: 60px;
+	width: 16%;
+	padding: 0;
+	border: medium none;
+	border-radius: 6px;
+	color: #e6001a;
+	font-size: 32px;
+	font-weight: 600;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+
+
+
