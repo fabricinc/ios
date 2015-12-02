@@ -1,12 +1,71 @@
 
+html {
+	font-size: 62.5%;
+}
+
+
+/* iPhone 5/5s */
+@media screen and (device-aspect-ratio: 40/71) {
+
+	html {
+		font-size: 52%;
+	}
+} 
+
+/* iPhone 6 */
+@media screen and (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2) {
+	
+	html {
+		font-size: 62.5%;
+	}
+} 
+
+/* iPhone 6+ */
+@media screen and (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3) {
+	
+	html {
+		font-size: 72%;
+	}
+} 
+
+/* iPad overrides */
+@media screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	
+	html {
+		font-size: 100%;
+	}
+} 
+
+
 .welcome-screen {
 	position: relative;
 	z-index: 1000;
-	width: 640px;
-	height: 1136px;
-	background-image: url('../images/welcome/welcome-screen-1.jpg');
+	width: 375px;
+	height: 667px;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	color: #fff;
+}
+
+#welcome-screen-1 {
+	background-image: url('../images/welcome/welcome-screen-1-back.jpg');
+	color: #e1fefe;
+}
+
+#welcome-screen-2 {
+	background-image: url('../images/welcome/welcome-screen-2-back.png');
+}
+
+#welcome-screen-3 {
+	background-image: url('../images/welcome/welcome-screen-3-back.png');
+}
+
+#welcome-screen-4 {
+	background-image: url('../images/welcome/welcome-screen-4-back.png');
+}
+
+#welcome-screen-5 {
+	background-image: url('../images/welcome/welcome-screen-5-back.png');
 }
 
 .welcome-screen .mask {
@@ -18,70 +77,144 @@
 	opacity: 0.5;
 }
 
-.welcome-text-container {
+#welcome-screen-2 .mask {
+	opacity: 0.875;
+}
+
+#welcome-screen-3 .mask {
+	opacity: 0;
+}
+
+#welcome-screen-4 .mask {
+	opacity: 0;
+}
+
+#welcome-screen-5 .mask {
+	opacity: 0.9;
+}
+
+.welcome-message-container {
 	display: table;
 	position: relative;
 	z-index: 500;
+	width: 100%;
 	height: 50%;
 }
 
-.welcome-text {
+.welcome-message {
 	display: table-cell;
+	padding: 0 2rem;
 	vertical-align: middle;
 	text-align: center;
 }
 
-#welcome-screen-1 {
-	color: #e1fefe;
-}
-
 .headline {
 	font-family: "San Francisco Text", Helvetica, Sans-serif;
-	font-weight: 800;
-	font-size: 48px;
+	font-weight: 600;
+	font-size: 3.6rem;
 }
 
 .sub-headline, .instruction {
-	font-family: "Helvetica Neue Light", Helvetica, Sans-serif;
-	font-weight: 200;
-	font-size: 38px;
+	font-family: "Helvetica Neue", Helvetica, Sans-serif;
+	font-weight: 300;
+	font-size: 2rem;
 	line-height: 130%;
 }
 
 .user-favorite-interest {
 	position: relative;
 	z-index: 500;
-	width: 90%;
-	height: 60px;
+	width: 84%;
+	height: 4rem;
 	margin: 0 auto;
-	padding: 16px;
-	border-radius: 10px;
+	padding: 1.2rem;
+	border-radius: 1em;
 	background-color: rgba(255,255,255,0.25);
 }
 
 .user-favorite-interest .movie-interest {
-	height: 60px;
-	width: 76%;
-	padding: 0 16px;
+	width: 70%;
+	height: 4rem;
+	padding: 0 1.2rem;
 	background-color: rgba(255,255,255,0.6);
 	border: medium none;
-	font-size: 32px;
-	line-height: 60px;
+	font-size: 2rem;
+	line-height: 4rem;
 	text-align: left;
 }
 
 .user-favorite-interest .go {
 	float: right;
-	height: 60px;
-	width: 16%;
+	height: 4rem;
+	width: 15%;
 	padding: 0;
 	border: medium none;
-	border-radius: 6px;
+	border-radius: 0.7rem;
 	color: #e6001a;
-	font-size: 32px;
+	font-size: 2rem;
 	font-weight: 600;
 	text-align: center;
 	text-transform: uppercase;
+}
+
+.tastemates-row {
+	width: 30.3rem;
+	margin: 1.8rem auto;
+	padding: 0;
+	list-style: none;
+	overflow: auto;
+}
+
+.tastemate {
+	float: left;
+	margin: 0 0.5rem;
+}
+
+.tastemate .avatar, .tastemate.more {
+	width: 4rem;
+	height: 4rem;
+	border-radius: 2rem;
+}
+
+.tastemate.more {
+	background-color: #aaa;
+	font-family: "Helvetica Neue",Helvetica,sans-serif;
+	font-size: 1.5rem;
+	font-weight: 600;
+	line-height: 4rem;
+	text-align: center;
+	color: #fff;
+}
+
+.ack {
+	position: relative;
+	z-index: 500;
+	display: block;
+	width: 60%;
+	height: 6rem;
+	margin: 0 auto;
+	border: medium none;
+	border-radius: 0.5rem;
+	background-color: rgba(200, 200, 200, 0.5);
+	font-family: "Helvetica Neue",Helvetica,sans-serif;
+	font-size: 3rem;
+	font-weight: 400;
+	text-align: center;
+	color: #fff;
+}
+
+#welcome-screen-3 .ack {
+	width: 28%;
+	height: 5rem;
+	margin-top: 17rem;
+	font-size: 2.5rem;
+}
+
+#welcome-screen-4 .ack {
+	width: 28%;
+	height: 5rem;
+	margin-top: -0.75rem;
+	font-size: 2.5rem;
 }
 
 
