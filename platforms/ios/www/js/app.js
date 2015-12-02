@@ -137,6 +137,7 @@ var APP = {
             "inviteUserList",
             "register",
             "welcome",
+            "welcomeScreen1",
             "movieServices",
             "discussion",
             "discussionMessage",

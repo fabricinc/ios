@@ -8,11 +8,13 @@ var WelcomeCategoryModel = Backbone.Model.extend({
 });
 
 var WelcomeCategoryView = Backbone.View.extend({
+    el: "#wrapper",
     id: "welcome",
 
     initialize: function() {
 
         this.model = new WelcomeCategoryModel();
+        this.$el.addClass('welcome');
 
     },
 
@@ -20,10 +22,15 @@ var WelcomeCategoryView = Backbone.View.extend({
         callback = callback || function() { };
 
         if(APP.gameState.welcomeComplete == 1) {
+
             Backbone.history.navigate("rate", true);
+
         } else {
 
             // new code
+            var html = APP.load('welcomeScreen1');
+
+            this.$el.append( html );
 
 
         }
