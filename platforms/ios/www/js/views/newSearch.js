@@ -18,11 +18,11 @@ var SearchMethod = Backbone.Model.extend({
 		}
 
 
-		Api.findMoviesLikeTitle(searchValue, function(response) {
+		Api.findMoviesLikeTitle(searchValue, 1, function(response) {
 
 			if(response.data.length > 0) {
 
-				UI.scroller.disable();
+				// UI.scroller.disable();
 
 				this.set('results', new Results(response.data));
 				
@@ -36,7 +36,7 @@ var SearchMethod = Backbone.Model.extend({
 		
 		if( !this.get('results') ){ return; }
 
-		UI.scroller.enable();
+		// UI.scroller.enable();
 
 		var results = this.get('results');
 
@@ -54,7 +54,7 @@ var SearchMethod = Backbone.Model.extend({
 
 var Search = Backbone.View.extend({
 	
-	id: 'search',
+	el: '.user-favorite-interest',
 
 	events: {
 		'input input' : 'performSearch',
@@ -62,16 +62,16 @@ var Search = Backbone.View.extend({
 	},
 	
 	initialize: function(){
-	
+
 		this.model = new SearchMethod();
 	
 	},
 
 	render: function() {
 
-		var template = APP.load('newSearch');
+		// var template = APP.load('newSearch');
 
-		this.$el.append( template );
+		// this.$el.append( template );
 
 
 		return this;
@@ -107,8 +107,8 @@ var SearchResult = Backbone.Model.extend({
 	},
 
 	lobby: function(){
-
-		Backbone.history.navigate('movieLobby/'+ this.get('movieID'), true);
+		
+		// Backbone.history.navigate('movieLobby/'+ this.get('movieID'), true);
 	
 	},
 
@@ -141,6 +141,8 @@ var Results = Backbone.View.extend({
 	render: function() {
 
 		this.collection.each(this.addOne, this);
+
+		$(".welcome-container").scrollTop(230);
 
 		return this;
 	},
@@ -179,7 +181,7 @@ var Result = Backbone.View.extend({
 
 	lobby: function(){
 	
-		this.model.lobby();
+		window.vent.trigger('setID', this.model.get('movieID'));
 	
 	},
 });

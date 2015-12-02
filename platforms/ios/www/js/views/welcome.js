@@ -4,10 +4,14 @@ var WelcomeModel = Backbone.Model.extend({
         query: ""
     },
 
-    initialize: function() {
+    setID: function(ID) {
 
+        this.set('query', ID);
+
+        Api.setMovieToFabricList(ID, APP.gameState.favoriteListID, true);
 
     },
+
 
 });
 
@@ -17,13 +21,18 @@ var Welcome = Backbone.View.extend({
 
 
     events: {
-        'submit form.single-field-form' : 'nextStep',
+        'click .goto-swipe': 'gotoSwipe',
+        'click .welcome-3': 'welcome4',
+        'click .welcome-2': 'welcome3',
     },
 
     initialize: function() {
 
         this.model = new WelcomeModel();
         this.$el.addClass('welcome');
+
+        window.vent.on('setID', this.welcome2, this);
+
 
     },
 
@@ -41,26 +50,105 @@ var Welcome = Backbone.View.extend({
 
             this.$el.html( html );
 
+            var search = new Search();
+
 
         }
 
         callback();
     },
 
-    nextStep: function(e){
-        e.preventDefault(); e.stopPropagation();
+    welcome2: function(ID){
+        console.log( 'welcome2' );
+        this.model.setID(ID);
 
-        console.log( e );
-        this.model.set(e);
-        this.$el.html( APP.load("welcomeScreen2") );
-        $("button").click(function (response) {
-            
-            console.log( 'hi' );
+
+        var welcomeScreen2 = new WelcomeScreen2();
+
+        welcomeScreen2.render();
+        this.delegateEvents();
         
-        });
+    },
+
+    welcome3: function(){
+        console.log( 'welcome3' );
+        var welcomeScreen3 = new WelcomeScreen3();
+
+        welcomeScreen3.render();
+        this.delegateEvents();
+    
+    },
+    welcome4: function(){
+        console.log( 'welcome4' );
+        var welcomeScreen4 = new WelcomeScreen4();
+
+        welcomeScreen4.render();
+        this.delegateEvents();
+    
+    },
+
+    gotoSwipe: function(){
+        console.log( 'go to swipe now' );
+        
+        Backbone.history.navigate("discovery?categoryID=3423&listID=null", true);
+    
     },
 
     dealloc: function() {
         APP.welcome = false;
     }
+});
+
+
+
+var WelcomeScreen2 = Backbone.View.extend({
+    el: "#wrapper",
+    
+    render: function() {
+
+        
+        this.$el.html( APP.load("welcomeScreen2") );
+
+        return this;
+    },
+
+    next: function(){
+    
+        console.log( 'do next' );
+    
+    },
+
+});
+
+var WelcomeScreen3 = Backbone.View.extend({
+    el: "#wrapper",
+    
+    render: function() {
+
+        console.log( 'welcome3' );
+        this.$el.html( APP.load("welcomeScreen3") );
+
+        return this;
+    },
+
+    next: function(){
+    
+        console.log( 'do next' );
+    
+    },
+
+});
+
+var WelcomeScreen4 = Backbone.View.extend({
+    el: "#wrapper",
+    
+    render: function() {
+
+        console.log( 'welcome 4', this );
+        this.$el.html( APP.load("welcomeScreen4") );
+
+        return this;
+    },
+
+
 });

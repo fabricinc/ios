@@ -51,7 +51,7 @@
             "userFeed/:id": "userFeed",
             "rate": "home",
 			"fb-connect": "fb-connect",
-            "discovery?categoryID=:categoryID&listID=:listID&limiter=:limiter": "discovery",
+            "discovery?categoryID=:categoryID&listID=:listID&limiter=:limiter(/:onboard)": "discovery",
             "messages": "messages",
             "messages/:id": "conversation",
             "movieLobby/:id(/:publishedID)": "movieLobby",
@@ -644,10 +644,10 @@
                     loadPageHtml: false
                 }, "contestLeaderboard");
             });
-            this.on("route:discovery", function(categoryID, listID, limiter) {
+            this.on("route:discovery", function(categoryID, listID, limiter, onboard) {
 
                 console.log( 'discovery', arguments);
-                self.loadView(new DiscoveryView({ categoryID: categoryID, listID: listID, limiter: limiter }), function() {
+                self.loadView(new DiscoveryView({ categoryID: categoryID, listID: listID, limiter: limiter, onboard: onboard }), function() {
                     // Stub for callback
                 }, {
                     scroller: false,

@@ -138,6 +138,8 @@ var APP = {
             "register",
             "welcomeScreen1",
             "welcomeScreen2",
+            "welcomeScreen3",
+            "welcomeScreen4",
             "movieServices",
             "discussion",
             "discussionMessage",

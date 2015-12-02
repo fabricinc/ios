@@ -541,6 +541,15 @@ Api.getSwipeCategoryData = function(categoryID, listID, limiter, callback) {
     };
     this.fetch(options, callback);
 };
+
+Api.getOnboardDiscoveryData = function (callback) {
+    
+    callback = callback || function() {};
+
+    this.fetch({ action: 'getOnboardDiscoveryData' }, callback);
+
+};
+
 Api.getRecSubList = function(listID, callback) {
     callback = callback || function() {};
     listID = listID || null;
@@ -678,6 +687,7 @@ Api.setMovieToFabricList = function(moviePublishedID, listID, setter, callback) 
             return false;
         } else {
             callback();
+            console.log( 'success' );
             return true;
         }
     });
@@ -1382,12 +1392,17 @@ Api.getSuggestedGreeting = function(otherID, callback) {
     };
     this.fetch(options, callback);
 };
-Api.findMoviesLikeTitle = function(title, callback) {
+Api.findMoviesLikeTitle = function(title, sectionID, callback) {
     callback = callback || function() {};
+    sectionID = sectionID || null;
     var options = {
         "action": "findMoviesLikeTitle",
         "title": title
     };
+
+    if(sectionID){
+        options.sectionID = sectionID;
+    }
     this.fetch(options, callback);
 };
 Api.getUserFeed = function(userID, callback) {

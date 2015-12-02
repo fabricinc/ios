@@ -50,6 +50,9 @@ var DiscoveryModel = Backbone.Model.extend({
         this.categoryID = opts.categoryID || null;
         this.limiter = opts.limiter || null;
         this.listID = opts.listID || null;
+        this.onboard = opts.onboard || null;
+
+        console.log( opts );
 
         this.welcomeCompleted = parseInt(APP.gameState.welcomeCompleted);
     },
@@ -57,44 +60,56 @@ var DiscoveryModel = Backbone.Model.extend({
         var self = this;
         callback = callback || function() { };
 
-        Util.iOSVersion()[0] > 5 ? self.gtiOS5 = true : self.gtiOS5 = false;
-
-        //Api.getCategoryDiscoveryData(self.categoryID, function(result) {
-        //});
+        self.gtiOS5 = Util.iOSVersion()[0] > 5 ? true : false;
 
 
-		Api.getSwipeCategoryData(self.categoryID, self.listID, self.limiter, function(data) {
 
-            console.log( 'swipe cat data', data );
+        if(this.onboard) {
 
-			if (data.movies) { var list = data.movies; }
-            else { var list = data; }
+            console.log( 'onboard', this.onboard );
+            
+            Api.getOnboardDiscoveryData(function (response) {
+                
+                console.log( response );
+            
+            });
+            
+        } 
 
-            self.listType = list.length ? list[0].sectionID : null;
-            self.isAudioList = (self.listType === "4");
-            self.categoryData = data.data[0];
-            self.movieList = [];
-
-            for (var i = 0; i < list.length; i++) {
-
-                if(self.isAudioList) {
-
-                    if(i === 0){
-                        self.playTrack = new Audio(list[i].ad_path);
-                        self.playTrack.play();
+        else {
+        
+            Api.getSwipeCategoryData(self.categoryID, self.listID, self.limiter, function(data) {
+    
+                if (data.movies) { var list = data.movies; }
+                else { var list = data; }
+    
+                self.listType = list.length ? list[0].sectionID : null;
+                self.isAudioList = (self.listType === "4");
+                self.categoryData = data.data[0];
+                self.movieList = [];
+    
+                for (var i = 0; i < list.length; i++) {
+    
+                    if(self.isAudioList) {
+    
+                        if(i === 0){
+                            self.playTrack = new Audio(list[i].ad_path);
+                            self.playTrack.play();
+                        }
+                        self.audioList[ list[i].movieID ] = new Audio(list[i].ad_path);
+    
                     }
-                    self.audioList[ list[i].movieID ] = new Audio(list[i].ad_path);
-
+    
+                    if(list[i].movieID) { self.movieList.push(list[i]); }
+                    else { self.randData.push(list[i]); }
+    
                 }
-
-                if(list[i].movieID) { self.movieList.push(list[i]); }
-                else { self.randData.push(list[i]); }
-
-            }
-
-
-			callback();
-		});
+    
+    
+    
+                callback();
+            });
+        }
     },
     bindSwipeEvents: function(callback) {
         callback = callback || function() { };
