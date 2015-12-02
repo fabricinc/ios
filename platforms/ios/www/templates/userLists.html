@@ -1,23 +1,21 @@
 
-<% var action = followAction === "following" ? "followedID" : "followerID"; %>
 <div id="list-row-wrapper" class="friend-list">
     <div id="lists">
         <% if(followers.length) {  
             _.each(followers, function(follower) { 
+
                 var userID = follower.userID || null,
-                    compatibility = parseInt(follower.compatibility),
-                    profilePic = UI.avatar(follower.facebookID, follower.userID), 
-                    opacity = compatibility > 20 ? (compatibility / 100) : .2; %>
-                <div class="lists-row" data-followid="<%= follower[action] %>" data-userID="<%= userID %>">
+                    profilePic = UI.avatar(follower.facebook_id, userID); 
+
+        %>
+                <div class="lists-row" data-userID="<%= userID %>">
                 	<%= profilePic %> 
                 	<div class="follow-info">
-    	                <div class="follow-name"><%= follower.userName %></div>
+    	                <div class="follow-name"><%= follower.uName %></div>
     	                <div class="follow-location gry"><%= follower.city %></div>
                 	</div>
-                    <div class="follow-compatibility" style="background-color: rgba(222, 32, 32,<%= opacity %>);">
-                        <span class="percent-match"><%= compatibility %>%</span> <br />Match
-                    </div>
                 </div>
+                
             <% }); %>
         <% } else { %>
             <p class="blank-message">No friends?</p>

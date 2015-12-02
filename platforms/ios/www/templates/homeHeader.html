@@ -6,8 +6,7 @@
     var postButton = postButton || false; 
     var doneInter = doneInter || false; 
     var filterButton = filterButton || false; 
-    console.log( facebookID );
-    var picture = "hello";
+    var picture = facebookID ? "https://graph.facebook.com/"+ facebookID +"/picture?height=170&width=170" : "images/discovery/avatar.png";
 %>
 
 <nav>

@@ -33,7 +33,7 @@
         initialize: function(options, callback) { // Pass options value to the Model
             this.model = new HeaderModel(options);
 
-
+            console.log( this.model.get('facebookID') );
             this.listenTo(this.model, 'change:facebookID', this.updateFacebookID);
             this.render(options, callback);
             return this;
@@ -62,7 +62,7 @@
         },
 
         updateFacebookID: function() {
-            console.log( 'update image' );
+
             var facebookID = this.model.get('facebookID');
 
             if(!facebookID) { return; }
@@ -71,8 +71,6 @@
             var image = "https://graph.facebook.com/"+ facebookID +"/picture?height=170&width=170";
 
             
-            console.log( this.$('#profile-nav')[0].style.backgroundImage );
-
             this.$('#profile-nav').css({'background-image' : 'url(' + image + ')' });
 
 
@@ -83,7 +81,7 @@
         },
 
         setFacebookID: function(){
-        
+
             this.model.set('facebookID', APP.gameState.facebookID);
         
         },

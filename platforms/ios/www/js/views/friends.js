@@ -63,15 +63,11 @@ var FriendView = Backbone.View.extend({
     render: function(callback) {
         var self = this;
 
-        console.log( 'friends' );
-        console.log( self.model.get('userID') );
+        Api.getMatchList(function(response) {
 
-        Api.getMutualFollowers(self.model.get('userID'), function(response) {
-
-            console.log( response );
 
             var friendHead = self.model.get('isSelf') === "true" ? ( self.$el.addClass('self'), APP.load("inviteUserList") ) : "",
-                html = APP.load("userLists", { followers: response.friends, followAction: "following" });
+                html = APP.load("userLists", { followers: response });
 
             self.$el.html(friendHead + html);
             
@@ -84,7 +80,7 @@ var FriendView = Backbone.View.extend({
 
             $("#wrapper").html(self.$el);
 
-            if(response.friends.length < 1) {
+            if(response.length < 1) {
 
                 $("#friends #list-row-wrapper").addClass("no-friends");
 
