@@ -52,8 +52,12 @@ var Welcome = Backbone.View.extend({
 
         console.log( e );
         this.model.set(e);
-        
         this.$el.html( APP.load("welcomeScreen2") );
+        $("button").click(function (response) {
+            
+            console.log( 'hi' );
+        
+        });
     },
 
     dealloc: function() {
