@@ -327,7 +327,7 @@
             this.on("route:welcome", function() {
 
                 if (APP.gameState && APP.gameState.welcomeCompleted === "0") {
-                    self.loadView(new WelcomeCategoryView(), function() {
+                    self.loadView(new Welcome(), function() {
                         // Callback?
                     }, {
                         fadeImageClass: false,
