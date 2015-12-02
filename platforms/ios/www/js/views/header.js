@@ -22,7 +22,7 @@
         initialize: function(){
 
             this.set('facebookID', APP.gameState.facebookID);
-            console.log( APP.gameState.facebookID );
+
         },
     });
 
@@ -33,7 +33,7 @@
         initialize: function(options, callback) { // Pass options value to the Model
             this.model = new HeaderModel(options);
 
-            console.log( this.model.get('facebookID') );
+
             this.listenTo(this.model, 'change:facebookID', this.updateFacebookID);
             this.render(options, callback);
             return this;

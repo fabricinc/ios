@@ -84,7 +84,7 @@ var Section = Backbone.Model.extend({
 
         Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function (response){
 
-            console.log( 'response', response );
+            
             this.set('nextCategories', response.data.categories);
 
         }.bind(this));
@@ -145,11 +145,6 @@ var Person = Backbone.Model.extend({
         
     },
 
-    viewMates: function(){
-    
-        console.log( 'view Mates' );
-    
-    },
 
 });
 
@@ -288,7 +283,7 @@ var HomeView = Backbone.View.extend({
 
     progressiveLoad: function(){
     
-        console.log( 'progressiveLoad' );
+        
         var section = this.model.get('currentTab');
 
         this.sections[section].model.moreCategories();
@@ -357,7 +352,7 @@ var HomeContent = Backbone.View.extend({
 
         if (scrollDiff < 800) {
 
-            console.log( 'load more' );
+            
             this.model.loadMore();
 
         }
