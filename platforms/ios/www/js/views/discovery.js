@@ -46,7 +46,7 @@ var DiscoveryModel = Backbone.Model.extend({
     listType: null,
 
     initialize: function(opts) {
-        console.log( 'opts', opts );
+
         this.categoryID = opts.categoryID || null;
         this.limiter = opts.limiter || null;
         this.listID = opts.listID || null;
@@ -1023,8 +1023,8 @@ var DiscoveryModel = Backbone.Model.extend({
     updateProgressBar: function() {
         var self = this,
             pBar = $("#progress #inner-bar"),
-            rated = (self.totalMovies - self.movieList.length) + self.currentPos,
             total = self.totalMovies,
+            rated = total - (total - self.movieList.length) - self.currentPos,
             completion = Math.round((rated / total) * 100);
 
         $("#rated").html(rated);

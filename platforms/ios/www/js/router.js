@@ -185,8 +185,7 @@
             });
 
             $("#notifications-menu").fastClick(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+                e.preventDefault(); e.stopPropagation();
 
                 if(!APP.working) {
                     UI.toggleNotifications();
@@ -328,7 +327,7 @@
             this.on("route:welcome", function() {
 
                 if (APP.gameState && APP.gameState.welcomeCompleted === "0") {
-                    self.loadView(new WelcomeCategoryView(), function() {
+                    self.loadView(new Welcome(), function() {
                         // Callback?
                     }, {
                         fadeImageClass: false,

@@ -763,6 +763,14 @@ Api.getMatchCount = function (callback) {
 
 };
 
+Api.getMatchList = function (callback) {
+    
+    callback = callback || function() {};
+
+    this.fetch({action: 'getMatchList'}, callback);
+
+};
+
 Api.getMatchMe = function(moviePublishedID, listType, callback) {
     callback = callback || function() {};
     var options = {

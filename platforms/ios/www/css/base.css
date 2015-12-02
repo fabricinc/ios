@@ -346,12 +346,12 @@ header nav #profile-nav {
     border-radius: 50%;
     height: 40px;
     width: 40px;
-    right: 0;
-    top: 0px;
+    right: 5px;
+    top: 5px;
 }
 header nav #shopping-cart,
 header nav #notifications-menu {
-    right: 35px;
+    right: 45px;
     background-image: url(../images/discovery/notifications.png);
     background-size: 16px;
     background-position: 12px 15px;
@@ -422,7 +422,7 @@ header nav #tap-menu {
     /* Pick */
 #tab-control {
     background-color: #A21600;
-    padding: 7px 10px;
+    padding: 0 10px;
 }
 #tab-control div {
     text-transform: uppercase;
@@ -433,7 +433,7 @@ header nav #tap-menu {
     font-size: 0.9em;
     color: white;
     padding: 5px 2%;
-    margin: 0 2%;
+    margin: 7px 2%;
     width: 25%;
 }
 #tab-control div.active {
@@ -1913,7 +1913,7 @@ div.recommendation.list-item.userChoice .title {
 
 /*      WELCOME        */
 #wrapper.welcome {
-    background-image: url(../images/coach/couch.jpg);
+
     background-size: 100% 100%;
 }
 

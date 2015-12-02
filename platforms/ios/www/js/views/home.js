@@ -84,7 +84,7 @@ var Section = Backbone.Model.extend({
 
         Api.getCategoryListPart3(1, 100, start, discoveryLimit, sectionID, function (response){
 
-            console.log( 'response', response );
+            
             this.set('nextCategories', response.data.categories);
 
         }.bind(this));
@@ -145,11 +145,6 @@ var Person = Backbone.Model.extend({
         
     },
 
-    viewMates: function(){
-    
-        console.log( 'view Mates' );
-    
-    },
 
 });
 
@@ -172,7 +167,7 @@ var HomeModel = Backbone.Model.extend({
 
         APP.refreshSettings(function() {
             User.fetchMinData(function(success) {
-                
+
                 if(!success) {
                     
                     Backbone.history.navigate("start/true", true);
@@ -235,9 +230,9 @@ var HomeView = Backbone.View.extend({
     render: function(callback, update) {
         callback = callback || function() { };
 
-        var header = new HeaderView({ home: true });
+        this.header = new HeaderView({ home: true });
 
-        this.$el.html(header.el);
+        this.$el.html(this.header.el);
 
 
         callback();
@@ -253,6 +248,8 @@ var HomeView = Backbone.View.extend({
         var current       = this.model.get('currentTab');
 
         
+        this.header.setFacebookID();
+
         this.$el
             .append(tabController.render().el)
             .append(content.render().el);
@@ -286,7 +283,7 @@ var HomeView = Backbone.View.extend({
 
     progressiveLoad: function(){
     
-        console.log( 'progressiveLoad' );
+        
         var section = this.model.get('currentTab');
 
         this.sections[section].model.moreCategories();
@@ -355,7 +352,7 @@ var HomeContent = Backbone.View.extend({
 
         if (scrollDiff < 800) {
 
-            console.log( 'load more' );
+            
             this.model.loadMore();
 
         }
@@ -394,7 +391,8 @@ var TabController = Backbone.View.extend({
     },
 
     changeTab: function(e){
-        
+        e.preventDefault(); e.stopPropagation();
+
         this.model.changeSection(e.target.dataset.tag);
     
     },
@@ -465,8 +463,10 @@ var PickView = Backbone.View.extend({
     
     render: function() {
 
-
+        this.delegateEvents();
+        
         return this;
+
     },
 
     fillPick: function(){
@@ -499,11 +499,12 @@ var PickView = Backbone.View.extend({
 });
 
 var PeopleView = Backbone.View.extend({
+    personViews: [],
     id: "people",
     people: [],
 
     events: {
-        'click .match .plus': 'viewMates'
+        'click .plus': 'viewMates'
     },
 
     initialize: function(){
@@ -529,6 +530,10 @@ var PeopleView = Backbone.View.extend({
     
     render: function() {
 
+        this.personViews.forEach(this.peopleEvents);
+
+        this.delegateEvents();
+
         return this;
 
     },
@@ -548,6 +553,8 @@ var PeopleView = Backbone.View.extend({
         var personView = new PersonView({ model: personModel });
 
         this.$el.append( personView.render().el );
+
+        this.personViews.push(personView);
     
     },
 
@@ -562,8 +569,14 @@ var PeopleView = Backbone.View.extend({
     },
 
     viewMates: function(){
+        
+        Backbone.history.navigate('friends/null/true', true);
+
+    },
+
+    peopleEvents: function(person){
     
-        this.model.viewMates();
+        person.delegateEvents();
     
     },
 
@@ -593,6 +606,7 @@ var PersonView = Backbone.View.extend({
 });
 
 var PacksView = Backbone.View.extend({
+    packViews: [],
     id: 'packs',
     packs: [],
     
@@ -616,7 +630,10 @@ var PacksView = Backbone.View.extend({
     },
     
     render: function() {
-
+        
+        // re-delegate pack events 
+        this.packViews.forEach(this.packEvents);
+        
         return this;
 
     },
@@ -635,6 +652,14 @@ var PacksView = Backbone.View.extend({
 
         this.$el.append( pack.render().el );
 
+        this.packViews.push(pack);
+
+    },
+
+    packEvents: function(pack){
+    
+        pack.delegateEvents();
+    
     },
 
     addCategories: function(){
@@ -657,7 +682,6 @@ var PackView = Backbone.View.extend({
     render: function() {
 
         var pack = APP.load('pack', this.model.toJSON());
-
 
         this.$el.append( pack );
 

@@ -16,12 +16,13 @@
                 action: "edit",
                 visibility: "hidden",
                 class: "edit"
-            }
+            },
+            facebookID: null,
         },
         initialize: function(){
 
             this.set('facebookID', APP.gameState.facebookID);
-        
+
         },
     });
 
@@ -33,7 +34,7 @@
             this.model = new HeaderModel(options);
 
 
-            // this.listenTo(this.model, 'change:moreButton', this.updateMore);
+            this.listenTo(this.model, 'change:facebookID', this.updateFacebookID);
             this.render(options, callback);
             return this;
         },
@@ -60,14 +61,29 @@
             return this;
         },
 
-        updateMore: function() {
-            // console.log('updateMore');
-            this.render();
-            APP.router.bindHeaderEvents('profile');
+        updateFacebookID: function() {
+
+            var facebookID = this.model.get('facebookID');
+
+            if(!facebookID) { return; }
+
+            
+            var image = "https://graph.facebook.com/"+ facebookID +"/picture?height=170&width=170";
+
+            
+            this.$('#profile-nav').css({'background-image' : 'url(' + image + ')' });
+
+
         },
 
         bindEvents: function() {
             return this;
+        },
+
+        setFacebookID: function(){
+
+            this.model.set('facebookID', APP.gameState.facebookID);
+        
         },
 
         dealloc: function() {

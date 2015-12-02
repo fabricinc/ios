@@ -82,8 +82,10 @@
         fetchMinData: function(callback) {
             callback = callback || function() {};
             Api.getFabricState(function(response) {
+                
                 if (response) {
                     if(response.active) {
+
                         response = response.data;
                         response.success = true;
                         response.isFacebook = (parseInt(response.facebookID) > 0) ? true : false;
@@ -174,7 +176,7 @@
 
                 self.fetchData(function(success) {
                     if(success) {
-                        console.log( 'dispatch' );
+                        
                         APP.dispatcher("welcome");
                     } else {
                         Util.log("register callback failed to successfully get game state data");

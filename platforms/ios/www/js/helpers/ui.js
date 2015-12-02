@@ -647,7 +647,7 @@ var UI = {
                     movieID: $(this).attr('movieid'),
                     categoryID: $(this).attr('categoryid'),
                     listID: $(this).attr('listid')
-                }
+                };
                 APP.playerDispatcher(movieOptions);
             });
         },
@@ -666,7 +666,7 @@ var UI = {
 
                     self.oldTitle = $("header nav h1").html();
                     
-                    $("header nav h1").html("Notifications");
+                    // $("header nav h1").html("Notifications");
 
                     Api.getNotifications(function(response) {
                         self.bindNotificationEvents(response.notifications);
