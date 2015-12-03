@@ -1062,11 +1062,15 @@ var DiscoveryModel = Backbone.Model.extend({
         var self = this,
             pBar = $("#progress #inner-bar"),
             total = self.totalMovies,
-            rated = total - (total - self.movieList.length) - self.currentPos,
-            completion = Math.round((rated / total) * 100);
+            listLength = total - self.movieList.length;
+            rated = total - listLength - self.currentPos,
+            completion = Math.round((self.currentPos / total) * 100);
 
+        
         $("#rated").html(rated);
+
         pBar.animate({ width: completion.toString() + "%" });
+
     }
 });
 
