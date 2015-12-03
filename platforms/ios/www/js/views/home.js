@@ -582,7 +582,7 @@ var PeopleView = Backbone.View.extend({
         var matchCount = this.model.get('matchCount');
         
         this.$el
-            .prepend( "all picks ranked by your <span class='bold'> " + matchCount + " tastemates</span>" )
+            .prepend("<p class='heading'>all picks ranked by your <span class='bold'> " + matchCount + " tastemates</span></p>" )
             .append( "<div class='match plus'>" + (matchCount - 5) + "+</div>" );
     
     },

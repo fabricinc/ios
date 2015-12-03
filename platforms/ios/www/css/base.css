@@ -460,6 +460,11 @@ header nav #tap-menu {
     font-size: 1.2em;
     margin: 5px 0;
 }
+
+#pick-content #tastemates {
+    font-size: 0.7em;
+}
+
 #pick .purchase-links {
     position: absolute;
     bottom: 15px;
@@ -478,8 +483,14 @@ header nav #tap-menu {
     text-align: center;
     font-size: 0.8em;
     padding: 15px;
-    height: 61px;
+    height: 76px;
 }
+
+#people .heading {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
 #people .bold {
     color: #000;
 }
@@ -511,27 +522,29 @@ header nav #tap-menu {
     font-size: 0.7em;
 }
 #packs .pack {
-    background-color: rgb(246, 246, 246);
-    margin-bottom: 10px;
-    height: 85px;
+    background-color: rgb(240, 240, 240);
+    margin-bottom: 8px;
+    height: 90px;
+    border-bottom: 2px solid #dfdfdf;
 }
 #packs .pack-image {
     float: left;
     width: 50px;
-    margin: 5px;
+    margin: 8px;
 }
 .pack-info {
     text-transform: uppercase;
     margin-left: 10px;
-    margin-top: 20px;
+    padding-top: 20px;
     font-weight: 600;
     float: left;
-    width: 75%;
+    width: 70%;
+    word-wrap: normal;
 }
 .pack-info h4 {
     margin-bottom: 5px;
-    font-size: 0.8em;
-    color: gray;
+    font-size: 0.95em;
+    color: #777;
 }
 .pack-info p {
     font-size: 0.7em;

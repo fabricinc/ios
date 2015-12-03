@@ -205,18 +205,18 @@ div#mask .wheel {
 }
 .follow-name { width: 220px; }
 .swipe-icon {
-    height: 33px;
+    height: 43px;
     width: 37px;
 }
 .swipe-icon span { font-size: 14px; top: 33px; }
 .swipe-icon.not-seen span { font-size: 13px; left: -9px;}
-.swipe-icon.favorite { top: 100px; left: 173px; }
+.swipe-icon.favorite { top: 120px; left: 173px; }
 .swipe-icon.queue { bottom: 60px; left: 173px; }
 .swipe-icon.seen,
 .swipe-icon.not-seen { top: 350px; }
-#progress { width: 360px; left: 2px; top: 65px; }
-#progress .outer-bar { width: 300px; height: 12px; }
-#progress .outer-bar #inner-bar { height: 12px; }
+#progress { width: 360px; left: 0px; top: 116px; }
+#progress .outer-bar { width: 300px; height: 6px; }
+#progress .outer-bar #inner-bar { height: 6px; }
 #progress .numbers { line-height: 12px; }
 
 #follow-info { width: 250px;}
@@ -276,6 +276,7 @@ div#mask .wheel {
 #gravity { background-position: center 490px; }
 .bottom-info {
     font-size: 17px;
+    margin-right: 10px;
 }
 .bottom-info span {
     background-size: 100% 100%;
@@ -283,6 +284,11 @@ div#mask .wheel {
     height: 16px;
     width: 16px;
 }
+
+div#critic-rating.bottom-info {
+    width: auto;
+}
+
 .list-summary #image {  }
 .list-summary #info { width: 364px; height: 197px; font-size: 25px; }
 .list-summary #info h1 { margin-top: 10px; }
