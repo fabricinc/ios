@@ -402,12 +402,6 @@ var DiscoveryModel = Backbone.Model.extend({
 
             if(APP.gameState.welcomeCompleted === "0"){
 
-                // IF part of the welcome round take them to rate (Home) screen after swiping
-                // And mark them as welcome completed
-
-                User.welcomeCompleted();
-                if(Analytics) { Analytics.event("Welcome completed"); }
-                mixpanel.track("Welcome completed");
                 Backbone.history.navigate("rate", true);
 
             } else {
@@ -552,7 +546,7 @@ var DiscoveryModel = Backbone.Model.extend({
 
         else {
 
-            callback();
+            callback(this.movieList);
 
         }
     },
@@ -1104,11 +1098,14 @@ var DiscoveryView = Backbone.View.extend({
 
                 self.model.loadCategoryListSummary(function(movies, friends, suggestions) {
 
+                    console.log( 'friends', friends );
                     //
                     var onboardDone = sMod.welcomeCompleted ? true : false;
                     var html = APP.load("discovery", {
                         section: self.listType
                     });
+
+                    console.log( 'onboardDone', onboardDone );
 
                     self.header = new HeaderView({
                         title: self.model.categoryData.title,

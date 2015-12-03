@@ -59,7 +59,6 @@ var Welcome = Backbone.View.extend({
     },
 
     welcome2: function(ID){
-        console.log( 'welcome2' );
         this.model.setID(ID);
 
 
@@ -71,7 +70,6 @@ var Welcome = Backbone.View.extend({
     },
 
     welcome3: function(){
-        console.log( 'welcome3' );
         var welcomeScreen3 = new WelcomeScreen3();
 
         welcomeScreen3.render();
@@ -79,7 +77,6 @@ var Welcome = Backbone.View.extend({
     
     },
     welcome4: function(){
-        console.log( 'welcome4' );
         var welcomeScreen4 = new WelcomeScreen4();
 
         welcomeScreen4.render();
@@ -113,7 +110,6 @@ var WelcomeScreen2 = Backbone.View.extend({
 
     next: function(){
     
-        console.log( 'do next' );
     
     },
 
@@ -124,7 +120,6 @@ var WelcomeScreen3 = Backbone.View.extend({
     
     render: function() {
 
-        console.log( 'welcome3' );
         this.$el.html( APP.load("welcomeScreen3") );
 
         return this;
@@ -132,7 +127,6 @@ var WelcomeScreen3 = Backbone.View.extend({
 
     next: function(){
     
-        console.log( 'do next' );
     
     },
 
@@ -143,7 +137,6 @@ var WelcomeScreen4 = Backbone.View.extend({
     
     render: function() {
 
-        console.log( 'welcome 4', this );
         this.$el.html( APP.load("welcomeScreen4") );
 
         return this;

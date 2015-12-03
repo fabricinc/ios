@@ -40,7 +40,7 @@
 }
 #people {
     font-size: 1em;
-    height: 67px;
+    height: 80px;
 }
 #people .match {
     margin-top: 8px;
@@ -70,13 +70,7 @@
     height: 40px;
     width: 40px;
 }
-.div-swiper {
-    width: 172px !important;
-    height: 258px !important;
-    background-size: 172px 258px;
-    top: 120px;
-    left: 70px;
-}
+
 .list-grid-item {
     height: 198px;
     width: 132px;
@@ -133,20 +127,25 @@ div#mask .wheel {
     left: 180px;
 }
 .div-swiper {
-    width: 275px !important;
-    height: 409px !important;
-    background-size: 275px 409px;
-    top: 160px;
-    left: 67px;
+    width: 315px !important;
+    height: 472px !important;
+    top: 190px;
+    left: 46px;
 }
+
+
 /* COACH */
-
-
-.swipe-icon.favorite { top: 100px; left: 193px; }
-.swipe-icon.queue { bottom: 90px; left: 193px; }
+.swipe-icon {
+    height: 30px;
+    width: 30px;
+}
+.swipe-icon.favorite { top: 154px; left: 193px; }
+.swipe-icon.queue { bottom:10px; left: 193px; }
 .swipe-icon.seen,
-.swipe-icon.not-seen { top: 350px; }
-#progress { width: 360px; left: 20px; top: 71px; }
+.swipe-icon.not-seen { top: 385px; }
+#progress {
+    top: 122px; 
+}
 #progress .outer-bar { width: 300px; }
 #profile #action-buttons .button.follow { margin-left: 2px; }
 #profile-picture-block { height: 85px; width: 85px; }
@@ -470,7 +469,7 @@ div#search-for-friends { background-size: 30px; }
     margin-top: 20px;
 }
 #status-poster.poster { width: 100px; height: 150px; background-size: 100px 150px; }
-header nav #notifications-menu { background-size: 20px; right: 50px; }
+header nav #notifications-menu { background-size: 20px; right: 55px; top: 0;}
 #menu-search-form { margin: 20px auto; }
 .feed-item .avatar {
     border-radius: 33px;
@@ -511,7 +510,6 @@ div#friends-queued.bottom-info { left: 250px; }
     height: 100px;
     background-size: 100px 100px;
 }
-.swipe-icon { width: 42px; height: 38px; }
 .swipe-icon span { top: 39px; left: 4px; }
 .swipe-icon.not-seen span { left: -11px; width: 63px; }
 .swipe-icon.favorite span { left: -5px; }
@@ -584,6 +582,11 @@ div#friends-queued.bottom-info { left: 250px; }
 .poster img.movie-img.music { height: auto; }
 
 
+
+
+#wrapper.welcome #search-results.active {
+    height: 500px;
+}
 
 
 /* font fixes */

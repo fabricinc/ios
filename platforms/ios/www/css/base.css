@@ -6734,14 +6734,14 @@ div#movie-list-view {
     float: left;
 }
 #swipe-heading div.inlineb {
-    margin: 6px 15px;
+    margin: 6px 0 6px 15px;
     font-size: 1.1em;
+    width: 70%;
 }
 #swipe-title {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow-x: hidden;
-    width: 200px;
 }
 #stats {
     position: relative;
@@ -6892,6 +6892,7 @@ div#critic-rating.bottom-info { width: 43px; }
 }
 #wrapper.welcome #search-results {
     background-color: rgba(255, 255, 255, 0.64);
+    top: 20px;
 }
 #wrapper.welcome #search-results.active,
 #search #search-results.active {
@@ -7218,6 +7219,7 @@ h1.pop-up-content {
 
 .user-favorite-interest {
     position: relative;
+    top: 10px;
     z-index: 500;
     width: 84%;
     height: 2rem;
@@ -7241,6 +7243,7 @@ h1.pop-up-content {
 .user-favorite-interest .go {
     float: right;
     height: 2rem;
+    line-height: 2rem;
     width: 15%;
     padding: 0;
     border: medium none;

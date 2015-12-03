@@ -59,6 +59,9 @@ var Search = Backbone.View.extend({
 	events: {
 		'input input' : 'performSearch',
 		'touchstart #close': 'clear',
+		// 'submit form' : 'submit',
+		'touchstart .movie-interest': 'prevent',
+		// 'click input': 'inputClick'
 	},
 	
 	initialize: function(){
@@ -89,6 +92,25 @@ var Search = Backbone.View.extend({
 		this.$('#close').removeClass('active');
 		this.$('input').val('');
 		this.model.clear();
+	
+	},
+
+	prevent: function(e){
+		e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+		console.log( 'prevent' , e );
+		console.log( 'this', this );
+
+		$(".welcome-message-container").remove();
+
+		e.target.focus();
+
+		return false;
+	},
+
+	inputClick: function(e){
+		e.preventDefault(); e.stopPropagation();
+
+		console.log( 'inputClick' );
 	
 	},
 
@@ -142,7 +164,7 @@ var Results = Backbone.View.extend({
 
 		this.collection.each(this.addOne, this);
 
-		$(".welcome-container").scrollTop(230);
+		// $(".welcome-container").scrollTop(230);
 
 		return this;
 	},

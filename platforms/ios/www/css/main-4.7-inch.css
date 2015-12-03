@@ -199,7 +199,6 @@ div#mask .wheel {
 .div-swiper {
     width: 250px !important;
     height: 371px !important;
-    background-size: 100% 100%;
     top: 160px;
     left: 60px;
 }
@@ -214,7 +213,7 @@ div#mask .wheel {
 .swipe-icon.queue { bottom: 60px; left: 173px; }
 .swipe-icon.seen,
 .swipe-icon.not-seen { top: 350px; }
-#progress { width: 360px; left: 0px; top: 116px; }
+#progress { top: 116px; }
 #progress .outer-bar { width: 300px; height: 6px; }
 #progress .outer-bar #inner-bar { height: 6px; }
 #progress .numbers { line-height: 12px; }

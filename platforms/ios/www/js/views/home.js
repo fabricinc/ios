@@ -240,7 +240,8 @@ var HomeView = Backbone.View.extend({
             
             this.$el.prepend( APP.load("welcomeScreen5") );
 
-            $(".ack").fastClick(function () {
+            $(".ack").fastClick(function (e) {
+                e.preventDefault(); e.stopPropagation();
                 
                 $("article").remove();
             
