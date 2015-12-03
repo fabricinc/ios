@@ -51,7 +51,7 @@
             "userFeed/:id": "userFeed",
             "rate": "home",
 			"fb-connect": "fb-connect",
-            "discovery?categoryID=:categoryID&listID=:listID&limiter=:limiter(/:onboard)": "discovery",
+            "discovery?categoryID=:categoryID&listID=:listID&limiter=:limiter&onboard=:onboard": "discovery",
             "messages": "messages",
             "messages/:id": "conversation",
             "movieLobby/:id(/:publishedID)": "movieLobby",

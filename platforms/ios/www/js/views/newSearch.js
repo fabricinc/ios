@@ -180,8 +180,9 @@ var Result = Backbone.View.extend({
 	},
 
 	lobby: function(){
-	
-		window.vent.trigger('setID', this.model.get('movieID'));
+		
+
+		window.vent.trigger('setID', this.model.get('moviePublishedID'));
 	
 	},
 });

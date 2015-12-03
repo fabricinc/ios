@@ -125,7 +125,7 @@ var Pack = Backbone.Model.extend({
     
     goToSwipe: function() {
 
-        Backbone.history.navigate("discovery?categoryID=" +  this.get('category_id') + "&listID=null&limiter=" + this.get('limiter'), true);
+        Backbone.history.navigate("discovery?categoryID=" +  this.get('category_id') + "&listID=null&limiter=" + this.get('limiter') + "&onboard=null", true);
         
     },
 

@@ -1,24 +1,6 @@
-<%
-    section = parseInt(section);
-    var sectionID = 0;
-    if(section == 3) { sectionID = 1; }
-    else if(section == 4 || section == 5) { sectionID = 2; }
 
-var terms = [{
-        "present": "see",
-        "past": "seen"
-    },{
-        "present": "visit",
-        "past": "visited"
-
-    },{
-        "present": "hear",
-        "past": "heard"
-    }];
-console.log(totalMovies);
-%>
 <div id="swipe-heading">
-    <b id="rated"><%= totalMovies %></b>
+    <b id="rated"></b>
     <div class="inlineb">
         <h1 id="swipe-title">Title</h1>
         <div id="stats">
