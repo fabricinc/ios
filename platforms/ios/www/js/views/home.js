@@ -230,9 +230,28 @@ var HomeView = Backbone.View.extend({
     render: function(callback, update) {
         callback = callback || function() { };
 
+
+
         this.header = new HeaderView({ home: true });
 
         this.$el.html(this.header.el);
+
+        if(APP.gameState.welcomeCompleted === "0") {
+            
+            this.$el.prepend( APP.load("welcomeScreen5") );
+
+            $(".ack").fastClick(function () {
+                
+                $("article").remove();
+            
+                User.welcomeCompleted();
+
+                if(Analytics) { Analytics.event("Welcome completed"); }
+                mixpanel.track("Welcome completed");
+            });
+            
+
+        }
 
 
         callback();

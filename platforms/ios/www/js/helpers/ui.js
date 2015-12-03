@@ -702,7 +702,7 @@ var UI = {
                     APP.click = false;
                 });
                 self.oldTitle = $("header nav h1").html();
-                $("header nav h1").html("Notifications");
+                // $("header nav h1").html("Notifications");
             }
         },
         bindNotificationEvents: function(notifications) {
