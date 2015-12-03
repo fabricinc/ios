@@ -7124,6 +7124,43 @@ h1.pop-up-content {
 
 /*    WELCOME     */
 
+.welcome-screen {
+    font-size: 18px;
+}
+
+
+/* iPhone 5/5s */
+@media screen and (device-aspect-ratio: 40/71) {
+
+    .welcome-screen {
+        font-size: 18px;
+    }
+} 
+
+/* iPhone 6 */
+@media screen and (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2) {
+    
+    .welcome-screen {
+        font-size: 20px;
+    }
+} 
+
+/* iPhone 6+ */ 
+@media screen and (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3) {
+    
+    .welcome-screen {
+        font-size: 22px;
+    }
+} 
+
+/* iPad overrides */
+@media screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    
+    .welcome-screen {
+        font-size: 32px;
+    }
+} 
+
 
 
 .welcome-screen {
@@ -7135,6 +7172,7 @@ h1.pop-up-content {
     background-size: 100% 100%;
     color: #fff;
 }
+
 .welcome-container {
     overflow-y: scroll;
     position: relative;
@@ -7198,22 +7236,22 @@ h1.pop-up-content {
 
 .welcome-message {
     display: table-cell;
-    padding: 0 1rem;
+    padding: 0 1em;
     vertical-align: middle;
     text-align: center;
 }
 
 .headline {
-    margin-bottom: 3rem;
+    margin-bottom: 1.2em;
     font-family: "San Francisco Text", Helvetica, Sans-serif;
     font-weight: 600;
-    font-size: 1.6rem;
+    font-size: 1.6em;
 }
 
 .sub-headline, .instruction {
     font-family: "Helvetica Neue", Helvetica, Sans-serif;
     font-weight: 300;
-    font-size: 1rem;
+    font-size: 1em;
     line-height: 130%;
 }
 
@@ -7222,43 +7260,43 @@ h1.pop-up-content {
     top: 10px;
     z-index: 500;
     width: 84%;
-    height: 2rem;
+    height: 2em;
     margin: 0 auto;
-    padding: 0.6rem;
+    padding: 0.6em;
     border-radius: 0.25em;
     background-color: rgba(255,255,255,0.25);
 }
 
 .user-favorite-interest .movie-interest {
     width: 70%;
-    height: 2rem;
-    padding: 0 0.6rem;
+    height: 2em;
+    padding: 0 0.6em;
     background-color: rgba(255,255,255,0.7);
     border: medium none;
-    font-size: 1rem;
-    line-height: 2rem;
+    font-size: 1em;
+    line-height: 2em;
     text-align: left;
 }
 
 .user-favorite-interest .go {
     float: right;
-    height: 2rem;
-    line-height: 2rem;
+    height: 2em;
+    line-height: 2em;
     width: 15%;
     padding: 0;
     border: medium none;
-    border-radius: 0.25rem;
+    border-radius: 0.25em;
     background-color: rgba(255, 255, 255, 0.8);
     color: #e6001a;
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;
 }
 
 .tastemates-row {
-    width: 15rem;
-    margin: 0.9rem auto;
+    width: 15em;
+    margin: 0.9em auto;
     padding: 0;
     list-style: none;
     overflow: auto;
@@ -7266,21 +7304,21 @@ h1.pop-up-content {
 
 .tastemate-item {
     float: left;
-    margin: 0 0.25rem;
+    margin: 0 0.25em;
 }
 
 .tastemate-item .avatar, .tastemate-item.more {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 1rem;
+    width: 2em;
+    height: 2em;
+    border-radius: 1em;
 }
 
 .tastemate-item.more {
     background-color: #aaa;
     font-family: "Helvetica Neue",Helvetica,sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.75em;
     font-weight: 600;
-    line-height: 2rem;
+    line-height: 2em;
     text-align: center;
     color: #fff;
 }
@@ -7290,13 +7328,13 @@ h1.pop-up-content {
     z-index: 500;
     display: block;
     width: 60%;
-    height: 3rem;
+    height: 2em;
     margin: 0 auto;
     border: medium none;
-    border-radius: 0.25rem;
+    border-radius: 0.25em;
     background-color: rgba(200, 200, 200, 0.5);
     font-family: "Helvetica Neue",Helvetica,sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.5em;
     font-weight: 400;
     text-align: center;
     color: #fff;
@@ -7304,16 +7342,16 @@ h1.pop-up-content {
 
 #welcome-screen-3 .ack {
     width: 28%;
-    height: 2.5rem;
-    margin-top: 8.5rem;
-    font-size: 1.25rem;
+    height: 2.5em;
+    margin-top: 8.5em;
+    font-size: 1.25em;
 }
 
 #welcome-screen-4 .ack {
     width: 28%;
-    height: 2.5rem;
-    margin-top: -0.375rem;
-    font-size: 1.25rem;
+    height: 2.5em;
+    margin-top: -0.375em;
+    font-size: 1.25em;
 }
 
 
