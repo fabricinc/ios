@@ -883,7 +883,7 @@ var DiscoveryModel = Backbone.Model.extend({
             if (!$("video").length){
                 $("#list-items-container").append(videoPlayer);
                 Util.trailerPlayer();
-            };
+            }
 
             $("video").css("display", "block").attr("src", src);
             $("video")[0].load();

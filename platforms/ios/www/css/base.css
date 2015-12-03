@@ -7307,7 +7307,7 @@ h1.pop-up-content {
     margin: 0 0.25em;
 }
 
-.tastemate-item .avatar, .tastemate-item.more {
+.tastemate-item.match, .tastemate-item .avatar, .tastemate-item.more {
     width: 2em;
     height: 2em;
     border-radius: 1em;

@@ -96,9 +96,44 @@ var Welcome = Backbone.View.extend({
 });
 
 
+var WelcomeModel2 = Backbone.Model.extend({
+
+    defaults: {
+        matchCount: 0,
+        matches: []
+    },
+    
+    initialize: function() {
+
+        Api.getMatchDisplay(function (matches) {
+
+            this.set("matches", matches);
+        
+        }.bind(this));
+
+        Api.getMatchCount(function (count) {
+
+            this.set('matchCount', +count[0].MatchCount);
+
+        }.bind(this));
+        
+    },
+
+});
 
 var WelcomeScreen2 = Backbone.View.extend({
     el: "#wrapper",
+
+    initialize: function(){
+    
+        this.model = new WelcomeModel2();
+        this.collection = new People();
+
+        this.listenTo(this.model, 'change:matchCount', this.addMatchCount);
+        this.listenTo(this.model, 'change:matches', this.addMatches);
+        this.listenTo(this.collection, 'add', this.addPerson);
+    
+    },
     
     render: function() {
 
@@ -108,8 +143,28 @@ var WelcomeScreen2 = Backbone.View.extend({
         return this;
     },
 
-    next: function(){
+    addMatches: function(){
+        
+        this.collection.add(this.model.get('matches'));
     
+    },
+
+    addPerson: function(person){
+        
+        var personView = new PersonView({ model : person });
+
+        personView.$el.addClass('tastemate-item');
+        personView.undelegateEvents();
+        
+
+        this.$('.tastemates-row').prepend( personView.render().el );
+    
+    },
+    addMatchCount: function(){
+
+        var count = this.model.get('matchCount') - 5;
+
+        this.$('.tastemates-row').append('<li class="more tastemate-item"><div class="more-count">'+ count +'+</div></li>');
     
     },
 
