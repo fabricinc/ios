@@ -1403,6 +1403,7 @@ Api.findMoviesLikeTitle = function(title, sectionID, callback) {
     if(sectionID){
         options.sectionID = sectionID;
     }
+
     this.fetch(options, callback);
 };
 Api.getUserFeed = function(userID, callback) {

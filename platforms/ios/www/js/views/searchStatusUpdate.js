@@ -4,7 +4,7 @@ var SearchStatusUpdateModel = Backbone.Model.extend({
 
         return {
 
-        }
+        };
 
     },
 
@@ -52,7 +52,7 @@ var SearchStatusUpdateView = Backbone.View.extend({
 
 
             if(title.length > 2) {
-                Api.findMoviesLikeTitle($(this).val(), function(response) {
+                Api.findMoviesLikeTitle($(this).val(), null, function(response) {
 
 
                     if(response.data.length > 0) {
@@ -67,7 +67,7 @@ var SearchStatusUpdateView = Backbone.View.extend({
 
                         $("#search-results .result").unbind("click").click(function() {
                             var movieID = $(this).data("movieid");
-                            Backbone.history.navigate("statusUpdate/" + movieID, true);
+                            Backbone.history.navigate("movieLobby/" + movieID, true);
                         });
                         
 
@@ -116,7 +116,7 @@ var SearchStatusUpdateView = Backbone.View.extend({
 
 
         var header = new HeaderView({
-            title: "Post to Fabric",
+            title: "Search",
             home: false,
         });
 
@@ -125,23 +125,15 @@ var SearchStatusUpdateView = Backbone.View.extend({
             .html( header.el )
             .append( template );
 
-        if(APP.gameState.post === "0") {
+        
 
-            var coach = APP.load("coach", { section : 'post' });
+        // Autofocus the search box
+        setTimeout(function() {
 
-            $('#coach-overlay').html(coach);
+            $("#status-update-input").focus();
 
-            UI.bindCoachEvents('post');
-        } else {
-
-            // Autofocus the search box
-            setTimeout(function() {
-
-                $("#status-update-input").focus();
-
-            },200);
-        }
-
+        },200);
+        
 
         UI.initScroller($("#search-wrapper")[0]);  
 

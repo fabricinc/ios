@@ -201,7 +201,7 @@
 
             $("#tap-menu, .left.button.slide").fastClick(function(e) {
                 e.preventDefault();
-                Backbone.history.navigate("matches", true);
+                Backbone.history.navigate("searchStatusUpdate", true);
             });
 
             $("#profile-nav").fastClick(function () {
