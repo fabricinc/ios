@@ -47,12 +47,10 @@ var DiscoveryModel = Backbone.Model.extend({
 
     initialize: function(opts) {
 
+        this.onboard = opts.onboard !== 'null' && opts.onboard ? opts.onboard : false;
         this.categoryID = opts.categoryID || null;
         this.limiter = opts.limiter || null;
         this.listID = opts.listID || null;
-        this.onboard = opts.onboard || null;
-
-        console.log( opts );
 
         this.welcomeCompleted = parseInt(APP.gameState.welcomeCompleted);
     },
@@ -60,28 +58,48 @@ var DiscoveryModel = Backbone.Model.extend({
         var self = this;
         callback = callback || function() { };
 
-        self.gtiOS5 = Util.iOSVersion()[0] > 5 ? true : false;
+        this.gtiOS5 = Util.iOSVersion()[0] > 5 ? true : false;
 
 
 
         if(this.onboard) {
 
-            console.log( 'onboard', this.onboard );
-            
+
             Api.getOnboardDiscoveryData(function (response) {
                 
-                console.log( response );
+                console.log( 'onboard data', response );
+
+
+                var list = response;
+                
+                this.categoryData = {};
+                this.listType = list.length ? list[0].sectionID : null;
+                this.categoryData.title = "Welcome";
+                this.movieList = [];
+                
+                for (var i = 0; i < list.length; i++) {
+                
+                    if(list[i].movieID) { 
+
+                        this.movieList.push(list[i]); 
+
+                    }
+                
+                }
+
+                callback();
             
-            });
+            }.bind(this));
             
         } 
 
         else {
         
             Api.getSwipeCategoryData(self.categoryID, self.listID, self.limiter, function(data) {
-    
-                if (data.movies) { var list = data.movies; }
-                else { var list = data; }
+                
+                console.log( data );
+                var list = data.movies ? data.movies : data;
+                
     
                 self.listType = list.length ? list[0].sectionID : null;
                 self.isAudioList = (self.listType === "4");
@@ -493,39 +511,50 @@ var DiscoveryModel = Backbone.Model.extend({
     loadCategoryListSummary: function(callback) {
         var self = this;
 
-        Api.getFabricCategoryData(self.categoryID, self.limiter, function(response) {
-            if(response.data) {
-                if(response.data.movies.list.length) {
-                    if (response.data.movies.list) { var list = response.data.movies.list; }
-                    else { var list = response.data.movies; }
-                    if(!self.categoryName) { self.categoryName = response.data.movies.title; }
-                    self.totalSeen = 0;
-                    var newArr = [];
-                    $.each(list, function(index, value) {
-                        if(value.movieID) {
-                            if(value.movieSeen == "1") { self.totalSeen++; }
-                            newArr.push(value);
-                        }
-                    });
-                    self.totalMovies = newArr.length;
-                    self.ratioSeen = Math.ceil((self.totalSeen / self.totalMovies) * 100);
-                    self.sectionID = newArr[0].sectionID;
+        if(!self.onboard) {
 
-                    callback(newArr, response.data.friends, response.data.suggestedFriends);
-                } else {
-                    // no movies
+            Api.getFabricCategoryData(self.categoryID, self.limiter, function(response) {
+                if(response.data) {
+                    if(response.data.movies.list.length) {
+                        if (response.data.movies.list) { var list = response.data.movies.list; }
+                        else { var list = response.data.movies; }
+                        if(!self.categoryName) { self.categoryName = response.data.movies.title; }
+                        self.totalSeen = 0;
+                        var newArr = [];
+                        $.each(list, function(index, value) {
+                            if(value.movieID) {
+                                if(value.movieSeen == "1") { self.totalSeen++; }
+                                newArr.push(value);
+                            }
+                        });
+                        self.totalMovies = newArr.length;
+                        self.ratioSeen = Math.ceil((self.totalSeen / self.totalMovies) * 100);
+                        self.sectionID = newArr[0].sectionID;
 
-                    //If there welcome completed is true take the to the rate/home page else welcome packs
-                    var route = this.welcomeCompleted ? "rate" : "welcome";
+                        callback(newArr, response.data.friends, response.data.suggestedFriends);
+                    } else {
+                        // no movies
 
-                    Util.alert("Great Scott! There seems to be a problem. Please select another pack");
+                        //If there welcome completed is true take the to the rate/home page else welcome packs
+                        var route = this.welcomeCompleted ? "rate" : "welcome";
+
+                        Util.alert("Great Scott! There seems to be a problem. Please select another pack");
 
 
-                    Backbone.history.navigate(route, true);
+                        Backbone.history.navigate(route, true);
 
+                    }
                 }
-            }
-        });
+            });
+
+            
+        }
+
+        else {
+
+            callback();
+
+        }
     },
     bindDiscoveryEvents: function() {
         var self = this,
@@ -640,7 +669,7 @@ var DiscoveryModel = Backbone.Model.extend({
                 "action": "setMovieToList",
                 "listID": self.watchList.ID,
                 "moviePublishedID": moviePublishedID
-            }
+            };
 
             var interval;
             setTimeout(function() {
@@ -667,7 +696,7 @@ var DiscoveryModel = Backbone.Model.extend({
                 "action": "setMovieToList",
                 "listID": self.favoriteList.ID,
                 "moviePublishedID": moviePublishedID
-            }
+            };
 
             var interval;
             setTimeout(function() {
@@ -1072,19 +1101,13 @@ var DiscoveryView = Backbone.View.extend({
             // !!!!!!!!!!!! Load Swipe !!!!!!!!!!!!!
 
             if(self.model.movieList.length > 0) {
+
                 self.model.loadCategoryListSummary(function(movies, friends, suggestions) {
 
                     //
                     var onboardDone = sMod.welcomeCompleted ? true : false;
                     var html = APP.load("discovery", {
-                        totalSeen: sMod.totalSeen,
-                        totalMovies: sMod.totalMovies,
-                        ratioSeen: sMod.ratioSeen,
-                        currentPos: sMod.totalMovies - sMod.movieList.length,
-                        categoryName: sMod.categoryData.title,
-                        friends: friends,
-                        suggestions: suggestions,
-                        section: movies[0].sectionID
+                        section: self.listType
                     });
 
                     self.header = new HeaderView({

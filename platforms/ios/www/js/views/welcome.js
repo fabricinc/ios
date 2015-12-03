@@ -88,9 +88,8 @@ var Welcome = Backbone.View.extend({
     },
 
     gotoSwipe: function(){
-        console.log( 'go to swipe now' );
-        
-        Backbone.history.navigate("discovery?categoryID=3423&listID=null", true);
+
+        Backbone.history.navigate("discovery?categoryID=null&listID=null&limiter=null&onboard=true", true);
     
     },
 
