@@ -1059,17 +1059,22 @@ var DiscoveryModel = Backbone.Model.extend({
         });
     },
     updateProgressBar: function() {
-        var self = this,
-            pBar = $("#progress #inner-bar"),
-            total = self.totalMovies,
-            listLength = total - self.movieList.length;
-            rated = total - listLength - self.currentPos,
-            completion = Math.round((self.currentPos / total) * 100);
-
+        var old = (this.totalMovies - this.movieList.length) + this.currentPos;
+        var total = this.totalMovies;
+        var listLength = total - this.movieList.length;
+        var rated = total - listLength - this.currentPos;
+        var completion = Math.round(((listLength + this.currentPos) / total) * 100);
         
+        console.log( 'old', old );
+        console.log( 'total', total );
+        console.log( 'listLength', listLength );
+        console.log( 'rated', rated );
+        console.log( 'completion', completion );
+        console.log( 'currentPos', this.currentPos );
+
         $("#rated").html(rated);
 
-        pBar.animate({ width: completion.toString() + "%" });
+        $("#inner-bar").animate({ width: completion.toString() + "%" });
 
     }
 });

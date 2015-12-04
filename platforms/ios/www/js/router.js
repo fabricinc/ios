@@ -103,7 +103,10 @@
 
                 // A little cleanup may be in order.
 
-                if (APP.view.previous) { APP.view.current.dealloc(); }
+                if (APP.view.previous) { 
+                    APP.view.current.dealloc();
+                    console.log( 'app view', APP.view.current.$el.children().remove() );
+                }
                 
                 APP.view.previous = APP.view.current;
                 APP.view.current = view;
@@ -139,7 +142,8 @@
             
             $(".left.button.back").fastClick(function(e) {
                 e.preventDefault(); e.stopPropagation();
-
+                console.log( this );
+                $(this).siblings('h1').empty();
                 window.vent.trigger( 'back' );
                 
 
@@ -147,7 +151,10 @@
             });
             $("#done-button").fastClick(function(e){
                 e.preventDefault();     e.stopPropagation();
-                Backbone.history.navigate("rate", true);
+                
+                // Empty heading so no overlapping titles 
+                $(this).siblings('h1').empty();
+                Backbone.history.navigate("home", true);
 
                 return false;
             });
@@ -766,7 +773,8 @@
                     // Stub for callback
                 }, {
                     scroller: false,
-                    loadPageHtml: false
+                    loadPageHtml: false,
+                    spinner: false,
                 }, "search-status-update");
             });
             this.on("route:getFavsInCommon", function(userID) {

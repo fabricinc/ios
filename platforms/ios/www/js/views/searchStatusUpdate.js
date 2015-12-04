@@ -145,7 +145,8 @@ var SearchStatusUpdateView = Backbone.View.extend({
         return this;
     },
     dealloc: function() {
-
+        console.log( 'dealoc', this );
+        // this.$el.children().remove();
     }
 
 
