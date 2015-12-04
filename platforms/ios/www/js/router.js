@@ -105,7 +105,7 @@
 
                 if (APP.view.previous) { 
                     APP.view.current.dealloc();
-                    console.log( 'app view', APP.view.current.$el.children().remove() );
+                    APP.view.current.$el.children().remove();
                 }
                 
                 APP.view.previous = APP.view.current;
@@ -749,6 +749,7 @@
                     // Stub for callback
                 }, {
                     scroller: false,
+                    spinner: false,
                     loadPageHtml: false
                 }, "invite");
             });

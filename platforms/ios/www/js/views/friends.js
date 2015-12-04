@@ -14,7 +14,7 @@ var FriendModel = Backbone.Model.extend({
 
     bindFriendEvents: function() {
         $(".lists-row").click(function() {
-            var userID = $(this).data("followid"),
+            var userID = $(this).data("userid"),
                 uName = $(this).find(".follow-name").html(),
                 profile = uName == APP.gameState.uName ? "profile" : "profile/" + userID; 
 
@@ -30,6 +30,13 @@ var FriendModel = Backbone.Model.extend({
             var searchTerm = $("#search-users input").val();
             Backbone.history.navigate("searchUsers/" + searchTerm, true);
         });
+
+        $("#invite-friends").fastClick(function () {
+            
+            Backbone.history.navigate('invite', true);
+        
+        });
+
     },
 
     removeAppUsers: function(FBFriends) {

@@ -773,7 +773,10 @@ var DiscoveryModel = Backbone.Model.extend({
         $(".category").click(function() {
             var categoryID = $(this).data("catid") || null;
             var listID = $(this).data("listid") || null;
-            Backbone.history.navigate("discovery?categoryID=" + categoryID + "&listID=" + listID, true);
+            var limit = $(this).data('limit');
+
+            console.log( 'limit', limit );
+            Backbone.history.navigate("discovery?categoryID=" + categoryID + "&listID=" + listID + "&limiter=" + limit + "&onboard=null" , true);
         });
 
         $(".share-buttons .btn").fastClick(function() {
@@ -955,9 +958,12 @@ var DiscoveryModel = Backbone.Model.extend({
         $("#up-next-wrapper div.catItem").click(function() {
             var categoryID = this.getAttribute("data-catid") || null;
             var listID = this.getAttribute("data-listid") || null;
+            var limit = this.getAttribute('data-limit');
 
             if(listID || categoryID) {
-                Backbone.history.navigate("discovery?categoryID=" + categoryID + "&listID=" + listID, true);
+
+                Backbone.history.navigate("discovery?categoryID=" + categoryID + "&listID=" + listID + "&limiter=" + limit + "&onboard=null" , true);
+                
             }
         });
     },

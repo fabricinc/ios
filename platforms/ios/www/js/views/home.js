@@ -193,6 +193,9 @@ var HomeModel = Backbone.Model.extend({
     
         if(tab === this.get('currentTab')) { return; }
 
+        // Set section id to remember tab on return
+        APP.sectionID = tab;
+
         // set scroll position
         var pos = this.get('scrollPositions');
         var curTab = this.get("currentTab");
