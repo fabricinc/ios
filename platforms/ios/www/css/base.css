@@ -434,7 +434,7 @@ header nav #tap-menu {
     font-size: 1em;
     color: white;
     padding: 1.6% 2%;
-    margin: 7px 6.3% 7px 5%;
+    margin: 3px 6.3% 7px 5%;
     width: 18%;
 }
 #tab-control div.active {
@@ -453,17 +453,17 @@ header nav #tap-menu {
     width: 100%;
 }
 #home-content #pick-content {
-    padding: 84px 15px 12px;;
+    padding: 84px 15px 22px;
     font-weight: 600;
     text-shadow: #222 1px 1px 1px;
 }
 #pick-content h1 {
-    font-size: 1.2em;
-    margin: 5px 0;
+    font-size: 1.45em;
+    margin: 5px 0 10px;
 }
 
 #pick-content #tastemates {
-    font-size: 0.7em;
+    font-size: 0.9em;
 }
 
 #pick .purchase-links {
@@ -472,7 +472,7 @@ header nav #tap-menu {
     right: 10px;
 }
 #pick-content #daily-pick {
-    font-size: 0.7em;
+    font-size: 0.9em;
 
 }
 
