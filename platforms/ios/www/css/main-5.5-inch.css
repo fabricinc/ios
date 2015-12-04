@@ -469,7 +469,14 @@ div#search-for-friends { background-size: 30px; }
     margin-top: 20px;
 }
 #status-poster.poster { width: 100px; height: 150px; background-size: 100px 150px; }
-header nav #notifications-menu { background-size: 20px; right: 55px; top: 0;}
+
+header nav #notifications-menu { background-size: 20px; right: 58px; top: 5px;}
+
+header nav #notifications-menu.on {
+    background-size: 30px;
+    background-position: 7px 12px;
+}
+
 #menu-search-form { margin: 20px auto; }
 .feed-item .avatar {
     border-radius: 33px;

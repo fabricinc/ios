@@ -387,8 +387,11 @@ h6.like-you + .action {
 header nav { height: 59px; }
 
 header nav #notifications-menu {
-    right: 50px;
+    right: 54px;
 }
+header nav #notifications-menu.on {
+    background-position: 6px 12px;
+}   
 header nav #share-icon,
 header nav #shopping-cart,
 header nav #notifications-menu,
