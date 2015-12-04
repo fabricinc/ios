@@ -1213,5 +1213,7 @@ var DiscoveryView = Backbone.View.extend({
 
         }
 
+        this.model.destroy();
+
     }
 });
