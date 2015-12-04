@@ -184,6 +184,10 @@
         left: 520px;
     }
 
+    #home-content #pick-content {
+        padding: 280px 15px 12px;
+    }
+
 
     /*
     ==============================================================    
@@ -442,9 +446,9 @@
     .music-section #swiper-content .highlight-holder #favorite-highlight { top: 140px; }
     /* END MUSIC */
 
-    #progress { width: 720px;padding: 10px; border-radius: 20px; }
-    #progress .outer-bar { width: 650px; height: 15px;height: 20px;border-radius: 10px; }
-    #progress .outer-bar #inner-bar { height: 20px; }
+    #progress { width: 720px; }
+    #progress .outer-bar { width: 650px; height: 10px; border-radius: 10px; }
+    #progress .outer-bar #inner-bar { height: 10px; }
     #progress .numbers { font-size: 20px; line-height: 20px; }
 
     .swipe-icon {
