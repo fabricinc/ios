@@ -73,7 +73,7 @@ var FriendView = Backbone.View.extend({
             
             if (!self.header) { 
                 self.header = new HeaderView({ 
-                    title: "Friends" 
+                    title: "Tastemates" 
                 }); 
                 self.$el.prepend(self.header.el);
             }

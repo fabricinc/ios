@@ -645,7 +645,7 @@ var PacksView = Backbone.View.extend({
         this.listenTo(this.model, 'change:nextCategories', this.addCategories);
         this.listenTo(this.model, 'change:categories', this.renderPacks);
 
-        this.$el.prepend( "<p id='heading'>top ranking this week</p>" );
+        // this.$el.prepend( "<p id='heading'>top ranking this week</p>" );
 
     },
     
