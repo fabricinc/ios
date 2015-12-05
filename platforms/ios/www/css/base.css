@@ -6148,7 +6148,7 @@ button#done {
 #menu-drop .result .info {
     margin: 0;
     float: left;
-
+    width: 84%;
     text-align:left;
 }
 #menu-drop .result .info { width: 185px; }

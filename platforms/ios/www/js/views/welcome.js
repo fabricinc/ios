@@ -1,14 +1,16 @@
 var WelcomeModel = Backbone.Model.extend({
 
     defaults: {
-        query: ""
+        movieID: null,
+        title: null,
     },
 
-    setID: function(ID) {
+    setMovie: function(movie) {
 
-        this.set('query', ID);
+        this.set('movieID', movie.moviePublishedID);
+        this.set('title', movie.movieTitle);
 
-        Api.setMovieToFabricList(ID, APP.gameState.favoriteListID, true);
+        Api.setMovieToFabricList(movie.moviePublishedID, APP.gameState.favoriteListID, true);
 
     },
 
@@ -31,7 +33,7 @@ var Welcome = Backbone.View.extend({
         this.model = new WelcomeModel();
         this.$el.addClass('welcome');
 
-        window.vent.on('setID', this.welcome2, this);
+        window.vent.on('setMovie', this.welcome2, this);
 
 
     },
@@ -58,11 +60,11 @@ var Welcome = Backbone.View.extend({
         callback();
     },
 
-    welcome2: function(ID){
-        this.model.setID(ID);
+    welcome2: function(movie){
+        this.model.setMovie(movie);
 
 
-        var welcomeScreen2 = new WelcomeScreen2();
+        var welcomeScreen2 = new WelcomeScreen2({ title: this.model.get('title') });
 
         welcomeScreen2.render();
         this.delegateEvents();
@@ -126,7 +128,7 @@ var WelcomeScreen2 = Backbone.View.extend({
 
     initialize: function(){
     
-        this.model = new WelcomeModel2();
+        this.model      = new WelcomeModel2();
         this.collection = new People();
 
         this.listenTo(this.model, 'change:matchCount', this.addMatchCount);
@@ -138,7 +140,7 @@ var WelcomeScreen2 = Backbone.View.extend({
     render: function() {
 
         
-        this.$el.html( APP.load("welcomeScreen2") );
+        this.$el.html( APP.load("welcomeScreen2", this.options) );
 
         return this;
     },
@@ -165,6 +167,7 @@ var WelcomeScreen2 = Backbone.View.extend({
         var count = this.model.get('matchCount') - 5;
 
         this.$('.tastemates-row').append('<li class="more tastemate-item"><div class="more-count">'+ count +'+</div></li>');
+        this.$('.m-count').html(this.model.get('matchCount'));
     
     },
 

@@ -203,8 +203,9 @@ var Result = Backbone.View.extend({
 
 	lobby: function(){
 		
+		console.log( this.model.toJSON() );
 
-		window.vent.trigger('setID', this.model.get('moviePublishedID'));
+		window.vent.trigger('setMovie', this.model.toJSON());
 	
 	},
 });
