@@ -38,8 +38,15 @@
 .digest-content-img {
     height: 200px;
 }
+header nav #profile-nav {
+    height: 42px;
+    width: 42px;
+}
+#home-content #pick-content {
+    padding: 84px 15px 22px;
+}
 #people {
-    font-size: 1em;
+    font-size: 0.85em;
     height: 80px;
 }
 #people .match {
@@ -55,6 +62,11 @@
     height: 30px;
     width: 30px;
     top: 9px;
+}
+#home-content .purchase-links a {
+    height: 40px;
+    width: 40px;
+    top: 0px;
 }
 .available-on {
     font-size: 15px;
@@ -132,6 +144,14 @@ div#mask .wheel {
     top: 190px;
     left: 46px;
 }
+
+#packs .pack {
+    height: 102px;
+}
+#packs .pack-image {
+    width: 60px;
+}
+
 
 
 /* COACH */

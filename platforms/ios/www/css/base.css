@@ -468,7 +468,7 @@ header nav #tap-menu {
 
 #pick .purchase-links {
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
     right: 10px;
 }
 #pick-content #daily-pick {
@@ -488,7 +488,7 @@ header nav #tap-menu {
 }
 
 #people .heading {
-    text-align: left;
+    text-align: center;
     margin-bottom: 8px;
 }
 
@@ -525,18 +525,18 @@ header nav #tap-menu {
 #packs .pack {
     background-color: rgb(240, 240, 240);
     margin-bottom: 8px;
-    height: 90px;
+    height: 94px;
     border-bottom: 2px solid #dfdfdf;
 }
 #packs .pack-image {
     float: left;
-    width: 50px;
-    margin: 8px;
+    width: 56px;
+    margin: 6px;
 }
 .pack-info {
     text-transform: uppercase;
     margin-left: 10px;
-    padding-top: 20px;
+    padding-top: 30px;
     font-weight: 600;
     float: left;
     width: 70%;
@@ -544,7 +544,8 @@ header nav #tap-menu {
 }
 .pack-info h4 {
     margin-bottom: 5px;
-    font-size: 0.95em;
+    font-size: 1.1em;
+    text-transform: none;
 }
 .pack-info p {
     font-size: 0.7em;
