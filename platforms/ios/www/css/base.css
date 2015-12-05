@@ -246,7 +246,7 @@ header nav h1, #available-services h1 {
     display: inline-block;
     background-size: 100%;
     position: relative;
-    width: 90px;
+    width: 5.7em;
 }
 
 header nav h1 {
@@ -346,8 +346,9 @@ header nav #profile-nav {
     border-radius: 50%;
     height: 40px;
     width: 40px;
-    right: 5px;
-    top: 5px;
+    right: 10px;
+    top: 12px;
+    box-shadow: 0px 0px 6px #700
 }
 header nav #shopping-cart,
 header nav #notifications-menu {
@@ -422,19 +423,19 @@ header nav #tap-menu {
     /* Pick */
 #tab-control {
     background-color: #A21600;
-    padding: 0 10px;
+    padding: 0 0 3px 10px;
 }
 #tab-control div {
     text-transform: uppercase;
     display: inline-block;
     text-align: center;
-    border-radius: 3px;
+    border-radius: 4px;
     font-weight: 600;
-    font-size: 0.9em;
+    font-size: 1em;
     color: white;
-    padding: 5px 2%;
-    margin: 7px 2%;
-    width: 25%;
+    padding: 1.6% 2%;
+    margin: 3px 6.3% 7px 5%;
+    width: 18%;
 }
 #tab-control div.active {
     background-color: white;
@@ -452,26 +453,26 @@ header nav #tap-menu {
     width: 100%;
 }
 #home-content #pick-content {
-    padding: 84px 15px 12px;;
+    padding: 84px 15px 22px;
     font-weight: 600;
     text-shadow: #222 1px 1px 1px;
 }
 #pick-content h1 {
-    font-size: 1.2em;
-    margin: 5px 0;
+    font-size: 1.45em;
+    margin: 5px 0 10px;
 }
 
 #pick-content #tastemates {
-    font-size: 0.7em;
+    font-size: 0.9em;
 }
 
 #pick .purchase-links {
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
     right: 10px;
 }
 #pick-content #daily-pick {
-    font-size: 0.7em;
+    font-size: 0.9em;
 
 }
 
@@ -487,7 +488,7 @@ header nav #tap-menu {
 }
 
 #people .heading {
-    text-align: left;
+    text-align: center;
     margin-bottom: 8px;
 }
 
@@ -524,18 +525,18 @@ header nav #tap-menu {
 #packs .pack {
     background-color: rgb(240, 240, 240);
     margin-bottom: 8px;
-    height: 90px;
+    height: 94px;
     border-bottom: 2px solid #dfdfdf;
 }
 #packs .pack-image {
     float: left;
-    width: 50px;
-    margin: 8px;
+    width: 56px;
+    margin: 6px;
 }
 .pack-info {
     text-transform: uppercase;
     margin-left: 10px;
-    padding-top: 20px;
+    padding-top: 30px;
     font-weight: 600;
     float: left;
     width: 70%;
@@ -543,7 +544,8 @@ header nav #tap-menu {
 }
 .pack-info h4 {
     margin-bottom: 5px;
-    font-size: 0.95em;
+    font-size: 1.1em;
+    text-transform: none;
 }
 .pack-info p {
     font-size: 0.7em;

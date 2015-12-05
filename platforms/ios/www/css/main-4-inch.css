@@ -59,3 +59,34 @@
     }
     #match-found.msPop { background-size: 320px 568px; }
 }
+
+header nav #profile-nav {
+    height: 32px;
+    width: 32px;
+    top: 9px;
+}
+
+header nav h1 {
+    width: 5em;
+}
+
+#tab-control div {
+    font-size: 0.8em;
+}
+
+#pick-content #daily-pick {
+    font-size: 0.75em;
+}
+
+#pick-content h1 {
+    font-size: 1.3em;
+}
+
+#home-content #pick-content {
+    padding: 68px 15px 14px;
+}
+
+#home-content #people {
+    font-size: 0.75em;
+}
+
