@@ -310,7 +310,7 @@ var FacebookLogin  = Backbone.View.extend({
 
 
         this.$el
-            .prepend( "<p>Get daily entertainment picks based on what you and your friends are into!</p>" );
+            .prepend( "<p>Discover your next favorite movie, TV show or song from people who share your taste</p>" );
 
         this.$('#login-buttons')
             .append( facebookButton.render().el )
