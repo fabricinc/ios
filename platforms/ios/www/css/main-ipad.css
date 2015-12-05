@@ -185,9 +185,48 @@
     }
 
     #home-content #pick-content {
-        padding: 280px 15px 12px;
+        padding: 280px 15px 12px 24px;
     }
 
+    header nav #notifications-menu {
+        right: 80px;
+        background-size: 24px;
+    }
+
+    #wrapper.home header nav h1 {
+        width: 6em;
+        top: 6px;
+    }
+
+    #pick-content #daily-pick {
+        font-size: 1.3em;
+    }
+
+    #pick-content h1 {
+        font-size: 2.4em;
+    }
+
+    .purchase-links a {
+        height: 60px;
+        width: 60px;
+        top: 0px;
+    }
+
+    #pick .purchase-links {
+        bottom: 26px;
+        right: 26px;    
+    }
+
+    #home-content #people {
+        font-size: 1.2em;
+        height: 96px;
+    }
+
+    #people .match, #people .plus {
+        width: 54px;
+        height: 54px;
+        line-height: 54px;
+    }
 
     /*
     ==============================================================    
@@ -337,11 +376,6 @@
     #pack-title {
         font-size: 20px;
         width: 326px;
-    }
-    .purchase-links a {
-        height: 30px;
-        width: 30px;
-        top: 8px;
     }
     .available-on {
         font-size: 18px;
