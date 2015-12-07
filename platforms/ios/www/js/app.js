@@ -28,6 +28,11 @@ var APP = {
     tapPosters: null,
     movieCatWelcome: true,
     wantToSortFilter: "Count",
+    sectionNames: {
+         1: 'movies',
+         2: 'shows',
+         4: 'songs'
+    },
     listWelcome: true,
     feedPos: 0,
     sectionID: 0,

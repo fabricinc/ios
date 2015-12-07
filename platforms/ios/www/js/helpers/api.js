@@ -1014,9 +1014,9 @@ Api.welcomeCompleted = function(friendList, callback) {
     };
     if(friendList) { options.friendList = friendList.join(); }
 
-    console.log( 'welcomeCompleted', options );
+
     this.fetch(options, callback);
-    APP.gameState.welcomeCompleted = "1";
+    
 };
 Api.getLikes = function(objectType, objectID, callback) {
     callback = callback || function() {};
