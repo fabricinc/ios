@@ -1304,6 +1304,25 @@
         font-size: 20px;
         width: 713px;
     }
+
+    #welcome-screen-2 {
+        background-image: url('../images/welcome/ipad-welcome-screen-2-back.png');
+    }
+
+    #welcome-screen-3 {
+        background-image: url('../images/welcome/ipad-welcome-screen-3-back.png');
+    }
+
+    #welcome-screen-4 {
+        background-image: url('../images/welcome/ipad-welcome-screen-4-back.png');
+    }
+
+    #welcome-screen-5 {
+        background-image: url('../images/welcome/ipad-welcome-screen-5-back.png');
+    }
+
+
+
     /*
     ==============================================================    
         Coach

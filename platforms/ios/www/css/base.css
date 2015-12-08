@@ -7316,10 +7316,13 @@ h1.pop-up-content {
 
 .tastemate-item.more {
     background-color: #aaa;
+    line-height: 2em;
+}
+
+.tastemate-item.more .more-count {
     font-family: "Helvetica Neue",Helvetica,sans-serif;
     font-size: 0.75em;
     font-weight: 600;
-    line-height: 2em;
     text-align: center;
     color: #fff;
 }
