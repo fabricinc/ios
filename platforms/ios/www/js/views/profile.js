@@ -229,7 +229,7 @@ var ProfileInfoView = Backbone.View.extend({
     },
 
     events: {
-        "touchstart #follow-info li" : "viewFollowFollowers",
+        // "touchstart #follow-info li" : "viewFollowFollowers",
         "click #settings-gear" : "settings",
         "click #follow-button" : "follow",
         "click #send-greeting" : "greet",

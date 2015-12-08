@@ -31,7 +31,7 @@ var Section = Backbone.Model.extend({
 
 
         Api.getDigestLite(function (response) {
-
+            console.log( 'digest', response );
             this.set("digest", response.digestData.filter(this.filterDigest, this)[0]);
 
         }.bind(this));
@@ -54,7 +54,7 @@ var Section = Backbone.Model.extend({
 
     filterDigest: function(item){
 
-        return +item.section_id === this.get('sectionID');
+        return +item.section_id === this.get('sectionID') && item.column_type === "clip";
     
     },
 
@@ -127,7 +127,6 @@ var Pack = Backbone.Model.extend({
     initialize: function(){
         
         this.set( 'sectionName', APP.sectionNames[this.get('section_id')]);
-        console.log( this.get('sectionName') );
     
     },
     goToSwipe: function() {
@@ -711,7 +710,6 @@ var PackView = Backbone.View.extend({
 
     render: function() {
 
-        console.log( this.model.toJSON() );
         var pack = APP.load('pack', this.model.toJSON());
 
         this.$el.append( pack );
