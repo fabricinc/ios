@@ -120,9 +120,16 @@ var Sections = Backbone.Collection.extend({
 var Pack = Backbone.Model.extend({
 
     defaults: {
-        
+        "sectionName": ""
     },
     
+
+    initialize: function(){
+        
+        this.set( 'sectionName', APP.sectionNames[this.get('section_id')]);
+        console.log( this.get('sectionName') );
+    
+    },
     goToSwipe: function() {
 
         Backbone.history.navigate("discovery?categoryID=" +  this.get('category_id') + "&listID=null&limiter=" + this.get('limiter') + "&onboard=null", true);
@@ -144,7 +151,6 @@ var Person = Backbone.Model.extend({
         Backbone.history.navigate('profile/'+ this.get('userID'), true);
         
     },
-
 
 });
 
@@ -246,6 +252,7 @@ var HomeView = Backbone.View.extend({
             $(".ack").fastClick(function (e) {
                 e.preventDefault(); e.stopPropagation();
                 
+                APP.gameState.welcomeCompleted = "1";
                 $("article").remove();
             
                 User.welcomeCompleted();
@@ -704,6 +711,7 @@ var PackView = Backbone.View.extend({
 
     render: function() {
 
+        console.log( this.model.toJSON() );
         var pack = APP.load('pack', this.model.toJSON());
 
         this.$el.append( pack );
