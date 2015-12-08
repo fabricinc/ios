@@ -218,6 +218,7 @@
     }
 
     #home-content #people {
+        position: relative;
         font-size: 1.2em;
         height: 96px;
     }
@@ -226,6 +227,12 @@
         width: 54px;
         height: 54px;
         line-height: 54px;
+    }
+
+    #people .plus {
+        float: none;
+        position: absolute;
+        right: 7.9em;
     }
 
     /*
@@ -1304,6 +1311,25 @@
         font-size: 20px;
         width: 713px;
     }
+
+    #welcome-screen-2 {
+        background-image: url('../images/welcome/ipad-welcome-screen-2-back.png');
+    }
+
+    #welcome-screen-3 {
+        background-image: url('../images/welcome/ipad-welcome-screen-3-back.png');
+    }
+
+    #welcome-screen-4 {
+        background-image: url('../images/welcome/ipad-welcome-screen-4-back.png');
+    }
+
+    #welcome-screen-5 {
+        background-image: url('../images/welcome/ipad-welcome-screen-5-back.png');
+    }
+
+
+
     /*
     ==============================================================    
         Coach
